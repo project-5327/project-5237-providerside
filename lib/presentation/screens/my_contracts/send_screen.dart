@@ -227,20 +227,29 @@ class PdfContainer extends StatelessWidget {
 class TextWidget extends StatelessWidget {
   final String text;
   final size;
+  final fontFamily;
   final Color color;
+  final TextAlign? align;
   final fontweight;
   const TextWidget(
       {super.key,
       required this.text,
       this.size,
       required this.color,
-      this.fontweight});
+      this.fontweight,
+      this.align,
+      this.fontFamily});
 
   @override
   Widget build(BuildContext context) {
     return Text(
+      textAlign: align,
       text,
-      style: TextStyle(fontSize: size, fontWeight: fontweight, color: color),
+      style: TextStyle(
+          fontFamily: fontFamily,
+          fontSize: size,
+          fontWeight: fontweight,
+          color: color),
     );
   }
 }

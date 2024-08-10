@@ -43,4 +43,6 @@ class Assets {
   static String successImg = 'assets/images/successImg.svg';
   static String joseph_profile = 'assets/images/joseph_profile.svg';
   static String splashScreen = 'assets/images/Splash Screen (1).svg';
+  static String createProfile = 'assets/images/Frame.svg';
+  static String uploadPhoto = 'assets/images/Mask Group.svg';
 }
