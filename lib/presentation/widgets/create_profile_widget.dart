@@ -65,6 +65,7 @@ class EditCreateProfile extends StatelessWidget {
       required this.text1,
       required this.feildText});
   final ProfileController profileController = Get.put(ProfileController());
+
   @override
   Widget build(BuildContext context) {
     return Obx(
@@ -126,7 +127,11 @@ class EditCreateProfile extends StatelessWidget {
               height: 25.h,
             ),
             LinearProgressIndicator(
-                value: (profileController.currentIndex.value + 1) / 8),
+              value: (profileController.currentIndex.value + 1) / 8,
+              color: MyColors.btnColor,
+              borderRadius: BorderRadius.circular(4.r),
+              minHeight: 5.h,
+            ),
             SizedBox(
               height: 25.h,
             ),
@@ -143,7 +148,6 @@ class EditCreateProfile extends StatelessWidget {
             TextWidget(
               align: TextAlign.start,
               text: text1,
-              // 'Lorem ipsum dolor sit amet, consectetur adipiscing elit,sed do eiusmod.',
               color: MyColors.black,
               size: 10.sp,
               fontweight: FontWeight.w500,
@@ -152,10 +156,6 @@ class EditCreateProfile extends StatelessWidget {
               height: 25.h,
             ),
             TextFormField(
-              //controller: controller,
-              //onChanged: onChanged,
-              //obscureText: obscureText,
-              //validator: validator,
               decoration: InputDecoration(
                 hintText: feildText,
                 hintStyle: TextStyle(
@@ -168,7 +168,7 @@ class EditCreateProfile extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8.r),
                 ),
               ),
-            )
+            ),
           ]),
     );
   }

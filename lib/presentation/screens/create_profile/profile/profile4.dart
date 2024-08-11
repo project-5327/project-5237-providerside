@@ -4,13 +4,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:project_5237_provider/presentation/screens/my_contracts/send_screen.dart';
 
+import '../../../../controller/profile_controller.dart';
 import '../../../constants/color.dart';
 import '../../../widgets/create_profile_widget.dart';
 import '../../../widgets/customize_button.dart';
 import 'profile5.dart';
 
 class Profile4 extends StatelessWidget {
-  const Profile4({super.key});
+  Profile4({super.key});
+
+  final ProfileController profileController = Get.put(ProfileController());
 
   @override
   Widget build(BuildContext context) {
@@ -58,6 +61,7 @@ class Profile4 extends StatelessWidget {
                       color: MyColors.btnColor,
                       textColor: MyColors.white,
                       onTap: () {
+                        profileController.nextPage();
                         Get.to(() => Profile5());
                       },
                     ),

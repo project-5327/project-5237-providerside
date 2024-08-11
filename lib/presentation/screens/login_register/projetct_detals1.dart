@@ -38,6 +38,7 @@ class _HomeProjectDetailsState extends State<HomeProjectDetails> {
                     height: 14.h,
                   ),
                   ListTile(
+                    onTap: () => Get.back(),
                     leading: Icon(
                       Icons.arrow_back_ios,
                       color: MyColors.white,

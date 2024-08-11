@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:project_5237_provider/presentation/screens/login_register/notification.dart';
 
 import '../../constants/assets.dart';
 import '../../constants/color.dart';
@@ -32,10 +33,15 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         leading: Padding(
           padding: const EdgeInsets.only(top: 10),
-          child: Stack(alignment: Alignment.topRight, children: [
-            SvgPicture.asset(Assets.bell),
-            SvgPicture.asset(Assets.dot)
-          ]),
+          child: InkWell(
+            onTap: () {
+              Get.to(NotificationScreen());
+            },
+            child: Stack(alignment: Alignment.topRight, children: [
+              SvgPicture.asset(Assets.bell),
+              SvgPicture.asset(Assets.dot)
+            ]),
+          ),
         ),
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

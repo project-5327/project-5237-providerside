@@ -1,7 +1,10 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:project_5237_provider/presentation/screens/main_screen.dart';
+import 'package:project_5237_provider/presentation/screens/message/forget_password.dart';
 
 import '../../constants/color.dart';
 import '../../widgets/Customize_textfield.dart';
@@ -52,19 +55,7 @@ class LoginScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         CustomizeButton(
-                          text: 'Login',
-                          height: 40.h,
-                          width: 151.5.w,
-                          color: MyColors.white,
-                          textColor: Colors.grey,
-                          borderColor: MyColors.white,
-                          radius: 100.r,
-                          onTap: () {
-                            // Get.to(() => SendProposalScreen());
-                          },
-                        ),
-                        CustomizeButton(
-                          text: 'Register',
+                          text: 'Seek Service',
                           radius: 100.r,
                           height: 40.h,
                           width: 151.5.w,
@@ -73,6 +64,18 @@ class LoginScreen extends StatelessWidget {
                           borderColor: MyColors.white,
                           onTap: () {
                             Get.to(() => RegisterScreen());
+                          },
+                        ),
+                        CustomizeButton(
+                          text: 'Post Service',
+                          height: 40.h,
+                          width: 151.5.w,
+                          color: MyColors.white,
+                          textColor: Colors.grey,
+                          borderColor: MyColors.white,
+                          radius: 100.r,
+                          onTap: () {
+                            // Get.to(() => SendProposalScreen());
                           },
                         ),
                       ],
@@ -117,13 +120,18 @@ class LoginScreen extends StatelessWidget {
                   SizedBox(height: 9.7.h),
                   Align(
                     alignment: Alignment.topRight,
-                    child: Text(
-                      textAlign: TextAlign.right,
-                      'Forgot Password',
-                      style: TextStyle(
-                        fontSize: 13.sp,
-                        fontWeight: FontWeight.w500,
-                        color: MyColors.black1,
+                    child: InkWell(
+                      onTap: () {
+                        Get.to(ForgetPasswordScreen());
+                      },
+                      child: Text(
+                        textAlign: TextAlign.right,
+                        'Forgot Password',
+                        style: TextStyle(
+                          fontSize: 13.sp,
+                          fontWeight: FontWeight.w500,
+                          color: MyColors.black1,
+                        ),
                       ),
                     ),
                   ),
@@ -138,7 +146,7 @@ class LoginScreen extends StatelessWidget {
                       color: MyColors.btnColor,
                       textColor: MyColors.white,
                       onTap: () {
-                        Get.to(RegisterScreen());
+                        Get.to(MainScreen());
                       },
                     ),
                   ),
@@ -154,6 +162,10 @@ class LoginScreen extends StatelessWidget {
                         ),
                         children: <TextSpan>[
                           TextSpan(
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                Get.to(RegisterScreen());
+                              },
                             text: 'Register',
                             style: TextStyle(
                               fontSize: 14.sp,

@@ -1,6 +1,9 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:project_5237_provider/presentation/screens/create_profile/my_account.dart';
+import 'package:project_5237_provider/presentation/screens/login_register/login.dart';
 
 import '../../constants/color.dart';
 import '../../widgets/Customize_textfield.dart';
@@ -152,28 +155,31 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   Center(
                     child: Container(
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(7.r),
+                          borderRadius: BorderRadius.circular(4.r),
                           border: Border.all(
                               color: MyColors.black.withOpacity(0.5)),
                         ),
                         height: 30.h,
-                        width: 234.w,
+                        width: 270.w,
                         child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Container(
                               height: 28.h,
                               width: 135.w,
                               decoration: BoxDecoration(
-                                  color: MyColors.btnColor,
-                                  borderRadius: BorderRadius.circular(4.r)),
+                                color: _selectedValue == 'Freelancer'
+                                    ? MyColors.btnColor
+                                    : Colors.white,
+                                borderRadius: BorderRadius.circular(4.r),
+                              ),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                // crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Radio<String>(
-                                    // fillColor: MyColors.white,
-                                    activeColor: MyColors.red,
-                                    focusColor: MyColors.red,
+                                    activeColor: Colors.white,
                                     value: 'Freelancer',
                                     groupValue: _selectedValue,
                                     onChanged: (value) {
@@ -182,21 +188,33 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       });
                                     },
                                   ),
-                                  Text('Freelancer')
+                                  Text(
+                                    'Freelancer',
+                                    style: TextStyle(
+                                      color: _selectedValue == 'Freelancer'
+                                          ? Colors.white
+                                          : Colors.black,
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
+                            // Provider Option
                             Container(
-                              height: 25.h,
-                              width: 95.w,
+                              height: 28.h,
+                              width: 133.w,
                               decoration: BoxDecoration(
-                                  color: MyColors.white,
-                                  borderRadius: BorderRadius.circular(8.r)),
+                                color: _selectedValue == 'Client'
+                                    ? MyColors.btnColor
+                                    : Colors.white,
+                                borderRadius: BorderRadius.circular(4.r),
+                              ),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                //  crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Radio<String>(
+                                    activeColor: Colors.white,
                                     value: 'Client',
                                     groupValue: _selectedValue,
                                     onChanged: (value) {
@@ -205,10 +223,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       });
                                     },
                                   ),
-                                  Text("Client")
+                                  Text(
+                                    'Client',
+                                    style: TextStyle(
+                                      color: _selectedValue == 'Client'
+                                          ? Colors.white
+                                          : Colors.black,
+                                    ),
+                                  ),
                                 ],
                               ),
-                            )
+                            ),
                           ],
                         )),
                   ),
@@ -225,7 +250,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       color: MyColors.btnColor,
                       textColor: MyColors.white,
                       onTap: () {
-                        Get.to(() => MainScreen());
+                        Get.to(() => MyAccountScreen());
                       },
                     ),
                   ),
@@ -243,8 +268,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                         children: <TextSpan>[
                           TextSpan(
-                            //recognizer: TapGestureRecognizer()
-
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                Get.to(LoginScreen());
+                              },
                             text: 'Login',
                             style: TextStyle(
                               fontSize: 14.sp,

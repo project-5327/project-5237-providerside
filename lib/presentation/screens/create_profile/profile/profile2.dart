@@ -71,7 +71,7 @@ class Profile2 extends StatelessWidget {
                       color: MyColors.btnColor,
                       textColor: MyColors.white,
                       onTap: () {
-                        //  profileController.nextPage();
+                        profileController.nextPage();
                         Get.to(() => Profile3());
                       },
                     ),

@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:project_5237_provider/presentation/screens/login_register/login.dart';
 import 'package:project_5237_provider/presentation/widgets/Customize_textfield.dart';
 
+import '../../../../controller/profile_controller.dart';
 import '../../../constants/assets.dart';
 import '../../../constants/color.dart';
 import '../../../widgets/create_profile_widget.dart';
@@ -12,7 +13,8 @@ import '../../../widgets/customize_button.dart';
 import '../../my_contracts/send_screen.dart';
 
 class Profile8 extends StatelessWidget {
-  const Profile8({super.key});
+  Profile8({super.key});
+  final ProfileController profileController = Get.put(ProfileController());
 
   @override
   Widget build(BuildContext context) {
@@ -73,11 +75,24 @@ class Profile8 extends StatelessWidget {
                           fit: BoxFit.cover,
                         ),
                         TextWidget(
-                            text: '1/8',
+                            text:
+                                '${profileController.currentIndex.value + 1}/8',
                             color: MyColors.black,
                             size: 14.sp,
                             fontweight: FontWeight.w400),
                       ],
+                    ),
+                    SizedBox(
+                      height: 25.h,
+                    ),
+                    LinearProgressIndicator(
+                      value: (profileController.currentIndex.value + 1) / 8,
+                      color: MyColors.btnColor,
+                      //   backgroundColor: MyColors.grey,
+                      borderRadius: BorderRadius.circular(4.r),
+                      minHeight: 5.h,
+                      //  valueColor:
+                      //MyColors.blue,
                     ),
                     SizedBox(
                       height: 25.h,
@@ -255,6 +270,7 @@ class Profile8 extends StatelessWidget {
                         color: MyColors.btnColor,
                         textColor: MyColors.white,
                         onTap: () {
+                          profileController.nextPage();
                           Get.to(() => LoginScreen());
                         },
                       ),

@@ -50,6 +50,7 @@ class ProfileDetail extends StatelessWidget {
                       color: MyColors.btnColor,
                       textColor: MyColors.white,
                       onTap: () {
+                        profileController.nextPage();
                         Get.to(() => Profile2());
                       },
                     ),

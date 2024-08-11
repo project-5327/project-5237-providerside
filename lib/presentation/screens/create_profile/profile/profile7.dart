@@ -8,10 +8,12 @@ import 'package:project_5237_provider/presentation/screens/create_profile/profil
 import 'package:project_5237_provider/presentation/screens/my_contracts/send_screen.dart';
 import 'package:project_5237_provider/presentation/widgets/create_profile_widget.dart';
 
+import '../../../../controller/profile_controller.dart';
 import '../../../widgets/customize_button.dart';
 
 class Profile7 extends StatelessWidget {
-  const Profile7({super.key});
+  Profile7({super.key});
+  final ProfileController profileController = Get.put(ProfileController());
 
   @override
   Widget build(BuildContext context) {
@@ -72,11 +74,23 @@ class Profile7 extends StatelessWidget {
                         fit: BoxFit.cover,
                       ),
                       TextWidget(
-                          text: '1/8',
+                          text: '${profileController.currentIndex.value + 1}/8',
                           color: MyColors.black,
                           size: 14.sp,
                           fontweight: FontWeight.w400),
                     ],
+                  ),
+                  SizedBox(
+                    height: 25.h,
+                  ),
+                  LinearProgressIndicator(
+                    value: (profileController.currentIndex.value + 1) / 8,
+                    color: MyColors.btnColor,
+                    // backgroundColor: MyColors.grey,
+                    borderRadius: BorderRadius.circular(4.r),
+                    minHeight: 5.h,
+                    //  valueColor:
+                    //MyColors.blue,
                   ),
                   SizedBox(
                     height: 25.h,
@@ -172,6 +186,7 @@ class Profile7 extends StatelessWidget {
                       color: MyColors.btnColor,
                       textColor: MyColors.white,
                       onTap: () {
+                        profileController.nextPage();
                         Get.to(() => Profile8());
                       },
                     ),
