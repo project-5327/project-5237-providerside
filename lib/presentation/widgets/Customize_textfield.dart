@@ -8,7 +8,7 @@ class CustomTextFormField extends StatelessWidget {
   final String? text;
   final double? width;
   final double? height;
-  final Icon? icon;
+  final IconButton? icon;
   final TextStyle? style;
   final Color? fillcolor;
   final TextEditingController? controller;

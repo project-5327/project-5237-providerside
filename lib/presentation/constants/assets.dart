@@ -34,6 +34,7 @@ class Assets {
   static String person = 'assets/icons/profile_white.svg';
   static String dot = 'assets/icons/dot.svg';
   static String bluedot = 'assets/icons/blue_dot.svg';
+  static String creditIC = 'assets/icons/Group 19.svg';
 
   //Images
   static String profile_img = 'assets/icons/profile_img.svg';

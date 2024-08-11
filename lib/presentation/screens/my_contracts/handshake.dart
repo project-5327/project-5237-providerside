@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:project_5237_provider/presentation/screens/milestones/milestone.dart';
 
 import '../../constants/assets.dart';
 import '../../constants/color.dart';
@@ -17,18 +19,23 @@ class HandshakeWidget extends StatelessWidget {
         SizedBox(
           height: 20.h,
         ),
-        ProjectTile1(
-            image: Assets.bag,
-            title: 'Project 1',
-            title1: 'Joseph Aina',
-            subtitle: 'Monday, 5th January - 11:50pm',
-            tralingicon: Assets.message,
-            //$
-            tralingtext: '\$Rate',
-            btnText: 'Active',
-            btntextColor: MyColors.black,
-            btnColor: MyColors.skyBlue,
-            image1: 'assets/images/girl2.png'),
+        InkWell(
+          onTap: () {
+            Get.to(MilestoneScreen());
+          },
+          child: ProjectTile1(
+              image: Assets.bag,
+              title: 'Project 1',
+              title1: 'Joseph Aina',
+              subtitle: 'Monday, 5th January - 11:50pm',
+              tralingicon: Assets.message,
+              //$
+              tralingtext: '\$Rate',
+              btnText: 'Active',
+              btntextColor: MyColors.black,
+              btnColor: MyColors.skyBlue,
+              image1: 'assets/images/girl2.png'),
+        ),
         SizedBox(
           height: 16.h,
         ),
@@ -92,17 +99,22 @@ class HandshakeWidget extends StatelessWidget {
         SizedBox(
           height: 20.h,
         ),
-        ProjectTile1(
-          btntextColor: MyColors.black,
-          image: Assets.bag,
-          title: 'Project 1',
-          title1: 'Joseph Aina',
-          subtitle: 'Monday, 5th January - 11:50pm',
-          tralingicon: Assets.message,
-          image1: 'assets/images/girl2.png',
-          tralingtext: '\$Rate',
-          btnText: 'Pending',
-          btnColor: MyColors.orange,
+        InkWell(
+          onTap: () {
+            Get.to(MilestoneScreen());
+          },
+          child: ProjectTile1(
+            btntextColor: MyColors.black,
+            image: Assets.bag,
+            title: 'Project 1',
+            title1: 'Joseph Aina',
+            subtitle: 'Monday, 5th January - 11:50pm',
+            tralingicon: Assets.message,
+            image1: 'assets/images/girl2.png',
+            tralingtext: '\$Rate',
+            btnText: 'Pending',
+            btnColor: MyColors.orange,
+          ),
         ),
       ],
     );

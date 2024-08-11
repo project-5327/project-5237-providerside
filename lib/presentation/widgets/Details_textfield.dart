@@ -151,7 +151,7 @@ class _DetailsTextfieldState extends State<DetailsTextfield> {
         ),
         Container(
           child: Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: EdgeInsets.only(left: 8),
             child: TextField(
               decoration: InputDecoration(
                 border: InputBorder.none,
@@ -159,7 +159,7 @@ class _DetailsTextfieldState extends State<DetailsTextfield> {
                 hintStyle: TextStyle(
                     fontSize: 13.sp,
                     fontWeight: FontWeight.w500,
-                    color: Color(0xff222222)),
+                    color: MyColors.lightGrey),
               ),
             ),
           ),

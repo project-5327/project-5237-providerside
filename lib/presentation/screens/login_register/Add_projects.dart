@@ -11,25 +11,30 @@ class AddProjects extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: Icon(
-          Icons.arrow_back_ios,
-          color: MyColors.black,
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
+            onPressed: () => Get.back(),
+            icon: Icon(
+              Icons.arrow_back_ios,
+              color: MyColors.black,
+            ),
+          ),
+          title: Text(
+            'Add your Project',
+            style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600),
+          ),
         ),
-        title: Text(
-          'Add your Project',
-          style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600),
-        ),
+        body: SingleChildScrollView(
+            child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 18),
+                child: DetailsTextfield(
+                  onTap: () {
+                    Get.to(() => SuccesfullyScreen());
+                  },
+                ))),
       ),
-      body: SingleChildScrollView(
-          child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 18),
-              child: DetailsTextfield(
-                onTap: () {
-                  Get.to(() => SuccesfullyScreen());
-                },
-              ))),
     );
   }
 }

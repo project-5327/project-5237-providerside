@@ -59,11 +59,15 @@ class EditCreateProfile extends StatelessWidget {
   final String text;
   final String text1;
   final String feildText;
+  final controller;
+  final validator;
   EditCreateProfile(
       {super.key,
       required this.text,
       required this.text1,
-      required this.feildText});
+      required this.feildText,
+      this.controller,
+      this.validator});
   final ProfileController profileController = Get.put(ProfileController());
 
   @override
@@ -156,6 +160,8 @@ class EditCreateProfile extends StatelessWidget {
               height: 25.h,
             ),
             TextFormField(
+              validator: validator,
+              controller: controller,
               decoration: InputDecoration(
                 hintText: feildText,
                 hintStyle: TextStyle(

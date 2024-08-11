@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:project_5237_provider/presentation/screens/my_contracts/send_screen.dart';
 
+import '../../../../controller/form_controller.dart';
 import '../../../../controller/profile_controller.dart';
 import '../../../constants/color.dart';
 import '../../../widgets/create_profile_widget.dart';
@@ -14,65 +15,80 @@ class Profile4 extends StatelessWidget {
   Profile4({super.key});
 
   final ProfileController profileController = Get.put(ProfileController());
+  final formKey = GlobalKey<FormState>();
+  final FormController formController = Get.put(FormController());
+
+  final TextEditingController controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            CreateProfileWidget(),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: 25.h,
+    return SafeArea(
+      child: Scaffold(
+        body: SingleChildScrollView(
+          child: Form(
+            key: formKey,
+            child: Column(
+              children: [
+                CreateProfileWidget(),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: 25.h,
+                      ),
+                      EditCreateProfile(
+                          validator: (value) =>
+                              formController.validateExperience(value),
+                          controller: controller,
+                          text: 'Add languages.',
+                          text1:
+                              "Lorem ipsum dolor sit amet, consectetur \nadipiscing elit,sed do eiusmod.",
+                          feildText: '+Add Language'),
+                      SizedBox(
+                        height: 20.h,
+                      ),
+                      Languagecontiner(
+                          text: 'English',
+                          text1: 'My level is',
+                          color: MyColors.grey),
+                      SizedBox(
+                        height: 16.h,
+                      ),
+                      Languagecontiner(
+                          text: 'Spanish',
+                          text1: 'Fluent',
+                          color: MyColors.black),
+                      SizedBox(
+                        height: 78.h,
+                      ),
+                      Center(
+                        child: CustomizeButton(
+                          borderColor: MyColors.btnColor,
+                          radius: 100.r,
+                          text: 'Next',
+                          height: 40.h,
+                          width: 334.w,
+                          color: MyColors.btnColor,
+                          textColor: MyColors.white,
+                          onTap: () {
+                            formKey.currentState!.validate();
+                            profileController.nextPage();
+                            Get.to(() => Profile5());
+                          },
+                        ),
+                      ),
+                      SizedBox(
+                        height: 42.h,
+                      ),
+                    ],
                   ),
-                  EditCreateProfile(
-                      text: 'Add languages.',
-                      text1:
-                          "Lorem ipsum dolor sit amet, consectetur \nadipiscing elit,sed do eiusmod.",
-                      feildText: '+Add Language'),
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                  Languagecontiner(
-                      text: 'English',
-                      text1: 'My level is',
-                      color: MyColors.grey),
-                  SizedBox(
-                    height: 16.h,
-                  ),
-                  Languagecontiner(
-                      text: 'Spanish', text1: 'Fluent', color: MyColors.black),
-                  SizedBox(
-                    height: 78.h,
-                  ),
-                  Center(
-                    child: CustomizeButton(
-                      borderColor: MyColors.btnColor,
-                      radius: 100.r,
-                      text: 'Next',
-                      height: 40.h,
-                      width: 334.w,
-                      color: MyColors.btnColor,
-                      textColor: MyColors.white,
-                      onTap: () {
-                        profileController.nextPage();
-                        Get.to(() => Profile5());
-                      },
-                    ),
-                  ),
-                  SizedBox(
-                    height: 42.h,
-                  ),
-                ],
-              ),
-            )
-          ],
+                )
+              ],
+            ),
+          ),
         ),
       ),
     );
