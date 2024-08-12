@@ -33,7 +33,6 @@ class _EditprofileState extends State<Editprofile>
   @override
   void dispose() {
     _tabController.dispose();
-
     super.dispose();
   }
 
@@ -96,7 +95,10 @@ class _EditprofileState extends State<Editprofile>
               Expanded(
                 child: TabBarView(
                   controller: _tabController,
-                  children: [Catagory(), Catagory2()],
+                  children: [
+                    Catagory(),
+                    Catagory2(),
+                  ],
                 ),
               )
             ],
@@ -113,12 +115,11 @@ class Catagory extends StatelessWidget {
   final FormController formController = FormController();
 
   final TextEditingController emailController = TextEditingController();
-
   final TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SingleChildScrollView(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -144,15 +145,18 @@ class Catagory extends StatelessWidget {
               top: 115,
               left: 140,
               child: Container(
-                  height: 36.h,
-                  width: 34.w,
-                  decoration: BoxDecoration(
-                      color: MyColors.darkBlue, shape: BoxShape.circle),
-                  child: Icon(
-                    Icons.person,
-                    size: 22,
-                    color: MyColors.white,
-                  )),
+                height: 36.h,
+                width: 34.w,
+                decoration: BoxDecoration(
+                  color: MyColors.darkBlue,
+                  shape: BoxShape.circle,
+                ),
+                child: Icon(
+                  Icons.person,
+                  size: 22,
+                  color: MyColors.white,
+                ),
+              ),
             )
           ]),
           SizedBox(
@@ -166,9 +170,10 @@ class Catagory extends StatelessWidget {
               text: 'Vishal',
               title: 'User Name',
               style: TextStyle(
-                  fontSize: 13.sp,
-                  fontWeight: FontWeight.w500,
-                  color: Color(0xff222222)),
+                fontSize: 13.sp,
+                fontWeight: FontWeight.w500,
+                color: Color(0xff222222),
+              ),
               icon: IconButton(onPressed: () {}, icon: Icon(Icons.edit)),
             ),
           ),
@@ -182,9 +187,10 @@ class Catagory extends StatelessWidget {
               text: 'name1234@gmail.com',
               title: 'Email',
               style: TextStyle(
-                  fontSize: 13.sp,
-                  fontWeight: FontWeight.w500,
-                  color: Color(0xff222222)),
+                fontSize: 13.sp,
+                fontWeight: FontWeight.w500,
+                color: Color(0xff222222),
+              ),
               icon: IconButton(onPressed: () {}, icon: Icon(Icons.edit)),
             ),
           ),
@@ -206,29 +212,34 @@ class Catagory extends StatelessWidget {
                   color: Color(0xff222222),
                 ),
                 icon: IconButton(
-                    onPressed: () {
-                      formController.togglePasswordVisibility();
-                    },
-                    icon: Icon(formController.obscureText.value
+                  onPressed: () {
+                    formController.togglePasswordVisibility();
+                  },
+                  icon: Icon(
+                    formController.obscureText.value
                         ? Icons.visibility_off
-                        : Icons.visibility)),
+                        : Icons.visibility,
+                  ),
+                ),
               ),
             ),
           ),
           SizedBox(
             height: 30.h,
           ),
-          CustomizeButton(
-            borderColor: MyColors.btnColor,
-            radius: 100.r,
-            text: 'Update',
-            height: 40.h,
-            width: 334.w,
-            color: MyColors.btnColor,
-            textColor: MyColors.white,
-            onTap: () {
-              Get.to(() => AddProjects());
-            },
+          Center(
+            child: CustomizeButton(
+              borderColor: MyColors.btnColor,
+              radius: 100.r,
+              text: 'Update',
+              height: 40.h,
+              width: 334.w,
+              color: MyColors.btnColor,
+              textColor: MyColors.white,
+              onTap: () {
+                Get.to(() => AddProjects());
+              },
+            ),
           ),
           SizedBox(
             height: 53.h,
@@ -240,55 +251,134 @@ class Catagory extends StatelessWidget {
 }
 
 class Catagory2 extends StatelessWidget {
-  const Catagory2({super.key});
+  Catagory2({super.key});
+  final TextEditingController userController = TextEditingController();
+  final FormController formController = FormController();
+
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          ListTile(
-            title: TextWidget(
-              text: 'Project name',
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: 20.h,
+            ),
+            Center(
+              child: Row(
+                children: [
+                  TextWidget(
+                    text: 'Project name',
+                    color: MyColors.black,
+                    size: 17.sp,
+                    fontweight: FontWeight.w500,
+                  ),
+                  SizedBox(
+                    width: 100.w,
+                  ),
+                  TextWidget(
+                    text: '17 days ago',
+                    color: MyColors.grey,
+                    size: 12.sp,
+                    fontweight: FontWeight.w400,
+                  ),
+                ],
+              ),
+            ),
+            TextWidget(
+              text: "Lorem ipsum dolor sit amet consectetur...",
               color: MyColors.black,
-              size: 17,
+              size: 12.sp,
               fontweight: FontWeight.w500,
             ),
-            subtitle: TextWidget(
-              text:
-                  "Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.",
-              color: MyColors.black,
-              size: 14,
-              fontweight: FontWeight.w500,
+            SizedBox(
+              height: 400.h,
             ),
-            trailing: TextWidget(
-              text: '17 days ago',
-              color: MyColors.grey,
-              size: 12,
-              fontweight: FontWeight.w400,
+            Center(
+              child: CustomizeButton(
+                borderColor: MyColors.btnColor,
+                radius: 100.r,
+                text: 'Update',
+                height: 40.h,
+                width: 334.w,
+                color: MyColors.btnColor,
+                textColor: MyColors.white,
+                onTap: () {
+                  Get.to(() => AddProjects());
+                },
+              ),
             ),
-          ),
-          SizedBox(
-            height: 300.h,
-          ),
-          CustomizeButton(
-            borderColor: MyColors.btnColor,
-            radius: 100.r,
-            text: 'Update',
-            height: 40.h,
-            width: 334.w,
-            color: MyColors.btnColor,
-            textColor: MyColors.white,
-            onTap: () {
-              Get.to(() => AddProjects());
-            },
-          ),
-          SizedBox(
-            height: 53.h,
-          ),
-        ],
+            SizedBox(
+              height: 53.h,
+            ),
+          ],
+        ),
       ),
     );
   }
 }
+
+// class Catagory2 extends StatelessWidget {
+//   const Catagory2({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Padding(
+//       padding: EdgeInsets.symmetric(vertical: 16.h),
+//       child: SingleChildScrollView(
+//         child: Column(
+//           crossAxisAlignment: CrossAxisAlignment.start,
+//           children: [
+//             ListTile(
+//               title: TextWidget(
+//                 text: 'Project name',
+//                 color: MyColors.black,
+//                 size: 17,
+//                 fontweight: FontWeight.w500,
+//               ),
+//               subtitle: TextWidget(
+//                 text:
+//                     "Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.",
+//                 color: MyColors.black,
+//                 size: 14,
+//                 fontweight: FontWeight.w500,
+//               ),
+//               trailing: TextWidget(
+//                 text: '17 days ago',
+//                 color: MyColors.grey,
+//                 size: 12,
+//                 fontweight: FontWeight.w400,
+//               ),
+//             ),
+//             SizedBox(
+//               height: 20.h,
+//             ),
+//             Center(
+//               child: CustomizeButton(
+//                 borderColor: MyColors.btnColor,
+//                 radius: 100.r,
+//                 text: 'Update',
+//                 height: 40.h,
+//                 width: 334.w,
+//                 color: MyColors.btnColor,
+//                 textColor: MyColors.white,
+//                 onTap: () {
+//                   Get.to(() => AddProjects());
+//                 },
+//               ),
+//             ),
+//             SizedBox(
+//               height: 53.h,
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }

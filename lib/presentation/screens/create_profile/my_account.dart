@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:project_5237_provider/controller/container_controller.dart';
+import 'package:project_5237_provider/controller/country_controller.dart';
 import 'package:project_5237_provider/controller/form_controller.dart';
 import 'package:project_5237_provider/presentation/screens/create_profile/create_your_profile.dart';
 import 'package:project_5237_provider/presentation/screens/filter/filter.dart';
@@ -18,8 +20,11 @@ class MyAccountScreen extends StatelessWidget {
   final FormController formcontroller = Get.put(FormController());
   final TextEditingController lastNameController = TextEditingController();
   final TextEditingController firstnameController = TextEditingController();
-  final TextEditingController countryController = TextEditingController();
-
+  //final TextEditingController countryController = TextEditingController();
+  final ContainerController containerController =
+      Get.put(ContainerController());
+  final CountryController countryController = Get.put(CountryController());
+  final List<String> countries = ['USA', 'India', 'Canada', 'Japan'];
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -59,18 +64,49 @@ class MyAccountScreen extends StatelessWidget {
                         text: 'Enter your name',
                       ),
                       SizedBox(
-                        height: 7.h,
+                        height: 27.h,
                       ),
-                      CustomTextFormField(
-                        controller: countryController,
-                        validator: (value) =>
-                            formcontroller.validatecountry(value ?? ''),
-                        text: 'Choose Your Country',
-                        icon: IconButton(
-                          onPressed: () {},
-                          icon: Icon(Icons.arrow_drop_down,
-                              size: 22.sp, color: MyColors.black),
+                      Center(
+                        child: customizeContainer(
+                          width: 336.w,
+                          height: 48.h,
+                          text: countryController.selectedCountry.isEmpty
+                              ? 'Choose Your Country'
+                              : countryController.selectedCountry.value,
+                          onChanged: (String? newValue) {
+                            if (newValue != null) {
+                              countryController.updateCountry(newValue);
+                            }
+                          },
+                          items: countries.map<DropdownMenuItem<String>>(
+                            (String value) {
+                              return DropdownMenuItem<String>(
+                                child: Text(value),
+                                value: value,
+                              );
+                            },
+                          ).toList(),
                         ),
+                      ),
+                      // Obx(
+                      //   () => CustomTextFormField(
+                      //     validator: (value) =>
+                      //         formcontroller.validatecountry(value ?? ''),
+                      //     text: countryController.selectedCountry.value,
+                      //     icon: IconButton(
+                      //       onPressed: () {
+                      //         // showCountryPicker(context);
+                      //       },
+                      //       icon: Icon(
+                      //         Icons.arrow_drop_down,
+                      //         size: 22.sp,
+                      //         color: MyColors.black,
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
+                      SizedBox(
+                        height: 10.h,
                       ),
                       SizedBox(
                         height: 47.h,
@@ -90,14 +126,32 @@ class MyAccountScreen extends StatelessWidget {
                       Center(
                         child: Row(
                           children: [
-                            Container(
-                              height: 18.h,
-                              width: 18.w,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(4.r),
-                                  border: Border.all(
-                                      width: 2.w,
-                                      color: MyColors.black.withOpacity(0.3))),
+                            Obx(
+                              () => InkWell(
+                                onTap: () =>
+                                    containerController.toggelSelection(0),
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  height: 18.h,
+                                  width: 18.w,
+                                  child: containerController.selectedcont[0]
+                                      ? Icon(
+                                          size: 12.sp,
+                                          Icons.check,
+                                          color: MyColors.white,
+                                        )
+                                      : null,
+                                  decoration: BoxDecoration(
+                                      color: containerController.selectedcont[0]
+                                          ? Color(0xffFF4C4A)
+                                          : MyColors.white,
+                                      borderRadius: BorderRadius.circular(4.r),
+                                      border: Border.all(
+                                          width: 2.w,
+                                          color:
+                                              MyColors.black.withOpacity(0.3))),
+                                ),
+                              ),
                             ),
                             SizedBox(
                               width: 7.w,
@@ -117,14 +171,32 @@ class MyAccountScreen extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          Container(
-                            height: 18.h,
-                            width: 18.w,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(4.r),
-                                border: Border.all(
-                                    width: 2.w,
-                                    color: MyColors.black.withOpacity(0.3))),
+                          Obx(
+                            () => InkWell(
+                              onTap: () =>
+                                  containerController.toggelSelection(1),
+                              child: Container(
+                                alignment: Alignment.center,
+                                height: 18.h,
+                                width: 18.w,
+                                child: containerController.selectedcont[1]
+                                    ? Icon(
+                                        size: 12.sp,
+                                        Icons.check,
+                                        color: MyColors.white,
+                                      )
+                                    : null,
+                                decoration: BoxDecoration(
+                                    color: containerController.selectedcont[1]
+                                        ? Color(0xffFF4C4A)
+                                        : MyColors.white,
+                                    borderRadius: BorderRadius.circular(4.r),
+                                    border: Border.all(
+                                        width: 2.w,
+                                        color:
+                                            MyColors.black.withOpacity(0.3))),
+                              ),
+                            ),
                           ),
                           SizedBox(
                             width: 10.w,
@@ -152,32 +224,35 @@ class MyAccountScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-                      RichText(
-                        textAlign: TextAlign.start,
-                        text: TextSpan(
-                          text: '\t\t\tof Service, ',
-                          style: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 12.sp,
-                            color: Color(0xffFF4C4A),
-                          ),
-                          children: <TextSpan>[
-                            TextSpan(
-                              text: 'including the ',
-                              style: TextStyle(
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.w500,
-                                color: MyColors.black.withOpacity(0.5),
-                              ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 30),
+                        child: RichText(
+                          textAlign: TextAlign.start,
+                          text: TextSpan(
+                            text: 'of Service, ',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 12.sp,
+                              color: Color(0xffFF4C4A),
                             ),
-                            TextSpan(
-                                text:
-                                    'User Agreement and \n\t\tPrivacy Policy. ',
+                            children: <TextSpan>[
+                              TextSpan(
+                                text: 'including the ',
                                 style: TextStyle(
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 12.sp,
-                                    color: Color(0xffFF4C4A))),
-                          ],
+                                  fontSize: 12.sp,
+                                  fontWeight: FontWeight.w500,
+                                  color: MyColors.black.withOpacity(0.5),
+                                ),
+                              ),
+                              TextSpan(
+                                  text:
+                                      'User Agreement and \n Privacy Policy. ',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 12.sp,
+                                      color: Color(0xffFF4C4A))),
+                            ],
+                          ),
                         ),
                       ),
                       SizedBox(
@@ -193,8 +268,9 @@ class MyAccountScreen extends StatelessWidget {
                           color: MyColors.btnColor,
                           textColor: MyColors.white,
                           onTap: () {
-                            formKey.currentState!.validate();
-                            Get.to(() => CreateYourProfile());
+                            if (formKey.currentState!.validate()) {
+                              Get.to(() => CreateYourProfile());
+                            }
                           },
                         ),
                       ),
@@ -212,3 +288,47 @@ class MyAccountScreen extends StatelessWidget {
     );
   }
 }
+
+
+
+       // context: context,
+        // builder: (BuildContext context) {
+        //   return
+   
+//         return Dialog(
+//           shape: RoundedRectangleBorder(
+//             borderRadius: BorderRadius.circular(10.r),
+//           ),
+//           child: Container(
+//             padding: EdgeInsets.all(16.w),
+//             child: Column(
+//               mainAxisSize: MainAxisSize.min,
+//               children: [
+//                 Text(
+//                   'Choose Your Country',
+//                   style: TextStyle(
+//                     fontSize: 18.sp,
+//                     fontWeight: FontWeight.bold,
+//                   ),
+//                 ),
+//                 SizedBox(height: 16.h),
+//                 ...countries.map((country) {
+//                   return ListTile(
+//                     title: Text(
+//                       country,
+//                       style: TextStyle(fontSize: 16.sp),
+//                     ),
+//                     onTap: () {
+//                       countryController.selectedCountry.value = country;
+//                       Get.back(); // Close the dialog
+//                     },
+//                   );
+//                 }).toList(),
+//               ],
+//             ),
+//           ),
+//         );
+//       },
+//     );
+//   }
+// }

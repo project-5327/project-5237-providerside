@@ -200,13 +200,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   color: MyColors.black.withOpacity(0.5)),
                             ),
                             height: 30.h,
-                            width: 270.w,
+                            width: 252.w,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Container(
                                   height: 28.h,
-                                  width: 135.w,
+                                  width: 130.w,
                                   decoration: BoxDecoration(
                                     color: _selectedValue == 'Freelancer'
                                         ? MyColors.btnColor
@@ -214,8 +214,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     borderRadius: BorderRadius.circular(4.r),
                                   ),
                                   child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
                                     // crossAxisAlignment: CrossAxisAlignment.center,
                                     children: [
                                       Radio<String>(
@@ -231,6 +229,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       Text(
                                         'Freelancer',
                                         style: TextStyle(
+                                          fontSize: 12.sp,
+                                          fontWeight: FontWeight.w500,
                                           color: _selectedValue == 'Freelancer'
                                               ? Colors.white
                                               : Colors.black,
@@ -239,10 +239,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     ],
                                   ),
                                 ),
+
                                 // Provider Option
                                 Container(
                                   height: 28.h,
-                                  width: 133.w,
+                                  width: 120.w,
                                   decoration: BoxDecoration(
                                     color: _selectedValue == 'Client'
                                         ? MyColors.btnColor
@@ -250,7 +251,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     borderRadius: BorderRadius.circular(4.r),
                                   ),
                                   child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    //    mainAxisAlignment: MainAxisAlignment.center,
                                     //  crossAxisAlignment: CrossAxisAlignment.center,
                                     children: [
                                       Radio<String>(
@@ -266,6 +267,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       Text(
                                         'Client',
                                         style: TextStyle(
+                                          fontSize: 12.sp,
+                                          fontWeight: FontWeight.w500,
                                           color: _selectedValue == 'Client'
                                               ? Colors.white
                                               : Colors.black,
@@ -290,8 +293,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           color: MyColors.btnColor,
                           textColor: MyColors.white,
                           onTap: () {
-                            formKey.currentState!.validate();
-                            Get.to(() => MyAccountScreen());
+                            if (formKey.currentState!.validate()) {
+                              Get.to(() => MyAccountScreen());
+                            }
                           },
                         ),
                       ),

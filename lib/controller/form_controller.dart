@@ -76,9 +76,10 @@ class FormController extends GetxController {
   String? validateRepeatPassword(String value, String password) {
     if (value.isEmpty) {
       return "Repeat Password can't be empty";
-    } else if (value != password) {
-      return 'Repeat password does not match ';
     }
+    //  else if (value != password) {
+    //   return 'Repeat password does not match ';
+    // }
     return null;
   }
 

@@ -8,6 +8,7 @@ import 'package:project_5237_provider/presentation/screens/login_register/EditPr
 import 'package:project_5237_provider/presentation/widgets/customize_button.dart';
 import 'package:project_5237_provider/presentation/widgets/customize_textfield.dart';
 
+import '../../../controller/date_time_controller.dart';
 import '../../constants/assets.dart';
 import '../../constants/color.dart';
 
@@ -18,6 +19,7 @@ class DebitCredit extends StatelessWidget {
   final TextEditingController cardnoController = TextEditingController();
   final TextEditingController cvController = TextEditingController();
   final FormController formController = Get.put(FormController());
+  final DateTimeController dateTimeController = Get.put(DateTimeController());
 
   final TextEditingController expiryController = TextEditingController();
 
@@ -30,17 +32,17 @@ class DebitCredit extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: SingleChildScrollView(
-        child: Scaffold(
-          appBar: AppBar(
-            automaticallyImplyLeading: false,
-            title: Text(
-              'Credit/ Debit Card',
-              style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600),
-            ),
+      child: Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          title: Text(
+            'Credit/ Debit Card',
+            style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600),
           ),
-          body: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: SingleChildScrollView(
             child: Form(
               key: formKey,
               child: Column(
@@ -133,3 +135,12 @@ class DebitCredit extends StatelessWidget {
     );
   }
 }
+//   onTap: () {
+                //     dateTimeController.pickDate(context);
+                //   },
+                //   controller: TextEditingController(
+                //     text: dateTimeController.selectedDate.value
+                //         .toString()
+                //         .substring(0, 10), // Format the date as needed
+                //   ),
+                // )),

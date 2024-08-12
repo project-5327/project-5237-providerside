@@ -12,7 +12,8 @@ import '../../constants/color.dart';
 import '../../widgets/customize_button.dart';
 
 class CreateYourProfile extends StatelessWidget {
-  const CreateYourProfile({super.key});
+  CreateYourProfile({super.key});
+  final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -88,17 +89,16 @@ class CreateYourProfile extends StatelessWidget {
                     ),
                     Center(
                       child: CustomizeButton(
-                        borderColor: MyColors.btnColor,
-                        radius: 100.r,
-                        text: 'Create Your Profile',
-                        height: 40.h,
-                        width: 334.w,
-                        color: MyColors.btnColor,
-                        textColor: MyColors.white,
-                        onTap: () {
-                          Get.to(() => ProfileDetail());
-                        },
-                      ),
+                          borderColor: MyColors.btnColor,
+                          radius: 100.r,
+                          text: 'Create Your Profile',
+                          height: 40.h,
+                          width: 334.w,
+                          color: MyColors.btnColor,
+                          textColor: MyColors.white,
+                          onTap: () {
+                            Get.to(() => ProfileDetail());
+                          }),
                     ),
                     SizedBox(
                       height: 42.h,

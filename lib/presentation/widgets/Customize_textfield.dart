@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:project_5237_provider/presentation/screens/my_contracts/send_screen.dart';
 
 import '../constants/color.dart';
 
@@ -70,6 +71,54 @@ class CustomTextFormField extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+class customizeContainer extends StatelessWidget {
+  final double? width;
+  final double? height;
+  final String text;
+  final List<DropdownMenuItem<String>>? items;
+  final ValueChanged<String?>? onChanged;
+
+  const customizeContainer(
+      {super.key,
+      this.width,
+      this.height,
+      required this.text,
+      this.items,
+      this.onChanged});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(width: 1, color: Color(0xff464646)),
+      ),
+      height: height,
+      width: width,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 7),
+        child: DropdownButton<String>(
+          // isDense: true,
+          alignment: Alignment.centerRight,
+
+          style: TextStyle(
+              fontSize: 10.sp,
+              color: MyColors.black1,
+              fontWeight: FontWeight.w400),
+          hint: TextWidget(
+            text: text,
+            size: 9.sp,
+            fontweight: FontWeight.w600,
+            color: MyColors.lightGrey,
+          ),
+          items: items,
+          onChanged: onChanged,
+        ),
+      ),
     );
   }
 }

@@ -91,6 +91,7 @@ class AwaitingMilestones extends StatelessWidget {
       content: Column(
         children: [
           TextWidget(
+            align: TextAlign.center,
             text:
                 'If you choose yes then the amount to \$200 first milestone will sent to freelancer account',
             color: MyColors.black1,
@@ -101,25 +102,29 @@ class AwaitingMilestones extends StatelessWidget {
             height: 30.h,
           ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               CustomizeButton(
                 borderColor: MyColors.btnColor,
                 radius: 100.r,
                 text: "Yes I'm sure",
                 height: 40.h,
-                width: 151.w,
+                width: 130.w,
                 color: MyColors.btnColor,
                 textColor: MyColors.white,
                 onTap: () {
                   Get.back();
                 },
               ),
+              SizedBox(
+                width: 10.w,
+              ),
               CustomizeButton(
                 borderColor: MyColors.btnColor,
                 radius: 100.r,
                 text: "Cancel",
                 height: 40.h,
-                width: 151.w,
+                width: 130.w,
                 color: MyColors.white,
                 textColor: MyColors.black,
                 onTap: () {

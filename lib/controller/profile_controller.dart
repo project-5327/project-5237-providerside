@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 
 class ProfileController extends GetxController {
   var currentIndex = 0.obs;
+  var skills = <String>[].obs;
   void nextPage() {
     if (currentIndex.value < 7) {
       currentIndex.value++;
@@ -17,5 +18,15 @@ class ProfileController extends GetxController {
         currentIndex.value = index;
       }
     }
+  }
+
+  void addSkill(String skill) {
+    if (skills.length < 15 && !skills.contains(skill)) {
+      skills.add(skill);
+    }
+  }
+
+  void removeSkill(String skill) {
+    skills.remove(skill);
   }
 }

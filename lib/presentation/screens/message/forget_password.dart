@@ -18,25 +18,25 @@ class ForgetPasswordScreen extends StatelessWidget {
     final formKey = GlobalKey<FormState>();
 
     return SafeArea(
-      child: SingleChildScrollView(
-        child: Scaffold(
-          appBar: AppBar(
-            leading: IconButton(
-              onPressed: () => Get.back(),
-              icon: Icon(
-                Icons.arrow_back_ios,
-                color: MyColors.black,
-              ),
-            ),
-            title: Text(
-              'Forgot Password',
-              style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600),
+      child: Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
+            onPressed: () => Get.back(),
+            icon: Icon(
+              Icons.arrow_back_ios,
+              color: MyColors.black,
             ),
           ),
-          body: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Form(
-              key: formKey,
+          title: Text(
+            'Forgot Password',
+            style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600),
+          ),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Form(
+            key: formKey,
+            child: SingleChildScrollView(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -80,8 +80,9 @@ class ForgetPasswordScreen extends StatelessWidget {
                     color: MyColors.btnColor,
                     textColor: MyColors.white,
                     onTap: () {
-                      formKey.currentState!.validate();
-                      Get.to(() => OtpScreen());
+                      if (formKey.currentState!.validate()) {
+                        Get.to(() => OtpScreen());
+                      }
                     },
                   ),
                   SizedBox(
@@ -91,9 +92,9 @@ class ForgetPasswordScreen extends StatelessWidget {
               ),
             ),
           ),
-
-          //
         ),
+
+        //
       ),
     );
   }

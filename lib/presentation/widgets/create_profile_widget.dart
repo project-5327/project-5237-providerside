@@ -61,121 +61,66 @@ class EditCreateProfile extends StatelessWidget {
   final String feildText;
   final controller;
   final validator;
+  final VoidCallback ontap;
   EditCreateProfile(
       {super.key,
       required this.text,
       required this.text1,
       required this.feildText,
       this.controller,
-      this.validator});
+      this.validator,
+      required this.ontap});
   final ProfileController profileController = Get.put(ProfileController());
 
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () => Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: 30.h,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        SizedBox(
+          height: 25.h,
+        ),
+        TextWidget(
+          align: TextAlign.start,
+          text: text,
+          color: MyColors.black,
+          size: 20.sp,
+          fontweight: FontWeight.w600,
+        ),
+        SizedBox(
+          height: 15.h,
+        ),
+        TextWidget(
+          align: TextAlign.start,
+          text: text1,
+          color: MyColors.black,
+          size: 10.sp,
+          fontweight: FontWeight.w500,
+        ),
+        SizedBox(
+          height: 25.h,
+        ),
+        TextFormField(
+          onTap: ontap,
+          textAlign: TextAlign.center,
+          readOnly: true,
+          validator: validator,
+          controller: controller,
+          decoration: InputDecoration(
+            hintText: feildText,
+            hintStyle: TextStyle(
+                fontSize: 10.sp,
+                color: MyColors.blue,
+                fontWeight: FontWeight.w600),
+            contentPadding:
+                const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8.r),
             ),
-            Row(
-              children: [
-                SizedBox(
-                  width: 15.w,
-                ),
-                Container(
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                      color: MyColors.blue1, shape: BoxShape.circle),
-                  child: TextWidget(
-                    text: 'M',
-                    color: MyColors.white,
-                    size: 20.sp,
-                    fontweight: FontWeight.w700,
-                  ),
-                  height: 42.h,
-                  width: 42.w,
-                ),
-                SizedBox(
-                  width: 44.w,
-                ),
-                TextWidget(
-                    text: 'Create Profile',
-                    color: MyColors.black,
-                    size: 24.sp,
-                    fontweight: FontWeight.w500),
-              ],
-            ),
-            SizedBox(
-              height: 32.h,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SvgPicture.asset(
-                  Assets.arrowLeft,
-                  height: 22.h,
-                  width: 11.w,
-                  fit: BoxFit.cover,
-                ),
-                TextWidget(
-                    text: '${profileController.currentIndex.value + 1}/8',
-                    color: MyColors.black,
-                    size: 14.sp,
-                    fontweight: FontWeight.w400),
-              ],
-            ),
-            SizedBox(
-              height: 25.h,
-            ),
-            LinearProgressIndicator(
-              value: (profileController.currentIndex.value + 1) / 8,
-              color: MyColors.btnColor,
-              borderRadius: BorderRadius.circular(4.r),
-              minHeight: 5.h,
-            ),
-            SizedBox(
-              height: 25.h,
-            ),
-            TextWidget(
-              align: TextAlign.start,
-              text: text,
-              color: MyColors.black,
-              size: 20.sp,
-              fontweight: FontWeight.w600,
-            ),
-            SizedBox(
-              height: 15.h,
-            ),
-            TextWidget(
-              align: TextAlign.start,
-              text: text1,
-              color: MyColors.black,
-              size: 10.sp,
-              fontweight: FontWeight.w500,
-            ),
-            SizedBox(
-              height: 25.h,
-            ),
-            TextFormField(
-              validator: validator,
-              controller: controller,
-              decoration: InputDecoration(
-                hintText: feildText,
-                hintStyle: TextStyle(
-                    fontSize: 10.sp,
-                    color: MyColors.blue,
-                    fontWeight: FontWeight.w600),
-                contentPadding:
-                    const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8.r),
-                ),
-              ),
-            ),
-          ]),
+          ),
+        )
+      ],
     );
   }
 }

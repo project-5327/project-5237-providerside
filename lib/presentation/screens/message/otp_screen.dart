@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -7,6 +8,7 @@ import '../../constants/color.dart';
 import '../../widgets/bottom_navigation.dart';
 import '../../widgets/customize_button.dart';
 import '../login_register/home_screen.dart';
+import '../my_contracts/send_screen.dart';
 import '../update_Project/chat_screen.dart';
 import '../login_register/EditProfile.dart';
 import 'change_password.dart';
@@ -40,7 +42,6 @@ class _OtpScreenState extends State<OtpScreen> {
         ),
         body: SingleChildScrollView(
           child: Column(children: [
-            //  _pages[currentIndex],
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
@@ -99,8 +100,47 @@ class _OtpScreenState extends State<OtpScreen> {
                         ),
                         children: <TextSpan>[
                           TextSpan(
-                            //recognizer: TapGestureRecognizer()
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                Get.defaultDialog(
+                                  titlePadding: EdgeInsets.only(top: 20),
+                                  title: 'Resend OTP',
+                                  titleStyle: TextStyle(
+                                      fontSize: 15.sp,
+                                      color: MyColors.btnColor,
+                                      fontWeight: FontWeight.w400),
+                                  content: Column(
+                                    children: [
+                                      TextWidget(
+                                        text: 'OTP code sent on your email.',
+                                        color: MyColors.black1,
+                                        size: 12.sp,
+                                        fontweight: FontWeight.w600,
+                                      ),
+                                      SizedBox(
+                                        height: 30.h,
+                                      ),
+                                      CustomizeButton(
+                                        borderColor: MyColors.btnColor,
+                                        radius: 100.r,
+                                        text: 'Ok',
+                                        height: 40.h,
+                                        width: 134.w,
+                                        color: MyColors.btnColor,
+                                        textColor: MyColors.white,
+                                        onTap: () {
+                                          Get.back();
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                );
+                                //   Column(
+                                //   children: [
 
+                                //   ],
+                                // ));
+                              },
                             text: 'Resend code',
                             style: TextStyle(
                               decoration: TextDecoration.underline,

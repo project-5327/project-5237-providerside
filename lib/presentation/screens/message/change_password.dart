@@ -123,8 +123,9 @@ class ChangePassword extends StatelessWidget {
                     color: MyColors.btnColor,
                     textColor: MyColors.white,
                     onTap: () {
-                      formKey.currentState!.validate();
-                      Get.to(() => AddProjects());
+                      if (formKey.currentState!.validate()) {
+                        Get.to(() => AddProjects());
+                      }
                     },
                   ),
                   SizedBox(

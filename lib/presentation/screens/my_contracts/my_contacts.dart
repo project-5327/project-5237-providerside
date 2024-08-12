@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 import '../../constants/assets.dart';
 import '../../constants/color.dart';
@@ -19,6 +20,7 @@ class MycontractScreen extends StatefulWidget {
 class _MycontractScreenState extends State<MycontractScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
+  bool showSendDetails = false;
 
   @override
   void initState() {
@@ -55,16 +57,18 @@ class _MycontractScreenState extends State<MycontractScreen>
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Column(
             children: [
+              //  _pages[currentIndex],
               SizedBox(
                 height: 10.h,
               ),
+
               TabBar(
                 indicator: BoxDecoration(
                   color: Colors.transparent,
                   border: Border(
                     bottom: BorderSide(
-                      color: MyColors.btnColor,
-                      width: 2.w,
+                      color: MyColors.btnColor, // Underline color
+                      width: 2.w, // Underline thickness
                     ),
                   ),
                 ),
@@ -76,16 +80,20 @@ class _MycontractScreenState extends State<MycontractScreen>
                 ],
                 labelColor: Colors.black,
               ),
+
               Expanded(
                 child: TabBarView(
                   controller: _tabController,
-                  children: const [
+                  children: [
                     HandshakeWidget(),
                     HandShakeTick(),
-                    SendDetails()
+                    SendScreen()
+                    // SendScreen(onProjectTileTap: () {
+                    //   Get.to(SendDetails());
+                    // }),
                   ],
                 ),
-              ),
+              )
             ],
           ),
         ),
