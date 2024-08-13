@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:latlong2/latlong.dart'; // Ensure this import is correct
+import 'package:latlong2/latlong.dart';
 
 import '../../constants/color.dart';
 import '../../widgets/customInfoWindow.dart';
@@ -27,6 +27,7 @@ class _MapScreenState extends State<MapScreen> {
     return SafeArea(
       child: Scaffold(
         body: FlutterMap(
+          mapController: mapController,
           options: MapOptions(
             initialCenter: markerPosition,
             initialZoom: 13.0,
@@ -40,14 +41,20 @@ class _MapScreenState extends State<MapScreen> {
             TileLayer(
               urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
             ),
-            MarkerLayer(
-              markers: [
-                Marker(
-                  width: 165.w,
-                  height: 173.h,
-                  point: markerPosition1,
-                  child: Column(
-                    children: [
+            MarkerLayer(markers: [
+              Marker(
+                width: 165.w,
+                height: 173.h,
+                point: markerPosition1,
+                // builder: (ctx) => GestureDetector(
+                //   onTap: () {
+                //     setState(() {
+                //       selectedMarker = markerPosition1;
+                //     });
+                //   },
+                child: Column(
+                  children: [
+                    if (selectedMarker == markerPosition1)
                       ConnectionContainer(
                         h: 32.h,
                         w: 165.w,
@@ -55,13 +62,19 @@ class _MapScreenState extends State<MapScreen> {
                         image: 'assets/icons/Icon.svg',
                         title: 'Connect with Clara 👋',
                       ),
-                      SizedBox(height: 5.h),
-                      Icon(
-                        Icons.circle,
-                        color: Color(0xff4B164C),
-                        size: 10.sp,
-                      ),
-                      Container(
+                    SizedBox(height: 5.h),
+                    Icon(
+                      Icons.circle,
+                      color: Color(0xff4B164C),
+                      size: 10.sp,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          selectedMarker = markerPosition1;
+                        });
+                      },
+                      child: Container(
                         width: 61.w,
                         height: 61.h,
                         decoration: BoxDecoration(
@@ -79,24 +92,29 @@ class _MapScreenState extends State<MapScreen> {
                           ),
                         ),
                       ),
-                    ],
-                  ),
-
-                  // builder: (ctx) => GestureDetector(
-                  //   onTap: () {
-                  //     setState(() {
-                  //       selectedMarker = markerPosition1;
-                  //     });
-                  //   },
-                  // ),
+                    ),
+                  ],
                 ),
-                Marker(
-                  width: 145.w,
-                  height: 163.h,
-                  point: markerPosition,
-                  child: Column(
-                    children: [
-                      Container(
+              ),
+              Marker(
+                width: 145.w,
+                height: 163.h,
+                point: markerPosition,
+                // builder: (ctx) => GestureDetector(
+                //   onTap: () {
+                //     setState(() {
+                //       selectedMarker = markerPosition;
+                //     });
+                //   },
+                child: Column(
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          selectedMarker = markerPosition;
+                        });
+                      },
+                      child: Container(
                         width: 71.w,
                         height: 71.h,
                         decoration: BoxDecoration(
@@ -114,34 +132,28 @@ class _MapScreenState extends State<MapScreen> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 5.h),
-                      Icon(
-                        Icons.circle,
-                        color: MyColors.btnColor,
-                        size: 10.sp,
+                    ),
+                    SizedBox(height: 5.h),
+                    Icon(
+                      Icons.circle,
+                      color: MyColors.btnColor,
+                      size: 10.sp,
+                    ),
+                    if (selectedMarker == markerPosition)
+                      SizedBox(height: 10.h),
+                    if (selectedMarker == markerPosition)
+                      CustomInfoWindow(
+                        color: MyColors.btnColor.withOpacity(0.7),
+                        h: 65.h,
+                        w: 144.w,
+                        title: 'Jason Jones',
+                        subtitle: 'Intermediate',
+                        rate: '\$1,000 - \$2,000',
                       ),
-                      if (selectedMarker == markerPosition)
-                        SizedBox(height: 10.h),
-                      if (selectedMarker == markerPosition)
-                        CustomInfoWindow(
-                          color: MyColors.btnColor.withOpacity(0.7),
-                          h: 65.h,
-                          w: 144.w,
-                          title: 'Jason Jones',
-                          subtitle: 'Intermediate',
-                          rate: '\$1,000 - \$2,000',
-                        ),
-                    ],
-                  ),
-                  // builder: (ctx) => GestureDetector(
-                  //   onTap: () {
-                  //     setState(() {
-                  //       selectedMarker = markerPosition;
-                  //     });
-                  //   },
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ]),
           ],
         ),
       ),
@@ -185,6 +197,7 @@ class ConnectionContainer extends StatelessWidget {
               height: 14.h,
               width: 14.w,
             ),
+            SizedBox(width: 4.w),
             Text(
               title,
               style: TextStyle(
