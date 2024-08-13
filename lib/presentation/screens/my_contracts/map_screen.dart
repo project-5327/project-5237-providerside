@@ -1,201 +1,201 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:latlong2/latlong.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:latlong2/latlong.dart'; // Ensure this import is correct
 
-class MapScreen extends StatelessWidget {
-  const MapScreen({super.key});
+import '../../constants/color.dart';
+import '../../widgets/customInfoWindow.dart';
+
+class MapScreen extends StatefulWidget {
+  MapScreen({super.key});
+
+  @override
+  State<MapScreen> createState() => _MapScreenState();
+}
+
+class _MapScreenState extends State<MapScreen> {
+  final MapController mapController = MapController();
+
+  LatLng markerPosition = LatLng(51.509364, -0.128928);
+  LatLng markerPosition1 = LatLng(54.509364, -1.128928);
+
+  LatLng? selectedMarker;
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: Scaffold(
-      body: FlutterMap(
-        options: MapOptions(
-          initialCenter:
-              LatLng(51.509364, -0.128928), // Center the map over London
-          initialZoom: 9.2,
+      child: Scaffold(
+        body: FlutterMap(
+          options: MapOptions(
+            initialCenter: markerPosition,
+            initialZoom: 13.0,
+            onTap: (tapPosition, latLng) {
+              setState(() {
+                selectedMarker = null;
+              });
+            },
+          ),
+          children: [
+            TileLayer(
+              urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+            ),
+            MarkerLayer(
+              markers: [
+                Marker(
+                  width: 165.w,
+                  height: 173.h,
+                  point: markerPosition1,
+                  child: Column(
+                    children: [
+                      ConnectionContainer(
+                        h: 32.h,
+                        w: 165.w,
+                        color: Color(0xff4B164C),
+                        image: 'assets/icons/Icon.svg',
+                        title: 'Connect with Clara 👋',
+                      ),
+                      SizedBox(height: 5.h),
+                      Icon(
+                        Icons.circle,
+                        color: Color(0xff4B164C),
+                        size: 10.sp,
+                      ),
+                      Container(
+                        width: 61.w,
+                        height: 61.h,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border:
+                              Border.all(color: Color(0xff4B164C), width: 3.w),
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(100.r),
+                          child: Image.asset(
+                            'assets/images/girl3.png',
+                            width: 71.w,
+                            height: 71.h,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  // builder: (ctx) => GestureDetector(
+                  //   onTap: () {
+                  //     setState(() {
+                  //       selectedMarker = markerPosition1;
+                  //     });
+                  //   },
+                  // ),
+                ),
+                Marker(
+                  width: 145.w,
+                  height: 163.h,
+                  point: markerPosition,
+                  child: Column(
+                    children: [
+                      Container(
+                        width: 71.w,
+                        height: 71.h,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border:
+                              Border.all(color: MyColors.btnColor, width: 3.w),
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(100.r),
+                          child: Image.asset(
+                            'assets/images/image.jpeg',
+                            width: 71.w,
+                            height: 71.h,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 5.h),
+                      Icon(
+                        Icons.circle,
+                        color: MyColors.btnColor,
+                        size: 10.sp,
+                      ),
+                      if (selectedMarker == markerPosition)
+                        SizedBox(height: 10.h),
+                      if (selectedMarker == markerPosition)
+                        CustomInfoWindow(
+                          color: MyColors.btnColor.withOpacity(0.7),
+                          h: 65.h,
+                          w: 144.w,
+                          title: 'Jason Jones',
+                          subtitle: 'Intermediate',
+                          rate: '\$1,000 - \$2,000',
+                        ),
+                    ],
+                  ),
+                  // builder: (ctx) => GestureDetector(
+                  //   onTap: () {
+                  //     setState(() {
+                  //       selectedMarker = markerPosition;
+                  //     });
+                  //   },
+                ),
+              ],
+            ),
+          ],
         ),
-        children: [
-          TileLayer(
-            // Display map tiles from any source
-            urlTemplate:
-                'https://tile.openstreetmap.org/{z}/{x}/{y}.png', // OSMF's Tile Server
-            userAgentPackageName: 'com.example.app',
-            maxNativeZoom:
-                19, // Scale tiles when the server doesn't support higher zoom levels
-          ),
-          RichAttributionWidget(
-            // Include a stylish prebuilt attribution widget that meets all requirments
-            attributions: [
-              TextSourceAttribution(
-                'OpenStreetMap contributors',
-                //  onTap: () => launchUrl(Uri.parse('https://openstreetmap.org/copyright')), // (external)
-              ),
-              // Also add images...
-            ],
-          ),
-        ],
       ),
-    ));
+    );
   }
 }
 
+class ConnectionContainer extends StatelessWidget {
+  final String title;
+  final String image;
+  final Color color;
+  final double h;
+  final double w;
 
-// import 'dart:async';
-// import 'dart:ui' as ui;
-// import 'package:flutter/material.dart';
-// import 'package:flutter/services.dart';
-// import 'package:flutter_screenutil/flutter_screenutil.dart';
-// import 'package:google_maps_flutter/google_maps_flutter.dart';
+  const ConnectionContainer({
+    super.key,
+    required this.title,
+    required this.image,
+    required this.color,
+    required this.h,
+    required this.w,
+  });
 
-// import '../../widgets/customInfoWindow.dart';
-
-// class MapScreen extends StatefulWidget {
-//   const MapScreen({super.key});
-
-//   @override
-//   State<MapScreen> createState() => _MapScreenState();
-// }
-
-// class _MapScreenState extends State<MapScreen> {
-//   final Completer<GoogleMapController> _controller =
-//       Completer<GoogleMapController>();
-
-//   final List<LatLng> latLng = const [
-//     LatLng(30.185400, 74.496300),
-//     LatLng(30.199510, 74.498100),
-//   ];
-
-//   final List<Marker> markers = [];
-//   bool showCustomWindow = false;
-//   LatLng? currentLatLng;
-//   int? selectedIndex;
-
-//   final List<String> images = [
-//     'assets/images/image.jpeg',
-//     'assets/images/girl1.png',
-//   ];
-
-//   final List<Map<String, String>> infoData = [
-//     {
-//       'title': 'Jason Jones',
-//       'subtitle': 'Intermediate',
-//       'rate': '\$1,000 - \$2,000',
-//     },
-//     {
-//       'title': 'Sophie Turner',
-//       'subtitle': 'Beginner',
-//       'rate': '\$500 - \$1,000',
-//     },
-//   ];
-
-//   static const CameraPosition _kGooglePlex = CameraPosition(
-//     target: LatLng(30.185400, 74.496300),
-//     zoom: 14.4746,
-//   );
-
-//   Future<BitmapDescriptor> getCircularMarker(String path, double radius) async {
-//     final Uint8List markerImageBytes =
-//         await getBytesFromAsset(path, 71.w.toInt(), 71.h.toInt());
-
-//     final ui.PictureRecorder pictureRecorder = ui.PictureRecorder();
-//     final Canvas canvas = Canvas(pictureRecorder);
-
-//     final Paint paint = Paint()..isAntiAlias = true;
-//     final double size = radius * 2;
-//     final Rect rect = Rect.fromLTWH(0.0, 0.0, size, size);
-
-//     final RRect rrect = RRect.fromRectAndRadius(rect, Radius.circular(radius));
-//     canvas.clipRRect(rrect);
-
-//     final ui.Image image = await decodeImageFromList(markerImageBytes);
-//     paintImage(canvas: canvas, rect: rect, image: image, fit: BoxFit.cover);
-
-//     final ui.Image markerImage = await pictureRecorder.endRecording().toImage(
-//           size.toInt(),
-//           size.toInt(),
-//         );
-//     final ByteData? byteData =
-//         await markerImage.toByteData(format: ui.ImageByteFormat.png);
-//     final Uint8List resizedMarkerImageBytes = byteData!.buffer.asUint8List();
-
-//     return BitmapDescriptor.fromBytes(resizedMarkerImageBytes);
-//   }
-
-//   Future<Uint8List> getBytesFromAsset(
-//       String path, int width, int height) async {
-//     ByteData data = await rootBundle.load(path);
-//     ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(),
-//         targetWidth: width, targetHeight: height);
-//     ui.FrameInfo fi = await codec.getNextFrame();
-//     final ByteData? byteData =
-//         await fi.image.toByteData(format: ui.ImageByteFormat.png);
-//     return byteData!.buffer.asUint8List();
-//   }
-
-//   @override
-//   void initState() {
-//     super.initState();
-//     loadData();
-//   }
-
-//   Future<void> loadData() async {
-//     for (int i = 0; i < latLng.length; i++) {
-//       final customIcon = await getCircularMarker(images[i], 100.r);
-
-//       markers.add(
-//         Marker(
-//           markerId: MarkerId(i.toString()),
-//           position: latLng[i],
-//           icon: customIcon,
-//           onTap: () {
-//             setState(() {
-//               showCustomWindow = true;
-//               currentLatLng = latLng[i];
-//               selectedIndex = i;
-//             });
-//           },
-//         ),
-//       );
-
-//       setState(() {});
-//     }
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: Stack(
-//         children: [
-//           GoogleMap(
-//             mapType: MapType.normal,
-//             myLocationButtonEnabled: true,
-//             myLocationEnabled: true,
-//             initialCameraPosition: _kGooglePlex,
-//             onMapCreated: (GoogleMapController controller) {
-//               _controller.complete(controller);
-//             },
-//             markers: Set<Marker>.of(markers),
-//             onTap: (LatLng latLng) {
-//               setState(() {
-//                 showCustomWindow = false;
-//               });
-//             },
-//           ),
-//           if (showCustomWindow &&
-//               currentLatLng != null &&
-//               selectedIndex != null)
-//             Positioned(
-//               left: MediaQuery.of(context).size.width / 2 - 72.w / 2,
-//               top: MediaQuery.of(context).size.height / 2 - 80.h,
-//               child: CustomInfoWindow(
-//                 title: infoData[selectedIndex!]['title']!,
-//                 subtitle: infoData[selectedIndex!]['subtitle']!,
-//                 rate: infoData[selectedIndex!]['rate']!,
-//               ),
-//             ),
-//         ],
-//       ),
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: h,
+      width: w,
+      decoration: BoxDecoration(
+        color: color,
+        borderRadius: BorderRadius.circular(16.r),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 2),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SvgPicture.asset(
+              image,
+              height: 14.h,
+              width: 14.w,
+            ),
+            Text(
+              title,
+              style: TextStyle(
+                color: MyColors.white,
+                fontSize: 10.sp,
+                fontWeight: FontWeight.w800,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

@@ -75,45 +75,49 @@ class CustomTextFormField extends StatelessWidget {
   }
 }
 
-class customizeContainer extends StatelessWidget {
+class CustomDropdownContainer extends StatelessWidget {
   final double? width;
   final double? height;
-  final String text;
+  final String hint;
   final List<DropdownMenuItem<String>>? items;
   final ValueChanged<String?>? onChanged;
+  final String selectedValue;
 
-  const customizeContainer(
-      {super.key,
-      this.width,
-      this.height,
-      required this.text,
-      this.items,
-      this.onChanged});
+  const CustomDropdownContainer({
+    super.key,
+    this.width,
+    this.height,
+    required this.hint,
+    this.items,
+    this.onChanged,
+    required this.selectedValue,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(width: 1, color: Color(0xff464646)),
+        border: Border.all(width: 1, color: const Color(0xff464646)),
       ),
       height: height,
       width: width,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 7),
         child: DropdownButton<String>(
-          // isDense: true,
           alignment: Alignment.centerRight,
-
           style: TextStyle(
-              fontSize: 10.sp,
-              color: MyColors.black1,
-              fontWeight: FontWeight.w400),
-          hint: TextWidget(
-            text: text,
-            size: 9.sp,
-            fontweight: FontWeight.w600,
-            color: MyColors.lightGrey,
+            fontSize: 10.sp,
+            color: MyColors.black1,
+            fontWeight: FontWeight.w400,
+          ),
+          hint: Text(
+            selectedValue.isEmpty ? hint : selectedValue,
+            style: TextStyle(
+              fontSize: 9.sp,
+              fontWeight: FontWeight.w600,
+              color: MyColors.lightGrey,
+            ),
           ),
           items: items,
           onChanged: onChanged,

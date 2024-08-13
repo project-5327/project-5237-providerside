@@ -1,10 +1,13 @@
 import 'package:get/get.dart';
 
-import '../data/models/countryModel.dart';
+class DropdownController extends GetxController {
+  var selectedValues = <String, String>{}.obs;
 
-class CountryController extends GetxController {
-  var selectedCountry = ''.obs;
-  void updateCountry(String country) {
-    selectedCountry.value = country;
+  void updateValue(String key, String value) {
+    selectedValues[key] = value;
+  }
+
+  String getValue(String key) {
+    return selectedValues[key] ?? '';
   }
 }

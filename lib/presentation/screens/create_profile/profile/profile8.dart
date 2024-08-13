@@ -45,7 +45,7 @@ class _Profile8State extends State<Profile8> {
   // final TextEditingController countryController = TextEditingController();
 
   final TextEditingController cityController = TextEditingController();
-  final CountryController countryController = Get.put(CountryController());
+  final DropdownController dropdownController = Get.put(DropdownController());
   final List<String> countries = ['USA', 'India', 'Canada', 'Japan'];
   final List<String> city = [
     'Delhi',
@@ -257,29 +257,24 @@ class _Profile8State extends State<Profile8> {
                                   SizedBox(
                                     height: 5.h,
                                   ),
-                                  customizeContainer(
-                                    //  height: 40.h,
+                                  CustomDropdownContainer(
                                     width: 153.w,
-                                    text: countryController
-                                            .selectedCountry.isEmpty
-                                        ? 'eg,Delhi'
-                                        : countryController
-                                            .selectedCountry.value,
-                                    //'eg,India',
+                                    hint: 'eg,Delhi',
+                                    selectedValue:
+                                        dropdownController.getValue('city'),
                                     onChanged: (String? newValue) {
                                       if (newValue != null) {
-                                        countryController
-                                            .updateCountry(newValue);
+                                        dropdownController.updateValue(
+                                            'city', newValue);
                                       }
                                     },
                                     items: city.map<DropdownMenuItem<String>>(
-                                      (String value) {
-                                        return DropdownMenuItem<String>(
-                                          child: Text(value),
-                                          value: value,
-                                        );
-                                      },
-                                    ).toList(),
+                                        (String value) {
+                                      return DropdownMenuItem<String>(
+                                        value: value,
+                                        child: Text(value),
+                                      );
+                                    }).toList(),
                                   ),
                                 ],
                               ),
@@ -299,30 +294,25 @@ class _Profile8State extends State<Profile8> {
                                   SizedBox(
                                     height: 5.h,
                                   ),
-                                  customizeContainer(
-                                    // height: 40.h,
+                                  CustomDropdownContainer(
                                     width: 153.w,
-                                    text: countryController
-                                            .selectedCountry.isEmpty
-                                        ? 'eg,India'
-                                        : countryController
-                                            .selectedCountry.value,
-                                    //'eg,India',
+                                    hint: 'eg,India',
+                                    selectedValue: dropdownController
+                                        .getValue('anotherCountry'),
                                     onChanged: (String? newValue) {
                                       if (newValue != null) {
-                                        countryController
-                                            .updateCountry(newValue);
+                                        dropdownController.updateValue(
+                                            'anotherCountry', newValue);
                                       }
                                     },
-                                    items:
-                                        countries.map<DropdownMenuItem<String>>(
-                                      (String value) {
-                                        return DropdownMenuItem<String>(
-                                          child: Text(value),
-                                          value: value,
-                                        );
-                                      },
-                                    ).toList(),
+                                    items: countries
+                                        .map<DropdownMenuItem<String>>(
+                                            (String value) {
+                                      return DropdownMenuItem<String>(
+                                        value: value,
+                                        child: Text(value),
+                                      );
+                                    }).toList(),
                                   ),
                                 ],
                               )

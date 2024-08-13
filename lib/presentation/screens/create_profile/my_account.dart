@@ -23,7 +23,7 @@ class MyAccountScreen extends StatelessWidget {
   //final TextEditingController countryController = TextEditingController();
   final ContainerController containerController =
       Get.put(ContainerController());
-  final CountryController countryController = Get.put(CountryController());
+  final DropdownController dropdownController = Get.put(DropdownController());
   final List<String> countries = ['USA', 'India', 'Canada', 'Japan'];
   @override
   Widget build(BuildContext context) {
@@ -67,25 +67,24 @@ class MyAccountScreen extends StatelessWidget {
                         height: 27.h,
                       ),
                       Center(
-                        child: customizeContainer(
+                        child: CustomDropdownContainer(
                           width: 336.w,
                           height: 48.h,
-                          text: countryController.selectedCountry.isEmpty
-                              ? 'Choose Your Country'
-                              : countryController.selectedCountry.value,
+                          hint: 'Choose Your Country',
+                          selectedValue: dropdownController.getValue('country'),
                           onChanged: (String? newValue) {
                             if (newValue != null) {
-                              countryController.updateCountry(newValue);
+                              dropdownController.updateValue(
+                                  'country', newValue);
                             }
                           },
-                          items: countries.map<DropdownMenuItem<String>>(
-                            (String value) {
-                              return DropdownMenuItem<String>(
-                                child: Text(value),
-                                value: value,
-                              );
-                            },
-                          ).toList(),
+                          items: countries
+                              .map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
                         ),
                       ),
                       // Obx(

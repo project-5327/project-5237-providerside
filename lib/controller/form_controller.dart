@@ -144,9 +144,10 @@ class FormController extends GetxController {
   ) {
     if (value.isEmpty) {
       return "Zipcode can't be empty";
-    } else if (!RegExp(r"^[0-9]{5}(?:-[0-9]{4})$").hasMatch(value)) {
-      return "Enter a valid 10\ndigit phone number";
     }
+    // else if (!RegExp(r"^[0-9]{5}(?:-[0-9]{4})$").hasMatch(value)) {
+    //   return "Enter a valid 10\ndigit number";
+    // }
     return null;
   }
 

@@ -20,7 +20,7 @@ class Profile4 extends StatelessWidget {
   final ProfileController profileController = Get.put(ProfileController());
   final formKey = GlobalKey<FormState>();
   final FormController formController = Get.put(FormController());
-  final CountryController countryController = Get.put(CountryController());
+  final DropdownController dropdownController = Get.put(DropdownController());
 
   final TextEditingController controller = TextEditingController();
   final List<String> level = ['Beginner', 'Intermediate', 'Experienced'];
@@ -55,14 +55,14 @@ class Profile4 extends StatelessWidget {
                   LanguageContainer(
                     text: 'English',
                     text1: 'My level is',
-                    countryController: countryController,
+                    //  countryController: countryController,
                     level: level,
                   ),
                   SizedBox(height: 16.h),
                   LanguageContainer(
                     text: 'Spanish',
                     text1: 'My level is',
-                    countryController: countryController,
+                    // countryController: countryController,
                     level: language,
                   ),
                   SizedBox(height: 78.h),
@@ -143,17 +143,19 @@ class Profile4 extends StatelessWidget {
   }
 }
 
+final DropdownController dropdownController = Get.put(DropdownController());
+
 class LanguageContainer extends StatelessWidget {
   final String text;
   final String text1;
-  final CountryController countryController;
+//  final Controller countryController;
   final List<String> level;
 
   const LanguageContainer({
     super.key,
     required this.text,
     required this.text1,
-    required this.countryController,
+    //  required this.countryController,
     required this.level,
   });
 
@@ -168,21 +170,20 @@ class LanguageContainer extends StatelessWidget {
           color: Color(0xff040200),
         ),
         SizedBox(width: 10.w),
-        customizeContainer(
+        CustomDropdownContainer(
           height: 40.h,
           width: 165.w,
-          text: countryController.selectedCountry.isEmpty
-              ? 'My level is'
-              : countryController.selectedCountry.value,
+          hint: 'My level is',
+          selectedValue: dropdownController.getValue('level'),
           onChanged: (String? newValue) {
             if (newValue != null) {
-              countryController.updateCountry(newValue);
+              dropdownController.updateValue('level', newValue);
             }
           },
           items: level.map<DropdownMenuItem<String>>((String value) {
             return DropdownMenuItem<String>(
-              child: Text(value),
               value: value,
+              child: Text(value),
             );
           }).toList(),
         ),
