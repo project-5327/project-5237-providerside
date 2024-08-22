@@ -33,50 +33,17 @@ class StaticProfileLayout extends StatelessWidget {
                     SizedBox(height: 30.h),
                     Row(
                       children: [
-                        SizedBox(width: 15.w),
-                        Container(
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                            color: MyColors.blue1,
-                            shape: BoxShape.circle,
-                          ),
-                          child: Text(
-                            'M',
-                            style: TextStyle(
-                              color: MyColors.white,
-                              fontSize: 20.sp,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                          height: 42.h,
-                          width: 42.w,
-                        ),
-                        SizedBox(width: 44.w),
+                        SizedBox(width: 10.w),
                         Text(
                           'Create Profile',
                           style: TextStyle(
+                            fontFamily: 'Montserrat',
                             color: MyColors.black,
                             fontSize: 24.sp,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                      ],
-                    ),
-                    SizedBox(height: 32.h),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            Get.back();
-                          },
-                          child: SvgPicture.asset(
-                            Assets.arrowLeft,
-                            height: 22.h,
-                            width: 11.w,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
+                        SizedBox(width: 75.w),
                         Obx(() => Text(
                               '${profileController.currentIndex.value + 1}/8',
                               style: TextStyle(
@@ -87,7 +54,7 @@ class StaticProfileLayout extends StatelessWidget {
                             )),
                       ],
                     ),
-                    SizedBox(height: 25.h),
+                    SizedBox(height: 45.h),
                     LinearProgressIndicator(
                       value: (profileController.currentIndex.value + 1) / 8,
                       color: MyColors.btnColor,

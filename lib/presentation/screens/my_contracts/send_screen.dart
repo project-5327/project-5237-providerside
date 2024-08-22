@@ -126,6 +126,7 @@ class _PdfContainerState extends State<PdfContainer> {
 class TextWidget extends StatelessWidget {
   final String text;
   final size;
+  final String? fontFamily;
   final align;
   final Color color;
   final fontweight;
@@ -135,14 +136,19 @@ class TextWidget extends StatelessWidget {
       this.size,
       required this.color,
       this.fontweight,
-      this.align});
+      this.align,
+      this.fontFamily});
 
   @override
   Widget build(BuildContext context) {
     return Text(
       textAlign: align,
       text,
-      style: TextStyle(fontSize: size, fontWeight: fontweight, color: color),
+      style: TextStyle(
+          fontFamily: fontFamily ?? 'Montserrat',
+          fontSize: size,
+          fontWeight: fontweight,
+          color: color),
     );
   }
 }

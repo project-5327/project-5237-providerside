@@ -48,5 +48,8 @@ class Assets {
   static String uploadPhoto = 'assets/images/Mask Group.svg';
   static String rectangle = 'assets/images/rectangle.png';
   static String rectangle1 = 'assets/images/Frame1.svg';
+  static String closeIC = 'assets/icons/close_small.svg';
+  static String editSqIC = 'assets/icons/edit_square.svg';
+
 
 }

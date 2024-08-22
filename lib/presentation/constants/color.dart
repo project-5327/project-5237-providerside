@@ -24,4 +24,5 @@ class MyColors {
   static Color blue1 = Color(0xff2942A5);
   static Color grey3 = Color(0xFF5E81F4);
   static Color blueContainer = Color(0xffEFF3FE);
+
 }
