@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -13,33 +14,73 @@ class PaymentsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SizedBox(
-          height: 35.h,
-        ),
-        TextWidget(
-          text: 'Payments Send',
-          color: MyColors.black,
-          size: 20.sp,
-          fontweight: FontWeight.w700,
-        ),
-        SizedBox(
-          height: 55.h,
-        ),
-        CustomizeButton(
-          text: 'Done',
-          height: 40.h,
-          width: 154.w,
-          color: MyColors.btnColor,
-          textColor: MyColors.white,
-          borderColor: MyColors.btnColor,
-          radius: 100.r,
-          onTap: () {
-            Get.to(() => MapScreen());
-          },
-        ),
-      ],
-    );
+    return defaultTargetPlatform == TargetPlatform.android ||
+            defaultTargetPlatform == TargetPlatform.iOS
+        ? Column(
+            children: [
+              SizedBox(
+                height: 35.h,
+              ),
+              TextWidget(
+                text: 'Payments Send',
+                color: MyColors.black,
+                size: 20.sp,
+                fontweight: FontWeight.w700,
+              ),
+              SizedBox(
+                height: 55.h,
+              ),
+              CustomizeButton(
+                text: 'Done',
+                height: 40.h,
+                width: 154.w,
+                color: MyColors.btnColor,
+                textColor: MyColors.white,
+                borderColor: MyColors.btnColor,
+                radius: 100.r,
+                onTap: () {
+                  Get.to(() => MapScreen());
+                },
+              ),
+            ],
+          )
+        : Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextWidget(
+                text: 'Payments Send',
+                color: MyColors.black,
+                size: 20.sp,
+                fontweight: FontWeight.w700,
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 21, bottom: 41),
+                width: 412.w,
+                child: TextWidget(
+                  text:
+                      'Lorem Ipsum has been the industry\'s standard dummy text ever since the  1500s, when an unknown.',
+                  color: MyColors.black,
+                  size: 14.sp,
+                  fontweight: FontWeight.w400,
+                  align: TextAlign.center,
+                ),
+              ),
+              SizedBox(
+                height: 55.h,
+              ),
+              CustomizeButton(
+                text: 'Done',
+                height: 40.h,
+                width: 154.w,
+                color: MyColors.btnColor,
+                textColor: MyColors.white,
+                borderColor: MyColors.btnColor,
+                radius: 100.r,
+                onTap: () {
+                  Get.to(() => MapScreen());
+                },
+              ),
+            ],
+          );
   }
 }
