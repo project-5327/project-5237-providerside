@@ -12,6 +12,8 @@ import 'presentation/screens/create_profile/profile/profile3.dart';
 import 'presentation/screens/login_register/Add_projects.dart';
 import 'presentation/screens/splash screen.dart';
 
+import 'desktop/onboarding/onboarding2.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -36,6 +38,8 @@ class MyApp extends StatelessWidget {
                 useMaterial3: true,
               ),
               home: SplashScreen());
+
+          //  Profile3());
         });
   }
 }
