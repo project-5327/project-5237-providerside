@@ -59,6 +59,9 @@ class EditCreateProfile extends StatelessWidget {
   final String text;
   final String text1;
   final String feildText;
+  final TextAlign? align;
+
+  final Color? color;
   final controller;
   final validator;
   final VoidCallback ontap;
@@ -69,7 +72,9 @@ class EditCreateProfile extends StatelessWidget {
       required this.feildText,
       this.controller,
       this.validator,
-      required this.ontap});
+      required this.ontap,
+      this.color,
+      this.align});
   final ProfileController profileController = Get.put(ProfileController());
 
   @override
@@ -103,7 +108,7 @@ class EditCreateProfile extends StatelessWidget {
         ),
         TextFormField(
           onTap: ontap,
-          textAlign: TextAlign.center,
+          textAlign: align ?? TextAlign.center,
           readOnly: true,
           validator: validator,
           controller: controller,
@@ -111,7 +116,7 @@ class EditCreateProfile extends StatelessWidget {
             hintText: feildText,
             hintStyle: TextStyle(
                 fontSize: 10.sp,
-                color: MyColors.blue,
+                color: color ?? MyColors.blue,
                 fontWeight: FontWeight.w600),
             contentPadding:
                 const EdgeInsets.symmetric(vertical: 10, horizontal: 16),

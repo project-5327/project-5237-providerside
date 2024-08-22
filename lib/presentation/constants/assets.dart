@@ -35,6 +35,7 @@ class Assets {
   static String dot = 'assets/icons/dot.svg';
   static String bluedot = 'assets/icons/blue_dot.svg';
   static String creditIC = 'assets/icons/Group 19.svg';
+  static String closeIC = 'assets\icons\close_small.svg';
 
   //Images
   static String profile_img = 'assets/icons/profile_img.svg';

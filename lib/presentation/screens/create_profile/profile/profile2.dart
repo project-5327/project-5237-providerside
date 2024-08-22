@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:project_5237_provider/controller/container_controller.dart';
+import 'package:project_5237_provider/presentation/screens/create_profile/profile/add_experience.dart';
+import 'package:project_5237_provider/presentation/screens/create_profile/profile/profile_detail.dart';
 import 'package:project_5237_provider/presentation/screens/my_contracts/send_screen.dart';
 
 import '../../../../controller/form_controller.dart';
 import '../../../../controller/profile_controller.dart';
 import '../../../constants/color.dart';
+import '../../../constants/strings.dart';
 import '../../../widgets/create_profile_widget.dart';
 import '../../../widgets/customize_button.dart';
 import 'profile3.dart';
@@ -29,54 +32,51 @@ class Profile2 extends StatelessWidget {
         child: Column(
           children: [
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
+              padding: EdgeInsets.symmetric(horizontal: 15),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   SizedBox(height: 25.h),
                   EditCreateProfile(
-                    ontap: () => _showExperienceOptions(context),
+                    ontap: () => Get.to(AddExperience()),
                     validator: (value) =>
                         formController.validateExperience(value),
                     controller: controller,
-                    text: 'Add your work experiences.',
-                    text1:
-                        'Lorem ipsum dolor sit amet, consectetur \nadipiscing elit, sed do eiusmod.',
-                    feildText: '+Add Experience',
+                    text: AppStrings.createProfileExperince,
+                    text1: AppStrings.createProfileLorem1,
+                    feildText: AppStrings.addExperience,
                   ),
                   SizedBox(height: 20.h),
                   Row(
                     children: [
-                      Obx(
-                        () => InkWell(
-                          onTap: () => containerController.toggelSelection(2),
-                          child: Container(
-                            alignment: Alignment.center,
-                            height: 18.h,
-                            width: 18.w,
-                            child: containerController.selectedcont[2]
-                                ? Icon(
-                                    size: 12.sp,
-                                    Icons.check,
-                                    color: MyColors.white)
-                                : null,
-                            decoration: BoxDecoration(
-                              color: containerController.selectedcont[2]
-                                  ? Color(0xffFF4C4A)
-                                  : MyColors.white,
-                              borderRadius: BorderRadius.circular(4.r),
-                              border: Border.all(
-                                width: 2.w,
-                                color: MyColors.black.withOpacity(0.3),
-                              ),
-                            ),
+                      // Obx(
+                      //   () => InkWell(
+                      //     onTap: () => containerController.toggelSelection(2),
+                      //     child:
+                      Container(
+                        alignment: Alignment.center,
+                        height: 18.h,
+                        width: 18.w,
+                        child: containerController.selectedcont[2]
+                            ? Icon(
+                                size: 12.sp, Icons.check, color: MyColors.white)
+                            : null,
+                        decoration: BoxDecoration(
+                          color: containerController.selectedcont[2]
+                              ? Color(0xffFF4C4A)
+                              : MyColors.white,
+                          borderRadius: BorderRadius.circular(4.r),
+                          border: Border.all(
+                            width: 2.w,
+                            color: MyColors.black.withOpacity(0.3),
                           ),
                         ),
                       ),
+
                       SizedBox(width: 10.w),
                       TextWidget(
-                        text: 'No experience yet.',
+                        text: AppStrings.noExperince,
                         color: MyColors.black.withOpacity(0.3),
                         size: 13.sp,
                         fontweight: FontWeight.w400,
@@ -84,22 +84,40 @@ class Profile2 extends StatelessWidget {
                     ],
                   ),
                   SizedBox(height: 122.h),
-                  Center(
-                    child: CustomizeButton(
-                      borderColor: MyColors.btnColor,
-                      radius: 100.r,
-                      text: 'Next',
-                      height: 40.h,
-                      width: 334.w,
-                      color: MyColors.btnColor,
-                      textColor: MyColors.white,
-                      onTap: () {
-                        if (formKey.currentState!.validate()) {
-                          profileController.nextPage();
-                          Get.to(() => Profile3());
-                        }
-                      },
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      CustomizeButton(
+                        borderColor: MyColors.btnColor,
+                        radius: 100.r,
+                        text: AppStrings.privious,
+                        height: 40.h,
+                        width: 150.w,
+                        color: MyColors.white,
+                        textColor: MyColors.btnColor,
+                        onTap: () {
+                          if (formKey.currentState!.validate()) {
+                            profileController.nextPage();
+                            Get.to(() => ProfileDetail());
+                          }
+                        },
+                      ),
+                      CustomizeButton(
+                        borderColor: MyColors.btnColor,
+                        radius: 100.r,
+                        text: AppStrings.next,
+                        height: 40.h,
+                        width: 150.w,
+                        color: MyColors.btnColor,
+                        textColor: MyColors.white,
+                        onTap: () {
+                          if (formKey.currentState!.validate()) {
+                            profileController.nextPage();
+                            Get.to(() => Profile3());
+                          }
+                        },
+                      ),
+                    ],
                   ),
                   SizedBox(height: 42.h),
                 ],
@@ -123,7 +141,7 @@ class Profile2 extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
                 child: TextWidget(
-                  text: 'Select Experience',
+                  text: AppStrings.selectExperience,
                   color: MyColors.black,
                   size: 15.sp,
                   fontweight: FontWeight.w400,
@@ -131,13 +149,13 @@ class Profile2 extends StatelessWidget {
               ),
               ListTile(
                 title: TextWidget(
-                  text: 'Fresher',
+                  text: AppStrings.fresher,
                   color: MyColors.black,
                   size: 14.sp,
                   fontweight: FontWeight.w400,
                 ),
                 onTap: () {
-                  controller.text = 'Fresher';
+                  controller.text = AppStrings.fresher;
                   Get.back();
                 },
               ),

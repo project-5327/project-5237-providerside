@@ -6,6 +6,7 @@ import 'package:project_5237_provider/controller/form_controller.dart';
 import 'package:project_5237_provider/presentation/screens/create_profile/profile/static_profile.dart';
 
 import '../../../constants/color.dart';
+import '../../../constants/strings.dart';
 import '../../../widgets/create_profile_widget.dart';
 import '../../../widgets/customize_button.dart';
 import 'profile2.dart';
@@ -27,19 +28,21 @@ class ProfileDetail extends StatelessWidget {
           children: [
             SizedBox(height: 30.h),
             EditCreateProfile(
+              align: TextAlign.start,
               ontap: () {},
               validator: (value) => formController.validateSkills(value),
               controller: skillsController,
-              text: 'First, add a title to tell the world what you do.',
-              text1: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-              feildText: 'Example Web developer | Web & Mobile',
+              text: AppStrings.createProfileText1,
+              text1: AppStrings.createProfileLorem,
+              feildText: AppStrings.titletext,
+              color: MyColors.lightGrey,
             ),
             SizedBox(height: 158.h),
             Center(
                 child: CustomizeButton(
                     borderColor: MyColors.btnColor,
                     radius: 100.r,
-                    text: 'Next',
+                    text: AppStrings.next,
                     height: 40.h,
                     width: 334.w,
                     color: MyColors.btnColor,
