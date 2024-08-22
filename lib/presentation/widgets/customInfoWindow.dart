@@ -1,26 +1,35 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../constants/color.dart';
 
 class CustomInfoWindow extends StatelessWidget {
-  final String title;
-  final String subtitle;
-  final String rate;
+  final title;
+  final subtitle;
+  final rate;
+  final image;
+  final color;
+  final h;
+  final w;
   const CustomInfoWindow({
     super.key,
-    required this.title,
-    required this.subtitle,
-    required this.rate,
+    this.title,
+    this.subtitle,
+    this.rate,
+    this.image,
+    this.color,
+    this.h,
+    this.w,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 65.h,
-      width: 144.w,
+      height: h,
+      width: w,
       decoration: BoxDecoration(
-        color: MyColors.btnColor.withOpacity(0.75),
+        color: color,
         borderRadius: BorderRadius.circular(10.r),
       ),
       child: Padding(
@@ -35,16 +44,18 @@ class CustomInfoWindow extends StatelessWidget {
             //   width: 10.w,
             //   fit: BoxFit.cover,
             // ),
+
             Text(
-              title,
+              title!,
               style: TextStyle(
                 color: MyColors.white,
                 fontSize: 10.sp,
                 fontWeight: FontWeight.w800,
               ),
             ),
+
             Text(
-              subtitle,
+              subtitle!,
               style: TextStyle(
                 color: MyColors.white,
                 fontSize: 10.sp,
@@ -52,7 +63,7 @@ class CustomInfoWindow extends StatelessWidget {
               ),
             ),
             Text(
-              rate,
+              rate!,
               style: TextStyle(
                 color: MyColors.white,
                 fontSize: 10.sp,

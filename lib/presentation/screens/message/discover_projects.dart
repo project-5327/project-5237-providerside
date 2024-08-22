@@ -29,67 +29,78 @@ class _DiscoverProjectsState extends State<DiscoverProjects> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: Padding(
-          padding: const EdgeInsets.only(top: 10),
-          child: Stack(alignment: Alignment.topRight, children: [
-            SvgPicture.asset(Assets.bell),
-            SvgPicture.asset(Assets.dot)
-          ]),
-        ),
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              'Discover Projects',
-              style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600),
-            ),
-            Switch(
-              value: _isSwitched,
-              onChanged: _toggleSwitch,
-              activeColor: Colors.blue,
-              inactiveThumbColor: Colors.grey,
-              inactiveTrackColor: Colors.grey[300],
-            )
-            //SvgPicture.asset(Assets.filter),
-          ],
-        ),
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20.sp),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          leading: Padding(
+            padding: const EdgeInsets.only(top: 10),
+            child: Stack(alignment: Alignment.topRight, children: [
+              SvgPicture.asset(Assets.bell),
+              SvgPicture.asset(Assets.dot)
+            ]),
+          ),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              //  _pages[currentIndex],
-              SearchField(),
-              SizedBox(
-                height: 27.h,
-              ),
               Text(
-                'Category 1',
-                style: TextStyle(
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w500,
-                    color: MyColors.black2),
+                'Discover Projects',
+                style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600),
               ),
-              Text(
-                '250 Result Found',
-                style: TextStyle(
-                    fontSize: 12.sp,
-                    fontWeight: FontWeight.w300,
-                    color: MyColors.blue),
-              ),
-              SizedBox(
-                height: 20.h,
-              ),
-              InkWell(
-                onTap: () {
-                  Get.to(AddProjects());
-                },
-                child: DiscoverContainer(
+              Switch(
+                value: _isSwitched,
+                onChanged: _toggleSwitch,
+                activeColor: Colors.blue,
+                inactiveThumbColor: Colors.grey,
+                inactiveTrackColor: Colors.grey[300],
+              )
+              //SvgPicture.asset(Assets.filter),
+            ],
+          ),
+        ),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.sp),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                //  _pages[currentIndex],
+                SearchField(),
+                SizedBox(
+                  height: 27.h,
+                ),
+                Text(
+                  'Category 1',
+                  style: TextStyle(
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w500,
+                      color: MyColors.black2),
+                ),
+                Text(
+                  '250 Result Found',
+                  style: TextStyle(
+                      fontSize: 12.sp,
+                      fontWeight: FontWeight.w300,
+                      color: MyColors.blue),
+                ),
+                SizedBox(
+                  height: 20.h,
+                ),
+                InkWell(
+                  onTap: () {
+                    Get.to(AddProjects());
+                  },
+                  child: DiscoverContainer(
+                      text1:
+                          "Lorem Ipsum has been the industry's standard dummy text ever since the  1500s",
+                      text2: '1000 - 2000',
+                      image: 'assets/images/image.jpeg',
+                      text3: 'Location',
+                      username: 'Jason Jones',
+                      time: '5 hours agoo',
+                      rate: 'Rate'),
+                ),
+                DiscoverContainer(
                     text1:
                         "Lorem Ipsum has been the industry's standard dummy text ever since the  1500s",
                     text2: '1000 - 2000',
@@ -97,18 +108,9 @@ class _DiscoverProjectsState extends State<DiscoverProjects> {
                     text3: 'Location',
                     username: 'Jason Jones',
                     time: '5 hours agoo',
-                    rate: 'Rate'),
-              ),
-              DiscoverContainer(
-                  text1:
-                      "Lorem Ipsum has been the industry's standard dummy text ever since the  1500s",
-                  text2: '1000 - 2000',
-                  image: 'assets/images/image.jpeg',
-                  text3: 'Location',
-                  username: 'Jason Jones',
-                  time: '5 hours agoo',
-                  rate: 'Budget'),
-            ],
+                    rate: 'Budget'),
+              ],
+            ),
           ),
         ),
       ),

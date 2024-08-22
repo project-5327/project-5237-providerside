@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:project_5237_provider/presentation/screens/my_contracts/map_screen.dart';
 
 import '../constants/assets.dart';
 import '../constants/color.dart';
@@ -80,19 +82,22 @@ class DiscoverContainer extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                   color: MyColors.black),
             ),
-            trailing: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                SvgPicture.asset(Assets.location),
-                SizedBox(width: 4.w),
-                Text(
-                  text3,
-                  style: TextStyle(
-                      fontSize: 12.sp,
-                      fontWeight: FontWeight.w500,
-                      color: MyColors.blue),
-                ),
-              ],
+            trailing: InkWell(
+              onTap: () => Get.to(MapScreen()),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SvgPicture.asset(Assets.location),
+                  SizedBox(width: 4.w),
+                  Text(
+                    text3,
+                    style: TextStyle(
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.w500,
+                        color: MyColors.blue),
+                  ),
+                ],
+              ),
             ),
           ),
           const CustomizeTagContainer(tag: 'Time range'),

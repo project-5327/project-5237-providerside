@@ -10,16 +10,18 @@ class BookedClient extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-          child: BookedMessage(
-              text: "\$Clientname booked!",
-              text1:
-                  "Lorem ipsum dolor sit amet consectetur. Etiam sollicitudin gravida et ornare.",
-              btntext: 'Done',
-              onTap: () {
-                //  Get.to(());
-              })),
+    return SafeArea(
+      child: Scaffold(
+        body: Center(
+            child: BookedMessage(
+                text: "\$Clientname booked!",
+                text1:
+                    "Lorem ipsum dolor sit amet consectetur. Etiam sollicitudin gravida et ornare.",
+                btntext: 'Done',
+                onTap: () {
+                  //  Get.to(());
+                })),
+      ),
     );
   }
 }
