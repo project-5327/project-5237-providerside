@@ -9,7 +9,6 @@ import '../../constants/color.dart';
 import '../../widgets/Customize_textfield.dart';
 import '../../widgets/customize_button.dart';
 import '../login_register/home_screen.dart';
-import '../main_screen.dart';
 import '../update_Project/chat_screen.dart';
 
 class ChangePassword extends StatelessWidget {

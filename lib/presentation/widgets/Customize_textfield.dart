@@ -12,6 +12,7 @@ class CustomTextFormField extends StatelessWidget {
   final IconButton? icon;
   final TextStyle? style;
   final int? maxLines;
+  final bool? readOnly;
 
   final Color? fillcolor;
   final TextEditingController? controller;
@@ -31,7 +32,8 @@ class CustomTextFormField extends StatelessWidget {
       this.fillcolor,
       this.width,
       this.height,
-      this.maxLines});
+      this.maxLines,
+      this.readOnly});
 
   @override
   Widget build(BuildContext context) {
@@ -51,6 +53,7 @@ class CustomTextFormField extends StatelessWidget {
           height: height,
           width: width,
           child: TextFormField(
+            readOnly: readOnly ?? false,
             maxLines: maxLines ?? 1,
             controller: controller,
             onChanged: onChanged,
@@ -83,7 +86,7 @@ class CustomDropdownContainer extends StatelessWidget {
   final double? width;
   final double? height;
   final String hint;
-  final List<DropdownMenuItem<String>>? items;
+  final List<String>? items;
   final ValueChanged<String?>? onChanged;
   final String selectedValue;
 
@@ -100,33 +103,46 @@ class CustomDropdownContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(width: 1, color: const Color(0xff464646)),
-      ),
-      height: height,
-      width: width,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 7),
-        child: DropdownButton<String>(
-          alignment: Alignment.centerRight,
-          style: TextStyle(
-            fontSize: 10.sp,
-            color: MyColors.black1,
-            fontWeight: FontWeight.w400,
-          ),
-          hint: Text(
-            selectedValue.isEmpty ? hint : selectedValue,
-            style: TextStyle(
-              fontSize: 9.sp,
-              fontWeight: FontWeight.w600,
-              color: MyColors.lightGrey,
-            ),
-          ),
-          items: items,
-          onChanged: onChanged,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8.r),
+          border: Border.all(width: 1, color: const Color(0xff464646)),
         ),
-      ),
-    );
+        height: height,
+        width: width,
+        child: Padding(
+            padding: const EdgeInsets.only(top: 5.0, left: 5.0, right: 5.0),
+            child: DropdownButton<String>(
+              alignment: Alignment.bottomCenter,
+              style: TextStyle(
+                fontSize: 10.sp,
+                color: MyColors.black1,
+                fontWeight: FontWeight.w400,
+              ),
+              borderRadius: BorderRadius.circular(6.r),
+              isDense: true,
+              value:
+                  items?.contains(selectedValue) == true ? selectedValue : null,
+              hint: Text(
+                selectedValue.isEmpty ? hint : selectedValue,
+                style: TextStyle(
+                  fontSize: 9.sp,
+                  fontWeight: FontWeight.w600,
+                  color: MyColors.lightGrey,
+                ),
+              ),
+              isExpanded: true,
+              icon: Icon(
+                Icons.arrow_drop_down,
+                color: MyColors.grey,
+                size: 30.sp,
+              ),
+              items: items?.map((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+              onChanged: onChanged,
+            )));
   }
 }
