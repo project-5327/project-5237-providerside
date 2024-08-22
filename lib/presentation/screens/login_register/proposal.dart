@@ -13,16 +13,18 @@ class ProposalScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-          child: BookedMessage(
-              text: "\$Proposal accepted",
-              text1:
-                  "Lorem ipsum dolor sit amet consectetur. Etiam sollicitudin gravida et ornare.",
-              btntext: 'Message',
-              onTap: () {
-                Get.to(MessageScreen());
-              })),
+    return SafeArea(
+      child: Scaffold(
+        body: Center(
+            child: BookedMessage(
+                text: "\$Proposal accepted",
+                text1:
+                    "Lorem ipsum dolor sit amet consectetur. Etiam sollicitudin gravida et ornare.",
+                btntext: 'Message',
+                onTap: () {
+                  Get.to(MessageScreen());
+                })),
+      ),
     );
   }
 }

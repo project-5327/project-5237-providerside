@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:project_5237_provider/presentation/screens/filter/filter.dart';
 
 import '../constants/assets.dart';
 import '../constants/color.dart';
@@ -33,7 +35,11 @@ class SearchField extends StatelessWidget {
             ),
           ),
         ),
-        SvgPicture.asset(Assets.filter),
+        InkWell(
+            onTap: () {
+              Get.to(FilterScreen());
+            },
+            child: SvgPicture.asset(Assets.filter)),
       ],
     );
   }

@@ -52,7 +52,7 @@ class AwaitingMilestones extends StatelessWidget {
                   borderColor: MyColors.btnColor,
                   radius: 100.r,
                   onTap: () {
-                    Get.to(() => ProposalScreen());
+                    _showDialogeBox();
                   },
                 ),
                 SizedBox(
@@ -67,7 +67,7 @@ class AwaitingMilestones extends StatelessWidget {
                   textColor: MyColors.white,
                   borderColor: MyColors.btnColor,
                   onTap: () {
-                    Get.to(() => ProposalScreen());
+                    _showDialogeBox();
                   },
                 ),
               ],
@@ -77,6 +77,64 @@ class AwaitingMilestones extends StatelessWidget {
       ),
     );
   }
-}
+
 //   void _dialogBox() {}
 // }
+  void _showDialogeBox() {
+    Get.defaultDialog(
+      titlePadding: EdgeInsets.only(top: 20),
+      title: 'Are you Sure?',
+      titleStyle: TextStyle(
+          fontSize: 20.sp,
+          color: MyColors.btnColor,
+          fontWeight: FontWeight.w700),
+      content: Column(
+        children: [
+          TextWidget(
+            align: TextAlign.center,
+            text:
+                'If you choose yes then the amount to \$200 first milestone will sent to freelancer account',
+            color: MyColors.black1,
+            size: 14.sp,
+            fontweight: FontWeight.w400,
+          ),
+          SizedBox(
+            height: 30.h,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CustomizeButton(
+                borderColor: MyColors.btnColor,
+                radius: 100.r,
+                text: "Yes I'm sure",
+                height: 40.h,
+                width: 130.w,
+                color: MyColors.btnColor,
+                textColor: MyColors.white,
+                onTap: () {
+                  Get.back();
+                },
+              ),
+              SizedBox(
+                width: 10.w,
+              ),
+              CustomizeButton(
+                borderColor: MyColors.btnColor,
+                radius: 100.r,
+                text: "Cancel",
+                height: 40.h,
+                width: 130.w,
+                color: MyColors.white,
+                textColor: MyColors.black,
+                onTap: () {
+                  Get.back();
+                },
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}

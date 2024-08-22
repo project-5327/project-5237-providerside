@@ -36,78 +36,80 @@ class _MilestoneScreenState extends State<MilestoneScreen>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: Text(
-          'Milestone',
-          style: TextStyle(
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w700,
-              color: MyColors.black),
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          title: Text(
+            'Milestone',
+            style: TextStyle(
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w700,
+                color: MyColors.black),
+          ),
+          centerTitle: true,
         ),
-        centerTitle: true,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        child: Column(
-          children: [
-            SizedBox(
-              height: 10.h,
-            ),
-            TabBar(
-              indicator: BoxDecoration(
-                color: Colors.transparent,
-                border: Border(
-                  bottom: BorderSide(
-                    color: MyColors.btnColor,
-                    width: 2.w,
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: Column(
+            children: [
+              SizedBox(
+                height: 10.h,
+              ),
+              TabBar(
+                indicator: BoxDecoration(
+                  color: Colors.transparent,
+                  border: Border(
+                    bottom: BorderSide(
+                      color: MyColors.btnColor,
+                      width: 2.w,
+                    ),
                   ),
                 ),
-              ),
-              controller: _tabController,
-              tabs: [
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Tab(
-                      child: TextWidget(
-                    text: 'Active Milestones',
-                    color: MyColors.black,
-                    size: 12.sp,
-                    fontweight: FontWeight.w600,
-                  )),
-                ),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Tab(
-                      child: TextWidget(
-                    text: 'Awaiting Milestones',
-                    color: MyColors.black,
-                    size: 12.sp,
-                    fontweight: FontWeight.w600,
-                  )),
-                ),
-                Tab(
-                    child: TextWidget(
-                  text: 'Payments',
-                  color: MyColors.black,
-                  size: 12.sp,
-                  fontweight: FontWeight.w600,
-                )),
-              ],
-              labelColor: Colors.black,
-            ),
-            Expanded(
-              child: TabBarView(
                 controller: _tabController,
-                children: const [
-                  ActiveMilestones(),
-                  AwaitingMilestones(),
-                  PaymentsScreen()
+                tabs: [
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Tab(
+                        child: TextWidget(
+                      text: 'Active Milestones',
+                      color: MyColors.black,
+                      size: 12.sp,
+                      fontweight: FontWeight.w600,
+                    )),
+                  ),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Tab(
+                        child: TextWidget(
+                      text: 'Awaiting Milestones',
+                      color: MyColors.black,
+                      size: 12.sp,
+                      fontweight: FontWeight.w600,
+                    )),
+                  ),
+                  Tab(
+                      child: TextWidget(
+                    text: 'Payments',
+                    color: MyColors.black,
+                    size: 12.sp,
+                    fontweight: FontWeight.w600,
+                  )),
                 ],
+                labelColor: Colors.black,
               ),
-            ),
-          ],
+              Expanded(
+                child: TabBarView(
+                  controller: _tabController,
+                  children: const [
+                    ActiveMilestones(),
+                    AwaitingMilestones(),
+                    PaymentsScreen()
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

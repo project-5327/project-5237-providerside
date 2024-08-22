@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:project_5237_provider/presentation/screens/login_register/credit.dart';
+import 'package:project_5237_provider/presentation/screens/login_register/message.dart';
+import 'package:project_5237_provider/presentation/screens/milestones/milestone.dart';
 
 import '../constants/assets.dart';
 import '../constants/color.dart';
@@ -24,9 +27,9 @@ class _MainScreenState extends State<MainScreen> {
 
   final List<Widget> _screens = [
     const HomeScreen(),
-    const ChatScreen(),
-    const MapScreen(),
-    const MyProjectScreen(),
+    const MilestoneScreen(),
+    const MessageScreen(),
+    DebitCredit(),
     Editprofile()
   ];
 
@@ -39,38 +42,44 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _screens[_selectedIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        onTap: _onItemTapped,
-        currentIndex: _selectedIndex,
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        backgroundColor: MyColors.white,
-        elevation: 0,
-        selectedItemColor: MyColors.black.withOpacity(0.1),
-        items: [
-          BottomNavigationBarItem(
-            icon: _buildIcon(Assets.home, 0),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: _buildIcon(Assets.person, 1),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: _buildIcon(Assets.location, 2),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: _buildIcon(Assets.message, 3),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: _buildProfileIcon(4),
-            label: '',
-          ),
-        ],
+    return SafeArea(
+      child: Scaffold(
+        body: _screens[_selectedIndex],
+        bottomNavigationBar: BottomNavigationBar(
+          onTap: _onItemTapped,
+          currentIndex: _selectedIndex,
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+          backgroundColor: MyColors.white,
+          elevation: 0,
+          selectedItemColor: MyColors.black.withOpacity(0.1),
+          items: [
+            BottomNavigationBarItem(
+              icon: _buildIcon(Assets.home, 0),
+              label: '',
+            ),
+            BottomNavigationBarItem(
+              icon: _buildIcon(Assets.person, 1),
+              label: '',
+            ),
+            // BottomNavigationBarItem(
+            //   icon: _buildIcon(Assets.location, 2),
+            //   label: '',
+            // ),
+            BottomNavigationBarItem(
+              icon: _buildIcon(Assets.message, 2),
+              label: '',
+            ),
+            BottomNavigationBarItem(
+              icon: _buildIcon(Assets.wallet, 3),
+              label: '',
+            ),
+            BottomNavigationBarItem(
+              icon: _buildProfileIcon(4),
+              label: '',
+            ),
+          ],
+        ),
       ),
     );
   }

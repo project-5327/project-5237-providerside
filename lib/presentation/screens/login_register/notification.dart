@@ -12,99 +12,104 @@ class NotificationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: Icon(
-          Icons.arrow_back_ios,
-          color: MyColors.black,
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
+            onPressed: () => Get.back(),
+            icon: Icon(
+              Icons.arrow_back_ios,
+              color: MyColors.black,
+            ),
+          ),
+          title: Text(
+            'Your Notifications',
+            style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600),
+          ),
         ),
-        title: Text(
-          'Your Notifications',
-          style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600),
-        ),
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: 30.h,
-              ),
-              Text(
-                'Today',
-                style: TextStyle(
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w400,
-                    color: MyColors.grey),
-              ),
-              SizedBox(
-                height: 19.sp,
-              ),
-              InkWell(
-                onTap: () {
-                  //Payment page
-                  Get.to(() => Editprofile());
-                },
-                child: const CustomizeListTile(
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: 30.h,
+                ),
+                Text(
+                  'Today',
+                  style: TextStyle(
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w400,
+                      color: MyColors.grey),
+                ),
+                SizedBox(
+                  height: 19.sp,
+                ),
+                InkWell(
+                  onTap: () {
+                    //Payment page
+                    Get.to(() => Editprofile());
+                  },
+                  child: const CustomizeListTile(
+                      image: 'assets/images/girl1.png',
+                      title: 'Jason Jones',
+                      subTitle: 'Thanks, Ajay! We look forward to it as...',
+                      time: '5 mins ago'),
+                ),
+                SizedBox(
+                  height: 15.h,
+                ),
+                const CustomizeListTile(
+                    image: 'assets/images/girl2.png',
+                    title: 'Barbiana Liu',
+                    subTitle: 'Thanks, Ajay! We look forward to it as...',
+                    time: '10 mins ago'),
+                SizedBox(
+                  height: 15.h,
+                ),
+                const CustomizeListTile(
                     image: 'assets/images/girl1.png',
                     title: 'Jason Jones',
                     subTitle: 'Thanks, Ajay! We look forward to it as...',
-                    time: '5 mins ago'),
-              ),
-              SizedBox(
-                height: 15.h,
-              ),
-              const CustomizeListTile(
-                  image: 'assets/images/girl2.png',
-                  title: 'Barbiana Liu',
-                  subTitle: 'Thanks, Ajay! We look forward to it as...',
-                  time: '10 mins ago'),
-              SizedBox(
-                height: 15.h,
-              ),
-              const CustomizeListTile(
-                  image: 'assets/images/girl1.png',
-                  title: 'Jason Jones',
-                  subTitle: 'Thanks, Ajay! We look forward to it as...',
-                  time: '23 mins ago'),
-              SizedBox(
-                height: 15.h,
-              ),
-              const CustomizeListTile(
-                  image: 'assets/images/girl2.png',
-                  title: 'Barbiana Liu',
-                  subTitle: 'Thanks, Ajay! We look forward to it as...',
-                  time: '43 mins ago'),
-              SizedBox(
-                height: 30.h,
-              ),
-              Text(
-                'Yesterday',
-                style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
-                    color: MyColors.grey),
-              ),
-              SizedBox(
-                height: 17.h,
-              ),
-              const CustomizeListTile(
-                  image: 'assets/images/girl1.png',
-                  title: 'Jason Jones',
-                  subTitle: 'Thanks, Ajay! We look forward to it as...',
-                  time: '23 mins ago'),
-              SizedBox(
-                height: 15.h,
-              ),
-              const CustomizeListTile(
-                  image: 'assets/images/girl2.png',
-                  title: 'Barbiana Liu',
-                  subTitle: 'Thanks, Ajay! We look forward to it as...',
-                  time: '43 mins ago'),
-            ],
+                    time: '23 mins ago'),
+                SizedBox(
+                  height: 15.h,
+                ),
+                const CustomizeListTile(
+                    image: 'assets/images/girl2.png',
+                    title: 'Barbiana Liu',
+                    subTitle: 'Thanks, Ajay! We look forward to it as...',
+                    time: '43 mins ago'),
+                SizedBox(
+                  height: 30.h,
+                ),
+                Text(
+                  'Yesterday',
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400,
+                      color: MyColors.grey),
+                ),
+                SizedBox(
+                  height: 17.h,
+                ),
+                const CustomizeListTile(
+                    image: 'assets/images/girl1.png',
+                    title: 'Jason Jones',
+                    subTitle: 'Thanks, Ajay! We look forward to it as...',
+                    time: '23 mins ago'),
+                SizedBox(
+                  height: 15.h,
+                ),
+                const CustomizeListTile(
+                    image: 'assets/images/girl2.png',
+                    title: 'Barbiana Liu',
+                    subTitle: 'Thanks, Ajay! We look forward to it as...',
+                    time: '43 mins ago'),
+              ],
+            ),
           ),
         ),
       ),
