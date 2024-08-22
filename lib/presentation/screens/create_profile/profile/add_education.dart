@@ -11,8 +11,8 @@ import '../../../constants/assets.dart';
 import '../../../constants/color.dart';
 import '../../../widgets/customize_button.dart';
 
-class AddExperience extends StatelessWidget {
-  const AddExperience({super.key});
+class AddEducation extends StatelessWidget {
+  const AddEducation({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -66,13 +66,27 @@ class AddExperience extends StatelessWidget {
                       SizedBox(
                         height: 14.h,
                       ),
+                      const CustomTextFormField(
+                        text: AppStrings.enterHere,
+                        title: AppStrings.degree,
+                      ),
+                      SizedBox(
+                        height: 14.h,
+                      ),
+                      const CustomTextFormField(
+                        text: AppStrings.enterHere,
+                        title: AppStrings.institutionName,
+                      ),
+                      SizedBox(
+                        height: 14.h,
+                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           const Flexible(
                             child: CustomTextFormField(
                               text: AppStrings.enterHere,
-                              title: AppStrings.companyName,
+                              title: AppStrings.fieldOfStudy,
                             ),
                           ),
                           SizedBox(
@@ -81,7 +95,7 @@ class AddExperience extends StatelessWidget {
                           const Flexible(
                             child: CustomTextFormField(
                               text: AppStrings.enterHere,
-                              title: AppStrings.role,
+                              title: AppStrings.location,
                             ),
                           ),
                         ],
@@ -105,29 +119,6 @@ class AddExperience extends StatelessWidget {
                             child: CustomTextFormField(
                               text: AppStrings.date,
                               title: AppStrings.endDate,
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 14.h,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Flexible(
-                            child: CustomTextFormField(
-                              text: AppStrings.enterHere,
-                              title: AppStrings.location,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 5.w,
-                          ),
-                          const Flexible(
-                            child: CustomTextFormField(
-                              text: AppStrings.enterHere,
-                              title: AppStrings.employmentType,
                             ),
                           ),
                         ],
@@ -171,7 +162,7 @@ class AddExperience extends StatelessWidget {
                   child: CustomizeButton(
                       borderColor: MyColors.btnColor,
                       radius: 100.r,
-                      text: AppStrings.next,
+                      text: AppStrings.save,
                       height: 40.h,
                       width: 334.w,
                       color: MyColors.btnColor,
