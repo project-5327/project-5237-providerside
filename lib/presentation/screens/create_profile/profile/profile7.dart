@@ -5,11 +5,13 @@ import 'package:get/get.dart';
 import 'package:project_5237_provider/controller/form_controller.dart';
 import 'package:project_5237_provider/presentation/constants/assets.dart';
 import 'package:project_5237_provider/presentation/constants/color.dart';
+import 'package:project_5237_provider/presentation/screens/create_profile/profile/profile6.dart';
 import 'package:project_5237_provider/presentation/screens/create_profile/profile/profile8.dart';
 import 'package:project_5237_provider/presentation/screens/my_contracts/send_screen.dart';
 import 'package:project_5237_provider/presentation/widgets/create_profile_widget.dart';
 
 import '../../../../controller/profile_controller.dart';
+import '../../../constants/strings.dart';
 import '../../../widgets/customize_button.dart';
 import 'static_profile.dart';
 
@@ -28,7 +30,7 @@ class Profile7 extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 15),
             child: Form(
               key: formKey,
               child: Column(
@@ -40,7 +42,7 @@ class Profile7 extends StatelessWidget {
                     ),
                     TextWidget(
                       align: TextAlign.start,
-                      text: 'Add Hourly Rate',
+                      text: AppStrings.addHourlyRate,
                       color: MyColors.black,
                       size: 20.sp,
                       fontweight: FontWeight.w600,
@@ -50,8 +52,7 @@ class Profile7 extends StatelessWidget {
                     ),
                     TextWidget(
                       align: TextAlign.start,
-                      text:
-                          'Lorem ipsum dolor sit amet, consectetur adipiscing elit,sed do  eiusmod.',
+                      text: AppStrings.lorem2,
                       color: MyColors.black,
                       size: 10.sp,
                       fontweight: FontWeight.w500,
@@ -60,14 +61,15 @@ class Profile7 extends StatelessWidget {
                       height: 16.h,
                     ),
                     TextWidget(
+                      fontFamily: 'Lexend',
                       align: TextAlign.start,
-                      text: 'Hourly Rate',
+                      text: AppStrings.hourlyRate,
                       color: MyColors.black,
-                      size: 16.sp,
-                      fontweight: FontWeight.w400,
+                      size: 12.sp,
+                      fontweight: FontWeight.w500,
                     ),
                     SizedBox(
-                      height: 34.h,
+                      height: 5.h,
                     ),
                     Row(
                       children: [
@@ -122,13 +124,33 @@ class Profile7 extends StatelessWidget {
                     SizedBox(
                       height: 129.h,
                     ),
-                    Center(
-                      child: CustomizeButton(
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        CustomizeButton(
                           borderColor: MyColors.btnColor,
                           radius: 100.r,
-                          text: 'Next',
+                          text: AppStrings.privious,
                           height: 40.h,
-                          width: 334.w,
+                          width: 150.w,
+                          color: MyColors.white,
+                          textColor: MyColors.btnColor,
+                          onTap: () {
+                            if (formKey.currentState!.validate()) {
+                              profileController.nextPage();
+                              Get.to(() => Profile6());
+                            }
+                          },
+                        ),
+                        SizedBox(
+                          width: 5.w,
+                        ),
+                        CustomizeButton(
+                          borderColor: MyColors.btnColor,
+                          radius: 100.r,
+                          text: AppStrings.next,
+                          height: 40.h,
+                          width: 150.w,
                           color: MyColors.btnColor,
                           textColor: MyColors.white,
                           onTap: () {
@@ -136,7 +158,9 @@ class Profile7 extends StatelessWidget {
                               profileController.nextPage();
                               Get.to(() => Profile8());
                             }
-                          }),
+                          },
+                        ),
+                      ],
                     ),
                     SizedBox(
                       height: 42.h,
