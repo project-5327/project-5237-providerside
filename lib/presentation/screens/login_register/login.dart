@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:project_5237_provider/presentation/screens/main_screen.dart';
 import 'package:project_5237_provider/presentation/screens/message/forget_password.dart';
 
 import '../../../controller/form_controller.dart';
 import '../../constants/color.dart';
 import '../../widgets/Customize_textfield.dart';
 import '../../widgets/customize_button.dart';
+import '../main_screen .dart';
 import 'register.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -157,7 +157,9 @@ class LoginScreen extends StatelessWidget {
                           textColor: MyColors.white,
                           onTap: () {
                             if (formKey.currentState!.validate()) {
-                              Get.to(MainScreen());
+                              Get.to(MainScreen(
+                                selectedIndex: 0,
+                              ));
                             }
                           },
                         ),

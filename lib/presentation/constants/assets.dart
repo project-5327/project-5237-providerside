@@ -37,6 +37,8 @@ class Assets {
   static String creditIC = 'assets/icons/Group 19.svg';
   static String closeIC = 'assets/icons/close_small.svg';
   static String editSqIC = 'assets/icons/edit_square.svg';
+  static String circleIC = 'assets/icons/circle.svg';
+  static String circle_dotIC = 'assets/icons/circle_dot.svg';
 
   //Images
   static String profile_img = 'assets/icons/profile_img.svg';

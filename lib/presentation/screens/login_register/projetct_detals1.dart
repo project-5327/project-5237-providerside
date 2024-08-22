@@ -14,6 +14,7 @@ import '../../widgets/customize_button.dart';
 import '../../widgets/discover_project_cont.dart';
 import '../../widgets/project_detail_widget.dart';
 import '../filter/filter.dart';
+import '../main_screen .dart';
 import 'message.dart';
 
 class HomeProjectDetails extends StatefulWidget {
@@ -238,7 +239,10 @@ class _HomeProjectDetailsState extends State<HomeProjectDetails> {
                     borderColor: MyColors.btnColor,
                     radius: 100.r,
                     onTap: () {
-                      Get.to(() => DebitCredit());
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                            builder: (_) => MainScreen(selectedIndex: 6)),
+                      );
                     },
                   ),
                   SizedBox(

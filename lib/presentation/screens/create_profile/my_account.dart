@@ -12,7 +12,6 @@ import 'package:project_5237_provider/presentation/widgets/create_profile_widget
 
 import '../../constants/color.dart';
 import '../../widgets/customize_button.dart';
-import '../main_screen.dart';
 
 class MyAccountScreen extends StatelessWidget {
   MyAccountScreen({super.key});
@@ -68,24 +67,18 @@ class MyAccountScreen extends StatelessWidget {
                       ),
                       Center(
                         child: CustomDropdownContainer(
-                          width: 336.w,
-                          height: 48.h,
-                          hint: 'Choose Your Country',
-                          selectedValue: dropdownController.getValue('country'),
-                          onChanged: (String? newValue) {
-                            if (newValue != null) {
-                              dropdownController.updateValue(
-                                  'country', newValue);
-                            }
-                          },
-                          items: countries
-                              .map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList(),
-                        ),
+                            width: 336.w,
+                            height: 48.h,
+                            hint: 'Choose Your Country',
+                            selectedValue:
+                                dropdownController.getValue('country'),
+                            onChanged: (String? newValue) {
+                              if (newValue != null) {
+                                dropdownController.updateValue(
+                                    'country', newValue);
+                              }
+                            },
+                            items: countries),
                       ),
                       // Obx(
                       //   () => CustomTextFormField(

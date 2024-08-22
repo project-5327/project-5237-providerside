@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:project_5237_provider/presentation/screens/login_register/succesfully.dart';
 
 import '../../constants/color.dart';
+import '../../constants/strings.dart';
 import '../../widgets/Details_textfield.dart';
 
 class AddProjects extends StatelessWidget {
@@ -22,18 +23,15 @@ class AddProjects extends StatelessWidget {
             ),
           ),
           title: Text(
-            'Add your Project',
+            AppStrings.addYourProjects,
             style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600),
           ),
         ),
-        body: SingleChildScrollView(
-            child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 18),
-                child: DetailsTextfield(
-                  onTap: () {
-                    Get.to(() => SuccesfullyScreen());
-                  },
-                ))),
+        body: SingleChildScrollView(child: DetailsTextfield(
+          onTap: () {
+            Get.to(() => SuccesfullyScreen());
+          },
+        )),
       ),
     );
   }
