@@ -65,7 +65,7 @@ class MyAccountScreen extends StatelessWidget {
                       SizedBox(
                         height: 27.h,
                       ),
-                      Center(
+                      /*Center(
                         child: CustomDropdownContainer(
                             width: 336.w,
                             height: 48.h,
@@ -79,7 +79,7 @@ class MyAccountScreen extends StatelessWidget {
                               }
                             },
                             items: countries),
-                      ),
+                      ),*/
                       // Obx(
                       //   () => CustomTextFormField(
                       //     validator: (value) =>

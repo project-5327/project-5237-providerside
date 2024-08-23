@@ -98,4 +98,10 @@ class AppStrings {
   static const enterprojectTitle = 'Enter your Project Title ';
   static const projectcatagory = 'Project Category';
   static const enterprojectCatagory = 'Select your Project Catagory';
+  static const createMyAoccunt ='Create my Account';
+  static const enterUrName ='Enter your Name';
+  static  const firstName = 'First Name';
+  static const lastName ='Last Name';
+
+
 }

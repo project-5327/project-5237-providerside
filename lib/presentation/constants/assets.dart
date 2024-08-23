@@ -52,4 +52,7 @@ class Assets {
   static String uploadPhoto = 'assets/images/Mask Group.svg';
   static String rectangle = 'assets/images/rectangle.png';
   static String rectangle1 = 'assets/images/Frame1.svg';
+  static String gmail1= 'assets/images/gmail1.svg';
+  static String bgirl ='assets/images/bgirl.svg';
+  static String wgirl ='assets/images/wgirl1.png';
 }
