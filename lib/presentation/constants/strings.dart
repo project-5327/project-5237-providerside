@@ -110,4 +110,6 @@ class AppStrings {
   static const areYouSure = 'Are you Sure?';
   static const cancel = 'Cancel';
   static const yesImSure = 'Yes I\'m sure';
+  static const projects = 'Projects';
+  static const category = 'Category 1';
 }

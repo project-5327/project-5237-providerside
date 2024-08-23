@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:project_5237_provider/desktop/projects/projects_screen.dart';
 import 'package:project_5237_provider/presentation/screens/create_profile/my_account.dart';
 import 'package:project_5237_provider/presentation/screens/create_profile/profile/profile2.dart';
 import 'package:project_5237_provider/presentation/screens/login_register/add_project1.dart';
@@ -42,7 +43,7 @@ class MyApp extends StatelessWidget {
                 colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
                 useMaterial3: true,
               ),
-              home: SplashScreen());
+              home: ProjectsScreen());
 
           //  Profile3());
         });
