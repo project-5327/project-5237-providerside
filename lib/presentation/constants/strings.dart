@@ -119,4 +119,10 @@ class AppStrings {
   static const areYouSure = 'Are you Sure?';
   static const cancel = 'Cancel';
   static const yesImSure = 'Yes I\'m sure';
+  static const createMyAoccunt ='Create my Account';
+  static const enterUrName ='Enter your Name';
+  static  const firstName = 'First Name';
+  static const lastName ='Last Name';
+
+
 }
