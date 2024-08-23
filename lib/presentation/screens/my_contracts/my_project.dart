@@ -5,13 +5,7 @@ import 'package:get/get.dart';
 
 import '../../constants/assets.dart';
 import '../../constants/color.dart';
-import '../../widgets/bottom_navigation.dart';
 import '../../widgets/contract_widgets.dart';
-import '../login_register/home_screen.dart';
-import '../login_register/EditProfile.dart';
-import '../login_register/message.dart';
-import '../update_Project/chat_screen.dart';
-import 'send_screen.dart';
 
 class MyProjectScreen extends StatefulWidget {
   const MyProjectScreen({super.key});

@@ -37,6 +37,8 @@ class Assets {
   static String creditIC = 'assets/icons/Group 19.svg';
   static String closeIC = 'assets/icons/close_small.svg';
   static String editSqIC = 'assets/icons/edit_square.svg';
+  static String circleIC = 'assets/icons/circle.svg';
+  static String circle_dotIC = 'assets/icons/circle_dot.svg';
 
   //Images
   static String profile_img = 'assets/icons/profile_img.svg';
@@ -47,5 +49,7 @@ class Assets {
   static String joseph_profile = 'assets/images/joseph_profile.svg';
   static String splashScreen = 'assets/images/Splash Screen (1).svg';
   static String createProfile = 'assets/images/Frame.svg';
-  static String uploadPhoto = 'assets/images/Ellipse 53.svg';
+  static String uploadPhoto = 'assets/images/Mask Group.svg';
+  static String rectangle = 'assets/images/rectangle.png';
+  static String rectangle1 = 'assets/images/Frame1.svg';
 }

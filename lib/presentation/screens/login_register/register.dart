@@ -9,7 +9,6 @@ import 'package:project_5237_provider/presentation/screens/login_register/login.
 import '../../constants/color.dart';
 import '../../widgets/Customize_textfield.dart';
 import '../../widgets/customize_button.dart';
-import '../main_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
   RegisterScreen({super.key});

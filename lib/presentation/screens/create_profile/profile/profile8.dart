@@ -207,22 +207,18 @@ class _Profile8State extends State<Profile8> {
                                   ),
                                   CustomDropdownContainer(
                                     width: 153.w,
-                                    hint: 'eg,Delhi',
+                                    height: 40.h,
+                                    hint: 'eg, Delhi',
                                     selectedValue:
-                                        dropdownController.getValue('city'),
+                                        dropdownController.getValue('city') ??
+                                            '',
                                     onChanged: (String? newValue) {
                                       if (newValue != null) {
                                         dropdownController.updateValue(
                                             'city', newValue);
                                       }
                                     },
-                                    items: city.map<DropdownMenuItem<String>>(
-                                        (String value) {
-                                      return DropdownMenuItem<String>(
-                                        value: value,
-                                        child: Text(value),
-                                      );
-                                    }).toList(),
+                                    items: city,
                                   ),
                                 ],
                               ),
@@ -242,25 +238,18 @@ class _Profile8State extends State<Profile8> {
                                     height: 5.h,
                                   ),
                                   CustomDropdownContainer(
-                                    width: 153.w,
-                                    hint: 'eg,India',
-                                    selectedValue: dropdownController
-                                        .getValue('anotherCountry'),
-                                    onChanged: (String? newValue) {
-                                      if (newValue != null) {
-                                        dropdownController.updateValue(
-                                            'anotherCountry', newValue);
-                                      }
-                                    },
-                                    items: countries
-                                        .map<DropdownMenuItem<String>>(
-                                            (String value) {
-                                      return DropdownMenuItem<String>(
-                                        value: value,
-                                        child: Text(value),
-                                      );
-                                    }).toList(),
-                                  ),
+                                      width: 153.w,
+                                      height: 40.h,
+                                      hint: 'eg,India',
+                                      selectedValue: dropdownController
+                                          .getValue('anotherCountry'),
+                                      onChanged: (String? newValue) {
+                                        if (newValue != null) {
+                                          dropdownController.updateValue(
+                                              'anotherCountry', newValue);
+                                        }
+                                      },
+                                      items: countries),
                                 ],
                               )
                             ],

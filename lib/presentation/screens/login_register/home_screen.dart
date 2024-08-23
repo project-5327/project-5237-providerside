@@ -9,6 +9,7 @@ import '../../constants/color.dart';
 import '../../widgets/discover_project_cont.dart';
 import '../../widgets/search_field.dart';
 
+import '../main_screen .dart';
 import 'projetct_detals1.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -98,7 +99,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 InkWell(
                   onTap: () {
-                    Get.to(HomeProjectDetails());
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                          builder: (_) => MainScreen(selectedIndex: 5)),
+                    );
                   },
                   child: DiscoverContainer(
                       text1:
@@ -116,7 +120,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 InkWell(
                   onTap: () {
-                    Get.to(HomeProjectDetails());
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                          builder: (_) => MainScreen(selectedIndex: 5)),
+                    );
                   },
                   child: DiscoverContainer(
                       text1:
