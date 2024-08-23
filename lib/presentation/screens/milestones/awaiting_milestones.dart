@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:project_5237_provider/presentation/constants/strings.dart';
 import 'package:project_5237_provider/presentation/screens/my_contracts/send_screen.dart';
 import '../../constants/color.dart';
 import '../../widgets/customize_button.dart';
@@ -22,7 +23,7 @@ class AwaitingMilestones extends StatelessWidget {
                     height: 35.h,
                   ),
                   TextWidget(
-                    text: 'Work submitted',
+                    text: AppStrings.workSubmitted,
                     color: MyColors.black,
                     size: 20.sp,
                     fontweight: FontWeight.w700,
@@ -45,7 +46,7 @@ class AwaitingMilestones extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       CustomizeButton(
-                        text: 'Accept',
+                        text: AppStrings.accept,
                         height: 40.h,
                         width: 154.w,
                         color: MyColors.btnColor,
@@ -60,7 +61,7 @@ class AwaitingMilestones extends StatelessWidget {
                         width: 14.w,
                       ),
                       CustomizeButton(
-                        text: 'Request Changes',
+                        text: AppStrings.requestChanges,
                         radius: 100.r,
                         height: 40.h,
                         width: 160.w,
@@ -167,7 +168,7 @@ class AwaitingMilestones extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     CustomizeButton(
-                      text: 'Request Changes',
+                      text: AppStrings.requestChanges,
                       radius: 100.r,
                       height: 40.h,
                       width: 160.w,
@@ -182,7 +183,7 @@ class AwaitingMilestones extends StatelessWidget {
                       width: 16.w,
                     ),
                     CustomizeButton(
-                      text: 'Accept',
+                      text: AppStrings.accept,
                       height: 40.h,
                       width: 154.w,
                       color: MyColors.btnColor,
@@ -206,7 +207,7 @@ class AwaitingMilestones extends StatelessWidget {
     Get.defaultDialog(
       titlePadding: EdgeInsets.only(top: 86.h, bottom: 25.h),
       contentPadding: EdgeInsets.symmetric(horizontal: 55.w),
-      title: 'Are you Sure?',
+      title: AppStrings.areYouSure,
       titleStyle: TextStyle(
           fontSize: 20.sp,
           color: MyColors.btnColor,
@@ -236,7 +237,7 @@ class AwaitingMilestones extends StatelessWidget {
               CustomizeButton(
                 borderColor: MyColors.btnColor,
                 radius: 100.r,
-                text: "Cancel",
+                text: AppStrings.cancel,
                 height: 40.h,
                 width: 130.w,
                 color: MyColors.white,
@@ -251,7 +252,7 @@ class AwaitingMilestones extends StatelessWidget {
               CustomizeButton(
                 borderColor: MyColors.btnColor,
                 radius: 100.r,
-                text: "Yes I'm sure",
+                text: AppStrings.yesImSure,
                 height: 40.h,
                 width: 130.w,
                 color: MyColors.btnColor,

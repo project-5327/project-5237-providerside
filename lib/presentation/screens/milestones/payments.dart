@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:project_5237_provider/presentation/constants/strings.dart';
 import 'package:project_5237_provider/presentation/screens/my_contracts/send_screen.dart';
 
 import '../../constants/color.dart';
@@ -22,7 +23,7 @@ class PaymentsScreen extends StatelessWidget {
                 height: 35.h,
               ),
               TextWidget(
-                text: 'Payments Send',
+                text: AppStrings.payemntsSend,
                 color: MyColors.black,
                 size: 20.sp,
                 fontweight: FontWeight.w700,
@@ -31,7 +32,7 @@ class PaymentsScreen extends StatelessWidget {
                 height: 55.h,
               ),
               CustomizeButton(
-                text: 'Done',
+                text: AppStrings.done,
                 height: 40.h,
                 width: 154.w,
                 color: MyColors.btnColor,
@@ -48,13 +49,13 @@ class PaymentsScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TextWidget(
-                text: 'Payments Send',
+                text: AppStrings.payemntsSend,
                 color: MyColors.black,
                 size: 20.sp,
                 fontweight: FontWeight.w700,
               ),
               Container(
-                margin: const EdgeInsets.only(top: 21, bottom: 41),
+                margin: EdgeInsets.only(top: 21.h, bottom: 41.h),
                 width: 412.w,
                 child: TextWidget(
                   text:
@@ -69,7 +70,7 @@ class PaymentsScreen extends StatelessWidget {
                 height: 55.h,
               ),
               CustomizeButton(
-                text: 'Done',
+                text: AppStrings.done,
                 height: 40.h,
                 width: 154.w,
                 color: MyColors.btnColor,

@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:project_5237_provider/presentation/constants/strings.dart';
 import 'package:project_5237_provider/presentation/screens/milestones/active_milestones.dart';
 import 'package:project_5237_provider/presentation/screens/milestones/awaiting_milestones.dart';
 import 'package:project_5237_provider/presentation/screens/milestones/payments.dart';
@@ -75,7 +76,7 @@ class _MilestoneScreenState extends State<MilestoneScreen>
                           scrollDirection: Axis.horizontal,
                           child: Tab(
                               child: TextWidget(
-                            text: 'Active Milestones',
+                            text: AppStrings.activeMilestones,
                             color: MyColors.black,
                             size: 12.sp,
                             fontweight: FontWeight.w600,
@@ -85,7 +86,7 @@ class _MilestoneScreenState extends State<MilestoneScreen>
                           scrollDirection: Axis.horizontal,
                           child: Tab(
                               child: TextWidget(
-                            text: 'Awaiting Milestones',
+                            text: AppStrings.awaitingMilestones,
                             color: MyColors.black,
                             size: 12.sp,
                             fontweight: FontWeight.w600,
@@ -93,7 +94,7 @@ class _MilestoneScreenState extends State<MilestoneScreen>
                         ),
                         Tab(
                             child: TextWidget(
-                          text: 'Payments',
+                          text: AppStrings.payments,
                           color: MyColors.black,
                           size: 12.sp,
                           fontweight: FontWeight.w600,
@@ -124,7 +125,7 @@ class _MilestoneScreenState extends State<MilestoneScreen>
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'MileStone Payment',
+                      AppStrings.milestonePayment,
                       style: TextStyle(
                           fontSize: 20.sp,
                           fontWeight: FontWeight.w600,
@@ -153,7 +154,7 @@ class _MilestoneScreenState extends State<MilestoneScreen>
                           scrollDirection: Axis.horizontal,
                           child: Tab(
                             child: TextWidget(
-                              text: 'Active Milestones',
+                              text: AppStrings.activeMilestones,
                               color: MyColors.black,
                               size: 12.sp,
                               fontweight: FontWeight.w600,
@@ -164,7 +165,7 @@ class _MilestoneScreenState extends State<MilestoneScreen>
                           scrollDirection: Axis.horizontal,
                           child: Tab(
                             child: TextWidget(
-                              text: 'Awaiting Milestones',
+                              text: AppStrings.awaitingMilestones,
                               color: MyColors.black,
                               size: 12.sp,
                               fontweight: FontWeight.w600,
@@ -173,7 +174,7 @@ class _MilestoneScreenState extends State<MilestoneScreen>
                         ),
                         Tab(
                           child: TextWidget(
-                            text: 'Payments',
+                            text: AppStrings.payments,
                             color: MyColors.black,
                             size: 12.sp,
                             fontweight: FontWeight.w600,
