@@ -18,27 +18,19 @@ class MyProjectsScreen extends StatefulWidget {
 class _MyProjectsScreenState extends State<MyProjectsScreen> {
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return ListView(
+      padding: EdgeInsets.only(left: 33.w, top: 37.h, right: 33.w),
       children: [
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.all(15),
-            child: GridView.builder(
-              padding: EdgeInsets.all(0),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                  mainAxisSpacing: 20,
-                  crossAxisSpacing: 20,
-                  childAspectRatio: 2.3),
-              itemCount: 5,
-              itemBuilder: (context, index) {
-                return ProjectComp();
-              },
-            ),
+        Wrap(
+          children: List.generate(
+            12,
+            (index) {
+              return const ProjectComp();
+            },
           ),
         ),
         SizedBox(
-          height: 150.h,
+          height: 36.h,
         ),
         Align(
           alignment: Alignment.centerRight,
@@ -50,10 +42,11 @@ class _MyProjectsScreenState extends State<MyProjectsScreen> {
             width: 151.w,
             color: MyColors.btnColor,
             textColor: MyColors.white,
-            onTap: () {
-              //  Get.to(() => AddProjects());
-            },
+            onTap: () {},
           ),
+        ),
+        SizedBox(
+          height: 36.h,
         ),
       ],
     );
@@ -66,7 +59,8 @@ class ProjectComp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 362.w,
+      margin: EdgeInsets.only(left: 30.w, bottom: 30.h),
+      width: 390.w,
       padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 15.h),
       decoration: BoxDecoration(
         border: Border.all(width: 1.w, color: MyColors.textColor),
