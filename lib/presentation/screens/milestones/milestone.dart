@@ -131,10 +131,13 @@ class _MilestoneScreenState extends State<MilestoneScreen>
                           color: MyColors.black),
                     ),
                     SizedBox(
-                      height: 10.h,
+                      height: 30.h,
                     ),
                     TabBar(
-                      labelPadding: EdgeInsets.symmetric(horizontal: 10.0),
+                      tabAlignment: TabAlignment.start,
+                      isScrollable: true,
+                      labelPadding:
+                          const EdgeInsets.symmetric(horizontal: 10.0),
                       indicator: BoxDecoration(
                         color: Colors.transparent,
                         border: Border(
