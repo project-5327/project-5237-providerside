@@ -98,4 +98,18 @@ class AppStrings {
   static const enterprojectTitle = 'Enter your Project Title ';
   static const projectcatagory = 'Project Category';
   static const enterprojectCatagory = 'Select your Project Catagory';
+  static const milestonePayment = 'MileStone Payment';
+  static const activeMilestones = 'Active Milestones';
+  static const awaitingMilestones = 'Awaiting Milestones';
+  static const payments = 'Payments';
+  static const accept = 'Accept';
+  static const requestChanges = 'Request Changes';
+  static const payemntsSend = 'Payments Send';
+  static const done = 'Done';
+  static const workSubmitted = 'Work submitted';
+  static const areYouSure = 'Are you Sure?';
+  static const cancel = 'Cancel';
+  static const yesImSure = 'Yes I\'m sure';
+  static const projects = 'Projects';
+  static const category = 'Category 1';
 }

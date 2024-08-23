@@ -1,12 +1,15 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:project_5237_provider/desktop/projects/projects_screen.dart';
 import 'package:project_5237_provider/presentation/screens/create_profile/my_account.dart';
 import 'package:project_5237_provider/presentation/screens/create_profile/profile/profile2.dart';
 import 'package:project_5237_provider/presentation/screens/login_register/add_project1.dart';
 import 'package:project_5237_provider/presentation/screens/login_register/credit.dart';
 import 'package:project_5237_provider/presentation/screens/login_register/register.dart';
+import 'package:project_5237_provider/presentation/screens/milestones/milestone.dart';
 
 import 'presentation/screens/create_profile/profile/profile3.dart';
 import 'presentation/screens/login_register/Add_projects.dart';
@@ -24,7 +27,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-        designSize: const Size(375, 812),
+        designSize: defaultTargetPlatform == TargetPlatform.android ||
+                defaultTargetPlatform == TargetPlatform.iOS
+            ? const Size(375, 812)
+            : const Size(1440, 941),
         minTextAdapt: true,
         splitScreenMode: true,
         builder: (_, child) {
@@ -37,7 +43,7 @@ class MyApp extends StatelessWidget {
                 colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
                 useMaterial3: true,
               ),
-              home: SplashScreen());
+              home: ProjectsScreen());
 
           //  Profile3());
         });
