@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:project_5237_provider/presentation/screens/create_profile/my_account.dart';
 import 'package:project_5237_provider/presentation/screens/create_profile/profile/profile2.dart';
+import 'package:project_5237_provider/presentation/screens/login_register/accept_proposal.dart';
 import 'package:project_5237_provider/presentation/screens/login_register/add_project1.dart';
 import 'package:project_5237_provider/presentation/screens/login_register/credit.dart';
 import 'package:project_5237_provider/presentation/screens/login_register/register.dart';

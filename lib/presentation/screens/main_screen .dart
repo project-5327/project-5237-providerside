@@ -1,9 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:project_5237_provider/presentation/screens/login_register/Add_projects.dart';
+import 'package:project_5237_provider/presentation/screens/login_register/add_project1.dart';
+import 'package:project_5237_provider/presentation/screens/login_register/booked.dart';
 import 'package:project_5237_provider/presentation/screens/login_register/credit.dart';
 import 'package:project_5237_provider/presentation/screens/login_register/message.dart';
+import 'package:project_5237_provider/presentation/screens/login_register/notification.dart';
+import 'package:project_5237_provider/presentation/screens/login_register/proposal.dart';
+import 'package:project_5237_provider/presentation/screens/login_register/succesfully.dart';
+import 'package:project_5237_provider/presentation/screens/message/change_password.dart';
+import 'package:project_5237_provider/presentation/screens/message/forget_password.dart';
+import 'package:project_5237_provider/presentation/screens/message/otp_screen.dart';
 import 'package:project_5237_provider/presentation/screens/milestones/milestone.dart';
+import 'package:project_5237_provider/presentation/screens/my_contracts/my_contacts.dart';
 
 import '../constants/assets.dart';
 import '../constants/color.dart';
@@ -30,8 +40,24 @@ class _MainScreenState extends State<MainScreen> {
     const MessageScreen(),
     DebitCredit(),
     Editprofile(),
-    HomeProjectDetails(),
-    DebitCredit(),
+
+    //0
+    const HomeProjectDetails(),
+    const ProposalScreen(),
+    const SuccesfullyScreen(),
+    const NotificationScreen(),
+
+    const BookedClient(),
+    const AddProjects(),
+    const AddProject1(),
+    const ForgetPasswordScreen(),
+    const OtpScreen(),
+    const ChangePassword(),
+    const MilestoneScreen(),
+    const MycontractScreen(),
+
+    //2
+    const ChatScreen(),
   ];
 
   @override
@@ -71,7 +97,17 @@ class _MainScreenState extends State<MainScreen> {
                   icon: Assets.home,
                   isSelected: _selectedIndex == 0 ||
                       _selectedIndex == 5 ||
-                      _selectedIndex == 6,
+                      _selectedIndex == 6 ||
+                      _selectedIndex == 7 ||
+                      _selectedIndex == 8 ||
+                      _selectedIndex == 9 ||
+                      _selectedIndex == 10 ||
+                      _selectedIndex == 11 ||
+                      _selectedIndex == 12 ||
+                      _selectedIndex == 13 ||
+                      _selectedIndex == 14 ||
+                      _selectedIndex == 15 ||
+                      _selectedIndex == 16,
                   onTap: () {
                     if (_selectedIndex != 0) {
                       setState(() {
@@ -95,7 +131,7 @@ class _MainScreenState extends State<MainScreen> {
                 bottomNavItem(
                   title: "",
                   icon: Assets.message,
-                  isSelected: _selectedIndex == 2,
+                  isSelected: _selectedIndex == 2 || _selectedIndex == 17,
                   onTap: () {
                     if (_selectedIndex != 2) {
                       setState(() {

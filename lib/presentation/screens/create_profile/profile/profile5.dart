@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -14,9 +15,16 @@ import '../../../widgets/customize_button.dart';
 import 'profile6.dart';
 import 'static_profile.dart';
 
-class Profile5 extends StatelessWidget {
+class Profile5 extends StatefulWidget {
   Profile5({super.key});
+
+  @override
+  State<Profile5> createState() => _Profile5State();
+}
+
+class _Profile5State extends State<Profile5> {
   final ProfileController profileController = Get.put(ProfileController());
+  final List<String> _skills = [];
 
   @override
   Widget build(BuildContext context) {
@@ -57,6 +65,7 @@ class Profile5 extends StatelessWidget {
                     height: 5.h,
                   ),
                   Container(
+                    width: 307.w,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10.r),
                       border: Border.all(
@@ -67,30 +76,70 @@ class Profile5 extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.only(
                           right: 150, left: 20, top: 5, bottom: 5),
-                      child: Container(
-                        height: 45.h,
-                        width: 319.w,
-                        decoration: BoxDecoration(
-                          color: MyColors.blue,
-                          borderRadius: BorderRadius.circular(74.r),
-                          border: Border.all(color: MyColors.grey1),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            TextWidget(
-                              text: 'Web design',
-                              color: MyColors.white,
-                              size: 9.sp,
-                              fontweight: FontWeight.w400,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          if (_skills.isNotEmpty)
+                            Wrap(
+                              spacing: 4.0,
+                              runSpacing: 4.0,
+                              children: _skills.map((skill) {
+                                return Container(
+                                  height: 40.h,
+                                  decoration: BoxDecoration(
+                                    color: MyColors.blueContainer,
+                                    borderRadius: BorderRadius.circular(100.r),
+                                  ),
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 10.w),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      TextWidget(
+                                        text: skill,
+                                        color: MyColors.black1,
+                                        size: 10.sp,
+                                        fontweight: FontWeight.w500,
+                                      ),
+                                      SizedBox(width: 5.w),
+                                      GestureDetector(
+                                        onTap: () {
+                                          setState(() {
+                                            _skills.remove(skill);
+                                          });
+                                        },
+                                        child: Icon(
+                                          CupertinoIcons.clear_circled,
+                                          size: 13.sp,
+                                          color: MyColors.closeBtn,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              }).toList(),
+                            )
+                          else
+                            TextField(
+                              decoration: InputDecoration(
+                                hintText: 'Add a skill',
+                                hintStyle: TextStyle(
+                                  color: MyColors.black1,
+                                  fontSize: 10.sp,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                                border: InputBorder.none,
+                              ),
+                              onSubmitted: (String newSkill) {
+                                if (newSkill.isNotEmpty &&
+                                    !_skills.contains(newSkill)) {
+                                  setState(() {
+                                    _skills.add(newSkill);
+                                  });
+                                }
+                              },
                             ),
-                            Icon(
-                              Icons.close,
-                              color: MyColors.white,
-                              size: 14.sp,
-                            ),
-                          ],
-                        ),
+                        ],
                       ),
                     ),
                   ),
@@ -104,7 +153,7 @@ class Profile5 extends StatelessWidget {
                       fontweight: FontWeight.w500,
                     ),
                   ),
-                  SizedBox(height: 42.h),
+                  SizedBox(height: 150.h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -118,7 +167,7 @@ class Profile5 extends StatelessWidget {
                         textColor: MyColors.btnColor,
                         onTap: () {
                           // if (formKey.currentState!.validate()) {
-                          profileController.nextPage();
+                          profileController.previousPage();
                           Get.to(() => Profile4());
                           // }
                         },
