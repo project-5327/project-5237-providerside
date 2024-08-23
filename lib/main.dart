@@ -1,13 +1,10 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-
-import 'desktop/message_chat/messages_chat.dart';
-import 'desktop/onboarding/create_profile.dart';
-import 'desktop/onboarding/onboarding3.dart';
-
+import 'package:project_5237_provider/presentation/screens/splash%20screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,7 +16,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-        designSize: const Size(375, 812),
+        designSize: defaultTargetPlatform == TargetPlatform.android ||
+                defaultTargetPlatform == TargetPlatform.iOS
+            ? const Size(375, 812)
+            : const Size(1440, 941),
         minTextAdapt: true,
         splitScreenMode: true,
         builder: (_, child) {
@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
                 colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
                 useMaterial3: true,
               ),
-              home: MessageChatScreen1());
+              home: SplashScreen());
 
           //  Profile3());
         });

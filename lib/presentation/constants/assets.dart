@@ -26,6 +26,7 @@ class Assets {
   static String handshake = 'assets/icons/handShake.svg';
   static String send = 'assets/icons/send.svg';
   static String pdf = 'assets/icons/fa-solid_file-pdf.svg';
+  static String pdfRed = 'assets/icons/fa-solid_file-pdf1.svg';
   static String menu = 'assets/icons/menu.svg';
   static String menuCircle =
       'assets/icons/horizontal-menu-circle--navigation-dots-three-circle-button-horizontal-menu.svg';

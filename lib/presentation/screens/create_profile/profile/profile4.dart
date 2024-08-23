@@ -35,8 +35,8 @@ class _Profile4State extends State<Profile4> {
   final TextEditingController controller = TextEditingController();
 
   final TextEditingController _languageController = TextEditingController();
-  final List<String> _languages = ['English', 'Hindi', 'Spanish', 'Punjabi'];
-  String? _selectedLanguage;
+  final List<String> _languages = ['English', 'Hindi', 'Spanish', 'German'];
+  List<String> _selectedLanguages = [];
 
   @override
   Widget build(BuildContext context) {
@@ -72,67 +72,101 @@ class _Profile4State extends State<Profile4> {
                     height: 25.h,
                   ),
                   Container(
+                    height: 55.h,
+                    width: 307.w,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8.r),
-                        border: Border.all(color: MyColors.black)),
+                      borderRadius: BorderRadius.circular(8.r),
+                      border: Border.all(color: MyColors.black),
+                    ),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 15.0, vertical: 13.0),
-                      child: DropdownButton<String>(
-                        borderRadius: BorderRadius.circular(6.0),
-                        isDense: true,
-                        value: _selectedLanguage,
-                        hint: const Text(AppStrings.chooseyourLanguages),
-                        style: TextStyle(
-                          fontSize: 13.sp,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black,
-                        ),
-                        isExpanded: true,
-                        icon: Icon(
-                          Icons.arrow_drop_down,
-                          color: MyColors.grey,
-                          size: 30.sp,
-                        ),
-                        items: _languages.map((String language) {
-                          return DropdownMenuItem<String>(
-                            value: language,
-                            child: Text(language),
-                          );
-                        }).toList(),
-                        onChanged: (String? newValue) {
-                          setState(() {
-                            _selectedLanguage = newValue;
-                            _languageController.text = newValue ?? '';
-                          });
-                        },
+                          horizontal: 15.0, vertical: 5.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          if (_selectedLanguages.isNotEmpty)
+                            Wrap(
+                              spacing: 4.0,
+                              runSpacing: 4.0,
+                              children: _selectedLanguages.map((language) {
+                                return Container(
+                                  height: 40.h,
+                                  decoration: BoxDecoration(
+                                    color: MyColors.blueContainer,
+                                    borderRadius: BorderRadius.circular(100.r),
+                                  ),
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 10.w),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Text(
+                                        language,
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 13.sp,
+                                          color: MyColors.black1,
+                                        ),
+                                      ),
+                                      SizedBox(width: 5.w),
+                                      GestureDetector(
+                                        onTap: () {
+                                          setState(() {
+                                            _selectedLanguages.remove(language);
+                                          });
+                                        },
+                                        child: Icon(
+                                          CupertinoIcons.clear_circled,
+                                          size: 13.sp,
+                                          color: MyColors.closeBtn,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              }).toList(),
+                            )
+                          else
+                            Padding(
+                              padding: const EdgeInsets.only(top: 10.0),
+                              child: DropdownButton<String>(
+                                borderRadius: BorderRadius.circular(6.0),
+                                isDense: true,
+                                value: null,
+                                hint:
+                                    const Text(AppStrings.chooseyourLanguages),
+                                style: TextStyle(
+                                  fontSize: 13.sp,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.black,
+                                ),
+                                isExpanded: true,
+                                icon: Icon(
+                                  Icons.arrow_drop_down,
+                                  color: MyColors.grey,
+                                  size: 30.sp,
+                                ),
+                                items: _languages.map((String language) {
+                                  return DropdownMenuItem<String>(
+                                    value: language,
+                                    child: Text(language),
+                                  );
+                                }).toList(),
+                                onChanged: (String? newValue) {
+                                  if (newValue != null &&
+                                      !_selectedLanguages.contains(newValue)) {
+                                    setState(() {
+                                      _selectedLanguages.add(newValue);
+                                    });
+                                  }
+                                },
+                              ),
+                            ),
+                        ],
                       ),
                     ),
                   ),
-                  SizedBox(height: 10.h),
-                  // TextField(
-                  //   controller: _languageController,
-                  //   readOnly: true,
-                  //   decoration: InputDecoration(
-                  //     suffixIcon: Icon(
-                  //       Icons.arrow_drop_down,
-                  //       color: MyColors.grey,
-                  //       size: 30.sp,
-                  //     ),
-                  //     hintText: AppStrings.chooseyourLanguages,
-                  //     hintStyle: TextStyle(
-                  //       fontSize: 10.sp,
-                  //       color: MyColors.grey,
-                  //       fontWeight: FontWeight.w600,
-                  //     ),
-                  //     contentPadding: const EdgeInsets.symmetric(
-                  //         vertical: 10, horizontal: 16),
-                  //     border: OutlineInputBorder(
-                  //       borderRadius: BorderRadius.circular(8.r),
-                  //     ),
-                  //   ),
-                  // ),
-                  SizedBox(height: 78.h),
+                  SizedBox(height: 160.h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -146,7 +180,7 @@ class _Profile4State extends State<Profile4> {
                         textColor: MyColors.btnColor,
                         onTap: () {
                           // if (formKey.currentState!.validate()) {
-                          profileController.nextPage();
+                          profileController.previousPage();
                           Get.to(() => Profile3());
                           // }
                         },

@@ -65,41 +65,9 @@ class MyAccountScreen extends StatelessWidget {
                       SizedBox(
                         height: 27.h,
                       ),
-                      /*Center(
-                        child: CustomDropdownContainer(
-                            width: 336.w,
-                            height: 48.h,
-                            hint: 'Choose Your Country',
-                            selectedValue:
-                                dropdownController.getValue('country'),
-                            onChanged: (String? newValue) {
-                              if (newValue != null) {
-                                dropdownController.updateValue(
-                                    'country', newValue);
-                              }
-                            },
-                            items: countries),
-                      ),*/
+
                       // Obx(
-                      //   () => CustomTextFormField(
-                      //     validator: (value) =>
-                      //         formcontroller.validatecountry(value ?? ''),
-                      //     text: countryController.selectedCountry.value,
-                      //     icon: IconButton(
-                      //       onPressed: () {
-                      //         // showCountryPicker(context);
-                      //       },
-                      //       icon: Icon(
-                      //         Icons.arrow_drop_down,
-                      //         size: 22.sp,
-                      //         color: MyColors.black,
-                      //       ),
-                      //     ),
-                      //   ),
-                      // ),
-                      SizedBox(
-                        height: 10.h,
-                      ),
+
                       SizedBox(
                         height: 47.h,
                       ),
