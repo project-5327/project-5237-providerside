@@ -15,6 +15,7 @@ class AppStrings {
   static const String iAmI = 'I am a:';
   static const String alreadyAccount = 'Already have a account?';
   static const String passWord1 = 'Password';
+  static const String userName = 'User Name';
   static const String accept = 'Accept';
   static const String acceptProposal = 'Accept Proposal';
 
@@ -119,4 +120,8 @@ class AppStrings {
   static const areYouSure = 'Are you Sure?';
   static const cancel = 'Cancel';
   static const yesImSure = 'Yes I\'m sure';
+
+  static const myProjects = 'My Projects';
+  static const myProfile = 'My Profile';
+  static const addProject = 'Add Project';
 }
