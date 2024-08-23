@@ -90,6 +90,8 @@ class AppStrings {
   static const inputDesiredRate = 'Input desired rate';
   static const rate = 'Rate';
   static const inputAddress = 'Input Address';
+  static const $100 = '\$100';
+  static const dummyDate = '09/07/2024 & 11:30 AM';
   static const attachImage = 'Attach Image (if any)';
   static const addAttachImage = '+ Attach images';
   static const continueText = 'Continue';
@@ -103,6 +105,7 @@ class AppStrings {
   static const awaitingMilestones = 'Awaiting Milestones';
   static const payments = 'Payments';
   static const accept = 'Accept';
+  static const acceptProposal = 'Accept Proposal';
   static const requestChanges = 'Request Changes';
   static const payemntsSend = 'Payments Send';
   static const done = 'Done';
