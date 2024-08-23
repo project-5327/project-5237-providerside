@@ -13,6 +13,7 @@ import '../../../../controller/country_controller.dart';
 import '../../../../controller/profile_controller.dart';
 import '../../../constants/assets.dart';
 import '../../../constants/color.dart';
+import '../../../constants/responsive_view.dart';
 import '../../../constants/strings.dart';
 import '../../../widgets/create_profile_widget.dart';
 import '../../../widgets/customize_button.dart';
@@ -34,9 +35,6 @@ class _Profile8State extends State<Profile8> {
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController addressController = TextEditingController();
   final TextEditingController zipcodeController = TextEditingController();
-
-  // final TextEditingController countryController = TextEditingController();
-
   final TextEditingController cityController = TextEditingController();
   final DropdownController dropdownController = Get.put(DropdownController());
   final List<String> countries = ['USA', 'India', 'Canada', 'Japan'];
@@ -64,7 +62,15 @@ class _Profile8State extends State<Profile8> {
 
   @override
   Widget build(BuildContext context) {
-    return StaticProfileLayout(
+    return ResponsiveView(
+      mobile: _mobileView(context),
+      desktop: _deskTopView(context),
+      tablet: _mobileView(context),
+    );
+  }
+
+  _mobileView(BuildContext context) {
+    StaticProfileLayout(
         middleContentBuilder: () => Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -125,12 +131,11 @@ class _Profile8State extends State<Profile8> {
                                   top: 20.0,
                                   right: 0.0,
                                   left: 50.0,
-                                  child: IconButton(
-                                      iconSize: 20,
-                                      onPressed: () {
+                                  child: GestureDetector(
+                                      onTap: () {
                                         _pickImage();
                                       },
-                                      icon: SvgPicture.asset(Assets.editSqIC)))
+                                      child: SvgPicture.asset(Assets.editSqIC)))
                             ]),
                           ],
                           SizedBox(
@@ -280,5 +285,60 @@ class _Profile8State extends State<Profile8> {
                         ]),
                   )
                 ]));
+  }
+
+  _deskTopView(BuildContext context) {
+    return Scaffold(
+        body: Row(children: [
+      Flexible(
+        child: Container(
+          child: SvgPicture.asset(
+            Assets.createProfile1,
+            fit: BoxFit.cover,
+          ),
+        ),
+      ),
+      Flexible(
+          child: Center(
+              child: Container(
+                  //  height: 450.h,
+                  width: 336.w,
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        SizedBox(height: 100.h),
+                        Row(
+                          children: [
+                            Text(
+                              AppStrings.createProfile,
+                              style: TextStyle(
+                                fontFamily: 'Montserrat',
+                                color: MyColors.black,
+                                fontSize: 24.sp,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            SizedBox(width: 100.w),
+                            Obx(() => Text(
+                                  '${profileController.currentIndex.value + 1}/8',
+                                  style: TextStyle(
+                                    color: MyColors.black,
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                )),
+                          ],
+                        ),
+                        SizedBox(height: 30.h),
+                        LinearProgressIndicator(
+                          value: (profileController.currentIndex.value + 1) / 8,
+                          color: MyColors.btnColor,
+                          borderRadius: BorderRadius.circular(4.r),
+                          minHeight: 5.h,
+                        ),
+                        SizedBox(height: 30.h),
+                      ]))))
+    ]));
   }
 }

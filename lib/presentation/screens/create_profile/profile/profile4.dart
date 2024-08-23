@@ -1,17 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:project_5237_provider/presentation/screens/my_contracts/send_screen.dart';
-import 'package:project_5237_provider/presentation/widgets/Customize_textfield.dart';
 
 import '../../../../controller/country_controller.dart';
 import '../../../../controller/form_controller.dart';
 import '../../../../controller/profile_controller.dart';
+import '../../../constants/assets.dart';
 import '../../../constants/color.dart';
+import '../../../constants/responsive_view.dart';
+
 import '../../../constants/strings.dart';
 import '../../../widgets/create_profile_widget.dart';
 import '../../../widgets/customize_button.dart';
+import '../../my_contracts/send_screen.dart';
+import 'components/profilewidget4.dart';
+
 import 'profile3.dart';
 import 'profile5.dart';
 import 'static_profile.dart';
@@ -40,16 +45,71 @@ class _Profile4State extends State<Profile4> {
 
   @override
   Widget build(BuildContext context) {
+    return ResponsiveView(
+      mobile: _mobileView(context),
+      desktop: _deskTopView(context),
+      tablet: _mobileView(context),
+    );
+  }
+
+  _mobileView(BuildContext context) {
     return StaticProfileLayout(
-      middleContentBuilder: () => Form(
-        key: formKey,
-        child: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15),
+      middleContentBuilder: () => Form(key: formKey, child: Profilewidget4()),
+    );
+  }
+
+  _deskTopView(BuildContext context) {
+    return Scaffold(
+      body: Row(
+        children: [
+          Flexible(
+            child: Container(
+              child: SvgPicture.asset(
+                Assets.createProfile1,
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          Flexible(
+              child: Center(
+            child: Container(
+              //  height: 450.h,
+              width: 336.w,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
+                  SizedBox(height: 100.h),
+                  Row(
+                    children: [
+                      Text(
+                        AppStrings.createProfile,
+                        style: TextStyle(
+                          fontFamily: 'Montserrat',
+                          color: MyColors.black,
+                          fontSize: 24.sp,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      SizedBox(width: 100.w),
+                      Obx(() => Text(
+                            '${profileController.currentIndex.value + 1}/8',
+                            style: TextStyle(
+                              color: MyColors.black,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          )),
+                    ],
+                  ),
+                  SizedBox(height: 30.h),
+                  LinearProgressIndicator(
+                    value: (profileController.currentIndex.value + 1) / 8,
+                    color: MyColors.btnColor,
+                    borderRadius: BorderRadius.circular(4.r),
+                    minHeight: 5.h,
+                  ),
+                  SizedBox(height: 30.h),
                   SizedBox(height: 25.h),
                   TextWidget(
                     align: TextAlign.start,
@@ -205,42 +265,12 @@ class _Profile4State extends State<Profile4> {
                           ),
                     ],
                   ),
-                  SizedBox(height: 42.h),
                 ],
               ),
             ),
-          ],
-        ),
+          ))
+        ],
       ),
-    );
-  }
-
-  void _showLanguageOptions() {
-    showModalBottomSheet(
-      context: context,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(16.r)),
-      ),
-      builder: (context) {
-        return Container(
-          padding: EdgeInsets.all(16.r),
-          height: 300.h,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: _languages.map((language) {
-              return ListTile(
-                title: Text(language),
-                onTap: () {
-                  setState(() {
-                    _languageController.text = language;
-                  });
-                  Navigator.pop(context);
-                },
-              );
-            }).toList(),
-          ),
-        );
-      },
     );
   }
 }

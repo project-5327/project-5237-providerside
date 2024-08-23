@@ -1,5 +1,4 @@
 class AppStrings {
-  static const hi = 'hi';
   static const String appName = 'APP NAME';
   static const String signIn = 'Sign In';
   static const String happy = 'Hey! Happy to see you again...';
@@ -10,11 +9,15 @@ class AppStrings {
   static const String email = 'Email';
   static const String enterUrEmail = 'Enter your email';
   static const String passWord = 'PASSWORD';
+
   static const String enterUrPassWord = 'Enter your Password';
   static const String repeatPassword = 'Repeat Password';
   static const String iAmI = 'I am a:';
   static const String alreadyAccount = 'Already have a account?';
   static const String passWord1 = 'Password';
+  static const String title = 'Title';
+  static const String createProfile = 'Create Profile';
+
   static const String accept = 'Accept';
   static const String acceptProposal = 'Accept Proposal';
 
@@ -38,16 +41,19 @@ class AppStrings {
   static const addDescription = 'Add Description';
   static const experience1 = 'Experience 1';
   static const education1 = 'Education 1';
-
+  static const save = 'Save';
+  static const userName = 'User Name';
   static const institutionName = 'Instiution Name';
   static const fieldOfStudy = 'Field of Study';
-  static const save = 'Save';
+  static const emailText = 'Email';
   static const address = 'Address';
   static const countryName = 'Country Name*';
   static const fullName = 'Full Name*';
   static const small = 'Small';
   static const medium = 'Medium';
   static const large = 'Large';
+  static const myProfile = 'My Profile';
+
   static const howLongWork = 'How long your work take?';
   static const expertiseLevelyou = 'Expertise level you want';
   static const experinced = 'Experinced';
