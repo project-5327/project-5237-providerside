@@ -12,7 +12,6 @@ import '../../constants/assets.dart';
 import '../../constants/color.dart';
 import '../../constants/strings.dart';
 import '../../widgets/Customize_textfield.dart';
-import '../../widgets/Details_textfield.dart';
 import 'succesfully.dart';
 
 class AddProject1 extends StatefulWidget {
