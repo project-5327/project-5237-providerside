@@ -15,6 +15,8 @@ class AppStrings {
   static const String iAmI = 'I am a:';
   static const String alreadyAccount = 'Already have a account?';
   static const String passWord1 = 'Password';
+  static const String accept = 'Accept';
+  static const String acceptProposal = 'Accept Proposal';
 
   static const createProfileText1 =
       'First, add a title to tell the world what you do.';
@@ -27,12 +29,16 @@ class AppStrings {
   static const next = 'Next';
   static const privious = 'Privious';
   static const addExperience1 = 'Add Experience';
+  static const addEducation1 = 'Add Education';
+
   static const addlanguage = '+Add Language';
   static const addLanguages = 'Add Languages';
   static const chooseyourLanguages = 'Chose languages';
 
   static const addDescription = 'Add Description';
   static const experience1 = 'Experience 1';
+  static const education1 = 'Education 1';
+
   static const institutionName = 'Instiution Name';
   static const fieldOfStudy = 'Field of Study';
   static const save = 'Save';
@@ -68,7 +74,7 @@ class AppStrings {
   static const skills = 'Skills';
 
   static const degree = 'Degree/Certification';
-  static const education1 = 'Education 1';
+  //static const education1 = 'Education 1';
   static const companyName = 'Company Name';
   static const role = 'Role';
   static const endDate = 'End Date';

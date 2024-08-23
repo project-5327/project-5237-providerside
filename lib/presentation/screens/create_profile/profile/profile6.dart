@@ -24,116 +24,119 @@ class Profile6 extends StatelessWidget {
     return StaticProfileLayout(
         middleContentBuilder: () => Form(
               key: formKey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: 25.h,
-                  ),
-                  TextWidget(
-                    align: TextAlign.start,
-                    text: AppStrings.addDescription,
-                    color: MyColors.black,
-                    size: 20.sp,
-                    fontweight: FontWeight.w600,
-                  ),
-                  SizedBox(
-                    height: 27.h,
-                  ),
-                  TextWidget(
-                    align: TextAlign.start,
-                    text: AppStrings.lorem2,
-                    color: MyColors.grey,
-                    size: 10.sp,
-                    fontweight: FontWeight.w500,
-                  ),
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                  TextWidget(
-                    align: TextAlign.start,
-                    text: AppStrings.yourSkills,
-                    color: MyColors.black,
-                    size: 12.sp,
-                    fontweight: FontWeight.w500,
-                  ),
-                  SizedBox(
-                    height: 5.h,
-                  ),
-                  TextFormField(
-                    maxLines: 4,
-                    decoration: InputDecoration(
-                      hintText: AppStrings.desc,
-                      hintStyle: TextStyle(
-                          fontSize: 10.sp,
-                          fontWeight: FontWeight.w500,
-                          color: Color(0xff2A1E17)),
-                      contentPadding: const EdgeInsets.symmetric(
-                          vertical: 3, horizontal: 7),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.r),
-                      ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: 25.h,
                     ),
-                  ),
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                  Align(
-                    alignment: Alignment.topRight,
-                    child: TextWidget(
-                      // align: TextAlign.c,
-                      text: '500 characters',
-                      color: Color(0xff2A1E17),
+                    TextWidget(
+                      align: TextAlign.start,
+                      text: AppStrings.addDescription,
+                      color: MyColors.black,
+                      size: 20.sp,
+                      fontweight: FontWeight.w600,
+                    ),
+                    SizedBox(
+                      height: 27.h,
+                    ),
+                    TextWidget(
+                      align: TextAlign.start,
+                      text: AppStrings.lorem2,
+                      color: MyColors.grey,
+                      size: 10.sp,
+                      fontweight: FontWeight.w500,
+                    ),
+                    SizedBox(
+                      height: 20.h,
+                    ),
+                    TextWidget(
+                      align: TextAlign.start,
+                      text: AppStrings.yourSkills,
+                      color: MyColors.black,
                       size: 12.sp,
                       fontweight: FontWeight.w500,
                     ),
-                  ),
-                  SizedBox(
-                    height: 57.h,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      CustomizeButton(
-                        borderColor: MyColors.btnColor,
-                        radius: 100.r,
-                        text: AppStrings.privious,
-                        height: 40.h,
-                        width: 150.w,
-                        color: MyColors.white,
-                        textColor: MyColors.btnColor,
-                        onTap: () {
-                          if (formKey.currentState!.validate()) {
-                            profileController.nextPage();
-                            Get.to(() => Profile5());
-                          }
-                        },
+                    SizedBox(
+                      height: 5.h,
+                    ),
+                    TextFormField(
+                      maxLines: 4,
+                      decoration: InputDecoration(
+                        hintText: AppStrings.desc,
+                        hintStyle: TextStyle(
+                            fontSize: 10.sp,
+                            fontWeight: FontWeight.w500,
+                            color: Color(0xff2A1E17)),
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 3, horizontal: 7),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.r),
+                        ),
                       ),
-                      SizedBox(
-                        width: 5.w,
+                    ),
+                    SizedBox(
+                      height: 20.h,
+                    ),
+                    Align(
+                      alignment: Alignment.topRight,
+                      child: TextWidget(
+                        // align: TextAlign.c,
+                        text: '500 characters',
+                        color: Color(0xff2A1E17),
+                        size: 12.sp,
+                        fontweight: FontWeight.w500,
                       ),
-                      CustomizeButton(
-                        borderColor: MyColors.btnColor,
-                        radius: 100.r,
-                        text: AppStrings.next,
-                        height: 40.h,
-                        width: 150.w,
-                        color: MyColors.btnColor,
-                        textColor: MyColors.white,
-                        onTap: () {
-                          if (formKey.currentState!.validate()) {
-                            profileController.nextPage();
-                            Get.to(() => Profile7());
-                          }
-                        },
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 42.h,
-                  ),
-                ],
+                    ),
+                    SizedBox(
+                      height: 57.h,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        CustomizeButton(
+                          borderColor: MyColors.btnColor,
+                          radius: 100.r,
+                          text: AppStrings.privious,
+                          height: 40.h,
+                          width: 150.w,
+                          color: MyColors.white,
+                          textColor: MyColors.btnColor,
+                          onTap: () {
+                            if (formKey.currentState!.validate()) {
+                              profileController.previousPage();
+                              Get.to(() => Profile5());
+                            }
+                          },
+                        ),
+                        SizedBox(
+                          width: 5.w,
+                        ),
+                        CustomizeButton(
+                          borderColor: MyColors.btnColor,
+                          radius: 100.r,
+                          text: AppStrings.next,
+                          height: 40.h,
+                          width: 150.w,
+                          color: MyColors.btnColor,
+                          textColor: MyColors.white,
+                          onTap: () {
+                            if (formKey.currentState!.validate()) {
+                              profileController.nextPage();
+                              Get.to(() => Profile7());
+                            }
+                          },
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 42.h,
+                    ),
+                  ],
+                ),
               ),
             ));
   }

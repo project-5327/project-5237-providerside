@@ -137,7 +137,7 @@ class Profile7 extends StatelessWidget {
                           textColor: MyColors.btnColor,
                           onTap: () {
                             if (formKey.currentState!.validate()) {
-                              profileController.nextPage();
+                              profileController.previousPage();
                               Get.to(() => Profile6());
                             }
                           },

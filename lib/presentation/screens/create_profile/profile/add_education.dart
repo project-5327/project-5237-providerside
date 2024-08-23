@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:project_5237_provider/presentation/constants/strings.dart';
+import 'package:project_5237_provider/presentation/screens/create_profile/profile/profile2.dart';
 import 'package:project_5237_provider/presentation/screens/create_profile/profile/profile4.dart';
 import 'package:project_5237_provider/presentation/screens/my_contracts/send_screen.dart';
 import 'package:project_5237_provider/presentation/widgets/Customize_textfield.dart';
@@ -27,7 +28,7 @@ class AddEducation extends StatelessWidget {
           ),
         ),
         title: Text(
-          AppStrings.addExperience1,
+          AppStrings.addEducation1,
           style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600),
         ),
       ),
@@ -55,7 +56,7 @@ class AddEducation extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           TextWidget(
-                            text: AppStrings.experience1,
+                            text: AppStrings.education1,
                             color: MyColors.black,
                             fontweight: FontWeight.w500,
                             size: 14.sp,
@@ -126,11 +127,6 @@ class AddEducation extends StatelessWidget {
                       SizedBox(
                         height: 14.h,
                       ),
-                      const CustomTextFormField(
-                        maxLines: 2,
-                        text: AppStrings.enterHere,
-                        title: AppStrings.description,
-                      ),
                     ],
                   ),
                 ),
@@ -168,10 +164,7 @@ class AddEducation extends StatelessWidget {
                       color: MyColors.btnColor,
                       textColor: MyColors.white,
                       onTap: () {
-                        //if (formKey.currentState!.validate()) {
-                        //  profileController.nextPage();
-                        Get.to(() => Profile4());
-                        //   }
+                        Get.back(result: true);
                       })),
               SizedBox(height: 42.h),
             ],

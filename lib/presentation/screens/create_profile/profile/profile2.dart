@@ -15,14 +15,26 @@ import '../../../widgets/customize_button.dart';
 import 'profile3.dart';
 import 'static_profile.dart';
 
-class Profile2 extends StatelessWidget {
+class Profile2 extends StatefulWidget {
   Profile2({super.key});
+
+  @override
+  State<Profile2> createState() => _Profile2State();
+}
+
+class _Profile2State extends State<Profile2> {
   final ProfileController profileController = Get.put(ProfileController());
+
   final formKey = GlobalKey<FormState>();
+
   final FormController formController = Get.put(FormController());
+
   final ContainerController containerController =
       Get.put(ContainerController());
+
   final TextEditingController controller = TextEditingController();
+
+  bool _isNextButtonEnabled = false;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +51,14 @@ class Profile2 extends StatelessWidget {
                 children: [
                   SizedBox(height: 25.h),
                   EditCreateProfile(
-                    ontap: () => Get.to(AddExperience()),
+                    ontap: () async {
+                      final result = await Get.to(() => const AddExperience());
+                      if (result != null && result == true) {
+                        setState(() {
+                          _isNextButtonEnabled = true;
+                        });
+                      }
+                    },
                     validator: (value) =>
                         formController.validateExperience(value),
                     controller: controller,
@@ -50,10 +69,6 @@ class Profile2 extends StatelessWidget {
                   SizedBox(height: 20.h),
                   Row(
                     children: [
-                      // Obx(
-                      //   () => InkWell(
-                      //     onTap: () => containerController.toggelSelection(2),
-                      //     child:
                       Container(
                         alignment: Alignment.center,
                         height: 18.h,
@@ -73,7 +88,6 @@ class Profile2 extends StatelessWidget {
                           ),
                         ),
                       ),
-
                       SizedBox(width: 10.w),
                       TextWidget(
                         text: AppStrings.noExperince,
@@ -96,11 +110,14 @@ class Profile2 extends StatelessWidget {
                         color: MyColors.white,
                         textColor: MyColors.btnColor,
                         onTap: () {
-                          if (formKey.currentState!.validate()) {
-                            profileController.nextPage();
-                            Get.to(() => ProfileDetail());
-                          }
+                          //  if (formKey.currentState!.validate()) {
+                          profileController.previousPage();
+                          Get.to(() => ProfileDetail());
+                          // }
                         },
+                      ),
+                      SizedBox(
+                        width: 7.w,
                       ),
                       CustomizeButton(
                         borderColor: MyColors.btnColor,
@@ -108,15 +125,19 @@ class Profile2 extends StatelessWidget {
                         text: AppStrings.next,
                         height: 40.h,
                         width: 150.w,
-                        color: MyColors.btnColor,
+                        color: _isNextButtonEnabled
+                            ? MyColors.btnColor
+                            : MyColors.btnDisable,
                         textColor: MyColors.white,
-                        onTap: () {
-                          if (formKey.currentState!.validate()) {
-                            profileController.nextPage();
-                            Get.to(() => Profile3());
-                          }
-                        },
-                      ),
+                        onTap: _isNextButtonEnabled
+                            ? () {
+                                //  if (formKey.currentState!.validate()) {
+                                profileController.nextPage();
+                                Get.to(() => Profile3());
+                                // }
+                              }
+                            : () {},
+                      )
                     ],
                   ),
                   SizedBox(height: 42.h),
