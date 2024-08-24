@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:project_5237_provider/presentation/screens/milestones/milestone.dart';
 import 'dart:async';
-
 import '../constants/assets.dart';
-import 'login_register/login.dart';
 
 class SplashScreen extends StatefulWidget {
   @override

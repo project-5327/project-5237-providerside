@@ -5,9 +5,15 @@ import 'package:project_5237_provider/presentation/constants/fonts.dart';
 import 'package:project_5237_provider/presentation/constants/responsive_view.dart';
 import 'package:project_5237_provider/presentation/screens/login_register/Add_projects.dart';
 
+import 'package:project_5237_provider/presentation/screens/login_register/home_screen.dart';
+import 'package:project_5237_provider/presentation/screens/login_register/message.dart';
+import 'package:project_5237_provider/presentation/screens/main_screen%20.dart';
+import 'package:project_5237_provider/presentation/screens/milestones/milestone.dart';
+import 'package:project_5237_provider/presentation/screens/update_Project/chat_screen.dart';
+
 class DashBoardView extends StatefulWidget {
-  final int? currentIndex;
-  const DashBoardView({super.key, this.currentIndex});
+  // final int? currentIndex;
+  const DashBoardView({super.key});
 
   @override
   State<DashBoardView> createState() => _DashBoardViewState();
@@ -15,12 +21,36 @@ class DashBoardView extends StatefulWidget {
 
 class _DashBoardViewState extends State<DashBoardView> {
   int _currentIndex = 0;
-  final List<Widget> _pages = const [
-    AddProjects(),
-    Scaffold(),
-    Scaffold(),
-    AddProjects(),
-    AddProjects(),
+  // final List<Widget> _pages = const [
+  //   AddProjects(),
+  //   Scaffold(),
+  //   Scaffold(),
+  //   AddProjects(),
+  //   AddProjects(),
+  // ];
+  final List<Widget> _pages = [
+    const HomeScreen(),
+    const MilestoneScreen(),
+    const MessageScreen(),
+    const ChatScreen(),
+    const AddProjects(),
+
+    // //0
+    // const HomeProjectDetails(),
+    // const ProposalScreen(),
+    // const SuccesfullyScreen(),
+    // const NotificationScreen(),
+
+    // const BookedClient(),
+    // const AddProjects(),
+    // const AddProject1(),
+    // const ForgetPasswordScreen(),
+    // const OtpScreen(),
+    // const ChangePassword(),
+    // const MilestoneScreen(),
+    // const MycontractScreen(),
+    // //2
+    // const ChatScreen(),
   ];
   SideMenuController sideMenu = SideMenuController();
   PageController pageController = PageController();
@@ -32,7 +62,7 @@ class _DashBoardViewState extends State<DashBoardView> {
       pageController.jumpToPage(index);
     });
     setState(() {
-      _currentIndex = widget.currentIndex ?? 0;
+      // _currentIndex = widget.currentIndex ?? 0;
     });
 
     super.initState();
@@ -42,29 +72,34 @@ class _DashBoardViewState extends State<DashBoardView> {
   Widget build(BuildContext context) {
     return ResponsiveView(
       mobile: _mobile(),
-      tablet: _mobile(),
+      tablet: _desktop(context),
       desktop: _desktop(context),
     );
   }
 
   Widget _mobile() {
-    return Container();
+    return MainScreen();
   }
 
   _desktop(BuildContext context) {
+    final responsive = ResponsiveCheck(context);
+    sideMenu.changePage(0);
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(80),
-        child: _appBar(context),
+        child: responsive.isTablet ? AppBar() : _appBar(context),
       ),
       body: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           SideMenu(
-            collapseWidth: 260,
-            alwaysShowFooter: true,
+            // collapseWidth: responsive.isTablet ? 80 : 260,
+            // alwaysShowFooter: true,
+
             controller: sideMenu,
             style: SideMenuStyle(
+              openSideMenuWidth: 200,
+              compactSideMenuWidth: 100,
               selectedTitleTextStyleExpandable: TextStyle(
                   fontFamily: Fonts.fontsinter,
                   fontSize: 18,
@@ -82,9 +117,11 @@ class _DashBoardViewState extends State<DashBoardView> {
                   ),
                 ),
               ),
-              showTooltip: false,
+              showTooltip: true,
               itemBorderRadius: const BorderRadius.all(Radius.circular(10)),
-              displayMode: SideMenuDisplayMode.auto,
+              displayMode: responsive.isTablet
+                  ? SideMenuDisplayMode.compact
+                  : SideMenuDisplayMode.auto,
               showHamburger: false,
               hoverColor: const Color.fromRGBO(0, 100, 210, 0.1),
               selectedHoverColor: Colors.blue[100],
@@ -139,70 +176,72 @@ class _DashBoardViewState extends State<DashBoardView> {
                 icon: const Icon(Icons.message),
               ),
             ],
-            footer: Container(
-              height: 300,
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              width: double.infinity,
-              child: Column(
-                children: [
-                  Image.asset(
-                    "assets/images/cat.png",
-                    height: 68,
-                    width: 113,
-                  ),
-                  const SizedBox(height: 5),
-                  Text(
-                    "First steps",
-                    style: TextStyle(
-                      fontFamily: Fonts.fontsinter,
-                      fontSize: 12,
-                      color: const Color.fromRGBO(64, 81, 137, 1),
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                  const SizedBox(height: 5),
-                  Text(
-                    "Customize your dashboard and lean about out features",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontFamily: Fonts.fontsinter,
-                      fontSize: 12,
-                      color: const Color.fromRGBO(64, 81, 137, 1),
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                  TextButton(
-                    child: Text(
-                      "Get Started",
-                      style: TextStyle(
-                        fontFamily: Fonts.fontsinter,
-                        fontSize: 12,
-                        color: const Color.fromRGBO(0, 100, 210, 1),
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                    onPressed: () {},
-                  ),
-                  const SizedBox(height: 40),
-                  Row(
-                    children: [
-                      SvgPicture.asset(
-                          "assets/svg_icon/majesticons_logout.svg"),
-                      const SizedBox(width: 10),
-                      Text(
-                        "Logout",
-                        style: TextStyle(
-                          fontFamily: Fonts.fontsinter,
-                          fontSize: 18,
-                          color: const Color.fromRGBO(34, 49, 63, 1),
-                          fontWeight: FontWeight.w400,
+            footer: responsive.isTablet
+                ? null
+                : Container(
+                    height: 300,
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    width: double.infinity,
+                    child: Column(
+                      children: [
+                        Image.asset(
+                          "assets/images/cat.png",
+                          height: 68,
+                          width: 113,
                         ),
-                      ),
-                    ],
-                  )
-                ],
-              ),
-            ),
+                        const SizedBox(height: 5),
+                        Text(
+                          "First steps",
+                          style: TextStyle(
+                            fontFamily: Fonts.fontsinter,
+                            fontSize: 12,
+                            color: const Color.fromRGBO(64, 81, 137, 1),
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        const SizedBox(height: 5),
+                        Text(
+                          "Customize your dashboard and lean about out features",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontFamily: Fonts.fontsinter,
+                            fontSize: 12,
+                            color: const Color.fromRGBO(64, 81, 137, 1),
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        TextButton(
+                          child: Text(
+                            "Get Started",
+                            style: TextStyle(
+                              fontFamily: Fonts.fontsinter,
+                              fontSize: 12,
+                              color: const Color.fromRGBO(0, 100, 210, 1),
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                          onPressed: () {},
+                        ),
+                        const SizedBox(height: 40),
+                        Row(
+                          children: [
+                            SvgPicture.asset(
+                                "assets/svg_icon/majesticons_logout.svg"),
+                            const SizedBox(width: 10),
+                            Text(
+                              "Logout",
+                              style: TextStyle(
+                                fontFamily: Fonts.fontsinter,
+                                fontSize: 18,
+                                color: const Color.fromRGBO(34, 49, 63, 1),
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
           ),
           const VerticalDivider(
             width: 0,

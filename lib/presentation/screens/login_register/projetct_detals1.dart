@@ -240,8 +240,7 @@ class _HomeProjectDetailsState extends State<HomeProjectDetails> {
                     radius: 100.r,
                     onTap: () {
                       Navigator.of(context).push(
-                        MaterialPageRoute(
-                            builder: (_) => MainScreen(selectedIndex: 6)),
+                        MaterialPageRoute(builder: (_) => MainScreen()),
                       );
                     },
                   ),

@@ -14,19 +14,16 @@ import 'package:project_5237_provider/presentation/screens/message/forget_passwo
 import 'package:project_5237_provider/presentation/screens/message/otp_screen.dart';
 import 'package:project_5237_provider/presentation/screens/milestones/milestone.dart';
 import 'package:project_5237_provider/presentation/screens/my_contracts/my_contacts.dart';
+import 'package:project_5237_provider/presentation/screens/update_Project/chat_screen.dart';
 
 import '../constants/assets.dart';
 import '../constants/color.dart';
 import 'login_register/home_screen.dart';
 import 'login_register/EditProfile.dart';
-import 'login_register/projetct_detals1.dart';
-import 'my_contracts/map_screen.dart';
-import 'my_contracts/my_project.dart';
-import 'update_Project/chat_screen.dart';
 
 class MainScreen extends StatefulWidget {
-  final int selectedIndex;
-  MainScreen({super.key, required this.selectedIndex});
+  // final int? selectedIndex;
+  MainScreen({super.key});
   @override
   State<MainScreen> createState() => _MainScreenState();
 }
@@ -38,45 +35,44 @@ class _MainScreenState extends State<MainScreen> {
     const HomeScreen(),
     const MilestoneScreen(),
     const MessageScreen(),
-    DebitCredit(),
-    Editprofile(),
-
-    //0
-    const HomeProjectDetails(),
-    const ProposalScreen(),
-    const SuccesfullyScreen(),
-    const NotificationScreen(),
-
-    const BookedClient(),
-    const AddProjects(),
-    const AddProject1(),
-    const ForgetPasswordScreen(),
-    const OtpScreen(),
-    const ChangePassword(),
-    const MilestoneScreen(),
-    const MycontractScreen(),
-
-    //2
     const ChatScreen(),
+    const AddProjects(),
+
+    // //0
+    // const HomeProjectDetails(),
+    // const ProposalScreen(),
+    // const SuccesfullyScreen(),
+    // const NotificationScreen(),
+
+    // const BookedClient(),
+    // const AddProjects(),
+    // const AddProject1(),
+    // const ForgetPasswordScreen(),
+    // const OtpScreen(),
+    // const ChangePassword(),
+    // const MilestoneScreen(),
+    // const MycontractScreen(),
+    // //2
+    // const ChatScreen(),
   ];
 
   @override
   void initState() {
     // TODO: implement initState
     setState(() {
-      _selectedIndex = widget.selectedIndex;
+      // _selectedIndex = widget.selectedIndex!;
     });
     super.initState();
   }
 
   final bottomNavKey = GlobalKey();
 
-  @override
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
+  // @override
+  // void _onItemTapped(int index) {
+  //   setState(() {
+  //     _selectedIndex = index;
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -152,13 +148,22 @@ class _MainScreenState extends State<MainScreen> {
                     }
                   },
                 ),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(100),
-                  child: Image.asset(
-                    'assets/images/girl2.png',
-                    height: 24.h,
-                    width: 24.w,
-                    fit: BoxFit.cover,
+                GestureDetector(
+                  onTap: () {
+                    if (_selectedIndex != 4) {
+                      setState(() {
+                        _selectedIndex = 4;
+                      });
+                    }
+                  },
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(100),
+                    child: Image.asset(
+                      'assets/images/girl2.png',
+                      height: 24.h,
+                      width: 24.w,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ],
@@ -188,11 +193,11 @@ class _MainScreenState extends State<MainScreen> {
                   decoration: BoxDecoration(
                     color: Colors.transparent,
                     borderRadius: BorderRadius.circular(50.0),
-                    boxShadow: [
+                    boxShadow: const [
                       BoxShadow(
                         color: Colors.transparent,
                         blurRadius: 5.0,
-                      ),
+                      )
                     ],
                   ),
                   child: SvgPicture.asset(
@@ -205,7 +210,7 @@ class _MainScreenState extends State<MainScreen> {
               : Container(
                   height: 45,
                   width: 45,
-                  padding: EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(10),
                   color: Colors.transparent,
                   child: SvgPicture.asset(
                     icon,

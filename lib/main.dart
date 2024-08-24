@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
             ),
             useMaterial3: true,
           ),
-          home: const DashBoardView(currentIndex: 0),
+          home: const DashBoardView(),
         );
 
         //  Profile3());

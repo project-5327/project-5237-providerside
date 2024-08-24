@@ -16,7 +16,7 @@ class AddProjects extends StatelessWidget {
   Widget build(BuildContext context) {
     return ResponsiveView(
       mobile: _mobile(),
-      tablet: _mobile(),
+      tablet: _desktop(),
       desktop: _desktop(),
     );
   }
