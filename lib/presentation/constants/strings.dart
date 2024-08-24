@@ -131,4 +131,7 @@ class AppStrings {
   static const category = 'Category 1';
   static const details = 'Details';
   static const reject = 'Reject';
+  static const home = 'Home';
+  static const seeAll = 'See All';
+  static const recentProposal = 'Recent Proposal';
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:project_5237_provider/presentation/constants/responsive_view.dart';
 import 'package:project_5237_provider/presentation/constants/strings.dart';
 import 'package:project_5237_provider/presentation/screens/milestones/active_milestones.dart';
 import 'package:project_5237_provider/presentation/screens/milestones/awaiting_milestones.dart';
@@ -38,8 +39,8 @@ class _MilestoneScreenState extends State<MilestoneScreen>
 
   @override
   Widget build(BuildContext context) {
-    return defaultTargetPlatform == TargetPlatform.android ||
-            defaultTargetPlatform == TargetPlatform.iOS
+    final responsive = ResponsiveCheck(context);
+    return responsive.isMobile || responsive.isTablet
         ? SafeArea(
             child: Scaffold(
               appBar: AppBar(
@@ -75,30 +76,33 @@ class _MilestoneScreenState extends State<MilestoneScreen>
                         SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           child: Tab(
-                              child: TextWidget(
-                            text: AppStrings.activeMilestones,
-                            color: MyColors.black,
-                            size: 12.sp,
-                            fontweight: FontWeight.w600,
-                          )),
+                            child: TextWidget(
+                              text: AppStrings.activeMilestones,
+                              color: MyColors.black,
+                              size: 12.sp,
+                              fontweight: FontWeight.w600,
+                            ),
+                          ),
                         ),
                         SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           child: Tab(
-                              child: TextWidget(
-                            text: AppStrings.awaitingMilestones,
+                            child: TextWidget(
+                              text: AppStrings.awaitingMilestones,
+                              color: MyColors.black,
+                              size: 12.sp,
+                              fontweight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                        Tab(
+                          child: TextWidget(
+                            text: AppStrings.payments,
                             color: MyColors.black,
                             size: 12.sp,
                             fontweight: FontWeight.w600,
-                          )),
+                          ),
                         ),
-                        Tab(
-                            child: TextWidget(
-                          text: AppStrings.payments,
-                          color: MyColors.black,
-                          size: 12.sp,
-                          fontweight: FontWeight.w600,
-                        )),
                       ],
                       labelColor: Colors.black,
                     ),
@@ -120,7 +124,7 @@ class _MilestoneScreenState extends State<MilestoneScreen>
         : SafeArea(
             child: Scaffold(
               body: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10.w),
+                padding: EdgeInsets.symmetric(horizontal: 33.w, vertical: 31.h),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
