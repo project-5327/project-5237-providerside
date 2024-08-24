@@ -4,6 +4,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:project_5237_provider/presentation/screens/dashboard/dashboard_view.dart';
+import 'package:project_5237_provider/presentation/screens/login_register/add_project1.dart';
+
+import 'presentation/screens/login_register/Add_projects.dart';
 
 void main() {
   runApp(const MyApp());
