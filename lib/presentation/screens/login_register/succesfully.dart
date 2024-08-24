@@ -7,7 +7,6 @@ import 'package:project_5237_provider/presentation/screens/my_contracts/my_proje
 import '../../constants/assets.dart';
 import '../../constants/color.dart';
 import '../../widgets/customize_button.dart';
-import '../update_Project/chat_screen.dart';
 
 class SuccesfullyScreen extends StatefulWidget {
   const SuccesfullyScreen({super.key});
@@ -63,7 +62,7 @@ class _SuccesfullyScreenState extends State<SuccesfullyScreen> {
                     color: MyColors.btnColor,
                     textColor: MyColors.white,
                     onTap: () {
-                      Get.to(() => MyProjectScreen());
+                      Get.to(() => const MyProjectScreen());
                     }
                     //)
 

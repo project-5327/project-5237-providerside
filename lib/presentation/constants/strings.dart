@@ -1,5 +1,4 @@
 class AppStrings {
-  static const hi = 'hi';
   static const String appName = 'APP NAME';
   static const String signIn = 'Sign In';
   static const String happy = 'Hey! Happy to see you again...';
@@ -10,11 +9,17 @@ class AppStrings {
   static const String email = 'Email';
   static const String enterUrEmail = 'Enter your email';
   static const String passWord = 'PASSWORD';
+
   static const String enterUrPassWord = 'Enter your Password';
   static const String repeatPassword = 'Repeat Password';
   static const String iAmI = 'I am a:';
   static const String alreadyAccount = 'Already have a account?';
   static const String passWord1 = 'Password';
+  static const String title = 'Title';
+  static const String createProfile = 'Create Profile';
+
+  static const String accept = 'Accept';
+  static const String acceptProposal = 'Accept Proposal';
 
   static const createProfileText1 =
       'First, add a title to tell the world what you do.';
@@ -27,21 +32,28 @@ class AppStrings {
   static const next = 'Next';
   static const privious = 'Privious';
   static const addExperience1 = 'Add Experience';
+  static const addEducation1 = 'Add Education';
+
   static const addlanguage = '+Add Language';
   static const addLanguages = 'Add Languages';
   static const chooseyourLanguages = 'Chose languages';
 
   static const addDescription = 'Add Description';
   static const experience1 = 'Experience 1';
+  static const education1 = 'Education 1';
+  static const save = 'Save';
+  static const userName = 'User Name';
   static const institutionName = 'Instiution Name';
   static const fieldOfStudy = 'Field of Study';
-  static const save = 'Save';
+  static const emailText = 'Email';
   static const address = 'Address';
   static const countryName = 'Country Name*';
   static const fullName = 'Full Name*';
   static const small = 'Small';
   static const medium = 'Medium';
   static const large = 'Large';
+  static const myProfile = 'My Profile';
+
   static const howLongWork = 'How long your work take?';
   static const expertiseLevelyou = 'Expertise level you want';
   static const experinced = 'Experinced';
@@ -68,7 +80,7 @@ class AppStrings {
   static const skills = 'Skills';
 
   static const degree = 'Degree/Certification';
-  static const education1 = 'Education 1';
+  //static const education1 = 'Education 1';
   static const companyName = 'Company Name';
   static const role = 'Role';
   static const endDate = 'End Date';
@@ -90,6 +102,8 @@ class AppStrings {
   static const inputDesiredRate = 'Input desired rate';
   static const rate = 'Rate';
   static const inputAddress = 'Input Address';
+  static const $100 = '\$100';
+  static const dummyDate = '09/07/2024 & 11:30 AM';
   static const attachImage = 'Attach Image (if any)';
   static const addAttachImage = '+ Attach images';
   static const continueText = 'Continue';
@@ -102,7 +116,6 @@ class AppStrings {
   static const activeMilestones = 'Active Milestones';
   static const awaitingMilestones = 'Awaiting Milestones';
   static const payments = 'Payments';
-  static const accept = 'Accept';
   static const requestChanges = 'Request Changes';
   static const payemntsSend = 'Payments Send';
   static const done = 'Done';
@@ -110,6 +123,12 @@ class AppStrings {
   static const areYouSure = 'Are you Sure?';
   static const cancel = 'Cancel';
   static const yesImSure = 'Yes I\'m sure';
+  static const createMyAoccunt = 'Create my Account';
+  static const enterUrName = 'Enter your Name';
+  static const firstName = 'First Name';
+  static const lastName = 'Last Name';
   static const projects = 'Projects';
   static const category = 'Category 1';
+  static const details = 'Details';
+  static const reject = 'Reject';
 }

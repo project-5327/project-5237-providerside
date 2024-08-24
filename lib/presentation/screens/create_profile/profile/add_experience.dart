@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:project_5237_provider/presentation/constants/strings.dart';
+import 'package:project_5237_provider/presentation/screens/create_profile/profile/profile3.dart';
 import 'package:project_5237_provider/presentation/screens/create_profile/profile/profile4.dart';
 import 'package:project_5237_provider/presentation/screens/my_contracts/send_screen.dart';
 import 'package:project_5237_provider/presentation/widgets/Customize_textfield.dart';
@@ -10,6 +11,7 @@ import 'package:project_5237_provider/presentation/widgets/Customize_textfield.d
 import '../../../constants/assets.dart';
 import '../../../constants/color.dart';
 import '../../../widgets/customize_button.dart';
+import 'profile2.dart';
 
 class AddExperience extends StatelessWidget {
   const AddExperience({super.key});
@@ -179,7 +181,7 @@ class AddExperience extends StatelessWidget {
                       onTap: () {
                         //if (formKey.currentState!.validate()) {
                         //  profileController.nextPage();
-                        Get.to(() => Profile4());
+                        Get.back(result: true);
                         //   }
                       })),
               SizedBox(height: 42.h),

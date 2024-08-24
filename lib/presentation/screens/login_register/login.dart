@@ -157,9 +157,7 @@ class LoginScreen extends StatelessWidget {
                           textColor: MyColors.white,
                           onTap: () {
                             if (formKey.currentState!.validate()) {
-                              Get.to(MainScreen(
-                                selectedIndex: 0,
-                              ));
+                              Get.to(MainScreen());
                             }
                           },
                         ),

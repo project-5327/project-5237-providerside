@@ -1,22 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:project_5237_provider/presentation/screens/login_register/Add_projects.dart';
+import 'package:project_5237_provider/presentation/screens/login_register/add_project1.dart';
+import 'package:project_5237_provider/presentation/screens/login_register/booked.dart';
 import 'package:project_5237_provider/presentation/screens/login_register/credit.dart';
 import 'package:project_5237_provider/presentation/screens/login_register/message.dart';
+import 'package:project_5237_provider/presentation/screens/login_register/notification.dart';
+import 'package:project_5237_provider/presentation/screens/login_register/proposal.dart';
+import 'package:project_5237_provider/presentation/screens/login_register/succesfully.dart';
+import 'package:project_5237_provider/presentation/screens/message/change_password.dart';
+import 'package:project_5237_provider/presentation/screens/message/forget_password.dart';
+import 'package:project_5237_provider/presentation/screens/message/otp_screen.dart';
 import 'package:project_5237_provider/presentation/screens/milestones/milestone.dart';
+import 'package:project_5237_provider/presentation/screens/my_contracts/my_contacts.dart';
+import 'package:project_5237_provider/presentation/screens/update_Project/chat_screen.dart';
 
 import '../constants/assets.dart';
 import '../constants/color.dart';
 import 'login_register/home_screen.dart';
 import 'login_register/EditProfile.dart';
-import 'login_register/projetct_detals1.dart';
-import 'my_contracts/map_screen.dart';
-import 'my_contracts/my_project.dart';
-import 'update_Project/chat_screen.dart';
 
 class MainScreen extends StatefulWidget {
-  final int selectedIndex;
-  MainScreen({super.key, required this.selectedIndex});
+  int? selectedIndex;
+  MainScreen({super.key, this.selectedIndex});
   @override
   State<MainScreen> createState() => _MainScreenState();
 }
@@ -28,35 +35,50 @@ class _MainScreenState extends State<MainScreen> {
     const HomeScreen(),
     const MilestoneScreen(),
     const MessageScreen(),
-    DebitCredit(),
-    Editprofile(),
-    HomeProjectDetails(),
-    DebitCredit(),
+    const ChatScreen(),
+    const AddProjects(),
+
+    // //0
+    // const HomeProjectDetails(),
+    // const ProposalScreen(),
+    // const SuccesfullyScreen(),
+    // const NotificationScreen(),
+
+    // const BookedClient(),
+    // const AddProjects(),
+    // const AddProject1(),
+    // const ForgetPasswordScreen(),
+    // const OtpScreen(),
+    // const ChangePassword(),
+    // const MilestoneScreen(),
+    // const MycontractScreen(),
+    // //2
+    // const ChatScreen(),
   ];
 
   @override
   void initState() {
     // TODO: implement initState
     setState(() {
-      _selectedIndex = widget.selectedIndex;
+      // _selectedIndex = widget.selectedIndex!;
     });
     super.initState();
   }
 
   final bottomNavKey = GlobalKey();
 
-  @override
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
+  // @override
+  // void _onItemTapped(int index) {
+  //   setState(() {
+  //     _selectedIndex = index;
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      body: _screens[_selectedIndex],
+      body: _screens[widget.selectedIndex ?? 0],
       bottomNavigationBar: Container(
         height: 65,
         key: bottomNavKey,
@@ -69,13 +91,23 @@ class _MainScreenState extends State<MainScreen> {
                 bottomNavItem(
                   title: "",
                   icon: Assets.home,
-                  isSelected: _selectedIndex == 0 ||
-                      _selectedIndex == 5 ||
-                      _selectedIndex == 6,
+                  isSelected: widget.selectedIndex == 0 ||
+                      widget.selectedIndex == 5 ||
+                      widget.selectedIndex == 6 ||
+                      widget.selectedIndex == 7 ||
+                      widget.selectedIndex == 8 ||
+                      widget.selectedIndex == 9 ||
+                      widget.selectedIndex == 10 ||
+                      widget.selectedIndex == 11 ||
+                      widget.selectedIndex == 12 ||
+                      widget.selectedIndex == 13 ||
+                      widget.selectedIndex == 14 ||
+                      widget.selectedIndex == 15 ||
+                      widget.selectedIndex == 16,
                   onTap: () {
-                    if (_selectedIndex != 0) {
+                    if (widget.selectedIndex != 0) {
                       setState(() {
-                        _selectedIndex = 0;
+                        widget.selectedIndex = 0;
                       });
                     }
                   },
@@ -83,11 +115,11 @@ class _MainScreenState extends State<MainScreen> {
                 bottomNavItem(
                   title: "",
                   icon: Assets.person,
-                  isSelected: _selectedIndex == 1,
+                  isSelected: widget.selectedIndex == 1,
                   onTap: () {
-                    if (_selectedIndex != 1) {
+                    if (widget.selectedIndex != 1) {
                       setState(() {
-                        _selectedIndex = 1;
+                        widget.selectedIndex = 1;
                       });
                     }
                   },
@@ -95,11 +127,12 @@ class _MainScreenState extends State<MainScreen> {
                 bottomNavItem(
                   title: "",
                   icon: Assets.message,
-                  isSelected: _selectedIndex == 2,
+                  isSelected:
+                      widget.selectedIndex == 2 || widget.selectedIndex == 17,
                   onTap: () {
-                    if (_selectedIndex != 2) {
+                    if (widget.selectedIndex != 2) {
                       setState(() {
-                        _selectedIndex = 2;
+                        widget.selectedIndex = 2;
                       });
                     }
                   },
@@ -107,22 +140,31 @@ class _MainScreenState extends State<MainScreen> {
                 bottomNavItem(
                   title: "",
                   icon: Assets.wallet,
-                  isSelected: _selectedIndex == 3,
+                  isSelected: widget.selectedIndex == 3,
                   onTap: () {
-                    if (_selectedIndex != 3) {
+                    if (widget.selectedIndex != 3) {
                       setState(() {
-                        _selectedIndex = 3;
+                        widget.selectedIndex = 3;
                       });
                     }
                   },
                 ),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(100),
-                  child: Image.asset(
-                    'assets/images/girl2.png',
-                    height: 24.h,
-                    width: 24.w,
-                    fit: BoxFit.cover,
+                GestureDetector(
+                  onTap: () {
+                    if (widget.selectedIndex != 4) {
+                      setState(() {
+                        widget.selectedIndex = 4;
+                      });
+                    }
+                  },
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(100),
+                    child: Image.asset(
+                      'assets/images/girl2.png',
+                      height: 24.h,
+                      width: 24.w,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ],
@@ -152,11 +194,11 @@ class _MainScreenState extends State<MainScreen> {
                   decoration: BoxDecoration(
                     color: Colors.transparent,
                     borderRadius: BorderRadius.circular(50.0),
-                    boxShadow: [
+                    boxShadow: const [
                       BoxShadow(
                         color: Colors.transparent,
                         blurRadius: 5.0,
-                      ),
+                      )
                     ],
                   ),
                   child: SvgPicture.asset(
@@ -169,7 +211,7 @@ class _MainScreenState extends State<MainScreen> {
               : Container(
                   height: 45,
                   width: 45,
-                  padding: EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(10),
                   color: Colors.transparent,
                   child: SvgPicture.asset(
                     icon,
