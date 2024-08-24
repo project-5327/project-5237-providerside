@@ -146,7 +146,7 @@ class _Profile3State extends State<Profile3> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  SizedBox(height: 100.h),
+                  SizedBox(height: 200.h),
                   Row(
                     children: [
                       Text(

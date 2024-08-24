@@ -45,7 +45,7 @@ class _MilestoneScreenState extends State<MilestoneScreen>
               appBar: AppBar(
                 automaticallyImplyLeading: false,
                 title: Text(
-                  'Milestone',
+                  AppStrings.milestonePayment,
                   style: TextStyle(
                       fontSize: 14.sp,
                       fontWeight: FontWeight.w700,

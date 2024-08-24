@@ -9,7 +9,6 @@ class MyColors {
   static Color white = const Color(0xffFFFFFF);
   static Color textColor = const Color(0xff808080);
   static Color black1 = const Color(0xff222222);
-
   static Color black2 = const Color(0xff0A0614);
   static Color tagCont = const Color(0xffEAEEF0);
   static Color darkBlue = const Color(0xff2D64BC);
@@ -30,4 +29,6 @@ class MyColors {
   static Color black3 = const Color(0xff2A1E17);
   static Color btnDisable = const Color(0x2C62B999);
   static Color closeBtn = const Color(0xffB3B3B3);
+
+  static Color grey4 = Color(0xff3D3F33);
 }
