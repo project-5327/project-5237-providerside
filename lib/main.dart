@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:project_5237_provider/presentation/constants/responsive_view.dart';
 import 'package:project_5237_provider/presentation/screens/dashboard/dashboard_view.dart';
 import 'package:project_5237_provider/presentation/screens/login_register/add_project1.dart';
 
@@ -17,11 +18,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final responsive = ResponsiveCheck(context);
     return ScreenUtilInit(
-      designSize: defaultTargetPlatform == TargetPlatform.android ||
-              defaultTargetPlatform == TargetPlatform.iOS
+      designSize: responsive.isMobile
           ? const Size(375, 812)
-          : const Size(1440, 941),
+          : responsive.isTablet
+              ? Size(1024, 1768)
+              : const Size(1440, 941),
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (_, child) {
