@@ -13,6 +13,7 @@ import '../../constants/color.dart';
 import '../../constants/strings.dart';
 import '../../widgets/Customize_textfield.dart';
 import '../../widgets/Details_textfield.dart';
+import '../main_screen .dart';
 import 'succesfully.dart';
 
 class AddProject1 extends StatefulWidget {
@@ -267,7 +268,11 @@ class _AddProject1State extends State<AddProject1> {
                         color: MyColors.btnColor,
                         textColor: MyColors.white,
                         onTap: () {
-                          Get.to(() => SuccesfullyScreen());
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                                builder: (_) => MainScreen(selectedIndex: 7)),
+                          );
+                          //      Get.to(() => SuccesfullyScreen());
                         }),
                   ),
                   SizedBox(
