@@ -10,6 +10,7 @@ import 'package:project_5237_provider/presentation/screens/dashboard/dashboard_v
 import 'package:project_5237_provider/presentation/screens/login_register/add_project1.dart';
 
 import 'presentation/screens/login_register/Add_projects.dart';
+import 'presentation/screens/splash screen.dart';
 
 void main() {
   runApp(const MyApp());
