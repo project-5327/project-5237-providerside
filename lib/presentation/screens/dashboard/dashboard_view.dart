@@ -87,7 +87,7 @@ class _DashBoardViewState extends State<DashBoardView> {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(80),
-        child: responsive.isTablet ? AppBar() : _appBar(context),
+        child: _appBar(context),
       ),
       body: Row(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -259,6 +259,7 @@ class _DashBoardViewState extends State<DashBoardView> {
   }
 
   Widget _appBar(BuildContext context) {
+    final responsive = ResponsiveCheck(context);
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       decoration: const BoxDecoration(
@@ -293,7 +294,9 @@ class _DashBoardViewState extends State<DashBoardView> {
             child: Row(
               children: [
                 SizedBox(
-                  width: MediaQuery.of(context).size.height * 0.4,
+                  width: responsive.isTablet
+                      ? MediaQuery.of(context).size.height * 0.3
+                      : MediaQuery.of(context).size.height * 0.4,
                   child: TextFormField(
                     validator: (value) {
                       return null;
@@ -354,7 +357,7 @@ class _DashBoardViewState extends State<DashBoardView> {
               const SizedBox(width: 20),
               Container(
                 height: 55,
-                width: 218,
+                width: responsive.isTablet ? 120 : 218,
                 alignment: Alignment.center,
                 padding: const EdgeInsets.symmetric(horizontal: 14),
                 decoration: BoxDecoration(
@@ -374,28 +377,31 @@ class _DashBoardViewState extends State<DashBoardView> {
                           ),
                         ),
                         const SizedBox(width: 10),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Jos Creative",
-                              style: TextStyle(
-                                fontFamily: Fonts.fontsinter,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500,
+                        responsive.isTablet
+                            ? const SizedBox()
+                            : Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "Jos Creative",
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                      fontFamily: Fonts.fontsinter,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                  Text(
+                                    "Client",
+                                    style: TextStyle(
+                                      fontFamily: Fonts.fontsinter,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  )
+                                ],
                               ),
-                            ),
-                            Text(
-                              "Client",
-                              style: TextStyle(
-                                fontFamily: Fonts.fontsinter,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            )
-                          ],
-                        ),
                       ],
                     ),
                     IconButton(

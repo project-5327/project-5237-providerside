@@ -62,8 +62,8 @@ class AddProjects extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Center(
-          child: SizedBox(
-            width: 500,
+          child: Container(
+            width: 400,
             child: SingleChildScrollView(child: DetailsTextfield(
               onTap: () {
                 Get.to(() => const SuccesfullyScreen());

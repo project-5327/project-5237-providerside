@@ -1,17 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:project_5237_provider/presentation/screens/my_contracts/send_screen.dart';
-import 'package:project_5237_provider/presentation/widgets/Customize_textfield.dart';
 
 import '../../../../controller/country_controller.dart';
 import '../../../../controller/form_controller.dart';
 import '../../../../controller/profile_controller.dart';
+import '../../../constants/assets.dart';
 import '../../../constants/color.dart';
+import '../../../constants/responsive_view.dart';
+
 import '../../../constants/strings.dart';
 import '../../../widgets/create_profile_widget.dart';
 import '../../../widgets/customize_button.dart';
+import '../../my_contracts/send_screen.dart';
+import 'components/profilewidget4.dart';
+
 import 'profile3.dart';
 import 'profile5.dart';
 import 'static_profile.dart';
@@ -40,22 +45,77 @@ class _Profile4State extends State<Profile4> {
 
   @override
   Widget build(BuildContext context) {
+    return ResponsiveView(
+      mobile: _mobileView(context),
+      desktop: _deskTopView(context),
+      tablet: _mobileView(context),
+    );
+  }
+
+  _mobileView(BuildContext context) {
     return StaticProfileLayout(
-      middleContentBuilder: () => Form(
-        key: formKey,
-        child: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15),
+      middleContentBuilder: () => Form(key: formKey, child: Profilewidget4()),
+    );
+  }
+
+  _deskTopView(BuildContext context) {
+    return Scaffold(
+      body: Row(
+        children: [
+          Flexible(
+            child: Container(
+              child: SvgPicture.asset(
+                Assets.createProfile1,
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          Flexible(
+              child: Center(
+            child: Container(
+              //  height: 450.h,
+              width: 336.w,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
+                  SizedBox(height: 100.h),
+                  Row(
+                    children: [
+                      Text(
+                        AppStrings.createProfile,
+                        style: TextStyle(
+                          fontFamily: 'Montserrat',
+                          color: MyColors.black,
+                          fontSize: 24.sp,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      SizedBox(width: 100.w),
+                      Obx(() => Text(
+                            '${profileController.currentIndex.value + 1}/8',
+                            style: TextStyle(
+                              color: MyColors.black,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          )),
+                    ],
+                  ),
+                  SizedBox(height: 30.h),
+                  LinearProgressIndicator(
+                    value: (profileController.currentIndex.value + 1) / 8,
+                    color: MyColors.btnColor,
+                    borderRadius: BorderRadius.circular(4.r),
+                    minHeight: 5.h,
+                  ),
+                  SizedBox(height: 30.h),
                   SizedBox(height: 25.h),
                   TextWidget(
                     align: TextAlign.start,
                     text: AppStrings.addLanguages,
                     color: MyColors.black,
-                    size: 20.sp,
+                    size: 22.sp,
                     fontweight: FontWeight.w600,
                   ),
                   SizedBox(
@@ -65,14 +125,13 @@ class _Profile4State extends State<Profile4> {
                     align: TextAlign.start,
                     text: AppStrings.createProfileLorem1,
                     color: MyColors.grey,
-                    size: 10.sp,
+                    size: 13.sp,
                     fontweight: FontWeight.w500,
                   ),
                   SizedBox(
                     height: 25.h,
                   ),
                   Container(
-                    height: 55.h,
                     width: 307.w,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8.r),
@@ -90,7 +149,7 @@ class _Profile4State extends State<Profile4> {
                               runSpacing: 4.0,
                               children: _selectedLanguages.map((language) {
                                 return Container(
-                                  height: 40.h,
+                                  height: 38.h,
                                   decoration: BoxDecoration(
                                     color: MyColors.blueContainer,
                                     borderRadius: BorderRadius.circular(100.r),
@@ -127,46 +186,42 @@ class _Profile4State extends State<Profile4> {
                               }).toList(),
                             )
                           else
-                            Padding(
-                              padding: const EdgeInsets.only(top: 10.0),
-                              child: DropdownButton<String>(
-                                borderRadius: BorderRadius.circular(6.0),
-                                isDense: true,
-                                value: null,
-                                hint:
-                                    const Text(AppStrings.chooseyourLanguages),
-                                style: TextStyle(
-                                  fontSize: 13.sp,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.black,
-                                ),
-                                isExpanded: true,
-                                icon: Icon(
-                                  Icons.arrow_drop_down,
-                                  color: MyColors.grey,
-                                  size: 30.sp,
-                                ),
-                                items: _languages.map((String language) {
-                                  return DropdownMenuItem<String>(
-                                    value: language,
-                                    child: Text(language),
-                                  );
-                                }).toList(),
-                                onChanged: (String? newValue) {
-                                  if (newValue != null &&
-                                      !_selectedLanguages.contains(newValue)) {
-                                    setState(() {
-                                      _selectedLanguages.add(newValue);
-                                    });
-                                  }
-                                },
+                            DropdownButton<String>(
+                              borderRadius: BorderRadius.circular(6.0),
+                              isDense: true,
+                              value: null,
+                              hint: const Text(AppStrings.chooseyourLanguages),
+                              style: TextStyle(
+                                fontSize: 13.sp,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black,
                               ),
+                              isExpanded: true,
+                              icon: Icon(
+                                Icons.arrow_drop_down,
+                                color: MyColors.grey,
+                                size: 30.sp,
+                              ),
+                              items: _languages.map((String language) {
+                                return DropdownMenuItem<String>(
+                                  value: language,
+                                  child: Text(language),
+                                );
+                              }).toList(),
+                              onChanged: (String? newValue) {
+                                if (newValue != null &&
+                                    !_selectedLanguages.contains(newValue)) {
+                                  setState(() {
+                                    _selectedLanguages.add(newValue);
+                                  });
+                                }
+                              },
                             ),
                         ],
                       ),
                     ),
                   ),
-                  SizedBox(height: 160.h),
+                  SizedBox(height: 50.h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -174,8 +229,8 @@ class _Profile4State extends State<Profile4> {
                         borderColor: MyColors.btnColor,
                         radius: 100.r,
                         text: AppStrings.privious,
-                        height: 40.h,
-                        width: 150.w,
+                        height: 45.h,
+                        width: 160.w,
                         color: MyColors.white,
                         textColor: MyColors.btnColor,
                         onTap: () {
@@ -192,8 +247,8 @@ class _Profile4State extends State<Profile4> {
                           borderColor: MyColors.btnColor,
                           radius: 100.r,
                           text: AppStrings.next,
-                          height: 40.h,
-                          width: 150.w,
+                          height: 45.h,
+                          width: 160.w,
                           color: MyColors.btnColor,
                           textColor: MyColors.white,
                           onTap: () {
@@ -205,42 +260,12 @@ class _Profile4State extends State<Profile4> {
                           ),
                     ],
                   ),
-                  SizedBox(height: 42.h),
                 ],
               ),
             ),
-          ],
-        ),
+          ))
+        ],
       ),
-    );
-  }
-
-  void _showLanguageOptions() {
-    showModalBottomSheet(
-      context: context,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(16.r)),
-      ),
-      builder: (context) {
-        return Container(
-          padding: EdgeInsets.all(16.r),
-          height: 300.h,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: _languages.map((language) {
-              return ListTile(
-                title: Text(language),
-                onTap: () {
-                  setState(() {
-                    _languageController.text = language;
-                  });
-                  Navigator.pop(context);
-                },
-              );
-            }).toList(),
-          ),
-        );
-      },
     );
   }
 }
