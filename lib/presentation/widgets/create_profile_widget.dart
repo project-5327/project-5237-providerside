@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:project_5237_provider/controller/profile_controller.dart';
-
-import '../constants/assets.dart';
 import '../constants/color.dart';
 import '../screens/my_contracts/send_screen.dart';
 
@@ -18,7 +15,7 @@ class CreateProfileWidget extends StatelessWidget {
       height: 160.h,
       decoration: BoxDecoration(color: MyColors.blue),
       child: Padding(
-        padding: EdgeInsets.symmetric(
+        padding: const EdgeInsets.symmetric(
           horizontal: 25,
         ),
         child: Column(

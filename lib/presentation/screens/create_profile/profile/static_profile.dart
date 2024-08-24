@@ -1,12 +1,11 @@
+// ignore_for_file: use_super_parameters
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:project_5237_provider/controller/profile_controller.dart';
 import 'package:project_5237_provider/presentation/constants/color.dart';
 import 'package:project_5237_provider/presentation/widgets/create_profile_widget.dart';
-
-import '../../../constants/assets.dart';
 
 class StaticProfileLayout extends StatelessWidget {
   final Widget Function() middleContentBuilder;
@@ -26,7 +25,7 @@ class StaticProfileLayout extends StatelessWidget {
             children: [
               CreateProfileWidget(),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
