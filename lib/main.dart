@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:project_5237_provider/desktop/projects/project_detail_screen.dart';
 import 'package:project_5237_provider/presentation/screens/dashboard/dashboard_view.dart';
 
 void main() {
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
             ),
             useMaterial3: true,
           ),
-          home: const DashBoardView(),
+          home: ProjectDetailScreen(),
         );
 
         //  Profile3());

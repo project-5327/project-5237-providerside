@@ -116,8 +116,6 @@ class AppStrings {
   static const activeMilestones = 'Active Milestones';
   static const awaitingMilestones = 'Awaiting Milestones';
   static const payments = 'Payments';
-  // static const accept = 'Accept';
-  // static const acceptProposal = 'Accept Proposal';
   static const requestChanges = 'Request Changes';
   static const payemntsSend = 'Payments Send';
   static const done = 'Done';
@@ -131,4 +129,6 @@ class AppStrings {
   static const lastName = 'Last Name';
   static const projects = 'Projects';
   static const category = 'Category 1';
+  static const details = 'Details';
+  static const reject = 'Reject';
 }
