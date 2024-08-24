@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_final_fields
+
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -7,6 +9,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:project_5237_provider/controller/form_controller.dart';
+import 'package:project_5237_provider/presentation/constants/responsive_view.dart';
 import 'package:project_5237_provider/presentation/screens/my_contracts/send_screen.dart';
 import 'package:project_5237_provider/presentation/widgets/toggels.dart';
 
@@ -19,7 +22,7 @@ import 'customize_button.dart';
 
 class DetailsTextfield extends StatefulWidget {
   final VoidCallback onTap;
-  DetailsTextfield({super.key, required this.onTap});
+  const DetailsTextfield({super.key, required this.onTap});
 
   @override
   State<DetailsTextfield> createState() => _DetailsTextfieldState();
@@ -55,6 +58,7 @@ class _DetailsTextfieldState extends State<DetailsTextfield> {
 
   @override
   Widget build(BuildContext context) {
+    final responsive = ResponsiveCheck(context);
     return SingleChildScrollView(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 10.w),
@@ -157,7 +161,7 @@ class _DetailsTextfieldState extends State<DetailsTextfield> {
               width: 355.w,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8.r),
-                border: Border.all(color: Color(0xff464646)),
+                border: Border.all(color: const Color(0xff464646)),
               ),
               child: Padding(
                 padding: EdgeInsets.only(left: 8.w),
@@ -430,18 +434,32 @@ class _DetailsTextfieldState extends State<DetailsTextfield> {
               ],
             ),
             SizedBox(height: 24.h),
-            Center(
-              child: CustomizeButton(
-                borderColor: MyColors.btnColor,
-                radius: 100.r,
-                text: AppStrings.continueText,
-                height: 40.h,
-                width: 334.w,
-                color: MyColors.btnColor,
-                textColor: MyColors.white,
-                onTap: widget.onTap,
-              ),
-            ),
+            responsive.isMobile
+                ? Center(
+                    child: CustomizeButton(
+                      borderColor: MyColors.btnColor,
+                      radius: 100.r,
+                      text: AppStrings.continueText,
+                      height: 40.h,
+                      width: 334.w,
+                      color: MyColors.btnColor,
+                      textColor: MyColors.white,
+                      onTap: widget.onTap,
+                    ),
+                  )
+                : Align(
+                    alignment: Alignment.centerRight,
+                    child: CustomizeButton(
+                      borderColor: MyColors.btnColor,
+                      radius: 100.r,
+                      text: AppStrings.continueText,
+                      height: 40.h,
+                      width: 120.w,
+                      color: MyColors.btnColor,
+                      textColor: MyColors.white,
+                      onTap: widget.onTap,
+                    ),
+                  ),
             SizedBox(height: 20.h),
           ],
         ),
