@@ -12,7 +12,7 @@ class ProjectDetailScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Details',
+          AppStrings.details,
           style: GoogleFonts.inter(
             textStyle: TextStyle(
                 fontSize: 20.sp,
