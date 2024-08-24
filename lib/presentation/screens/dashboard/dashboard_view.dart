@@ -1,6 +1,7 @@
 import 'package:easy_sidemenu/easy_sidemenu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:project_5237_provider/desktop/projects/projects_screen.dart';
 import 'package:project_5237_provider/presentation/constants/fonts.dart';
 import 'package:project_5237_provider/presentation/constants/responsive_view.dart';
 import 'package:project_5237_provider/presentation/screens/login_register/Add_projects.dart';
@@ -30,8 +31,8 @@ class _DashBoardViewState extends State<DashBoardView> {
   // ];
   final List<Widget> _pages = [
     const HomeScreen(),
+    const ProjectsScreen(),
     const MilestoneScreen(),
-    const MessageScreen(),
     const ChatScreen(),
     const AddProjects(),
 
@@ -59,6 +60,9 @@ class _DashBoardViewState extends State<DashBoardView> {
   void initState() {
     // Connect SideMenuController and PageController together
     sideMenu.addListener((index) {
+      print('sideMenuindex:${index}');
+      _currentIndex = index;
+
       pageController.jumpToPage(index);
     });
     setState(() {
@@ -78,12 +82,13 @@ class _DashBoardViewState extends State<DashBoardView> {
   }
 
   Widget _mobile() {
-    return MainScreen();
+    return MainScreen(selectedIndex: _currentIndex);
   }
 
   _desktop(BuildContext context) {
     final responsive = ResponsiveCheck(context);
-    sideMenu.changePage(0);
+    sideMenu.changePage(_currentIndex);
+
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(80),
@@ -93,9 +98,6 @@ class _DashBoardViewState extends State<DashBoardView> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           SideMenu(
-            // collapseWidth: responsive.isTablet ? 80 : 260,
-            // alwaysShowFooter: true,
-
             controller: sideMenu,
             style: SideMenuStyle(
               openSideMenuWidth: 200,
@@ -139,18 +141,16 @@ class _DashBoardViewState extends State<DashBoardView> {
                 title: 'Home',
                 onTap: (index, _) {
                   sideMenu.changePage(index);
+                  _currentIndex = index;
                 },
                 icon: const Icon(Icons.home_filled),
-                // badgeContent: const Text(
-                //   '3',
-                //   style: TextStyle(color: Colors.white),
-                // ),
                 tooltipContent: "This is a tooltip for Dashboard item",
               ),
               SideMenuItem(
                 title: 'Projects',
                 onTap: (index, _) {
                   sideMenu.changePage(index);
+                  _currentIndex = index;
                 },
                 icon: const Icon(Icons.group_outlined),
               ),
@@ -158,6 +158,9 @@ class _DashBoardViewState extends State<DashBoardView> {
                 title: 'Payment',
                 onTap: (index, _) {
                   sideMenu.changePage(index);
+                  setState(() {
+                    _currentIndex = index;
+                  });
                 },
                 icon: const Icon(Icons.card_travel_outlined),
               ),
@@ -165,6 +168,9 @@ class _DashBoardViewState extends State<DashBoardView> {
                 title: 'Messages',
                 onTap: (index, _) {
                   sideMenu.changePage(index);
+                  setState(() {
+                    _currentIndex = index;
+                  });
                 },
                 icon: const Icon(Icons.chat_bubble),
               ),
@@ -172,6 +178,9 @@ class _DashBoardViewState extends State<DashBoardView> {
                 title: 'My Project',
                 onTap: (index, _) {
                   sideMenu.changePage(index);
+                  setState(() {
+                    _currentIndex = index;
+                  });
                 },
                 icon: const Icon(Icons.message),
               ),

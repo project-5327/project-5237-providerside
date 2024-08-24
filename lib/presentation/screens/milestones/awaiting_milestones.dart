@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:project_5237_provider/presentation/constants/responsive_view.dart';
 import 'package:project_5237_provider/presentation/constants/strings.dart';
 import 'package:project_5237_provider/presentation/screens/my_contracts/send_screen.dart';
 import '../../constants/color.dart';
@@ -12,8 +13,8 @@ class AwaitingMilestones extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return defaultTargetPlatform == TargetPlatform.android ||
-            defaultTargetPlatform == TargetPlatform.iOS
+    final responsive = ResponsiveCheck(context);
+    return responsive.isMobile || responsive.isTablet
         ? Container(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 14),
