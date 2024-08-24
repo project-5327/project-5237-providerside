@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:project_5237_provider/controller/profile_controller.dart';
 import 'package:project_5237_provider/presentation/constants/responsive_view.dart';
@@ -19,7 +18,7 @@ class CreateProfileWidget extends StatelessWidget {
       height: 160.h,
       decoration: BoxDecoration(color: MyColors.blue),
       child: Padding(
-        padding: EdgeInsets.symmetric(
+        padding: const EdgeInsets.symmetric(
           horizontal: 25,
         ),
         child: Column(

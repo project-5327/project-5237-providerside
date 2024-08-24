@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:project_5237_provider/presentation/screens/main_screen%20.dart';
 import 'package:project_5237_provider/presentation/screens/my_contracts/send_screen.dart';
 import 'package:project_5237_provider/presentation/widgets/customize_button.dart';
 
@@ -12,8 +13,6 @@ import '../../constants/assets.dart';
 import '../../constants/color.dart';
 import '../../constants/strings.dart';
 import '../../widgets/Customize_textfield.dart';
-import '../../widgets/Details_textfield.dart';
-import '../main_screen .dart';
 import 'succesfully.dart';
 
 class AddProject1 extends StatefulWidget {
@@ -269,8 +268,7 @@ class _AddProject1State extends State<AddProject1> {
                         textColor: MyColors.white,
                         onTap: () {
                           Navigator.of(context).push(
-                            MaterialPageRoute(
-                                builder: (_) => MainScreen(selectedIndex: 7)),
+                            MaterialPageRoute(builder: (_) => MainScreen()),
                           );
                           //      Get.to(() => SuccesfullyScreen());
                         }),

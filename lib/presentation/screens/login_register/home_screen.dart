@@ -10,7 +10,6 @@ import '../../widgets/discover_project_cont.dart';
 import '../../widgets/search_field.dart';
 
 import '../main_screen .dart';
-import 'projetct_detals1.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -37,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
             padding: const EdgeInsets.only(top: 10),
             child: InkWell(
               onTap: () {
-                Get.to(NotificationScreen());
+                Get.to(const NotificationScreen());
               },
               child: Stack(alignment: Alignment.topRight, children: [
                 SvgPicture.asset(Assets.bell),
@@ -71,7 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 //  _pages[currentIndex],
-                SearchField(),
+                const SearchField(),
                 SizedBox(
                   height: 27.h,
                 ),
@@ -100,8 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 InkWell(
                   onTap: () {
                     Navigator.of(context).push(
-                      MaterialPageRoute(
-                          builder: (_) => MainScreen(selectedIndex: 5)),
+                      MaterialPageRoute(builder: (_) => MainScreen()),
                     );
                   },
                   child: DiscoverContainer(
@@ -121,8 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 InkWell(
                   onTap: () {
                     Navigator.of(context).push(
-                      MaterialPageRoute(
-                          builder: (_) => MainScreen(selectedIndex: 5)),
+                      MaterialPageRoute(builder: (_) => MainScreen()),
                     );
                   },
                   child: DiscoverContainer(
