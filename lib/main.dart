@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
             ),
             useMaterial3: true,
           ),
-          home: ProjectDetailScreen(),
+          home: DashBoardView(),
         );
 
         //  Profile3());
