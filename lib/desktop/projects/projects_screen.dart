@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:project_5237_provider/desktop/projects/components/project_comp.dart';
+import 'package:project_5237_provider/desktop/projects/project_detail_screen.dart';
 import 'package:project_5237_provider/presentation/constants/assets.dart';
 import 'package:project_5237_provider/presentation/constants/color.dart';
 import 'package:project_5237_provider/presentation/constants/strings.dart';
@@ -70,7 +71,16 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
                                 mainAxisExtent: 207),
                         itemCount: 6,
                         itemBuilder: (context, gridIndex) {
-                          return const ProjectComp();
+                          return GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          ProjectDetailScreen()),
+                                );
+                              },
+                              child: const ProjectComp());
                         },
                       ),
                       const SizedBox(

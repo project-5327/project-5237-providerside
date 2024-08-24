@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:project_5237_provider/presentation/screens/create_profile/profile/profile_detail.dart';
 
 import '../../presentation/constants/assets.dart';
 import '../../presentation/constants/color.dart';
@@ -10,7 +12,8 @@ class CreateYourProfileScreen extends StatefulWidget {
   const CreateYourProfileScreen({super.key});
 
   @override
-  State<CreateYourProfileScreen> createState() => _CreateYourProfileScreenState();
+  State<CreateYourProfileScreen> createState() =>
+      _CreateYourProfileScreenState();
 }
 
 class _CreateYourProfileScreenState extends State<CreateYourProfileScreen> {
@@ -40,7 +43,8 @@ class _CreateYourProfileScreenState extends State<CreateYourProfileScreen> {
                       style: TextStyle(
                         fontSize: 24.0,
                         fontWeight: FontWeight.bold,
-                        color: Color(0xff2A1E17), // Ensure consistent text color
+                        color:
+                            Color(0xff2A1E17), // Ensure consistent text color
                       ),
                       textAlign: TextAlign.center,
                     ),
@@ -79,7 +83,9 @@ class _CreateYourProfileScreenState extends State<CreateYourProfileScreen> {
                     SizedBox(
                       width: 300,
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.to(ProfileDetail());
+                        },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: MyColors.btnColor,
                           padding: const EdgeInsets.symmetric(
@@ -111,8 +117,6 @@ class _CreateYourProfileScreenState extends State<CreateYourProfileScreen> {
     );
   }
 }
-
-
 
 Widget _buildDivider() {
   return Padding(
