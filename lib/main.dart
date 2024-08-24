@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:project_5237_provider/presentation/screens/create_profile/profile/profile3.dart';
 import 'package:project_5237_provider/presentation/screens/login_register/Add_projects.dart';
+import 'package:project_5237_provider/presentation/screens/login_register/home_screen.dart';
 import 'package:project_5237_provider/presentation/screens/login_register/profile_screen.dart';
 
 import 'package:project_5237_provider/presentation/screens/splash%20screen.dart';
@@ -39,7 +40,7 @@ class MyApp extends StatelessWidget {
                 colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
                 useMaterial3: true,
               ),
-              home: Profile5());
+              home: ProfileDetail());
 
           //  Profile3());
         });

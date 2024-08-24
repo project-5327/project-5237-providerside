@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -178,7 +179,7 @@ class _Profile3State extends State<Profile3> {
                   SizedBox(height: 30.h),
                   DesktopEditCreate(
                     ontap: () async {
-                      final result = await Get.to(() => const AddEducation());
+                      final result = await _dialogueBox();
                       if (result != null && result == true) {
                         setState(() {
                           _isNextButtonEnabled = true;
@@ -250,153 +251,165 @@ class _Profile3State extends State<Profile3> {
         barrierDismissible: false,
         builder: (BuildContext context) {
           return AlertDialog(
-              content: Column(children: [
-            SizedBox(
-              height: 37.h,
+            title: Row(
+              children: [
+                SizedBox(
+                  width: 310.w,
+                ),
+                TextWidget(
+                  text: AppStrings.addEducation1,
+                  color: MyColors.black,
+                  fontweight: FontWeight.w600,
+                  size: 20.sp,
+                ),
+                SizedBox(
+                  width: 200.w,
+                ),
+                IconButton(
+                  onPressed: () {
+                    Get.back();
+                  },
+                  icon: Icon(
+                    CupertinoIcons.clear,
+                    color: MyColors.black.withOpacity(0.5),
+                    size: 21.sp,
+                  ),
+                )
+              ],
             ),
-            Center(
-              child: Container(
-                padding: const EdgeInsets.all(14.0),
-                height: 440.h,
-                width: 335.w,
-                decoration: BoxDecoration(
-                    color: MyColors.blueContainer,
-                    borderRadius: BorderRadius.circular(12.r)),
-                child: Column(
+            content: Column(
+              children: [
+                SizedBox(
+                  height: 10.h,
+                ),
+                Center(
+                  child: Container(
+                    padding: const EdgeInsets.all(14.0),
+                    // height: 440.h,
+                    width: 694.w,
+                    decoration: BoxDecoration(
+                        color: MyColors.blueContainer,
+                        borderRadius: BorderRadius.circular(12.r)),
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            TextWidget(
+                              text: AppStrings.education1,
+                              color: MyColors.black,
+                              fontweight: FontWeight.w500,
+                              size: 14.sp,
+                            ),
+                            SvgPicture.asset(Assets.closeIC)
+                          ],
+                        ),
+                        SizedBox(
+                          height: 14.h,
+                        ),
+                        const CustomTextFormField(
+                          text: AppStrings.enterHere,
+                          title: AppStrings.degree,
+                        ),
+                        SizedBox(
+                          height: 14.h,
+                        ),
+                        const CustomTextFormField(
+                          text: AppStrings.enterHere,
+                          title: AppStrings.institutionName,
+                        ),
+                        SizedBox(
+                          height: 14.h,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Flexible(
+                              child: CustomTextFormField(
+                                text: AppStrings.enterHere,
+                                title: AppStrings.fieldOfStudy,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 5.w,
+                            ),
+                            const Flexible(
+                              child: CustomTextFormField(
+                                text: AppStrings.enterHere,
+                                title: AppStrings.location,
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 14.h,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Flexible(
+                              child: CustomTextFormField(
+                                text: AppStrings.date,
+                                title: AppStrings.startDate,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 5.w,
+                            ),
+                            const Flexible(
+                              child: CustomTextFormField(
+                                text: AppStrings.date,
+                                title: AppStrings.endDate,
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 14.h,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 14.h,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        TextWidget(
-                          text: AppStrings.experience1,
-                          color: MyColors.black,
-                          fontweight: FontWeight.w500,
-                          size: 14.sp,
-                        ),
-                        SvgPicture.asset(Assets.closeIC)
-                      ],
+                    Icon(
+                      Icons.add_circle_outline,
+                      color: MyColors.blue,
+                      size: 20.sp,
                     ),
-                    SizedBox(
-                      height: 14.h,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Flexible(
-                          child: CustomTextFormField(
-                            text: AppStrings.enterHere,
-                            title: AppStrings.companyName,
-                          ),
-                        ),
-                        SizedBox(
-                          width: 5.w,
-                        ),
-                        const Flexible(
-                          child: CustomTextFormField(
-                            text: AppStrings.enterHere,
-                            title: AppStrings.role,
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 14.h,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Flexible(
-                          child: CustomTextFormField(
-                            text: AppStrings.date,
-                            title: AppStrings.startDate,
-                          ),
-                        ),
-                        SizedBox(
-                          width: 5.w,
-                        ),
-                        const Flexible(
-                          child: CustomTextFormField(
-                            text: AppStrings.date,
-                            title: AppStrings.endDate,
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 14.h,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Flexible(
-                          child: CustomTextFormField(
-                            text: AppStrings.enterHere,
-                            title: AppStrings.location,
-                          ),
-                        ),
-                        SizedBox(
-                          width: 5.w,
-                        ),
-                        const Flexible(
-                          child: CustomTextFormField(
-                            text: AppStrings.enterHere,
-                            title: AppStrings.employmentType,
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 14.h,
-                    ),
-                    const CustomTextFormField(
-                      maxLines: 2,
-                      text: AppStrings.enterHere,
-                      title: AppStrings.description,
+                    TextWidget(
+                      align: TextAlign.right,
+                      text: AppStrings.addMore,
+                      color: MyColors.blue,
+                      fontweight: FontWeight.w500,
+                      size: 14.sp,
                     ),
                   ],
                 ),
-              ),
-            ),
-            SizedBox(
-              height: 14.h,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Icon(
-                  Icons.add_circle_outline,
-                  color: MyColors.blue,
-                  size: 20.sp,
+                SizedBox(
+                  height: 30.h,
                 ),
-                TextWidget(
-                  align: TextAlign.right,
-                  text: AppStrings.addMore,
-                  color: MyColors.blue,
-                  fontweight: FontWeight.w500,
-                  size: 14.sp,
-                ),
+                Align(
+                    alignment: Alignment.topRight,
+                    child: CustomizeButton(
+                        borderColor: MyColors.btnColor,
+                        radius: 100.r,
+                        text: AppStrings.save,
+                        height: 45.h,
+                        width: 195.w,
+                        color: MyColors.btnColor,
+                        textColor: MyColors.white,
+                        onTap: () {
+                          Get.back(result: true);
+                        })),
               ],
             ),
-            SizedBox(
-              height: 150.h,
-            ),
-            Center(
-                child: CustomizeButton(
-                    borderColor: MyColors.btnColor,
-                    radius: 100.r,
-                    text: AppStrings.next,
-                    height: 40.h,
-                    width: 334.w,
-                    color: MyColors.btnColor,
-                    textColor: MyColors.white,
-                    onTap: () {
-                      //if (formKey.currentState!.validate()) {
-                      //  profileController.nextPage();
-                      Get.back(result: true);
-                      //   }
-                    })),
-            SizedBox(height: 42.h),
-          ]));
+          );
         });
   }
 }

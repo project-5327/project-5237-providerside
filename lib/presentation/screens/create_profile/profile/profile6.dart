@@ -215,7 +215,7 @@ class Profile6 extends StatelessWidget {
                           align: TextAlign.start,
                           text: AppStrings.lorem2,
                           color: MyColors.grey,
-                          size: 10.sp,
+                          size: 13.sp,
                           fontweight: FontWeight.w500,
                         ),
                         SizedBox(
@@ -225,7 +225,7 @@ class Profile6 extends StatelessWidget {
                           align: TextAlign.start,
                           text: AppStrings.yourSkills,
                           color: MyColors.black,
-                          size: 12.sp,
+                          size: 14.sp,
                           fontweight: FontWeight.w500,
                         ),
                         SizedBox(
@@ -236,7 +236,7 @@ class Profile6 extends StatelessWidget {
                           decoration: InputDecoration(
                             hintText: AppStrings.desc,
                             hintStyle: TextStyle(
-                                fontSize: 10.sp,
+                                fontSize: 13.sp,
                                 fontWeight: FontWeight.w500,
                                 color: Color(0xff2A1E17)),
                             contentPadding: const EdgeInsets.symmetric(
@@ -255,12 +255,12 @@ class Profile6 extends StatelessWidget {
                             // align: TextAlign.c,
                             text: '500 characters',
                             color: Color(0xff2A1E17),
-                            size: 12.sp,
+                            size: 13.sp,
                             fontweight: FontWeight.w500,
                           ),
                         ),
                         SizedBox(
-                          height: 57.h,
+                          height: 56.h,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -274,10 +274,10 @@ class Profile6 extends StatelessWidget {
                               color: MyColors.white,
                               textColor: MyColors.btnColor,
                               onTap: () {
-                                if (formKey.currentState!.validate()) {
-                                  profileController.previousPage();
-                                  Get.to(() => Profile5());
-                                }
+                                // if (formKey.currentState!.validate()) {
+                                profileController.previousPage();
+                                Get.to(() => Profile5());
+                                // }
                               },
                             ),
                             SizedBox(
@@ -292,10 +292,10 @@ class Profile6 extends StatelessWidget {
                               color: MyColors.btnColor,
                               textColor: MyColors.white,
                               onTap: () {
-                                if (formKey.currentState!.validate()) {
-                                  profileController.nextPage();
-                                  Get.to(() => Profile7());
-                                }
+                                //    if (formKey.currentState!.validate()) {
+                                profileController.nextPage();
+                                Get.to(() => Profile7());
+                                //  }
                               },
                             ),
                           ],

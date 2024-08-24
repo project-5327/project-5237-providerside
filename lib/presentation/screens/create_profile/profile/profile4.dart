@@ -115,7 +115,7 @@ class _Profile4State extends State<Profile4> {
                     align: TextAlign.start,
                     text: AppStrings.addLanguages,
                     color: MyColors.black,
-                    size: 20.sp,
+                    size: 22.sp,
                     fontweight: FontWeight.w600,
                   ),
                   SizedBox(
@@ -125,14 +125,13 @@ class _Profile4State extends State<Profile4> {
                     align: TextAlign.start,
                     text: AppStrings.createProfileLorem1,
                     color: MyColors.grey,
-                    size: 10.sp,
+                    size: 13.sp,
                     fontweight: FontWeight.w500,
                   ),
                   SizedBox(
                     height: 25.h,
                   ),
                   Container(
-                    height: 55.h,
                     width: 307.w,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8.r),
@@ -150,7 +149,7 @@ class _Profile4State extends State<Profile4> {
                               runSpacing: 4.0,
                               children: _selectedLanguages.map((language) {
                                 return Container(
-                                  height: 40.h,
+                                  height: 38.h,
                                   decoration: BoxDecoration(
                                     color: MyColors.blueContainer,
                                     borderRadius: BorderRadius.circular(100.r),
@@ -187,46 +186,42 @@ class _Profile4State extends State<Profile4> {
                               }).toList(),
                             )
                           else
-                            Padding(
-                              padding: const EdgeInsets.only(top: 10.0),
-                              child: DropdownButton<String>(
-                                borderRadius: BorderRadius.circular(6.0),
-                                isDense: true,
-                                value: null,
-                                hint:
-                                    const Text(AppStrings.chooseyourLanguages),
-                                style: TextStyle(
-                                  fontSize: 13.sp,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.black,
-                                ),
-                                isExpanded: true,
-                                icon: Icon(
-                                  Icons.arrow_drop_down,
-                                  color: MyColors.grey,
-                                  size: 30.sp,
-                                ),
-                                items: _languages.map((String language) {
-                                  return DropdownMenuItem<String>(
-                                    value: language,
-                                    child: Text(language),
-                                  );
-                                }).toList(),
-                                onChanged: (String? newValue) {
-                                  if (newValue != null &&
-                                      !_selectedLanguages.contains(newValue)) {
-                                    setState(() {
-                                      _selectedLanguages.add(newValue);
-                                    });
-                                  }
-                                },
+                            DropdownButton<String>(
+                              borderRadius: BorderRadius.circular(6.0),
+                              isDense: true,
+                              value: null,
+                              hint: const Text(AppStrings.chooseyourLanguages),
+                              style: TextStyle(
+                                fontSize: 13.sp,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black,
                               ),
+                              isExpanded: true,
+                              icon: Icon(
+                                Icons.arrow_drop_down,
+                                color: MyColors.grey,
+                                size: 30.sp,
+                              ),
+                              items: _languages.map((String language) {
+                                return DropdownMenuItem<String>(
+                                  value: language,
+                                  child: Text(language),
+                                );
+                              }).toList(),
+                              onChanged: (String? newValue) {
+                                if (newValue != null &&
+                                    !_selectedLanguages.contains(newValue)) {
+                                  setState(() {
+                                    _selectedLanguages.add(newValue);
+                                  });
+                                }
+                              },
                             ),
                         ],
                       ),
                     ),
                   ),
-                  SizedBox(height: 160.h),
+                  SizedBox(height: 50.h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -234,8 +229,8 @@ class _Profile4State extends State<Profile4> {
                         borderColor: MyColors.btnColor,
                         radius: 100.r,
                         text: AppStrings.privious,
-                        height: 40.h,
-                        width: 150.w,
+                        height: 45.h,
+                        width: 160.w,
                         color: MyColors.white,
                         textColor: MyColors.btnColor,
                         onTap: () {
@@ -252,8 +247,8 @@ class _Profile4State extends State<Profile4> {
                           borderColor: MyColors.btnColor,
                           radius: 100.r,
                           text: AppStrings.next,
-                          height: 40.h,
-                          width: 150.w,
+                          height: 45.h,
+                          width: 160.w,
                           color: MyColors.btnColor,
                           textColor: MyColors.white,
                           onTap: () {

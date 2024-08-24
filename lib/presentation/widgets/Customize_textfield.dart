@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:project_5237_provider/presentation/screens/my_contracts/send_screen.dart';
 
 import '../constants/color.dart';
+import '../constants/responsive_view.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final String? title;
@@ -37,6 +38,7 @@ class CustomTextFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final responsive = ResponsiveCheck(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -45,7 +47,7 @@ class CustomTextFormField extends StatelessWidget {
           child: Text(title ?? "",
               style: TextStyle(
                   color: MyColors.black,
-                  fontSize: 12.sp,
+                  fontSize: responsive.isMobile ? 12.sp : 14.sp,
                   fontWeight: FontWeight.w600)),
         ),
         SizedBox(height: 5.h),
@@ -65,11 +67,12 @@ class CustomTextFormField extends StatelessWidget {
               suffixIcon: icon,
               hintText: text,
               hintStyle: TextStyle(
-                  fontSize: 12.sp,
+                  fontSize: responsive.isMobile ? 12.sp : 13.sp,
                   fontWeight: FontWeight.w600,
                   color: MyColors.lightGrey),
-              contentPadding:
-                  const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+              contentPadding: responsive.isMobile
+                  ? const EdgeInsets.symmetric(vertical: 10, horizontal: 16)
+                  : const EdgeInsets.symmetric(horizontal: 16),
               border: OutlineInputBorder(
                 // borderSide: BorderSide(color: MyColors.black),
                 borderRadius: BorderRadius.circular(8.r),
@@ -102,6 +105,8 @@ class CustomDropdownContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final responsive = ResponsiveCheck(context);
+
     return Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8.r),
@@ -110,11 +115,13 @@ class CustomDropdownContainer extends StatelessWidget {
         height: height,
         width: width,
         child: Padding(
-            padding: const EdgeInsets.only(top: 5.0, left: 5.0, right: 5.0),
+            padding: responsive.isMobile
+                ? const EdgeInsets.only(top: 5.0, left: 5.0, right: 5.0)
+                : const EdgeInsets.symmetric(horizontal: 5.0, vertical: 7.0),
             child: DropdownButton<String>(
               alignment: Alignment.bottomCenter,
               style: TextStyle(
-                fontSize: 10.sp,
+                fontSize: responsive.isMobile ? 10.sp : 13.sp,
                 color: MyColors.black1,
                 fontWeight: FontWeight.w400,
               ),
@@ -125,7 +132,7 @@ class CustomDropdownContainer extends StatelessWidget {
               hint: Text(
                 selectedValue.isEmpty ? hint : selectedValue,
                 style: TextStyle(
-                  fontSize: 9.sp,
+                  fontSize: responsive.isMobile ? 10.sp : 13.sp,
                   fontWeight: FontWeight.w600,
                   color: MyColors.lightGrey,
                 ),

@@ -247,7 +247,7 @@ class Profile7 extends StatelessWidget {
                           align: TextAlign.start,
                           text: AppStrings.lorem2,
                           color: MyColors.black,
-                          size: 10.sp,
+                          size: 13.sp,
                           fontweight: FontWeight.w500,
                         ),
                         SizedBox(
@@ -258,7 +258,7 @@ class Profile7 extends StatelessWidget {
                           align: TextAlign.start,
                           text: AppStrings.hourlyRate,
                           color: MyColors.black,
-                          size: 12.sp,
+                          size: 14.sp,
                           fontweight: FontWeight.w500,
                         ),
                         SizedBox(
@@ -271,10 +271,8 @@ class Profile7 extends StatelessWidget {
                                 keyboardType: TextInputType.number,
                                 textAlign: TextAlign.right,
                                 controller: controller,
-                                //onChanged: onChanged,
-                                //obscureText: obscureText,
-                                validator: (value) =>
-                                    formController.validateSkills(value ?? ''),
+                                // validator: (value) =>
+                                //     formController.validateSkills(value!),
                                 decoration: InputDecoration(
                                   prefixIcon: Padding(
                                     padding: const EdgeInsets.symmetric(
@@ -329,34 +327,33 @@ class Profile7 extends StatelessWidget {
                               color: MyColors.white,
                               textColor: MyColors.btnColor,
                               onTap: () {
-                                if (formKey.currentState!.validate()) {
-                                  profileController.previousPage();
-                                  Get.to(() => Profile6());
-                                }
+                                // if (formKey.currentState != null &&
+                                //     formKey.currentState!.validate()) {
+                                profileController.previousPage();
+                                Get.to(() => Profile6());
+                                //     }
                               },
                             ),
                             SizedBox(
                               width: 5.w,
                             ),
                             CustomizeButton(
-                              borderColor: MyColors.btnColor,
-                              radius: 100.r,
-                              text: AppStrings.next,
-                              height: 40.h,
-                              width: 150.w,
-                              color: MyColors.btnColor,
-                              textColor: MyColors.white,
-                              onTap: () {
-                                if (formKey.currentState!.validate()) {
+                                borderColor: MyColors.btnColor,
+                                radius: 100.r,
+                                text: AppStrings.next,
+                                height: 40.h,
+                                width: 150.w,
+                                color: MyColors.btnColor,
+                                textColor: MyColors.white,
+                                onTap: () {
+                                  // if (formKey.currentState != null &&
+                                  //     formKey.currentState!.validate()) {
                                   profileController.nextPage();
                                   Get.to(() => Profile8());
                                 }
-                              },
-                            ),
+                                //  },
+                                ),
                           ],
-                        ),
-                        SizedBox(
-                          height: 42.h,
                         ),
                       ]))))
     ]));

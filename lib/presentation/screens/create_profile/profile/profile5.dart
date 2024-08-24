@@ -277,18 +277,17 @@ class _Profile5State extends State<Profile5> {
                 align: TextAlign.start,
                 text: AppStrings.createProfileLorem1,
                 color: MyColors.grey,
-                size: 10.sp,
+                size: 13.sp,
                 fontweight: FontWeight.w500,
               ),
               SizedBox(
                 height: 25.h,
               ),
-              SizedBox(height: 25.h),
               TextWidget(
                 align: TextAlign.start,
                 text: AppStrings.yourSkills,
                 color: MyColors.black,
-                size: 12.sp,
+                size: 14.sp,
                 fontweight: FontWeight.w500,
               ),
               SizedBox(
@@ -305,7 +304,9 @@ class _Profile5State extends State<Profile5> {
                 ),
                 child: Padding(
                   padding: const EdgeInsets.only(
-                      right: 150, left: 20, top: 5, bottom: 5),
+                    right: 150.0,
+                    left: 20.0,
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -315,7 +316,7 @@ class _Profile5State extends State<Profile5> {
                           runSpacing: 4.0,
                           children: _skills.map((skill) {
                             return Container(
-                              height: 40.h,
+                              height: 55.h,
                               decoration: BoxDecoration(
                                 color: MyColors.blueContainer,
                                 borderRadius: BorderRadius.circular(100.r),
@@ -327,10 +328,10 @@ class _Profile5State extends State<Profile5> {
                                   TextWidget(
                                     text: skill,
                                     color: MyColors.black1,
-                                    size: 10.sp,
+                                    size: 12.sp,
                                     fontweight: FontWeight.w500,
                                   ),
-                                  SizedBox(width: 5.w),
+                                  SizedBox(width: 5),
                                   GestureDetector(
                                     onTap: () {
                                       setState(() {
@@ -354,7 +355,7 @@ class _Profile5State extends State<Profile5> {
                             hintText: 'Add a skill',
                             hintStyle: TextStyle(
                               color: MyColors.black1,
-                              fontSize: 10.sp,
+                              fontSize: 13.sp,
                               fontWeight: FontWeight.w500,
                             ),
                             border: InputBorder.none,
@@ -382,7 +383,7 @@ class _Profile5State extends State<Profile5> {
                   fontweight: FontWeight.w500,
                 ),
               ),
-              SizedBox(height: 150.h),
+              SizedBox(height: 30.h),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -408,7 +409,7 @@ class _Profile5State extends State<Profile5> {
                       borderColor: MyColors.btnColor,
                       radius: 100.r,
                       text: AppStrings.next,
-                      height: 40.h,
+                      height: 45.h,
                       width: 150.w,
                       color: MyColors.btnColor,
                       textColor: MyColors.white,
@@ -421,7 +422,6 @@ class _Profile5State extends State<Profile5> {
                       ),
                 ],
               ),
-              SizedBox(height: 42.h),
             ],
           ),
         ),
