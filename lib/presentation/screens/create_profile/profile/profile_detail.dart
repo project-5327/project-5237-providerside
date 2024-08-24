@@ -90,6 +90,7 @@ class ProfileDetail extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
+                        SizedBox(height: 100.h),
                         Row(
                           children: [
                             Text(
