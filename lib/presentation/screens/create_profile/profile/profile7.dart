@@ -202,7 +202,7 @@ class Profile7 extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        SizedBox(height: 100.h),
+                        SizedBox(height: 200.h),
                         Row(
                           children: [
                             Text(

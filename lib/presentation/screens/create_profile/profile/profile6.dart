@@ -170,7 +170,7 @@ class Profile6 extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        SizedBox(height: 100.h),
+                        SizedBox(height: 200.h),
                         Row(
                           children: [
                             Text(
@@ -259,9 +259,7 @@ class Profile6 extends StatelessWidget {
                             fontweight: FontWeight.w500,
                           ),
                         ),
-                        SizedBox(
-                          height: 56.h,
-                        ),
+                        SizedBox(height: 100.h),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
