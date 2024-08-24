@@ -22,8 +22,8 @@ import 'login_register/home_screen.dart';
 import 'login_register/EditProfile.dart';
 
 class MainScreen extends StatefulWidget {
-  // final int? selectedIndex;
-  MainScreen({super.key});
+  int? selectedIndex;
+  MainScreen({super.key, this.selectedIndex});
   @override
   State<MainScreen> createState() => _MainScreenState();
 }
@@ -78,7 +78,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      body: _screens[_selectedIndex],
+      body: _screens[widget.selectedIndex ?? 0],
       bottomNavigationBar: Container(
         height: 65,
         key: bottomNavKey,
@@ -91,23 +91,23 @@ class _MainScreenState extends State<MainScreen> {
                 bottomNavItem(
                   title: "",
                   icon: Assets.home,
-                  isSelected: _selectedIndex == 0 ||
-                      _selectedIndex == 5 ||
-                      _selectedIndex == 6 ||
-                      _selectedIndex == 7 ||
-                      _selectedIndex == 8 ||
-                      _selectedIndex == 9 ||
-                      _selectedIndex == 10 ||
-                      _selectedIndex == 11 ||
-                      _selectedIndex == 12 ||
-                      _selectedIndex == 13 ||
-                      _selectedIndex == 14 ||
-                      _selectedIndex == 15 ||
-                      _selectedIndex == 16,
+                  isSelected: widget.selectedIndex == 0 ||
+                      widget.selectedIndex == 5 ||
+                      widget.selectedIndex == 6 ||
+                      widget.selectedIndex == 7 ||
+                      widget.selectedIndex == 8 ||
+                      widget.selectedIndex == 9 ||
+                      widget.selectedIndex == 10 ||
+                      widget.selectedIndex == 11 ||
+                      widget.selectedIndex == 12 ||
+                      widget.selectedIndex == 13 ||
+                      widget.selectedIndex == 14 ||
+                      widget.selectedIndex == 15 ||
+                      widget.selectedIndex == 16,
                   onTap: () {
-                    if (_selectedIndex != 0) {
+                    if (widget.selectedIndex != 0) {
                       setState(() {
-                        _selectedIndex = 0;
+                        widget.selectedIndex = 0;
                       });
                     }
                   },
@@ -115,11 +115,11 @@ class _MainScreenState extends State<MainScreen> {
                 bottomNavItem(
                   title: "",
                   icon: Assets.person,
-                  isSelected: _selectedIndex == 1,
+                  isSelected: widget.selectedIndex == 1,
                   onTap: () {
-                    if (_selectedIndex != 1) {
+                    if (widget.selectedIndex != 1) {
                       setState(() {
-                        _selectedIndex = 1;
+                        widget.selectedIndex = 1;
                       });
                     }
                   },
@@ -127,11 +127,12 @@ class _MainScreenState extends State<MainScreen> {
                 bottomNavItem(
                   title: "",
                   icon: Assets.message,
-                  isSelected: _selectedIndex == 2 || _selectedIndex == 17,
+                  isSelected:
+                      widget.selectedIndex == 2 || widget.selectedIndex == 17,
                   onTap: () {
-                    if (_selectedIndex != 2) {
+                    if (widget.selectedIndex != 2) {
                       setState(() {
-                        _selectedIndex = 2;
+                        widget.selectedIndex = 2;
                       });
                     }
                   },
@@ -139,20 +140,20 @@ class _MainScreenState extends State<MainScreen> {
                 bottomNavItem(
                   title: "",
                   icon: Assets.wallet,
-                  isSelected: _selectedIndex == 3,
+                  isSelected: widget.selectedIndex == 3,
                   onTap: () {
-                    if (_selectedIndex != 3) {
+                    if (widget.selectedIndex != 3) {
                       setState(() {
-                        _selectedIndex = 3;
+                        widget.selectedIndex = 3;
                       });
                     }
                   },
                 ),
                 GestureDetector(
                   onTap: () {
-                    if (_selectedIndex != 4) {
+                    if (widget.selectedIndex != 4) {
                       setState(() {
-                        _selectedIndex = 4;
+                        widget.selectedIndex = 4;
                       });
                     }
                   },
