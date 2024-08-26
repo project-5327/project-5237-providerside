@@ -1,5 +1,6 @@
 import 'package:easy_sidemenu/easy_sidemenu.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:project_5237_provider/desktop/myProject/myProject.dart';
 import 'package:project_5237_provider/desktop/projects/projects_screen.dart';
@@ -186,8 +187,27 @@ class _DashBoardViewState extends State<DashBoardView> {
                 icon: const Icon(Icons.message),
               ),
             ],
-            footer: responsive.isTablet
-                ? null
+            footer: responsive.isTablet || responsive.isDesktopHeight
+                ? Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    margin: EdgeInsets.only(top: 40.h, bottom: 50.h),
+                    child: Row(
+                      children: [
+                        SvgPicture.asset(
+                            "assets/svg_icon/majesticons_logout.svg"),
+                        const SizedBox(width: 10),
+                        Text(
+                          "Logout",
+                          style: TextStyle(
+                            fontFamily: Fonts.fontsinter,
+                            fontSize: 18,
+                            color: const Color.fromRGBO(34, 49, 63, 1),
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
                 : Container(
                     height: 300,
                     padding: const EdgeInsets.symmetric(horizontal: 20),
