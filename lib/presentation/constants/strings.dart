@@ -9,7 +9,8 @@ class AppStrings {
   static const String email = 'Email';
   static const String enterUrEmail = 'Enter your email';
   static const String passWord = 'PASSWORD';
-
+  static const String didnotReceiveCode = 'Didn’t Receive Code? Resend Code';
+  static const String resendCodeTime = 'Resend code in 00:59';
   static const String enterUrPassWord = 'Enter your Password';
   static const String repeatPassword = 'Repeat Password';
   static const String iAmI = 'I am a:';
@@ -134,4 +135,25 @@ class AppStrings {
   static const home = 'Home';
   static const seeAll = 'See All';
   static const recentProposal = 'Recent Proposal';
+
+  static const String enterCODE = 'ENTER CODE';
+  static const String createNewPassword = 'Create New Password';
+  static const String pleaseEnterAndConfirm =
+      'Please enter and confirm your password. You will need to login after you rest.';
+  static const String noWorriessEnter =
+      'No worries! Enter your email address below and we will send you a code to reset code.';
+  static const String codeHasBeenSend =
+      "Code has been send to josphamdes@gmail.com";
+  static const String enetrCode = 'Enter the code to verify your account.';
+  static const String verifyAccount = 'Verify Account';
+
+  static const enter4Digit = 'Enter 4 Digit Code';
+  static const emailNotRecived = 'Email Not Recived? ';
+  static const resendOtp = 'Resend OTP';
+  static const ok = 'Ok';
+  static const resendCode = 'Resend code';
+
+  static const otpCodeSent = 'OTP code sent on your email.';
+  static const enter4DigitCodeYour =
+      'Enter 4 digit code that your receive on your \nemail (cody.fisher45@example.com).';
 }

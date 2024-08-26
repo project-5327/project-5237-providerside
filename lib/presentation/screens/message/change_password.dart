@@ -1,26 +1,37 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:project_5237_provider/presentation/screens/login_register/Add_projects.dart';
 
 import '../../../controller/form_controller.dart';
+import '../../constants/assets.dart';
 import '../../constants/color.dart';
+import '../../constants/responsive_view.dart';
+import '../../constants/strings.dart';
 import '../../widgets/Customize_textfield.dart';
 import '../../widgets/customize_button.dart';
 import '../login_register/home_screen.dart';
-import '../update_Project/chat_screen.dart';
+import '../main_screen .dart';
 
 class ChangePassword extends StatelessWidget {
-  const ChangePassword({super.key});
-
+  ChangePassword({super.key});
+  final formKey = GlobalKey<FormState>();
+  final FormController formController = Get.put(FormController());
+  final TextEditingController repeatPasswordController =
+      TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    final FormController formController = Get.put(FormController());
-    final TextEditingController repeatPasswordController =
-        TextEditingController();
-    final TextEditingController passwordController = TextEditingController();
-    final formKey = GlobalKey<FormState>();
+    return ResponsiveView(
+      desktop: _deskTopView(context),
+      mobile: _mobileView(context),
+      tablet: _mobileView(context),
+    );
+  }
+
+  _mobileView(BuildContext context) {
+    final responsive = ResponsiveCheck(context);
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -38,7 +49,9 @@ class ChangePassword extends StatelessWidget {
         ),
         body: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.sp),
+            padding: responsive.isTablet
+                ? EdgeInsets.symmetric(horizontal: 100.sp)
+                : EdgeInsets.symmetric(horizontal: 20.sp),
             child: Form(
               key: formKey,
               child: Column(
@@ -62,6 +75,7 @@ class ChangePassword extends StatelessWidget {
                   Center(
                     child: Obx(
                       () => CustomTextFormField(
+                        readOnly: false,
                         obscureText: formController.obscureText.value,
                         validator: (value) =>
                             formController.validatePassword(value ?? ''),
@@ -89,6 +103,7 @@ class ChangePassword extends StatelessWidget {
                   Center(
                     child: Obx(
                       () => CustomTextFormField(
+                        readOnly: false,
                         obscureText: formController.obscureRepeatText.value,
                         validator: (value) =>
                             formController.validateRepeatPassword(
@@ -122,9 +137,8 @@ class ChangePassword extends StatelessWidget {
                     color: MyColors.btnColor,
                     textColor: MyColors.white,
                     onTap: () {
-                      if (formKey.currentState!.validate()) {
-                        Get.to(() => AddProjects());
-                      }
+                      formKey.currentState!.validate();
+                      Get.to(() => MainScreen());
                     },
                   ),
                   SizedBox(
@@ -139,5 +153,90 @@ class ChangePassword extends StatelessWidget {
         //
       ),
     );
+  }
+
+  _deskTopView(BuildContext context) {
+    return Scaffold(
+        body: Row(children: [
+      Flexible(
+        child: Container(
+          child: SvgPicture.asset(
+            Assets.createProfile1,
+            fit: BoxFit.cover,
+          ),
+        ),
+      ),
+      Flexible(
+          child: SizedBox(
+              child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 90.0),
+                  child: Center(
+                      child: Container(
+                          padding: EdgeInsets.all(14.0),
+                          height: 420,
+                          // width: 300.w,
+                          decoration: BoxDecoration(
+                              color: MyColors.blueContainer,
+                              borderRadius: BorderRadius.circular(12)),
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 20.0),
+                            child: Column(children: [
+                              Text(
+                                AppStrings.createNewPassword,
+                                style: TextStyle(
+                                    fontSize: 32,
+                                    fontWeight: FontWeight.w500,
+                                    color: MyColors.textC),
+                              ),
+                              SizedBox(
+                                height: 16,
+                              ),
+                              Text(
+                                AppStrings.pleaseEnterAndConfirm,
+                                style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w500,
+                                    color: MyColors.black1),
+                              ),
+                              SizedBox(
+                                height: 39,
+                              ),
+                              CustomTextFormField(
+                                color: MyColors.black,
+                                readOnly: false,
+                                title: 'Password',
+                                text: 'Enter your password',
+                              ),
+                              SizedBox(
+                                height: 25,
+                              ),
+                              CustomTextFormField(
+                                color: MyColors.black,
+                                readOnly: false,
+                                title: 'Confirm Password',
+                                text: 'Enter your password',
+                              ),
+                              SizedBox(
+                                height: 25,
+                              ),
+                              CustomizeButton(
+                                borderColor: MyColors.btnColor,
+                                radius: 8.0,
+                                text: 'Reset Password',
+                                height: 48.0,
+                                width: 327.0,
+                                color: MyColors.btnColor,
+                                textColor: MyColors.white,
+                                onTap: () {
+                                  Get.to(() => HomeScreen());
+                                },
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                            ]),
+                          ))))))
+    ]));
   }
 }

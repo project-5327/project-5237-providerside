@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:project_5237_provider/presentation/constants/responsive_view.dart';
 import 'package:project_5237_provider/presentation/screens/dashboard/dashboard_view.dart';
+import 'package:project_5237_provider/presentation/screens/login_register/home_screen.dart';
 
 import '../../../../../controller/country_controller.dart';
 import '../../../../../controller/form_controller.dart';
@@ -259,7 +260,7 @@ class _Profile8widgetState extends State<Profile8widget> {
                       onTap: () {
                         if (formKey.currentState!.validate()) {
                           profileController.nextPage();
-                          Get.to(() => DashBoardView());
+                          Get.to(() => HomeScreen());
                         }
                       },
                     ),
