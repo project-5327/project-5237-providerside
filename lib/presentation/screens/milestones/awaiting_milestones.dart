@@ -55,7 +55,7 @@ class AwaitingMilestones extends StatelessWidget {
                         borderColor: MyColors.btnColor,
                         radius: 100.r,
                         onTap: () {
-                          _showDialogeBox();
+                          _showDialogeBox(context);
                         },
                       ),
                       SizedBox(
@@ -70,7 +70,7 @@ class AwaitingMilestones extends StatelessWidget {
                         textColor: MyColors.white,
                         borderColor: MyColors.btnColor,
                         onTap: () {
-                          _showDialogeBox();
+                          _showDialogeBox(context);
                         },
                       ),
                     ],
@@ -177,7 +177,7 @@ class AwaitingMilestones extends StatelessWidget {
                       textColor: MyColors.btnColor,
                       borderColor: MyColors.btnColor,
                       onTap: () {
-                        _showDialogeBox();
+                        _showDialogeBox(context);
                       },
                     ),
                     SizedBox(
@@ -192,7 +192,7 @@ class AwaitingMilestones extends StatelessWidget {
                       borderColor: MyColors.btnColor,
                       radius: 100.r,
                       onTap: () {
-                        _showDialogeBox();
+                        _showDialogeBox(context);
                       },
                     ),
                   ],
@@ -204,7 +204,8 @@ class AwaitingMilestones extends StatelessWidget {
 
 //   void _dialogBox() {}
 // }
-  void _showDialogeBox() {
+  void _showDialogeBox(context) {
+    final responsive = ResponsiveCheck(context);
     Get.defaultDialog(
       titlePadding: EdgeInsets.only(top: 86.h, bottom: 25.h),
       contentPadding: EdgeInsets.symmetric(horizontal: 55.w),
@@ -216,8 +217,7 @@ class AwaitingMilestones extends StatelessWidget {
       content: Column(
         children: [
           Container(
-            width: defaultTargetPlatform == TargetPlatform.android ||
-                    defaultTargetPlatform == TargetPlatform.iOS
+            width: responsive.isMobile || responsive.isTablet
                 ? double.infinity
                 : 240.w,
             child: TextWidget(

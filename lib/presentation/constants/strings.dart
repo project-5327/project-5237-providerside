@@ -134,4 +134,7 @@ class AppStrings {
   static const home = 'Home';
   static const seeAll = 'See All';
   static const recentProposal = 'Recent Proposal';
+  static const message = 'Message';
+  static const hire = 'Hire';
+  static const sendProposal = 'Send proposal';
 }

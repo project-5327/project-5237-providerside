@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:project_5237_provider/desktop/onboarding/onboarding3.dart';
 import 'package:project_5237_provider/presentation/constants/color.dart';
 import 'package:project_5237_provider/presentation/constants/strings.dart';
+import 'package:project_5237_provider/presentation/screens/dashboard/dashboard_view.dart';
 
 import 'appname.dart';
 import 'onboarding2.dart';
@@ -142,7 +143,11 @@ class _OnbarodingScreen1State extends State<OnbarodingScreen1> {
                           width: double.infinity,
                           child: ElevatedButton(
                             onPressed: () {
-                              Get.to(Onboarding2Screen());
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => DashBoardView()));
+                              //  Get.to(DashBoardView());
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: MyColors.blue,
@@ -176,7 +181,9 @@ class _OnbarodingScreen1State extends State<OnbarodingScreen1> {
                               ),
                             ),
                             TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Get.to(Onboarding2Screen());
+                              },
                               child: Text(
                                 AppStrings.register,
                                 style: TextStyle(

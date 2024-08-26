@@ -44,7 +44,9 @@ class MyApp extends StatelessWidget {
             ),
             useMaterial3: true,
           ),
-          home: OnbarodingScreen1(),
+          home: responsive.isMobile || responsive.isTablet
+              ? SplashScreen()
+              : OnbarodingScreen1(),
         );
 
         //  Profile3());
