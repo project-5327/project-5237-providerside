@@ -98,29 +98,24 @@ class _Profile8widgetState extends State<Profile8widget> {
                   ),
                   if (_selectedImage != null)
                     Center(
-                        child: ClipRRect(
-                      borderRadius: BorderRadius.circular(100.r),
-                      child: Image.file(
-                        File(_selectedImage!.path),
-                        height: responsive.isMobile ? 50.h : 79.h,
-                        width: responsive.isMobile ? 50.w : 69.w,
-                        fit: BoxFit.cover,
+                      child: CircleAvatar(
+                        radius: 50.r,
+                        backgroundImage: NetworkImage(
+                          _selectedImage!.path,
+                        ),
                       ),
-                    ))
+                    )
                   else ...[
                     Stack(children: [
                       Center(
-                          child: ClipRRect(
-                        borderRadius: BorderRadius.circular(100.r),
-                        child: Image.asset(
+                          child: CircleAvatar(
+                        radius: 50.r,
+                        backgroundImage: AssetImage(
                           'assets/images/uploadImage.png',
-                          height: responsive.isMobile ? 50.h : 79.h,
-                          width: responsive.isMobile ? 50.w : 69.w,
-                          fit: BoxFit.cover,
                         ),
                       )),
                       Positioned(
-                          top: responsive.isMobile ? 20.0 : 35.0,
+                          top: responsive.isMobile ? 20.0 : 45.0,
                           right: 0.0,
                           left: responsive.isMobile ? 50.0 : 60.0,
                           child: GestureDetector(

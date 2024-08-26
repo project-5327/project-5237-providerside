@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:project_5237_provider/desktop/onboarding/onboarding1.dart';
 import 'package:project_5237_provider/presentation/constants/responsive_view.dart';
 import 'package:project_5237_provider/desktop/projects/project_detail_screen.dart';
+import 'package:project_5237_provider/presentation/screens/create_profile/profile/profile8.dart';
 import 'package:project_5237_provider/presentation/screens/dashboard/dashboard_view.dart';
 import 'package:project_5237_provider/presentation/screens/login_register/add_project1.dart';
 import 'package:project_5237_provider/presentation/screens/login_register/profile_screen.dart';
@@ -47,7 +48,7 @@ class MyApp extends StatelessWidget {
             ),
             useMaterial3: true,
           ),
-          home: SplashScreen(),
+          home: Profile8(),
         );
 
         //  Profile3());

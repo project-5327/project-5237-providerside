@@ -71,7 +71,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           if (_selectedImage != null)
             Center(
               child: CircleAvatar(
-                radius: 100.r,
+                radius: 50.r,
                 backgroundImage: NetworkImage(
                   _selectedImage!.path,
                 ),
@@ -81,16 +81,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
             Stack(children: [
               Center(
                   child: CircleAvatar(
-                radius: 100.r,
+                radius: 50.r,
                 //     borderRadius: BorderRadius.circular(100.r),
-                backgroundImage: NetworkImage(
+                backgroundImage: AssetImage(
                   'assets/images/uploadImage.png',
                 ),
               )),
               Positioned(
-                  top: 150.0,
+                  top: 40.0,
                   right: 0.0,
-                  left: 90.0,
+                  left: 50.0,
                   child: GestureDetector(
                       //  iconSize: 20,
                       onTap: () {
