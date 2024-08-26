@@ -140,4 +140,5 @@ class AppStrings {
   static const sendProposal = 'Send proposal';
   static const myProjects = 'My Projects';
   static const addProject = 'Add Project';
+  static const updatedSuccessfully = 'Updated Successfully!';
 }

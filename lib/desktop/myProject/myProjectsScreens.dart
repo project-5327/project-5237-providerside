@@ -1,6 +1,11 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/get_navigation.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:project_5237_provider/presentation/screens/login_register/Add_projects.dart';
 
 import '../../presentation/constants/assets.dart';
 import '../../presentation/constants/color.dart';
@@ -18,37 +23,41 @@ class MyProjectsScreen extends StatefulWidget {
 class _MyProjectsScreenState extends State<MyProjectsScreen> {
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      padding: EdgeInsets.only(left: 33.w, top: 37.h, right: 33.w),
-      children: [
-        Wrap(
-          children: List.generate(
-            12,
-            (index) {
-              return const ProjectComp();
-            },
+    return Scaffold(
+      body: ListView(
+        padding: EdgeInsets.only(left: 0.w, top: 37.h, right: 10.w),
+        children: [
+          Wrap(
+            children: List.generate(
+              12,
+              (index) {
+                return const ProjectComp();
+              },
+            ),
           ),
-        ),
-        SizedBox(
-          height: 36.h,
-        ),
-        Align(
-          alignment: Alignment.centerRight,
-          child: CustomizeButton(
-            borderColor: MyColors.btnColor,
-            radius: 100.r,
-            text: AppStrings.addProject,
-            height: 40.h,
-            width: 151.w,
-            color: MyColors.btnColor,
-            textColor: MyColors.white,
-            onTap: () {},
+          SizedBox(
+            height: 36.h,
           ),
-        ),
-        SizedBox(
-          height: 36.h,
-        ),
-      ],
+          Align(
+            alignment: Alignment.centerRight,
+            child: CustomizeButton(
+              borderColor: MyColors.btnColor,
+              radius: 100.r,
+              text: AppStrings.addProject,
+              height: 40.h,
+              width: 151.w,
+              color: MyColors.btnColor,
+              textColor: MyColors.white,
+              onTap: () {
+                Get.to(AddProjects());
+              },
+            ),
+          ),
+          SizedBox(
+            height: 36.h,
+          ),
+        ],
+      ),
     );
   }
 }
@@ -60,7 +69,7 @@ class ProjectComp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(left: 30.w, bottom: 30.h),
-      width: 390.w,
+      width: 360.w,
       padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 15.h),
       decoration: BoxDecoration(
         border: Border.all(width: 1.w, color: MyColors.textColor),
@@ -138,25 +147,33 @@ class ProjectComp extends StatelessWidget {
             ],
           ),
           Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: List.generate(3, (index) {
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: List.generate(
+              3,
+              (index) {
                 return Container(
                   alignment: Alignment.center,
-                  margin: EdgeInsets.only(top: 18.h, right: 17.w),
+                  margin: EdgeInsets.only(
+                    top: 18.h,
+                  ),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(6.r),
                       color: MyColors.tagCont),
                   padding:
-                      EdgeInsets.symmetric(horizontal: 33.w, vertical: 6.h),
+                      EdgeInsets.symmetric(horizontal: 30.w, vertical: 6.h),
                   child: Text(
                     'Tag1',
-                    style: TextStyle(
-                        fontSize: 12.sp,
-                        fontWeight: FontWeight.w400,
-                        color: MyColors.black),
+                    style: GoogleFonts.inter(
+                      textStyle: TextStyle(
+                          fontSize: 12.sp,
+                          fontWeight: FontWeight.w400,
+                          color: MyColors.black),
+                    ),
                   ),
                 );
-              })),
+              },
+            ),
+          )
         ],
       ),
     );

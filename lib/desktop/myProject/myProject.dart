@@ -22,7 +22,7 @@ class _MyProjectState extends State<MyProject>
     super.initState();
     _tabController = TabController(
       length: 2,
-      initialIndex: 1,
+      initialIndex: 0,
       vsync: this,
     );
   }
