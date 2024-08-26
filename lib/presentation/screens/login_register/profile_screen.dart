@@ -70,31 +70,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
           if (_selectedImage != null)
             Center(
-                child: ClipRRect(
-              borderRadius: BorderRadius.circular(100.r),
-              child: Image.file(
-                File(_selectedImage!.path),
-                height: 50.h,
-                width: 50.w,
-                fit: BoxFit.cover,
+              child: CircleAvatar(
+                radius: 50.r,
+                backgroundImage: NetworkImage(
+                  _selectedImage!.path,
+                ),
               ),
-            ))
+            )
           else ...[
             Stack(children: [
               Center(
-                  child: ClipRRect(
-                borderRadius: BorderRadius.circular(100.r),
-                child: Image.asset(
+                  child: CircleAvatar(
+                radius: 50.r,
+                //     borderRadius: BorderRadius.circular(100.r),
+                backgroundImage: AssetImage(
                   'assets/images/uploadImage.png',
-                  height: 79.h,
-                  width: 79.w,
-                  fit: BoxFit.cover,
                 ),
               )),
               Positioned(
-                  top: 55.0,
+                  top: 40.0,
                   right: 0.0,
-                  left: 70.0,
+                  left: 50.0,
                   child: GestureDetector(
                       //  iconSize: 20,
                       onTap: () {

@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:project_5237_provider/presentation/constants/responsive_view.dart';
 
 class CustomizeButton extends StatelessWidget {
   final String text;
@@ -28,6 +29,7 @@ class CustomizeButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final reponsive = ResponsiveCheck(context);
     return InkWell(
       onTap: onTap,
       child: Container(
@@ -41,7 +43,9 @@ class CustomizeButton extends StatelessWidget {
           child: Text(
             text,
             style: TextStyle(
-                fontSize: 14.sp, fontWeight: FontWeight.w600, color: textColor),
+                fontSize: reponsive.isMobile ? 14.sp : 14,
+                fontWeight: FontWeight.w600,
+                color: textColor),
           ),
         ),
       ),

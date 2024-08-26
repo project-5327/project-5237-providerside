@@ -14,6 +14,7 @@ class CustomTextFormField extends StatelessWidget {
   final TextStyle? style;
   final int? maxLines;
   final bool? readOnly;
+  final Color? color;
 
   final Color? fillcolor;
   final TextEditingController? controller;
@@ -34,7 +35,8 @@ class CustomTextFormField extends StatelessWidget {
       this.width,
       this.height,
       this.maxLines,
-      this.readOnly});
+      this.readOnly,
+      this.color});
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +71,7 @@ class CustomTextFormField extends StatelessWidget {
               hintStyle: TextStyle(
                   fontSize: responsive.isMobile ? 12.sp : 13.sp,
                   fontWeight: FontWeight.w600,
-                  color: MyColors.lightGrey),
+                  color: color ?? MyColors.lightGrey),
               contentPadding: responsive.isMobile
                   ? const EdgeInsets.symmetric(vertical: 10, horizontal: 16)
                   : const EdgeInsets.symmetric(horizontal: 16),
