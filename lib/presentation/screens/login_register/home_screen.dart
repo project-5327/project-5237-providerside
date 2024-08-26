@@ -148,11 +148,11 @@ class _HomeScreenState extends State<HomeScreen> {
           )
         : SafeArea(
             child: Scaffold(
-              body: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 33.w, vertical: 31.h),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+              body: ScrollConfiguration(
+                behavior: const ScrollBehavior().copyWith(scrollbars: false),
+                child: ListView(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 33.w, vertical: 31.h),
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -208,7 +208,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               crossAxisSpacing: 35,
                               childAspectRatio: 3 / 2,
                               mainAxisExtent: 207),
-                      itemCount: 6,
+                      itemCount: 16,
                       itemBuilder: (context, gridIndex) {
                         return GestureDetector(
                             onTap: () {
