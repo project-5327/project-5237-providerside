@@ -79,7 +79,7 @@ class _Profile4State extends State<Profile4> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  SizedBox(height: 100.h),
+                  SizedBox(height: 200.h),
                   Row(
                     children: [
                       Text(
@@ -221,7 +221,7 @@ class _Profile4State extends State<Profile4> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 50.h),
+                  SizedBox(height: 100.h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [

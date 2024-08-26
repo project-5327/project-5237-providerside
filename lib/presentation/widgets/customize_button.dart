@@ -1,8 +1,11 @@
+// ignore_for_file: prefer_typing_uninitialized_variables
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomizeButton extends StatelessWidget {
   final String text;
+
   final width;
   final height;
   final color;
@@ -10,16 +13,18 @@ class CustomizeButton extends StatelessWidget {
   final borderColor;
   final textColor;
   final VoidCallback onTap;
-  CustomizeButton(
-      {super.key,
-      required this.text,
-      this.width,
-      this.height,
-      required this.onTap,
-      this.color,
-      this.textColor,
-      this.borderColor,
-      this.radius});
+
+  const CustomizeButton({
+    super.key,
+    required this.text,
+    this.width,
+    this.height,
+    required this.onTap,
+    this.color,
+    this.textColor,
+    this.borderColor,
+    this.radius,
+  });
 
   @override
   Widget build(BuildContext context) {

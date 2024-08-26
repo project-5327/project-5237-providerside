@@ -18,6 +18,7 @@ class AppStrings {
   static const String title = 'Title';
   static const String createProfile = 'Create Profile';
 
+  static const String userName = 'User Name';
   static const String accept = 'Accept';
   static const String acceptProposal = 'Accept Proposal';
 
@@ -42,7 +43,7 @@ class AppStrings {
   static const experience1 = 'Experience 1';
   static const education1 = 'Education 1';
   static const save = 'Save';
-  static const userName = 'User Name';
+
   static const institutionName = 'Instiution Name';
   static const fieldOfStudy = 'Field of Study';
   static const emailText = 'Email';
@@ -131,4 +132,13 @@ class AppStrings {
   static const category = 'Category 1';
   static const details = 'Details';
   static const reject = 'Reject';
+  static const home = 'Home';
+  static const seeAll = 'See All';
+  static const recentProposal = 'Recent Proposal';
+  static const message = 'Message';
+  static const hire = 'Hire';
+  static const sendProposal = 'Send proposal';
+  static const myProjects = 'My Projects';
+  static const addProject = 'Add Project';
+  static const updatedSuccessfully = 'Updated Successfully!';
 }

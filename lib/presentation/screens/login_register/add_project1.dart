@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:project_5237_provider/presentation/screens/login_register/Add_projects.dart';
 import 'package:project_5237_provider/presentation/screens/main_screen%20.dart';
 import 'package:project_5237_provider/presentation/screens/my_contracts/send_screen.dart';
 import 'package:project_5237_provider/presentation/widgets/customize_button.dart';
@@ -267,10 +268,10 @@ class _AddProject1State extends State<AddProject1> {
                         color: MyColors.btnColor,
                         textColor: MyColors.white,
                         onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(builder: (_) => MainScreen()),
-                          );
-                          //      Get.to(() => SuccesfullyScreen());
+                          // Navigator.of(context).push(
+                          //   MaterialPageRoute(builder: (_) => MainScreen()),
+                          // );
+                          Get.to(() => AddProjects());
                         }),
                   ),
                   SizedBox(

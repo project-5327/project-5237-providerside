@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:project_5237_provider/desktop/home/AcceptProposalScreen.dart';
 import 'package:project_5237_provider/presentation/constants/assets.dart';
 import 'package:project_5237_provider/presentation/constants/color.dart';
 import 'package:project_5237_provider/presentation/constants/strings.dart';
 
 class ProjectDetailScreen extends StatelessWidget {
+  final bool isFromHomeScreen;
+  const ProjectDetailScreen({super.key, required this.isFromHomeScreen});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Details',
+          AppStrings.details,
           style: GoogleFonts.inter(
             textStyle: TextStyle(
                 fontSize: 20.sp,
@@ -215,7 +220,7 @@ class ProjectDetailScreen extends StatelessWidget {
                       children: [
                         ElevatedButton(
                           onPressed: () {
-                            // Reject action
+                            Get.back();
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: MyColors.blue,
@@ -223,7 +228,9 @@ class ProjectDetailScreen extends StatelessWidget {
                                 horizontal: 56.w, vertical: 12.h),
                           ),
                           child: Text(
-                            AppStrings.reject,
+                            isFromHomeScreen
+                                ? AppStrings.reject
+                                : AppStrings.hire,
                             style: GoogleFonts.inter(
                               textStyle: TextStyle(
                                   fontSize: 14.sp,
@@ -235,7 +242,7 @@ class ProjectDetailScreen extends StatelessWidget {
                         const SizedBox(width: 16),
                         ElevatedButton(
                           onPressed: () {
-                            // Accept action
+                            Get.to(() => AcceptProposalScreen());
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: MyColors.blue,
@@ -243,7 +250,9 @@ class ProjectDetailScreen extends StatelessWidget {
                                 horizontal: 38.w, vertical: 12.h),
                           ),
                           child: Text(
-                            AppStrings.accept,
+                            isFromHomeScreen
+                                ? AppStrings.accept
+                                : AppStrings.sendProposal,
                             style: GoogleFonts.inter(
                               textStyle: TextStyle(
                                   fontSize: 14.sp,

@@ -183,6 +183,7 @@ class _Profile2State extends State<Profile2> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  SizedBox(height: 100.h),
                   Row(
                     children: [
                       Text(

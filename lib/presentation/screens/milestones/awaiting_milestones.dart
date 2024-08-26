@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:project_5237_provider/presentation/constants/responsive_view.dart';
 import 'package:project_5237_provider/presentation/constants/strings.dart';
 import 'package:project_5237_provider/presentation/screens/my_contracts/send_screen.dart';
 import '../../constants/color.dart';
@@ -12,8 +13,8 @@ class AwaitingMilestones extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return defaultTargetPlatform == TargetPlatform.android ||
-            defaultTargetPlatform == TargetPlatform.iOS
+    final responsive = ResponsiveCheck(context);
+    return responsive.isMobile || responsive.isTablet
         ? Container(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 14),
@@ -54,7 +55,7 @@ class AwaitingMilestones extends StatelessWidget {
                         borderColor: MyColors.btnColor,
                         radius: 100.r,
                         onTap: () {
-                          _showDialogeBox();
+                          _showDialogeBox(context);
                         },
                       ),
                       SizedBox(
@@ -69,7 +70,7 @@ class AwaitingMilestones extends StatelessWidget {
                         textColor: MyColors.white,
                         borderColor: MyColors.btnColor,
                         onTap: () {
-                          _showDialogeBox();
+                          _showDialogeBox(context);
                         },
                       ),
                     ],
@@ -176,7 +177,7 @@ class AwaitingMilestones extends StatelessWidget {
                       textColor: MyColors.btnColor,
                       borderColor: MyColors.btnColor,
                       onTap: () {
-                        _showDialogeBox();
+                        _showDialogeBox(context);
                       },
                     ),
                     SizedBox(
@@ -191,7 +192,7 @@ class AwaitingMilestones extends StatelessWidget {
                       borderColor: MyColors.btnColor,
                       radius: 100.r,
                       onTap: () {
-                        _showDialogeBox();
+                        _showDialogeBox(context);
                       },
                     ),
                   ],
@@ -203,7 +204,8 @@ class AwaitingMilestones extends StatelessWidget {
 
 //   void _dialogBox() {}
 // }
-  void _showDialogeBox() {
+  void _showDialogeBox(context) {
+    final responsive = ResponsiveCheck(context);
     Get.defaultDialog(
       titlePadding: EdgeInsets.only(top: 86.h, bottom: 25.h),
       contentPadding: EdgeInsets.symmetric(horizontal: 55.w),
@@ -215,8 +217,7 @@ class AwaitingMilestones extends StatelessWidget {
       content: Column(
         children: [
           Container(
-            width: defaultTargetPlatform == TargetPlatform.android ||
-                    defaultTargetPlatform == TargetPlatform.iOS
+            width: responsive.isMobile || responsive.isTablet
                 ? double.infinity
                 : 240.w,
             child: TextWidget(

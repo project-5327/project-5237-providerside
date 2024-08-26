@@ -14,9 +14,7 @@ import '../../presentation/screens/my_contracts/send_screen.dart';
 import '../../presentation/widgets/Customize_textfield.dart';
 import '../../presentation/widgets/customize_button.dart';
 import 'appname.dart';
-
-
-
+import 'create_profile.dart';
 
 class OnBoardingScreen3 extends StatefulWidget {
   const OnBoardingScreen3({super.key});
@@ -26,14 +24,13 @@ class OnBoardingScreen3 extends StatefulWidget {
 }
 
 class _OnBoardingScreen3State extends State<OnBoardingScreen3> {
-
   final formKey = GlobalKey<FormState>();
   final FormController formcontroller = Get.put(FormController());
   final TextEditingController lastNameController = TextEditingController();
   final TextEditingController firstnameController = TextEditingController();
   //final TextEditingController countryController = TextEditingController();
   final ContainerController containerController =
-  Get.put(ContainerController());
+      Get.put(ContainerController());
   final DropdownController dropdownController = Get.put(DropdownController());
   final List<String> countries = ['USA', 'India', 'Canada', 'Japan'];
   @override
@@ -55,7 +52,7 @@ class _OnBoardingScreen3State extends State<OnBoardingScreen3> {
                     decoration: BoxDecoration(
                       color: MyColors.blueContainer,
                       borderRadius: BorderRadius.circular(16.0),
-                      boxShadow:const  [
+                      boxShadow: const [
                         BoxShadow(
                           color: Colors.black12,
                           blurRadius: 10.0,
@@ -70,8 +67,10 @@ class _OnBoardingScreen3State extends State<OnBoardingScreen3> {
                       children: [
                         SizedBox(
                           width: double.infinity,
-                          child:  ElevatedButton(
-                            onPressed: () {},
+                          child: ElevatedButton(
+                            onPressed: () {
+                              Get.to(CreateYourProfileScreen());
+                            },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: MyColors.blue,
                               padding: EdgeInsets.all(10),
@@ -80,10 +79,11 @@ class _OnBoardingScreen3State extends State<OnBoardingScreen3> {
                                 fontWeight: FontWeight.bold,
                               ),
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8.0), // Small circle at the corners
+                                borderRadius: BorderRadius.circular(
+                                    8.0), // Small circle at the corners
                               ),
                             ),
-                            child:const  Text(
+                            child: const Text(
                               AppStrings.register,
                               style: TextStyle(
                                 color: Colors.white,
@@ -94,7 +94,6 @@ class _OnBoardingScreen3State extends State<OnBoardingScreen3> {
                         ),
                       ],
                     ),
-
                   ),
                 ),
               ],

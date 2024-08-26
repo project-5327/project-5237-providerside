@@ -1,10 +1,10 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:project_5237_provider/desktop/projects/project_detail_screen.dart';
-import 'package:project_5237_provider/presentation/screens/dashboard/dashboard_view.dart';
+import 'package:project_5237_provider/desktop/onboarding/onboarding1.dart';
+import 'package:project_5237_provider/presentation/constants/responsive_view.dart';
+import 'presentation/screens/splash screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,11 +15,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final responsive = ResponsiveCheck(context);
     return ScreenUtilInit(
-      designSize: defaultTargetPlatform == TargetPlatform.android ||
-              defaultTargetPlatform == TargetPlatform.iOS
+      designSize: responsive.isMobile
           ? const Size(375, 812)
-          : const Size(1440, 941),
+          : responsive.isTablet
+              ? Size(1024, 1768)
+              : const Size(1440, 941),
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (_, child) {
@@ -36,7 +38,9 @@ class MyApp extends StatelessWidget {
             ),
             useMaterial3: true,
           ),
-          home: ProjectDetailScreen(),
+          home: responsive.isMobile || responsive.isTablet
+              ? SplashScreen()
+              : OnbarodingScreen1(),
         );
 
         //  Profile3());

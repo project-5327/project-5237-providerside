@@ -7,7 +7,6 @@ import 'package:project_5237_provider/desktop/projects/project_detail_screen.dar
 import 'package:project_5237_provider/presentation/constants/assets.dart';
 import 'package:project_5237_provider/presentation/constants/color.dart';
 import 'package:project_5237_provider/presentation/constants/strings.dart';
-import 'package:project_5237_provider/presentation/screens/my_contracts/send_screen.dart';
 
 class ProjectsScreen extends StatefulWidget {
   const ProjectsScreen({super.key});
@@ -28,14 +27,20 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
         children: [
           Padding(
             padding: const EdgeInsets.only(bottom: 34),
-            child: Text(
-              AppStrings.projects,
-              style: GoogleFonts.inter(
-                textStyle: TextStyle(
-                    fontSize: 20.sp,
-                    fontWeight: FontWeight.w600,
-                    color: MyColors.black2),
-              ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  AppStrings.projects,
+                  style: GoogleFonts.inter(
+                    textStyle: TextStyle(
+                        fontSize: 20.sp,
+                        fontWeight: FontWeight.w600,
+                        color: MyColors.black2),
+                  ),
+                ),
+                SvgPicture.asset(Assets.filter)
+              ],
             ),
           ),
           Expanded(
@@ -49,14 +54,28 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(bottom: 16),
-                        child: Text(
-                          categories[index],
-                          style: GoogleFonts.inter(
-                            textStyle: TextStyle(
-                                fontSize: 16.sp,
-                                fontWeight: FontWeight.w500,
-                                color: MyColors.black2),
-                          ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              categories[index],
+                              style: GoogleFonts.inter(
+                                textStyle: TextStyle(
+                                    fontSize: 16.sp,
+                                    fontWeight: FontWeight.w500,
+                                    color: MyColors.black2),
+                              ),
+                            ),
+                            Text(
+                              "250 Result Found",
+                              style: GoogleFonts.inter(
+                                textStyle: TextStyle(
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.w400,
+                                    color: MyColors.blue),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                       GridView.builder(
@@ -76,8 +95,10 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) =>
-                                          ProjectDetailScreen()),
+                                    builder: (context) => ProjectDetailScreen(
+                                      isFromHomeScreen: false,
+                                    ),
+                                  ),
                                 );
                               },
                               child: const ProjectComp());

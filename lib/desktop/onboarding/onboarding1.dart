@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:project_5237_provider/desktop/onboarding/onboarding3.dart';
 import 'package:project_5237_provider/presentation/constants/color.dart';
 import 'package:project_5237_provider/presentation/constants/strings.dart';
+import 'package:project_5237_provider/presentation/screens/dashboard/dashboard_view.dart';
 
 import 'appname.dart';
+import 'onboarding2.dart';
 
 class OnbarodingScreen1 extends StatefulWidget {
   const OnbarodingScreen1({super.key});
@@ -19,7 +23,7 @@ class _OnbarodingScreen1State extends State<OnbarodingScreen1> {
     return Scaffold(
       body: Row(
         children: [
-         const AppNameScreen(),
+          const AppNameScreen(),
           Flexible(
             flex: 2,
             child: Stack(
@@ -33,7 +37,7 @@ class _OnbarodingScreen1State extends State<OnbarodingScreen1> {
                     decoration: BoxDecoration(
                       color: MyColors.blueContainer,
                       borderRadius: BorderRadius.circular(16.0),
-                      boxShadow:const  [
+                      boxShadow: const [
                         BoxShadow(
                           color: Colors.black12,
                           blurRadius: 10.0,
@@ -62,7 +66,7 @@ class _OnbarodingScreen1State extends State<OnbarodingScreen1> {
                           ),
                         ),
                         const SizedBox(height: 32.0),
-                       const Text(
+                        const Text(
                           AppStrings.email,
                           style: TextStyle(
                             fontSize: 16.0,
@@ -82,9 +86,8 @@ class _OnbarodingScreen1State extends State<OnbarodingScreen1> {
                             ),
                           ),
                         ),
-
                         const SizedBox(height: 16.0),
-                       const Text(
+                        const Text(
                           AppStrings.passWord,
                           style: TextStyle(
                             fontSize: 16.0,
@@ -94,7 +97,7 @@ class _OnbarodingScreen1State extends State<OnbarodingScreen1> {
                         ),
                         const SizedBox(height: 8.0),
                         TextFormField(
-                          decoration:const InputDecoration(
+                          decoration: const InputDecoration(
                             hintText: AppStrings.enterUrPassWord,
                             enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(color: Colors.black),
@@ -104,7 +107,6 @@ class _OnbarodingScreen1State extends State<OnbarodingScreen1> {
                             ),
                           ),
                         ),
-
                         const SizedBox(height: 16.0),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -137,10 +139,16 @@ class _OnbarodingScreen1State extends State<OnbarodingScreen1> {
                           ],
                         ),
                         const SizedBox(height: 32.0),
-                         SizedBox(
+                        SizedBox(
                           width: double.infinity,
-                        child:  ElevatedButton(
-                            onPressed: () {},
+                          child: ElevatedButton(
+                            onPressed: () {
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => DashBoardView()));
+                              //  Get.to(DashBoardView());
+                            },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: MyColors.blue,
                               padding: EdgeInsets.all(10),
@@ -149,10 +157,11 @@ class _OnbarodingScreen1State extends State<OnbarodingScreen1> {
                                 fontWeight: FontWeight.bold,
                               ),
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8.0), // Small circle at the corners
+                                borderRadius: BorderRadius.circular(
+                                    8.0), // Small circle at the corners
                               ),
                             ),
-                            child:const  Text(
+                            child: const Text(
                               AppStrings.signIn,
                               style: TextStyle(
                                 color: Colors.white,
@@ -161,18 +170,20 @@ class _OnbarodingScreen1State extends State<OnbarodingScreen1> {
                             ),
                           ),
                         ),
-                         const SizedBox(height: 16.0),
+                        const SizedBox(height: 16.0),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                          const Text(
-                            AppStrings.dontHaveAccount,
+                            const Text(
+                              AppStrings.dontHaveAccount,
                               style: TextStyle(
                                 fontSize: 14.0,
                               ),
                             ),
                             TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Get.to(Onboarding2Screen());
+                              },
                               child: Text(
                                 AppStrings.register,
                                 style: TextStyle(

@@ -232,7 +232,7 @@ class _Profile5State extends State<Profile5> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              SizedBox(height: 100.h),
+              SizedBox(height: 200.h),
               Row(
                 children: [
                   Text(
@@ -383,7 +383,7 @@ class _Profile5State extends State<Profile5> {
                   fontweight: FontWeight.w500,
                 ),
               ),
-              SizedBox(height: 30.h),
+              SizedBox(height: 100.h),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [

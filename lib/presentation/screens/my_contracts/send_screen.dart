@@ -127,7 +127,7 @@ class TextWidget extends StatelessWidget {
   final String text;
   final size;
   final String? fontFamily;
-  final align;
+  final TextAlign? align;
   final Color color;
   final fontweight;
   const TextWidget(
@@ -142,7 +142,7 @@ class TextWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      textAlign: align,
+      textAlign: align ?? TextAlign.start,
       text,
       style: TextStyle(
           fontFamily: fontFamily ?? 'Montserrat',
