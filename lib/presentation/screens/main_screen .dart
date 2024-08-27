@@ -20,6 +20,7 @@ import '../constants/assets.dart';
 import '../constants/color.dart';
 import 'login_register/home_screen.dart';
 import 'login_register/EditProfile.dart';
+import 'message/discover_projects.dart';
 
 class MainScreen extends StatefulWidget {
   int? selectedIndex;
@@ -33,8 +34,8 @@ class _MainScreenState extends State<MainScreen> {
 
   final List<Widget> _screens = [
     const HomeScreen(),
-    const MilestoneScreen(),
-    const MessageScreen(),
+    const DiscoverProjects(),
+    DebitCredit(),
     const ChatScreen(),
     const AddProjects(),
 
@@ -126,7 +127,7 @@ class _MainScreenState extends State<MainScreen> {
                 ),
                 bottomNavItem(
                   title: "",
-                  icon: Assets.message,
+                  icon: Assets.wallet,
                   isSelected:
                       widget.selectedIndex == 2 || widget.selectedIndex == 17,
                   onTap: () {
@@ -139,7 +140,7 @@ class _MainScreenState extends State<MainScreen> {
                 ),
                 bottomNavItem(
                   title: "",
-                  icon: Assets.wallet,
+                  icon: Assets.message,
                   isSelected: widget.selectedIndex == 3,
                   onTap: () {
                     if (widget.selectedIndex != 3) {
