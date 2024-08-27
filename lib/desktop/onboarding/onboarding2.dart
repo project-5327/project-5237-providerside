@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:project_5237_provider/desktop/onboarding/onboarding1.dart';
 import 'package:project_5237_provider/desktop/onboarding/onboarding3.dart';
 
 import '../../presentation/constants/color.dart';
@@ -259,7 +260,9 @@ class _Onboarding2ScreenState extends State<Onboarding2Screen> {
                                 ),
                               ),
                               TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Get.to(OnbarodingScreen1());
+                                },
                                 child: Text(
                                   AppStrings.signIn,
                                   style: TextStyle(
