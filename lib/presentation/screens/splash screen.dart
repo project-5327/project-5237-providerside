@@ -8,6 +8,7 @@ import 'package:project_5237_provider/presentation/screens/milestones/milestone.
 import 'dart:async';
 import '../constants/assets.dart';
 import 'create_profile/my_account.dart';
+import 'login_register/login.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -20,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Timer(Duration(seconds: 3), () {
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (_) => MyAccountScreen()),
+        MaterialPageRoute(builder: (_) => LoginScreen()),
       );
     });
   }

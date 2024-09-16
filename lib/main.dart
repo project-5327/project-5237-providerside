@@ -11,12 +11,26 @@ import 'package:project_5237_provider/presentation/screens/login_register/add_pr
 import 'package:project_5237_provider/presentation/screens/login_register/profile_screen.dart';
 import 'package:project_5237_provider/presentation/screens/message/forget_password.dart';
 import 'package:project_5237_provider/presentation/screens/my_contracts/map_screen.dart';
+import 'package:project_5237_provider/provider/auth/login_provider.dart';
+import 'package:project_5237_provider/provider/auth/register_provider.dart';
+import 'package:project_5237_provider/provider/auth/verifyOTP_provider.dart';
+import 'package:provider/provider.dart';
 
+import 'config/baseclient/base_client.dart';
 import 'presentation/screens/login_register/Add_projects.dart';
 import 'presentation/screens/splash screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  BaseClient.initialize("https://project5237.zatest.biz");
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (context) => LoginProvider()),
+      ChangeNotifierProvider(create: (context) => VerifyOTPProvider()),
+      ChangeNotifierProvider(create: (context) => RegisterProvider()),
+    ],
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
