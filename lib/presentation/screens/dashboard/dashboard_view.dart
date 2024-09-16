@@ -2,6 +2,7 @@ import 'package:easy_sidemenu/easy_sidemenu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:project_5237_provider/desktop/message_chat/messages_chat.dart';
 import 'package:project_5237_provider/desktop/myProject/myProject.dart';
 import 'package:project_5237_provider/desktop/projects/projects_screen.dart';
 import 'package:project_5237_provider/presentation/constants/fonts.dart';
@@ -35,7 +36,7 @@ class _DashBoardViewState extends State<DashBoardView> {
     const HomeScreen(),
     const ProjectsScreen(),
     const MilestoneScreen(),
-    const ChatScreen(),
+    const MessageChatScreen1(),
     const MyProject(),
 
     // //0

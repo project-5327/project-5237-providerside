@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:project_5237_provider/presentation/screens/dashboard/dashboard_view.dart';
 
 import '../../../controller/form_controller.dart';
 import '../../constants/assets.dart';
@@ -138,7 +139,13 @@ class ChangePassword extends StatelessWidget {
                     textColor: MyColors.white,
                     onTap: () {
                       formKey.currentState!.validate();
-                      Get.to(() => MainScreen());
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => DashBoardView()),
+                        (Route<dynamic> route) =>
+                            false, // Remove all previous routes
+                      );
                     },
                   ),
                   SizedBox(
@@ -157,86 +164,101 @@ class ChangePassword extends StatelessWidget {
 
   _deskTopView(BuildContext context) {
     return Scaffold(
-        body: Row(children: [
-      Flexible(
-        child: Container(
-          child: SvgPicture.asset(
-            Assets.createProfile1,
-            fit: BoxFit.cover,
+      body: Row(
+        children: [
+          Flexible(
+            child: Container(
+              child: SvgPicture.asset(
+                Assets.createProfile1,
+                fit: BoxFit.cover,
+              ),
+            ),
           ),
-        ),
-      ),
-      Flexible(
-          child: SizedBox(
+          Flexible(
+            child: SizedBox(
               child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 90.0),
-                  child: Center(
-                      child: Container(
-                          padding: EdgeInsets.all(14.0),
-                          height: 420,
-                          // width: 300.w,
-                          decoration: BoxDecoration(
-                              color: MyColors.blueContainer,
-                              borderRadius: BorderRadius.circular(12)),
-                          child: Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 20.0),
-                            child: Column(children: [
-                              Text(
-                                AppStrings.createNewPassword,
-                                style: TextStyle(
-                                    fontSize: 32,
-                                    fontWeight: FontWeight.w500,
-                                    color: MyColors.textC),
-                              ),
-                              SizedBox(
-                                height: 16,
-                              ),
-                              Text(
-                                AppStrings.pleaseEnterAndConfirm,
-                                style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w500,
-                                    color: MyColors.black1),
-                              ),
-                              SizedBox(
-                                height: 39,
-                              ),
-                              CustomTextFormField(
-                                color: MyColors.black,
-                                readOnly: false,
-                                title: 'Password',
-                                text: 'Enter your password',
-                              ),
-                              SizedBox(
-                                height: 25,
-                              ),
-                              CustomTextFormField(
-                                color: MyColors.black,
-                                readOnly: false,
-                                title: 'Confirm Password',
-                                text: 'Enter your password',
-                              ),
-                              SizedBox(
-                                height: 25,
-                              ),
-                              CustomizeButton(
-                                borderColor: MyColors.btnColor,
-                                radius: 8.0,
-                                text: 'Reset Password',
-                                height: 48.0,
-                                width: 327.0,
-                                color: MyColors.btnColor,
-                                textColor: MyColors.white,
-                                onTap: () {
-                                  Get.to(() => HomeScreen());
-                                },
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                            ]),
-                          ))))))
-    ]));
+                padding: const EdgeInsets.symmetric(horizontal: 90.0),
+                child: Center(
+                  child: Container(
+                    padding: EdgeInsets.all(14.0),
+                    height: 420,
+                    // width: 300.w,
+                    decoration: BoxDecoration(
+                        color: MyColors.blueContainer,
+                        borderRadius: BorderRadius.circular(12)),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                      child: Column(
+                        children: [
+                          Text(
+                            AppStrings.createNewPassword,
+                            style: TextStyle(
+                                fontSize: 32,
+                                fontWeight: FontWeight.w500,
+                                color: MyColors.textC),
+                          ),
+                          SizedBox(
+                            height: 16,
+                          ),
+                          Text(
+                            AppStrings.pleaseEnterAndConfirm,
+                            style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                                color: MyColors.black1),
+                          ),
+                          SizedBox(
+                            height: 39,
+                          ),
+                          CustomTextFormField(
+                            color: MyColors.black,
+                            readOnly: false,
+                            title: 'Password',
+                            text: 'Enter your password',
+                          ),
+                          SizedBox(
+                            height: 25,
+                          ),
+                          CustomTextFormField(
+                            color: MyColors.black,
+                            readOnly: false,
+                            title: 'Confirm Password',
+                            text: 'Enter your password',
+                          ),
+                          SizedBox(
+                            height: 25,
+                          ),
+                          CustomizeButton(
+                            borderColor: MyColors.btnColor,
+                            radius: 8.0,
+                            text: 'Reset Password',
+                            height: 48.0,
+                            width: 327.0,
+                            color: MyColors.btnColor,
+                            textColor: MyColors.white,
+                            onTap: () {
+                              Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => DashBoardView()),
+                                (Route<dynamic> route) =>
+                                    false, // Remove all previous routes
+                              );
+                            },
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          )
+        ],
+      ),
+    );
   }
 }

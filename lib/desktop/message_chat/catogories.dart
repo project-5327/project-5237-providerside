@@ -1,30 +1,51 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:project_5237_provider/presentation/constants/color.dart';
-import 'package:project_5237_provider/presentation/constants/color.dart';
-import 'package:project_5237_provider/presentation/constants/color.dart';
-import 'package:project_5237_provider/presentation/constants/color.dart';
 
 class Catagory3 extends StatelessWidget {
-  const Catagory3();
+  const Catagory3({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // Initialize ScreenUtil if you are using responsive design.
-    ScreenUtil.init(context, designSize: const Size(375, 812));
-
     return ListView(
-      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-      children:  [
+      padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
+      children: [
         const CustomizeListTile(
           image: 'assets/images/Ellipse 1.png',
           title: 'Jason Jones',
           subTitle: 'Thanks, Ajay! We look forward to it as...',
           time: '5 mins ago',
         ),
-        const SizedBox(height: 5),
-        Divider(thickness: 0.5,color: MyColors.btnText,),
-        const SizedBox(height: 5),
+        SizedBox(height: 5.h),
+        Divider(
+          thickness: 0.5,
+          color: MyColors.btnText,
+        ),
+        SizedBox(height: 5.h),
+        const CustomizeListTile(
+          image: 'assets/images/Ellipse 1.png',
+          title: 'Anne Jones',
+          subTitle: 'Thanks, Ajay! We look forward to it as...',
+          time: '5 mins ago',
+        ),
+        SizedBox(height: 5.h),
+        Divider(
+          thickness: 0.5,
+          color: MyColors.btnText,
+        ),
+        SizedBox(height: 5.h),
+        const CustomizeListTile(
+          image: 'assets/images/Ellipse 1.png',
+          title: 'Jason Jones',
+          subTitle: 'Thanks, Ajay! We look forward to it as...',
+          time: '5 mins ago',
+        ),
+        SizedBox(height: 5.h),
+        Divider(
+          thickness: 0.5,
+          color: MyColors.btnText,
+        ),
+        SizedBox(height: 5.h),
         const CustomizeListTile(
           image: 'assets/images/Ellipse 1.png',
           title: 'Anne Jones',
@@ -32,26 +53,11 @@ class Catagory3 extends StatelessWidget {
           time: '5 mins ago',
         ),
         const SizedBox(height: 5),
-        Divider(thickness: 0.5,color: MyColors.btnText,),
-        const SizedBox(height: 5),
-        const CustomizeListTile(
-          image: 'assets/images/Ellipse 1.png',
-          title: 'Jason Jones',
-          subTitle: 'Thanks, Ajay! We look forward to it as...',
-          time: '5 mins ago',
+        Divider(
+          thickness: 0.5,
+          color: MyColors.btnText,
         ),
-        const SizedBox(height: 5),
-        Divider(thickness: 0.5,color: MyColors.btnText,),
-        const SizedBox(height: 5),
-        const CustomizeListTile(
-          image: 'assets/images/Ellipse 1.png',
-          title: 'Anne Jones',
-          subTitle: 'Thanks, Ajay! We look forward to it as...',
-          time: '5 mins ago',
-        ),
-        const SizedBox(height: 5),
-        Divider(thickness: 0.5,color: MyColors.btnText,),
-        const SizedBox(height: 5),
+        SizedBox(height: 5.h),
         const CustomizeListTile(
           image: 'assets/images/wgirl1.png',
           title: 'Jason Jones',
@@ -82,15 +88,15 @@ class CustomizeListTile extends StatelessWidget {
     return Row(
       children: [
         ClipRRect(
-          borderRadius: BorderRadius.circular(24),
+          borderRadius: BorderRadius.circular(24.r),
           child: Image.asset(
             image,
-            height: 60,
-            width: 60,
+            height: 60.h,
+            width: 60.w,
             fit: BoxFit.cover,
           ),
         ),
-         const SizedBox(width: 10),
+        SizedBox(width: 10.w),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -100,8 +106,8 @@ class CustomizeListTile extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: const TextStyle(
-                      fontSize: 16,
+                    style: TextStyle(
+                      fontSize: 16.sp,
                       fontWeight: FontWeight.w400,
                       color: Colors.black,
                     ),
@@ -109,18 +115,18 @@ class CustomizeListTile extends StatelessWidget {
                   Text(
                     time,
                     style: TextStyle(
-                      fontSize: 12,
+                      fontSize: 12.sp,
                       fontWeight: FontWeight.w400,
                       color: Colors.black.withOpacity(0.4),
                     ),
                   ),
                 ],
               ),
-               const SizedBox(height: 4),
+              const SizedBox(height: 4),
               Text(
                 subTitle,
                 style: TextStyle(
-                  fontSize: 14,
+                  fontSize: 14.sp,
                   fontWeight: FontWeight.w400,
                   color: Colors.black.withOpacity(0.6),
                 ),

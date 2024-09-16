@@ -255,7 +255,13 @@ class _Profile8widgetState extends State<Profile8widget> {
                       onTap: () {
                         if (formKey.currentState!.validate()) {
                           profileController.nextPage();
-                          Get.to(() => HomeScreen());
+                          Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => DashBoardView()),
+                            (Route<dynamic> route) =>
+                                false, // Remove all previous routes
+                          );
                         }
                       },
                     ),

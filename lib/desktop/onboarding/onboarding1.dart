@@ -4,6 +4,7 @@ import 'package:project_5237_provider/desktop/onboarding/onboarding3.dart';
 import 'package:project_5237_provider/presentation/constants/color.dart';
 import 'package:project_5237_provider/presentation/constants/strings.dart';
 import 'package:project_5237_provider/presentation/screens/dashboard/dashboard_view.dart';
+import 'package:project_5237_provider/presentation/screens/message/forget_password.dart';
 
 import 'appname.dart';
 import 'onboarding2.dart';
@@ -125,7 +126,9 @@ class _OnbarodingScreen1State extends State<OnbarodingScreen1> {
                               ],
                             ),
                             TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Get.to(ForgetPasswordScreen());
+                              },
                               child: Text(
                                 AppStrings.forgetPassword,
                                 style: TextStyle(
