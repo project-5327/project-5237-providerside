@@ -12,7 +12,8 @@ import '../../config/baseclient/endpoints.dart';
 class RegisterProvider extends ChangeNotifier {
   //Register API Implement
   final formKeyRegist = GlobalKey<FormState>();
-  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _fnameController = TextEditingController();
+  final TextEditingController _lnameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _repeatPasswordController =
@@ -27,7 +28,8 @@ class RegisterProvider extends ChangeNotifier {
   bool get isClient => isSelectedClient == "Client" ? true : false;
 
   String? get errorMessage => _errorMessage;
-  TextEditingController get nameController => _nameController;
+  TextEditingController get fnameController => _fnameController;
+  TextEditingController get lnameController => _lnameController;
   TextEditingController get emailController => _emailController;
   TextEditingController get passwordController => _passwordController;
   TextEditingController get repeatPasswordController =>
@@ -91,21 +93,29 @@ class RegisterProvider extends ChangeNotifier {
   }
 
   signUpBtn({required BuildContext context}) async {
-    if (formKeyRegist.currentState?.validate() ?? false) {
+    debugPrint("===name=====>${fnameController.text.trim()}");
+    debugPrint("===name=====>${lnameController.text.trim()}");
+    debugPrint("===Email=====>${emailController.text.trim}");
+    debugPrint("===password=====>${passwordController.text.trim()}");
+    debugPrint("===isClient=====>${repeatPasswordController.text.trim()}");
+    /*if (formKeyRegist.currentState?.validate() ?? false) {*/
       // If the form is valid, proceed with the login
-      final name = nameController.text.trim();
+      /*final name = nameController.text.trim();*/
+    final fname = fnameController.text.trim();
+    final lname = lnameController.text.trim();
       final email = emailController.text.trim();
       final password = passwordController.text.trim();
       final repeatPassword = repeatPasswordController.text.trim();
 
-      debugPrint("name=====>$name");
+      debugPrint("name=====>$fname");
+    debugPrint("name=====>$lname");
       debugPrint("Email=====>$email");
       debugPrint("password=====>$password");
       debugPrint("isClient=====>$isClient");
 
       final success = await signUp(
         context: context,
-        name: name,
+        name: fname + lname,
         email: email,
         password: password,
       );
@@ -116,7 +126,8 @@ class RegisterProvider extends ChangeNotifier {
           MaterialPageRoute(builder: (context) => LoginPage()),
         );*/
         Future.delayed(const Duration(seconds: 5), () {
-          nameController.clear();
+          fnameController.clear();
+          lnameController.clear();
           emailController.clear();
           passwordController.clear();
           repeatPasswordController.clear();
@@ -126,12 +137,13 @@ class RegisterProvider extends ChangeNotifier {
           SnackBar(content: Text(errorMessage ?? 'Registration failed')),
         );
       }
-    } else {
+    }/* else {
+
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(errorMessage ?? "Field can\'t empty")),
       );
-    }
-  }
+    }*/
+ /* }*/
 
   // Validation
   var obscureText = false;

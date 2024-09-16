@@ -92,7 +92,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           SizedBox(
                             height: 23.h,
                           ),
-                          Center(
+                         /* Center(
                             child: CustomTextFormField(
                               obscureText: formController.obscureText.value,
                               validator: (value) =>
@@ -105,7 +105,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   fontWeight: FontWeight.w500,
                                   color: Color(0xff222222)),
                             ),
-                          ),
+                          ),*/
                           SizedBox(
                             height: 22.h,
                           ),
@@ -296,8 +296,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               color: MyColors.btnColor,
                               textColor: MyColors.white,
                               onTap: () {
-                                registerProvider.signUpBtn(
-                                    context: context);
+                                debugPrint("name=====>${registerProvider.fnameController}");
+                                debugPrint("name=====>${registerProvider.lnameController}");
+                                debugPrint("Email=====>${registerProvider.emailController}");
+                                debugPrint("password=====>${registerProvider.passwordController}");
+                                debugPrint("isClient=====>${registerProvider.isClient}");
+                                /*registerProvider.signUpBtn(
+                                    context: context);*/
+                                Navigator.push((context), MaterialPageRoute(builder: (context)=>MyAccountScreen()));
                               },
                             ),
                           ),
