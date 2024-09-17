@@ -57,4 +57,5 @@ class Assets {
   static String bgirl = 'assets/images/bgirl.svg';
   static String wgirl = 'assets/images/wgirl1.png';
   static String createProfile1 = 'assets/images/Frame 1000005752.svg';
+  static String check = 'assets/icons/check.svg';
 }
