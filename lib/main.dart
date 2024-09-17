@@ -14,6 +14,7 @@ import 'package:project_5237_provider/presentation/screens/my_contracts/map_scre
 import 'package:project_5237_provider/provider/auth/login_provider.dart';
 import 'package:project_5237_provider/provider/auth/register_provider.dart';
 import 'package:project_5237_provider/provider/auth/verifyOTP_provider.dart';
+import 'package:project_5237_provider/routes/page_routes.dart';
 import 'package:provider/provider.dart';
 
 import 'config/baseclient/base_client.dart';
