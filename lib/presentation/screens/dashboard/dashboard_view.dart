@@ -25,36 +25,13 @@ class DashBoardView extends StatefulWidget {
 
 class _DashBoardViewState extends State<DashBoardView> {
   int _currentIndex = 0;
-  // final List<Widget> _pages = const [
-  //   AddProjects(),
-  //   Scaffold(),
-  //   Scaffold(),
-  //   AddProjects(),
-  //   AddProjects(),
-  // ];
+
   final List<Widget> _pages = [
     const HomeScreen(),
     const ProjectsScreen(),
     const MilestoneScreen(),
     const MessageChatScreen1(),
     const MyProject(),
-
-    // //0
-    // const HomeProjectDetails(),
-    // const ProposalScreen(),
-    // const SuccesfullyScreen(),
-    // const NotificationScreen(),
-
-    // const BookedClient(),
-    // const AddProjects(),
-    // const AddProject1(),
-    // const ForgetPasswordScreen(),
-    // const OtpScreen(),
-    // const ChangePassword(),
-    // const MilestoneScreen(),
-    // const MycontractScreen(),
-    // //2
-    // const ChatScreen(),
   ];
   SideMenuController sideMenu = SideMenuController();
   PageController pageController = PageController();
