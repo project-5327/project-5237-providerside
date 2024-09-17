@@ -268,7 +268,7 @@ class _OtpScreenState extends State<OtpScreen> {
               Flexible(
                 child: Container(
                   child: SvgPicture.asset(
-                    Assets.createProfile,
+                    Assets.createProfile1,
                     fit: BoxFit.cover,
                   ),
                 ),

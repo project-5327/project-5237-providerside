@@ -18,6 +18,7 @@ import 'package:project_5237_provider/routes/page_routes.dart';
 import 'package:provider/provider.dart';
 
 import 'config/baseclient/base_client.dart';
+import 'desktop/onboarding/onboarding3.dart';
 import 'presentation/screens/login_register/Add_projects.dart';
 import 'presentation/screens/splash screen.dart';
 

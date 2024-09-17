@@ -172,7 +172,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
               Flexible(
                 child: Container(
                   child: SvgPicture.asset(
-                    Assets.createProfile,
+                    Assets.createProfile1,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -274,7 +274,6 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                                       await loginProvider.sendOtpPostApi(
                                           context: context,
                                           loginProvider.emailController.text);
-
                                       if (loginSuccess) {
                                         Navigator.push(
                                           context,

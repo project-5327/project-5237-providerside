@@ -18,6 +18,7 @@ class AppStrings {
   static const String passWord1 = 'Password';
   static const String title = 'Title';
   static const String createProfile = 'Create Profile';
+  static const String accountSetup ='Complete your free \n   account setup';
 
   static const String userName = 'User Name';
   static const String accept = 'Accept';
