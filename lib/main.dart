@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:project_5237_provider/desktop/onboarding/onboarding1.dart';
 import 'package:project_5237_provider/presentation/constants/responsive_view.dart';
 import 'package:project_5237_provider/desktop/projects/project_detail_screen.dart';
+import 'package:project_5237_provider/presentation/screens/create_profile/create_your_profile.dart';
 import 'package:project_5237_provider/presentation/screens/create_profile/profile/profile8.dart';
 import 'package:project_5237_provider/presentation/screens/dashboard/dashboard_view.dart';
 import 'package:project_5237_provider/presentation/screens/login_register/add_project1.dart';
@@ -14,6 +15,7 @@ import 'package:project_5237_provider/presentation/screens/my_contracts/map_scre
 import 'package:project_5237_provider/provider/auth/login_provider.dart';
 import 'package:project_5237_provider/provider/auth/register_provider.dart';
 import 'package:project_5237_provider/provider/auth/verifyOTP_provider.dart';
+import 'package:project_5237_provider/provider/onboarding/onbaording_provider.dart';
 import 'package:project_5237_provider/routes/page_routes.dart';
 import 'package:provider/provider.dart';
 
@@ -30,6 +32,7 @@ void main() {
       ChangeNotifierProvider(create: (context) => LoginProvider()),
       ChangeNotifierProvider(create: (context) => VerifyOTPProvider()),
       ChangeNotifierProvider(create: (context) => RegisterProvider()),
+      ChangeNotifierProvider(create: (context) => OnbaordingProvider()),
     ],
     child: const MyApp(),
   ));
@@ -63,9 +66,9 @@ class MyApp extends StatelessWidget {
             ),
             useMaterial3: true,
           ),
-          home: responsive.isMobile || responsive.isTablet
+          home:  CreateYourProfile(), /*responsive.isMobile || responsive.isTablet
               ? SplashScreen()
-              : OnbarodingScreen1(),
+              : OnbarodingScreen1(),*/
         );
 
         //  Profile3());

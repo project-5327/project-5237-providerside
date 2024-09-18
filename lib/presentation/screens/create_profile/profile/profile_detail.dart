@@ -8,7 +8,9 @@ import 'package:project_5237_provider/controller/profile_controller.dart';
 import 'package:project_5237_provider/controller/form_controller.dart';
 import 'package:project_5237_provider/presentation/constants/responsive_view.dart';
 import 'package:project_5237_provider/presentation/screens/create_profile/profile/static_profile.dart';
+import 'package:provider/provider.dart';
 
+import '../../../../provider/onboarding/onbaording_provider.dart';
 import '../../../constants/assets.dart';
 import '../../../constants/color.dart';
 import '../../../constants/strings.dart';
@@ -31,43 +33,48 @@ class ProfileDetail extends StatelessWidget {
   }
 
   _mobileView(BuildContext context) {
-    return StaticProfileLayout(
-      middleContentBuilder: () => Form(
-        key: formKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: 30.h),
-            EditCreateProfile(
-              align: TextAlign.start,
-              ontap: () {},
-              validator: (value) => formController.validateSkills(value),
-              controller: skillsController,
-              text: AppStrings.createProfileText1,
-              text1: AppStrings.createProfileLorem,
-              feildText: AppStrings.titletext,
-              color: MyColors.lightGrey,
+    return Consumer<OnbaordingProvider>(builder: (context, onboardingProvider, child) {
+        return StaticProfileLayout(
+          middleContentBuilder: () => Form(
+            /*key: formKey,*/
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: 30.h),
+                EditCreateProfile(
+                  align: TextAlign.start,
+                  ontap: () {},
+                  validator: (value) =>
+                      onboardingProvider.validateTitle(value ?? ""),
+                  controller: onboardingProvider.titleController,
+                  text: AppStrings.createProfileText1,
+                  text1: AppStrings.createProfileLorem,
+                  feildText: AppStrings.titletext,
+                  labelText: AppStrings.title,
+                  color: MyColors.lightGrey,
+                ),
+                SizedBox(height: 158.h),
+                Center(
+                    child: CustomizeButton(
+                        borderColor: MyColors.btnColor,
+                        radius: 100.r,
+                        text: AppStrings.next,
+                        height: 40.h,
+                        width: 334.w,
+                        color: MyColors.btnColor,
+                        textColor: MyColors.white,
+                        onTap: () {
+                          //if (formKey.currentState!.validate()) {
+                          profileController.nextPage();
+                          Get.to(() => Profile2());
+                          //   }
+                        })),
+                SizedBox(height: 42.h),
+              ],
             ),
-            SizedBox(height: 158.h),
-            Center(
-                child: CustomizeButton(
-                    borderColor: MyColors.btnColor,
-                    radius: 100.r,
-                    text: AppStrings.next,
-                    height: 40.h,
-                    width: 334.w,
-                    color: MyColors.btnColor,
-                    textColor: MyColors.white,
-                    onTap: () {
-                      //if (formKey.currentState!.validate()) {
-                      profileController.nextPage();
-                      Get.to(() => Profile2());
-                      //   }
-                    })),
-            SizedBox(height: 42.h),
-          ],
-        ),
-      ),
+          ),
+        );
+      }
     );
   }
 
