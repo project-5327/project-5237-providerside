@@ -2,9 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../config/baseclient/CustomInterceptor.dart';
 import '../../config/baseclient/base_client.dart';
 import '../../config/baseclient/endpoints.dart';
@@ -106,7 +104,7 @@ class LoginProvider extends ChangeNotifier {
       );
 
       if (success) {
-       /* Get.to(() => DashBoardView());*/
+        /* Get.to(() => DashBoardView());*/
 
         Future.delayed(const Duration(seconds: 5), () {
           emailController.clear();
@@ -232,7 +230,7 @@ class LoginProvider extends ChangeNotifier {
         );
         _isLoading = false;
 
-       /* Navigator.of(context).pushAndRemoveUntil(
+        /* Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(builder: (context) => LoginScreen()),
           (Route<dynamic> route) => false,
         );*/
@@ -278,7 +276,7 @@ class LoginProvider extends ChangeNotifier {
         );
         _isLoading = false;
 
-       /* Navigator.of(context).pushAndRemoveUntil(
+        /* Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(builder: (context) => LoginScreen()),
           (Route<dynamic> route) => false,
         );*/

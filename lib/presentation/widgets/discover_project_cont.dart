@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:project_5237_provider/presentation/screens/my_contracts/map_screen.dart';
-
 import '../constants/assets.dart';
 import '../constants/color.dart';
 
@@ -29,36 +29,61 @@ class DiscoverContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 200.h,
       width: 352.w,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          ListTile(
-            leading: ClipRRect(
-                borderRadius: BorderRadius.circular(100.r),
-                child: Image.asset(
+          Row(
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(50.r),
+                child: Image.network(
                   image,
                   height: 35.h,
                   width: 35.w,
                   fit: BoxFit.cover,
-                )),
-            title: Text(
-              username,
-              style: TextStyle(
-                  fontSize: 17.sp,
-                  fontWeight: FontWeight.w500,
-                  color: MyColors.black),
-            ),
-            trailing: Text(
-              time,
-              style: TextStyle(
-                  fontSize: 12.sp,
-                  fontWeight: FontWeight.w600,
-                  color: MyColors.grey),
-            ),
+                  errorBuilder: (context, error, stackTrace) {
+                    return CircleAvatar(
+                      radius: 25.r,
+                      backgroundColor: Colors.grey,
+                    );
+                  },
+                ),
+              ),
+              SizedBox(
+                width: 12.h,
+              ),
+              Container(
+                margin: EdgeInsets.only(right: 8.w),
+                width: 200.w,
+                child: Text(
+                  username,
+                  style: GoogleFonts.inter(
+                    textStyle: TextStyle(
+                      fontSize: 17.sp,
+                      fontWeight: FontWeight.w500,
+                      color: MyColors.black,
+                    ),
+                  ),
+                ),
+              ),
+              const Spacer(),
+              Text(
+                time,
+                style: GoogleFonts.inter(
+                  textStyle: TextStyle(
+                      fontSize: 12.sp,
+                      fontWeight: FontWeight.w400,
+                      color: MyColors.black.withOpacity(0.40)),
+                ),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 13.h,
           ),
           Text(
             text1,
@@ -66,6 +91,9 @@ class DiscoverContainer extends StatelessWidget {
                 fontSize: 12.sp,
                 fontWeight: FontWeight.w600,
                 color: MyColors.black2),
+          ),
+          SizedBox(
+            height: 13.h,
           ),
           ListTile(
             title: Text(
@@ -100,6 +128,9 @@ class DiscoverContainer extends StatelessWidget {
               ),
             ),
           ),
+          SizedBox(
+            height: 13.h,
+          ),
           const CustomizeTagContainer(tag: 'Time range'),
         ],
       ),
@@ -117,7 +148,9 @@ class CustomizeTagContainer extends StatelessWidget {
       height: 25.h,
       width: 91.w,
       decoration: BoxDecoration(
-          color: MyColors.tagCont, borderRadius: BorderRadius.circular(6)),
+        color: MyColors.tagCont,
+        borderRadius: BorderRadius.circular(6),
+      ),
       child: Center(
         child: Text(
           tag,
