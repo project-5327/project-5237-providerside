@@ -77,7 +77,7 @@ class Profile6 extends StatelessWidget {
                         ),
                         TextFormField(
                           maxLines: 4,
-                          controller: onboardingProvider.descriptionController,
+                          controller: onboardingProvider.description1Controller,
                           decoration: InputDecoration(
                             hintText: AppStrings.desc,
                             hintStyle: TextStyle(
@@ -119,7 +119,7 @@ class Profile6 extends StatelessWidget {
                               color: MyColors.white,
                               textColor: MyColors.btnColor,
                               onTap: () {
-                                print('====> decription : ${onboardingProvider.descriptionController}');
+                                /*print('====> decription : ${onboardingProvider.descriptionController}');*/
                                 if (formKey.currentState!.validate()) {
                                   profileController.previousPage();
                                   Get.to(() => Profile5());
@@ -138,7 +138,7 @@ class Profile6 extends StatelessWidget {
                               color: MyColors.btnColor,
                               textColor: MyColors.white,
                               onTap: () {
-                                print('====> decription : ${onboardingProvider.descriptionController}');
+                                debugPrint('====> decription : ${onboardingProvider.description1Controller}');
                                 if (formKey.currentState!.validate()) {
                                   profileController.nextPage();
                                   Get.to(() => Profile7());

@@ -224,9 +224,9 @@ class _Profilewidget4State extends State<Profilewidget4> {
                           color: MyColors.btnColor,
                           textColor: MyColors.white,
                           onTap: () {
-                            print("====> _selected languagelist ${_selectedLanguages.length}");
+                            debugPrint("====> _selected languagelist ${_selectedLanguages.length}");
                             onboardingProvider.setLanguages =_selectedLanguages;
-                            print("====> _selected languagelist ${onboardingProvider.languages}");
+                            debugPrint("====> _selected languagelist ${onboardingProvider.languages}");
                             // if (formKey.currentState!.validate()) {
                             profileController.nextPage();
                             Get.to(() => Profile5());
@@ -275,3 +275,5 @@ print("${selectedCheckBoxValue}");
 whenEmpty: 'Select Location',
 ),
 ),*/
+
+

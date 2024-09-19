@@ -41,6 +41,13 @@ class _DetailsTextfieldState extends State<DetailsTextfield> {
     }
   }
 
+  String selectedExperienceLevel = AppStrings.medium;
+  void _updateExperienceLevel(String level) {
+    setState(() {
+      selectedExperienceLevel = level;
+    });
+  }
+
   final TextEditingController _skillsController = TextEditingController();
   bool _showOptions = false;
 
@@ -259,7 +266,7 @@ class _DetailsTextfieldState extends State<DetailsTextfield> {
               ),
             ),
             SizedBox(height: 10.h),
-            const Toggell1(),
+            Toggell1(onExperienceLevelChanged:_updateExperienceLevel ),
             SizedBox(height: 20.h),
             Center(
               child: CustomTextFormField(

@@ -185,6 +185,20 @@ class AddEducation extends StatelessWidget {
                           color: MyColors.btnColor,
                           textColor: MyColors.white,
                           onTap: () {
+                            debugPrint('====>  education : ${onboardingProvider.degreeORCertificateController}');
+                            debugPrint('====>  education : ${onboardingProvider.instituteNameController}');
+                            debugPrint('====>  education : ${onboardingProvider.feildOfStudyController}');
+                            debugPrint('====>  education : ${onboardingProvider.location1Controller.text}');
+                            debugPrint('====>  education : ${onboardingProvider.locationController}');
+                            debugPrint('====>  education : ${onboardingProvider.startDate1Controller}');
+                            debugPrint('====>  education : ${onboardingProvider.endDate1Controller}');
+                            onboardingProvider.addEducation(
+                                onboardingProvider.instituteNameController.text,
+                                onboardingProvider.degreeORCertificateController.text,
+                                onboardingProvider.feildOfStudyController.text,
+                                onboardingProvider.location1Controller.text,
+                                onboardingProvider.startDate1Controller.text,
+                                onboardingProvider.endDate1Controller.text);
                             Get.back(result: true);
                           })),
                   SizedBox(height: 42.h),
@@ -197,3 +211,5 @@ class AddEducation extends StatelessWidget {
     );
   }
 }
+
+

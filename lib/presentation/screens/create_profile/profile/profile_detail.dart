@@ -65,6 +65,7 @@ class ProfileDetail extends StatelessWidget {
                         textColor: MyColors.white,
                         onTap: () {
                           //if (formKey.currentState!.validate()) {
+                          debugPrint('====>  profile details : ${onboardingProvider.titleController}');
                           profileController.nextPage();
                           Get.to(() => Profile2());
                           //   }

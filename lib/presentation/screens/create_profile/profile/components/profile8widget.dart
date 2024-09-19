@@ -186,6 +186,12 @@ class _Profile8widgetState extends State<Profile8widget> {
                       color: MyColors.btnColor,
                       textColor: MyColors.white,
                       onTap: () {
+                        debugPrint('====>  profile details : ${onboardingProvider.fnameController}');
+                        debugPrint('====>  profile details : ${onboardingProvider.lnameController}');
+                        debugPrint('====>  profile details : ${onboardingProvider.addressController}');
+                        debugPrint('====>  profile details : ${onboardingProvider.pincodeController}');
+                        debugPrint('====>  profile details : ${onboardingProvider.phoneNumberController}');
+                        onboardingProvider.submitUserDetails(context: context);
                         if (formKey.currentState!.validate()) {
                           profileController.nextPage();
                           Navigator.pushAndRemoveUntil(

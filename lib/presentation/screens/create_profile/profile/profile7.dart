@@ -168,7 +168,8 @@ class Profile7 extends StatelessWidget {
                               color: MyColors.btnColor,
                               textColor: MyColors.white,
                               onTap: () {
-                                print('====> decription : ${onboardingProvider.hourlyRateController}');
+                                debugPrint('====> decription : ${onboardingProvider.hourlyRateController}');
+
                                 if (formKey.currentState!.validate()) {
                                   profileController.nextPage();
                                   Get.to(() => Profile8());

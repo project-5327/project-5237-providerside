@@ -8,9 +8,11 @@ import 'package:project_5237_provider/presentation/screens/create_profile/profil
 import 'package:project_5237_provider/presentation/screens/create_profile/profile/profile_detail.dart';
 import 'package:project_5237_provider/presentation/screens/my_contracts/send_screen.dart';
 import 'package:project_5237_provider/presentation/widgets/Customize_textfield.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../controller/form_controller.dart';
 import '../../../../controller/profile_controller.dart';
+import '../../../../provider/onboarding/onbaording_provider.dart';
 import '../../../constants/assets.dart';
 import '../../../constants/color.dart';
 import '../../../constants/responsive_view.dart';
@@ -51,115 +53,134 @@ class _Profile2State extends State<Profile2> {
   }
 
   _mobileView(BuildContext context) {
-    return StaticProfileLayout(
-      middleContentBuilder: () => Form(
-        key: formKey,
-        child: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  SizedBox(height: 25.h),
-                  EditCreateProfile(
-                    ontap: () async {
-                      final result = await Get.to(() => const AddExperience());
-                      if (result != null && result == true) {
-                        setState(() {
-                          _isNextButtonEnabled = true;
-                        });
-                      }
-                    },
-                    validator: (value) =>
-                        formController.validateExperience(value),
-                    controller: controller,
-                    text: AppStrings.createProfileExperince,
-                    text1: AppStrings.createProfileLorem1,
-                    feildText: AppStrings.addExperience,
-                  ),
-                  SizedBox(height: 20.h),
-                  Row(
+    return Consumer<OnbaordingProvider>(builder: (context, onboardingProvider, child) {
+        return StaticProfileLayout(
+          middleContentBuilder: () => Form(
+            key: formKey,
+            child: Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 15),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Container(
-                        alignment: Alignment.center,
-                        height: 18.h,
-                        width: 18.w,
-                        child: containerController.selectedcont[2]
-                            ? Icon(
-                                size: 12.sp, Icons.check, color: MyColors.white)
-                            : null,
-                        decoration: BoxDecoration(
-                          color: containerController.selectedcont[2]
-                              ? Color(0xffFF4C4A)
-                              : MyColors.white,
-                          borderRadius: BorderRadius.circular(4.r),
-                          border: Border.all(
-                            width: 2.w,
-                            color: MyColors.black.withOpacity(0.3),
-                          ),
-                        ),
-                      ),
-                      SizedBox(width: 10.w),
-                      TextWidget(
-                        text: AppStrings.noExperince,
-                        color: MyColors.black.withOpacity(0.3),
-                        size: 13.sp,
-                        fontweight: FontWeight.w400,
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 122.h),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      CustomizeButton(
-                        borderColor: MyColors.btnColor,
-                        radius: 100.r,
-                        text: AppStrings.privious,
-                        height: 40.h,
-                        width: 150.w,
-                        color: MyColors.white,
-                        textColor: MyColors.btnColor,
-                        onTap: () {
-                          //  if (formKey.currentState!.validate()) {
-                          profileController.previousPage();
-                          Get.to(() => ProfileDetail());
-                          // }
+                      SizedBox(height: 25.h),
+                      EditCreateProfile(
+                        ontap: () async {
+                          final result = await Get.to(() => const AddExperience());
+                          if (result != null && result == true) {
+                            setState(() {
+                              _isNextButtonEnabled = true;
+                            });
+                          }
                         },
+                        validator: (value) =>
+                            formController.validateExperience(value),
+                        controller: controller,
+                        text: AppStrings.createProfileExperince,
+                        text1: AppStrings.createProfileLorem1,
+                        feildText: AppStrings.addExperience,
                       ),
-                      SizedBox(
-                        width: 7.w,
+                      SizedBox(height: 20.h),
+                      Row(
+                        children: [
+                          Container(
+                            alignment: Alignment.center,
+                            height: 18.h,
+                            width: 18.w,
+                            child: containerController.selectedcont[2]
+                                ? Icon(
+                                    size: 12.sp, Icons.check, color: MyColors.white)
+                                : null,
+                            decoration: BoxDecoration(
+                              color: containerController.selectedcont[2]
+                                  ? Color(0xffFF4C4A)
+                                  : MyColors.white,
+                              borderRadius: BorderRadius.circular(4.r),
+                              border: Border.all(
+                                width: 2.w,
+                                color: MyColors.black.withOpacity(0.3),
+                              ),
+                            ),
+                          ),
+                          SizedBox(width: 10.w),
+                          TextWidget(
+                            text: AppStrings.noExperince,
+                            color: MyColors.black.withOpacity(0.3),
+                            size: 13.sp,
+                            fontweight: FontWeight.w400,
+                          ),
+                        ],
                       ),
-                      CustomizeButton(
-                        borderColor: MyColors.btnColor,
-                        radius: 100.r,
-                        text: AppStrings.next,
-                        height: 40.h,
-                        width: 150.w,
-                        color: _isNextButtonEnabled
-                            ? MyColors.btnColor
-                            : MyColors.btnDisable,
-                        textColor: MyColors.white,
-                        onTap: _isNextButtonEnabled
-                            ? () {
-                                //  if (formKey.currentState!.validate()) {
-                                profileController.nextPage();
-                                Get.to(() => Profile3());
-                                // }
-                              }
-                            : () {},
-                      )
+                      SizedBox(height: 122.h),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          CustomizeButton(
+                            borderColor: MyColors.btnColor,
+                            radius: 100.r,
+                            text: AppStrings.privious,
+                            height: 40.h,
+                            width: 150.w,
+                            color: MyColors.white,
+                            textColor: MyColors.btnColor,
+                            onTap: () {
+                              //  if (formKey.currentState!.validate()) {
+                              profileController.previousPage();
+                              Get.to(() => ProfileDetail());
+                              // }
+                            },
+                          ),
+                          SizedBox(
+                            width: 7.w,
+                          ),
+                          CustomizeButton(
+                            borderColor: MyColors.btnColor,
+                            radius: 100.r,
+                            text: AppStrings.next,
+                            height: 40.h,
+                            width: 150.w,
+                            color: _isNextButtonEnabled
+                                ? MyColors.btnColor
+                                : MyColors.btnDisable,
+                            textColor: MyColors.white,
+                            onTap: _isNextButtonEnabled
+                                ? () {
+                              debugPrint('====>  profile details : ${onboardingProvider.companyNameController}');
+                              debugPrint('====>  profile details : ${onboardingProvider.roleController}');
+                              debugPrint('====>  profile details : ${onboardingProvider.startDateController}');
+                              debugPrint('====>  profile details : ${onboardingProvider.endDateController}');
+                              debugPrint('====>  profile details : ${onboardingProvider.locationController}');
+                              debugPrint('====>  profile details : ${onboardingProvider.employementTypeController}');
+                              debugPrint('====>  profile details : ${onboardingProvider.descriptionController}');
+
+                              onboardingProvider.addExperience(
+                                  onboardingProvider.companyNameController.text,
+                                  onboardingProvider.roleController.text,
+                                  onboardingProvider.employementTypeController.text,
+                                  onboardingProvider.locationController.text,
+                                  onboardingProvider.startDateController.text,
+                                  onboardingProvider.endDateController.text,
+                                  onboardingProvider.descriptionController.text);
+                                    //  if (formKey.currentState!.validate()) {
+                                    profileController.nextPage();
+                                    Get.to(() => Profile3());
+                                    // }
+                                  }
+                                : () {},
+                          )
+                        ],
+                      ),
+                      SizedBox(height: 42.h),
                     ],
                   ),
-                  SizedBox(height: 42.h),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
+          ),
+        );
+      }
     );
   }
 

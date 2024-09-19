@@ -203,6 +203,22 @@ class AddExperience extends StatelessWidget {
                           color: MyColors.btnColor,
                           textColor: MyColors.white,
                           onTap: () {
+                            debugPrint('====>  Experiance : ${onboardingProvider.companyNameController}');
+                            debugPrint('====>  Experiance : ${onboardingProvider.roleController}');
+                            debugPrint('====>  Experiance : ${onboardingProvider.startDateController}');
+                            debugPrint('====>  Experiance : ${onboardingProvider.endDateController}');
+                            debugPrint('====>  Experiance : ${onboardingProvider.locationController}');
+                            debugPrint('====>  Experiance : ${onboardingProvider.employementTypeController}');
+                            debugPrint('====>  Experiance : ${onboardingProvider.descriptionController}');
+
+                            onboardingProvider.addExperience(
+                                onboardingProvider.companyNameController.text,
+                                onboardingProvider.roleController.text,
+                                onboardingProvider.employementTypeController.text,
+                                onboardingProvider.locationController.text,
+                                onboardingProvider.startDateController.text,
+                                onboardingProvider.endDateController.text,
+                                onboardingProvider.descriptionController.text);
                             //if (formKey.currentState!.validate()) {
                             //  profileController.nextPage();
                             Get.back(result: true);
@@ -218,3 +234,5 @@ class AddExperience extends StatelessWidget {
     );
   }
 }
+
+

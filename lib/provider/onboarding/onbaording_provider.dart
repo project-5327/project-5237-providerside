@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import '../../config/baseclient/base_client.dart';
 import '../../config/baseclient/endpoints.dart';
@@ -17,6 +19,8 @@ class OnbaordingProvider extends ChangeNotifier {
   final TextEditingController _profileDescriptionController = TextEditingController();
   final TextEditingController _hourlyRateController = TextEditingController();
   final TextEditingController _phoneNumberController = TextEditingController();
+
+   // add experiance
   final TextEditingController _companyNameController = TextEditingController();
   final TextEditingController _roleController = TextEditingController();
   final TextEditingController _locationController = TextEditingController();
@@ -25,6 +29,9 @@ class OnbaordingProvider extends ChangeNotifier {
   final TextEditingController _endDateController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
 
+  final TextEditingController _description1Controller = TextEditingController();
+
+  //education
   final TextEditingController _degreeORCertificateController = TextEditingController();
   final TextEditingController _instituteNameController = TextEditingController();
   final TextEditingController _FeildOfStudyController = TextEditingController();
@@ -32,6 +39,8 @@ class OnbaordingProvider extends ChangeNotifier {
   final TextEditingController _startDate1Controller = TextEditingController();
   final TextEditingController _endDate1Controller = TextEditingController();
 
+
+  File? _selectedImage;
 
  String _contryName ="";
  String _cityName ="";
@@ -75,6 +84,8 @@ class OnbaordingProvider extends ChangeNotifier {
   TextEditingController get endDateController => _endDateController;
   TextEditingController get descriptionController => _descriptionController;
 
+  TextEditingController get description1Controller => _description1Controller;
+
   TextEditingController get degreeORCertificateController => _degreeORCertificateController;
   TextEditingController get instituteNameController => _instituteNameController;
   TextEditingController get feildOfStudyController => _FeildOfStudyController;
@@ -90,29 +101,36 @@ class OnbaordingProvider extends ChangeNotifier {
 
   String get cityName =>_cityName;
 
+  File? get selectedImage => _selectedImage;
+
+
+  set setImage(File image) {
+    _selectedImage = image;
+    notifyListeners();
+  }
 
   set setLanguages(List<String> val) {
     _languages = val;
-    print('======> _languages ${_languages}');
+    print('======> language ${_languages}');
     notifyListeners();
   }
 
   set contryName(String val ) {
     _cityName = val;
-    print('======> _languages ${_cityName}');
+    debugPrint('======> countryname ${_cityName}');
     notifyListeners();
   }
 
   set cityName(String val ) {
     _contryName = val;
-    print('======> _languages ${_contryName}');
+    debugPrint('======> cityname ${_contryName}');
     notifyListeners();
   }
 
   set setSkill(List<String> val) {
     _skills = val;
    /* print('======> _skills ${descriptionController}');*/
-    print('======> _skills ${_skills}');
+    debugPrint('======> _skills ${_skills}');
     notifyListeners();
   }
 
@@ -129,30 +147,26 @@ class OnbaordingProvider extends ChangeNotifier {
 
 
   // Add experience
-  void addExperience(String companyName, String role, String duration,
-      String description, String employmentType, String location,
-      String startDate, String endDate) {
+  void addExperience(String companyName, String role, String employmentType,
+      String location, String startDate, String endDate, String description) {
     _experiences.add({
       "companyName": companyName,
       "role": role,
-      "duration": duration,
-      "description": description,
       "employmentType": employmentType,
       "location": location,
       "startDate": startDate,
       "endDate": endDate,
+      "description": description,
     });
     notifyListeners();
   }
 
   // Add education
-  void addEducation(String institutionName, String degree,
-      String yearOfCompletion, String fieldOfStudy, String location,
-      String startDate, String endDate) {
+  void addEducation(String institutionName, String degree, String fieldOfStudy,
+      String location, String startDate, String endDate) {
     _education.add({
       "institutionName": institutionName,
       "degree": degree,
-      "yearOfCompletion": yearOfCompletion,
       "fieldOfStudy": fieldOfStudy,
       "location": location,
       "startDate": startDate,
@@ -160,7 +174,6 @@ class OnbaordingProvider extends ChangeNotifier {
     });
     notifyListeners();
   }
-
   // Add skill
   void addSkill(String skill) {
     _skills.add(skill);
@@ -192,13 +205,14 @@ class OnbaordingProvider extends ChangeNotifier {
       "pincode": _pincodeController.text.trim(),
       "country": _countryController.text.trim(),
       "title": _titleController.text.trim(),
-      "profileDescription": _profileDescriptionController.text.trim(),
-      "hourlyRate": int.tryParse(_hourlyRateController.text.trim()) ?? 0,
-      "phoneNumber": _phoneNumberController.text.trim(),
       "experience": _experiences,
       "education": _education,
       "skills": _skills,
       "languages": _languages,
+      "profileDescription": _profileDescriptionController.text.trim(),
+      "hourlyRate": _hourlyRateController.text.trim() ?? '',
+      "phoneNumber": _phoneNumberController.text.trim(),
+      "profileImage" : _selectedImage ?? null
     };
 
     try {

@@ -6,6 +6,7 @@ import 'package:project_5237_provider/desktop/onboarding/onboarding1.dart';
 import 'package:project_5237_provider/presentation/constants/responsive_view.dart';
 import 'package:project_5237_provider/desktop/projects/project_detail_screen.dart';
 import 'package:project_5237_provider/presentation/screens/create_profile/create_your_profile.dart';
+import 'package:project_5237_provider/presentation/screens/create_profile/profile/components/add_project_deatiles.dart';
 import 'package:project_5237_provider/presentation/screens/create_profile/profile/profile8.dart';
 import 'package:project_5237_provider/presentation/screens/dashboard/dashboard_view.dart';
 import 'package:project_5237_provider/presentation/screens/login_register/add_project1.dart';
@@ -16,11 +17,13 @@ import 'package:project_5237_provider/provider/auth/login_provider.dart';
 import 'package:project_5237_provider/provider/auth/register_provider.dart';
 import 'package:project_5237_provider/provider/auth/verifyOTP_provider.dart';
 import 'package:project_5237_provider/provider/onboarding/onbaording_provider.dart';
+import 'package:project_5237_provider/provider/onboarding/project_provider.dart';
 import 'package:project_5237_provider/routes/page_routes.dart';
 import 'package:provider/provider.dart';
 
 import 'config/baseclient/base_client.dart';
 import 'desktop/onboarding/onboarding3.dart';
+import 'desktop/projects/projects_screen.dart';
 import 'presentation/screens/login_register/Add_projects.dart';
 import 'presentation/screens/splash screen.dart';
 
@@ -33,6 +36,7 @@ void main() {
       ChangeNotifierProvider(create: (context) => VerifyOTPProvider()),
       ChangeNotifierProvider(create: (context) => RegisterProvider()),
       ChangeNotifierProvider(create: (context) => OnbaordingProvider()),
+      ChangeNotifierProvider(create: (context) => ProjectProvider()),
     ],
     child: const MyApp(),
   ));
@@ -66,7 +70,7 @@ class MyApp extends StatelessWidget {
             ),
             useMaterial3: true,
           ),
-          home:  CreateYourProfile(), /*responsive.isMobile || responsive.isTablet
+          home:  AddProjects(), /*responsive.isMobile || responsive.isTablet
               ? SplashScreen()
               : OnbarodingScreen1(),*/
         );

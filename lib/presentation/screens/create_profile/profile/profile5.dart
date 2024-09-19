@@ -147,7 +147,7 @@ class _Profile5State extends State<Profile5> {
                               color: MyColors.btnColor,
                               textColor: MyColors.white,
                               onTap: () {
-                                print("====> _selected skills ${_selectedSkills.length}");
+                                debugPrint("====> _selected skills ${_selectedSkills.length}");
                                 onboardingProvider.setSkill =_selectedSkills;
                                 // if (formKey.currentState!.validate()) {
                                 profileController.nextPage();
@@ -391,3 +391,5 @@ class _Profile5State extends State<Profile5> {
     );
   }
 }
+
+
