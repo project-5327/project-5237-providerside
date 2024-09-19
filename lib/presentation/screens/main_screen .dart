@@ -2,24 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:project_5237_provider/presentation/screens/login_register/Add_projects.dart';
-import 'package:project_5237_provider/presentation/screens/login_register/add_project1.dart';
-import 'package:project_5237_provider/presentation/screens/login_register/booked.dart';
 import 'package:project_5237_provider/presentation/screens/login_register/credit.dart';
-import 'package:project_5237_provider/presentation/screens/login_register/message.dart';
-import 'package:project_5237_provider/presentation/screens/login_register/notification.dart';
-import 'package:project_5237_provider/presentation/screens/login_register/proposal.dart';
-import 'package:project_5237_provider/presentation/screens/login_register/succesfully.dart';
-import 'package:project_5237_provider/presentation/screens/message/change_password.dart';
-import 'package:project_5237_provider/presentation/screens/message/forget_password.dart';
-import 'package:project_5237_provider/presentation/screens/message/otp_screen.dart';
-import 'package:project_5237_provider/presentation/screens/milestones/milestone.dart';
-import 'package:project_5237_provider/presentation/screens/my_contracts/my_contacts.dart';
 import 'package:project_5237_provider/presentation/screens/update_Project/chat_screen.dart';
-
 import '../constants/assets.dart';
 import '../constants/color.dart';
 import 'login_register/home_screen.dart';
-import 'login_register/EditProfile.dart';
+
 import 'message/discover_projects.dart';
 
 class MainScreen extends StatefulWidget {
@@ -38,23 +26,6 @@ class _MainScreenState extends State<MainScreen> {
     DebitCredit(),
     const ChatScreen(),
     const AddProjects(),
-
-    // //0
-    // const HomeProjectDetails(),
-    // const ProposalScreen(),
-    // const SuccesfullyScreen(),
-    // const NotificationScreen(),
-
-    // const BookedClient(),
-    // const AddProjects(),
-    // const AddProject1(),
-    // const ForgetPasswordScreen(),
-    // const OtpScreen(),
-    // const ChangePassword(),
-    // const MilestoneScreen(),
-    // const MycontractScreen(),
-    // //2
-    // const ChatScreen(),
   ];
 
   @override
@@ -67,13 +38,6 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   final bottomNavKey = GlobalKey();
-
-  // @override
-  // void _onItemTapped(int index) {
-  //   setState(() {
-  //     _selectedIndex = index;
-  //   });
-  // }
 
   @override
   Widget build(BuildContext context) {

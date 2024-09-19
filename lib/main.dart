@@ -19,6 +19,7 @@ import 'package:project_5237_provider/provider/auth/verifyOTP_provider.dart';
 import 'package:project_5237_provider/provider/onboarding/onbaording_provider.dart';
 import 'package:project_5237_provider/provider/onboarding/project_provider.dart';
 import 'package:project_5237_provider/routes/page_routes.dart';
+import 'package:project_5237_provider/provider/home/home_provider.dart';
 import 'package:provider/provider.dart';
 
 import 'config/baseclient/base_client.dart';
@@ -35,8 +36,6 @@ void main() {
       ChangeNotifierProvider(create: (context) => LoginProvider()),
       ChangeNotifierProvider(create: (context) => VerifyOTPProvider()),
       ChangeNotifierProvider(create: (context) => RegisterProvider()),
-      ChangeNotifierProvider(create: (context) => OnbaordingProvider()),
-      ChangeNotifierProvider(create: (context) => ProjectProvider()),
     ],
     child: const MyApp(),
   ));
@@ -70,9 +69,9 @@ class MyApp extends StatelessWidget {
             ),
             useMaterial3: true,
           ),
-          home:  AddProjects(), /*responsive.isMobile || responsive.isTablet
+          home: responsive.isMobile || responsive.isTablet
               ? SplashScreen()
-              : OnbarodingScreen1(),*/
+              : OnbarodingScreen1(),
         );
 
         //  Profile3());

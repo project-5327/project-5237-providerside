@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -25,12 +26,26 @@ class _AcceptProposalScreenState extends State<AcceptProposalScreen> {
   ImagePicker _picker = ImagePicker();
   XFile? _selectedImage;
 
-  Future<void> _pickImage() async {
-    final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
-    if (pickedFile != null) {
+  String? filePath;
+
+  Future<void> pickFile() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles();
+
+    if (result != null) {
+      PlatformFile file = result.files.first;
+
       setState(() {
-        _selectedImage = pickedFile;
+        filePath = file.path; // Get the file path
       });
+
+      // You can do additional things with the file such as upload it
+      print('File Name: ${filePath}');
+      print('File Path: ${file.path}');
+      print('File Extension: ${file.extension}');
+      print('File Size: ${file.size}');
+    } else {
+      // User canceled the picker
+      print('No file selected');
     }
   }
 
@@ -125,42 +140,56 @@ class _AcceptProposalScreenState extends State<AcceptProposalScreen> {
                     SizedBox(
                       height: 10.h,
                     ),
-                    InkWell(
-                      onTap: _pickImage,
-                      child: Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            border: Border.all(color: MyColors.grayDark)),
-                        height: 88.h,
-                        width: double.infinity,
-                        child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              if (_selectedImage != null)
-                                Row(
+                    filePath != null
+                        ? InkWell(
+                            onTap: pickFile,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  border: Border.all(color: MyColors.grayDark)),
+                              height: 88.h,
+                              width: double.infinity,
+                              child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    Image.file(
-                                      File(_selectedImage!.path),
-                                      height: 88.h,
-                                      width: 355.w,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ],
-                                )
-                              else ...[
-                                Text(
-                                  AppStrings.addAttachImage,
-                                  style: TextStyle(
-                                      fontSize: 10.sp,
-                                      fontWeight: FontWeight.w600,
-                                      color: MyColors.lightGrey),
-                                ),
-                                SvgPicture.asset(Assets.addImage)
-                              ],
-                            ]),
-                      ),
-                    ),
+                                    if (_selectedImage != null)
+                                      Row(
+                                        children: [
+                                          Image.file(
+                                            File(filePath.toString()),
+                                            height: 88.h,
+                                            width: 355.w,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ],
+                                      )
+                                    else ...[
+                                      Text(
+                                        AppStrings.addAttachImage,
+                                        style: TextStyle(
+                                            fontSize: 10.sp,
+                                            fontWeight: FontWeight.w600,
+                                            color: MyColors.lightGrey),
+                                      ),
+                                      SvgPicture.asset(Assets.addImage)
+                                    ],
+                                  ]),
+                            ),
+                          )
+                        : Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(color: MyColors.lightred),
+                            ),
+                            height: 88.h,
+                            width: MediaQuery.of(context).size.height,
+                            child: SvgPicture.asset(
+                              Assets.pdf,
+                              width: 27,
+                              height: 32,
+                            ),
+                          ),
                     SizedBox(
                       height: 20.h,
                     ),
