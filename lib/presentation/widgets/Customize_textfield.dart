@@ -49,7 +49,7 @@ class CustomTextFormField extends StatelessWidget {
           child: Text(title ?? "",
               style: TextStyle(
                   color: MyColors.black,
-                  fontSize: responsive.isMobile ? 12.sp : 14.sp,
+                  fontSize: responsive.isMobile ? 12.sp : 14,
                   fontWeight: FontWeight.w600)),
         ),
         SizedBox(height: 5.h),
@@ -69,7 +69,7 @@ class CustomTextFormField extends StatelessWidget {
               suffixIcon: icon,
               hintText: text,
               hintStyle: TextStyle(
-                  fontSize: responsive.isMobile ? 12.sp : 13.sp,
+                  fontSize: responsive.isMobile ? 12.sp : 13,
                   fontWeight: FontWeight.w600,
                   color: color ?? MyColors.lightGrey),
               contentPadding: responsive.isMobile
