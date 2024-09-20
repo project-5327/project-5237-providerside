@@ -9,4 +9,5 @@ class EndPoints {
   static String ONBOARDING ="/api/user/onboard";
 /*  static const String LOGIN = "/api/auth/login";*/
   static const String GETPROPOSALS = "/api/projects";
+  static const String ACCEPTPROPOSAL = "/api/proposal";
 }

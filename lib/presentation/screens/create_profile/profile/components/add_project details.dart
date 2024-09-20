@@ -19,7 +19,7 @@ import '../../../../widgets/Customize_textfield.dart';
 import '../../../../widgets/customize_button.dart';
 import '../../../../widgets/toggels.dart';
 import '../../../my_contracts/send_screen.dart';
-import 'add_project_componant.dart';
+import 'add_project_comp.dart';
 
 class AddProjectDetails extends StatefulWidget {
   const AddProjectDetails({super.key});

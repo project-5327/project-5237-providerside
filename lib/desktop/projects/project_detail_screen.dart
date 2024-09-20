@@ -229,7 +229,7 @@ class ProjectDetailScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           CustomizeButton(
-                            text: 'Hire',
+                            text: 'Accept',
                             height: 40.h,
                             width: 154.w,
                             color: MyColors.btnColor,
@@ -237,11 +237,12 @@ class ProjectDetailScreen extends StatelessWidget {
                             borderColor: MyColors.btnColor,
                             radius: 100.r,
                             onTap: () {
-                              //  Get.to(() => UpdateProject());
+                                Get.to(() => AcceptProposalScreen(
+                                ));
                             },
                           ),
                           CustomizeButton(
-                            text: 'Send proposal',
+                            text: 'Reject',
                             radius: 100.r,
                             height: 40.h,
                             width: 154.w,

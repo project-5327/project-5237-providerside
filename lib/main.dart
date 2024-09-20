@@ -6,7 +6,6 @@ import 'package:project_5237_provider/desktop/onboarding/onboarding1.dart';
 import 'package:project_5237_provider/presentation/constants/responsive_view.dart';
 import 'package:project_5237_provider/desktop/projects/project_detail_screen.dart';
 import 'package:project_5237_provider/presentation/screens/create_profile/create_your_profile.dart';
-import 'package:project_5237_provider/presentation/screens/create_profile/profile/components/add_project_deatiles.dart';
 import 'package:project_5237_provider/presentation/screens/create_profile/profile/profile8.dart';
 import 'package:project_5237_provider/presentation/screens/dashboard/dashboard_view.dart';
 import 'package:project_5237_provider/presentation/screens/login_register/add_project1.dart';
@@ -16,8 +15,8 @@ import 'package:project_5237_provider/presentation/screens/my_contracts/map_scre
 import 'package:project_5237_provider/provider/auth/login_provider.dart';
 import 'package:project_5237_provider/provider/auth/register_provider.dart';
 import 'package:project_5237_provider/provider/auth/verifyOTP_provider.dart';
+import 'package:project_5237_provider/provider/home/proposal_provider.dart';
 import 'package:project_5237_provider/provider/onboarding/onbaording_provider.dart';
-import 'package:project_5237_provider/provider/onboarding/project_provider.dart';
 import 'package:project_5237_provider/routes/page_routes.dart';
 import 'package:project_5237_provider/provider/home/home_provider.dart';
 import 'package:provider/provider.dart';
@@ -36,6 +35,9 @@ void main() {
       ChangeNotifierProvider(create: (context) => LoginProvider()),
       ChangeNotifierProvider(create: (context) => VerifyOTPProvider()),
       ChangeNotifierProvider(create: (context) => RegisterProvider()),
+      ChangeNotifierProvider(create: (context) => HomeProvider()),
+      ChangeNotifierProvider(create: (context) => OnbaordingProvider()),
+      ChangeNotifierProvider(create: (_) => ProposalProvider()),
     ],
     child: const MyApp(),
   ));

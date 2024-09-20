@@ -8,12 +8,14 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:project_5237_provider/presentation/constants/responsive_view.dart';
 import 'package:project_5237_provider/presentation/screens/my_contracts/send_screen.dart';
+import 'package:provider/provider.dart';
 
 import '../../presentation/constants/assets.dart';
 import '../../presentation/constants/color.dart';
 import '../../presentation/constants/strings.dart';
 import '../../presentation/widgets/Customize_textfield.dart';
 import '../../presentation/widgets/customize_button.dart';
+import '../../provider/home/proposal_provider.dart';
 
 class AcceptProposalScreen extends StatefulWidget {
   const AcceptProposalScreen({super.key});
@@ -63,195 +65,217 @@ class _AcceptProposalScreenState extends State<AcceptProposalScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 18),
-            child: Center(
-              child: Container(
-                width: 500.sp,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
+      child: Consumer<ProposalProvider>(
+          builder: (context, proposalProvider, child) {
+          return Scaffold(
+            body: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 18),
+                child: Center(
+                  child: Container(
+                    width: 500.sp,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        IconButton(
-                            onPressed: () {
-                              Get.back();
-                            },
-                            icon: Icon(
-                              Icons.arrow_back,
-                              size: 16.sp,
-                            )),
-                        Text(
-                          AppStrings.acceptProposal,
+                        Row(
+                          children: [
+                            IconButton(
+                                onPressed: () {
+                                  Get.back();
+                                },
+                                icon: Icon(
+                                  Icons.arrow_back,
+                                  size: 16.sp,
+                                )),
+                            Text(
+                              AppStrings.acceptProposal,
+                              style: TextStyle(
+                                  fontSize: 16.sp, fontWeight: FontWeight.w600),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 35.h,
+                        ),
+                        CustomTextFormField(
+                          controller: proposalProvider.titleController,
+                          text: 'title',
+                          title: 'Project title',
                           style: TextStyle(
-                              fontSize: 16.sp, fontWeight: FontWeight.w600),
+                              fontSize: 13.sp,
+                              fontWeight: FontWeight.w500,
+                              color: MyColors.black1),
+                        ),
+                        SizedBox(
+                          height: 20.h,
+                        ),
+                        CustomTextFormField(
+                          controller: proposalProvider.datetimeController,
+                          text: AppStrings.dummyDate,
+                          title: AppStrings.dateTime,
+                          style: TextStyle(
+                              fontSize: 13.sp,
+                              fontWeight: FontWeight.w500,
+                              color: MyColors.black1),
+                        ),
+                        SizedBox(
+                          height: 20.h,
+                        ),
+                        CustomTextFormField(
+                          controller: proposalProvider.rateController,
+                          text: AppStrings.$100,
+                          title: AppStrings.rate,
+                          style: TextStyle(
+                              fontSize: 13.sp,
+                              fontWeight: FontWeight.w500,
+                              color: MyColors.black1),
+                        ),
+                        SizedBox(
+                          height: 20.h,
+                        ),
+                        CustomTextFormField(
+                          controller: proposalProvider.addressController,
+                          text: AppStrings.inputAddress,
+                          title: AppStrings.address,
+                          style: TextStyle(
+                              fontSize: 13.sp,
+                              fontWeight: FontWeight.w500,
+                              color: MyColors.black1),
+                        ),
+                        SizedBox(
+                          height: 20.h,
+                        ),
+                        Text(
+                          AppStrings.attachImage,
+                          style: TextStyle(
+                              fontSize: 13.sp,
+                              fontWeight: FontWeight.w500,
+                              color: MyColors.black1),
+                        ),
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                        filePath != null
+                            ? InkWell(
+                                onTap: pickFile,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(8),
+                                      border: Border.all(color: MyColors.grayDark)),
+                                  height: 88.h,
+                                  width: double.infinity,
+                                  child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      children: [
+                                        if (_selectedImage != null)
+                                          Row(
+                                            children: [
+                                              Image.file(
+                                                File(filePath.toString()),
+                                                height: 88.h,
+                                                width: 355.w,
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ],
+                                          )
+                                        else ...[
+                                          Text(
+                                            AppStrings.addAttachImage,
+                                            style: TextStyle(
+                                                fontSize: 10.sp,
+                                                fontWeight: FontWeight.w600,
+                                                color: MyColors.lightGrey),
+                                          ),
+                                          SvgPicture.asset(Assets.addImage)
+                                        ],
+                                      ]),
+                                ),
+                              )
+                            : Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  border: Border.all(color: MyColors.lightred),
+                                ),
+                                height: 88.h,
+                                width: MediaQuery.of(context).size.height,
+                                child: SvgPicture.asset(
+                                  Assets.pdf,
+                                  width: 27,
+                                  height: 32,
+                                ),
+                              ),
+                        SizedBox(
+                          height: 20.h,
+                        ),
+                        Text(
+                          AppStrings.briefDesc,
+                          style: TextStyle(
+                              fontSize: 13.sp,
+                              fontWeight: FontWeight.w500,
+                              color: MyColors.black1),
+                        ),
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8.r),
+                              border: Border.all(color: MyColors.grayDark)),
+                          height: 114.h,
+                          width: double.infinity,
+                          child: Padding(
+                            padding: EdgeInsets.only(left: 8),
+                            child: TextField(
+                              controller: proposalProvider.descriptionController,
+                              decoration: InputDecoration(
+                                border: InputBorder.none,
+                                hintText: AppStrings.briefDesc,
+                                hintStyle: TextStyle(
+                                    fontSize: 10.sp,
+                                    fontWeight: FontWeight.w600,
+                                    color: MyColors.lightGrey),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                        SizedBox(
+                          height: 34.h,
+                        ),
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: CustomizeButton(
+                              borderColor: MyColors.btnColor,
+                              radius: 100.r,
+                              text: AppStrings.accept,
+                              height: 45.h,
+                              width: 155.w,
+                              color: MyColors.btnColor,
+                              textColor: MyColors.white,
+                              onTap: () {
+                                WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+                                  Provider.of<ProposalProvider>(context, listen: false)
+                                      .acceptProposalPutApi('');
+
+                                });
+                                _showDialogeBox(context);
+                              }),
+                        ),
+                        SizedBox(
+                          height: 20.h,
                         ),
                       ],
                     ),
-                    SizedBox(
-                      height: 35.h,
-                    ),
-                    CustomTextFormField(
-                      controller: dateTimeController,
-                      text: AppStrings.dummyDate,
-                      title: AppStrings.dateTime,
-                      style: TextStyle(
-                          fontSize: 13.sp,
-                          fontWeight: FontWeight.w500,
-                          color: MyColors.black1),
-                    ),
-                    SizedBox(
-                      height: 20.h,
-                    ),
-                    CustomTextFormField(
-                      controller: rateController,
-                      text: AppStrings.$100,
-                      title: AppStrings.rate,
-                      style: TextStyle(
-                          fontSize: 13.sp,
-                          fontWeight: FontWeight.w500,
-                          color: MyColors.black1),
-                    ),
-                    SizedBox(
-                      height: 20.h,
-                    ),
-                    CustomTextFormField(
-                      controller: addressController,
-                      text: AppStrings.inputAddress,
-                      title: AppStrings.address,
-                      style: TextStyle(
-                          fontSize: 13.sp,
-                          fontWeight: FontWeight.w500,
-                          color: MyColors.black1),
-                    ),
-                    SizedBox(
-                      height: 20.h,
-                    ),
-                    Text(
-                      AppStrings.attachImage,
-                      style: TextStyle(
-                          fontSize: 13.sp,
-                          fontWeight: FontWeight.w500,
-                          color: MyColors.black1),
-                    ),
-                    SizedBox(
-                      height: 10.h,
-                    ),
-                    filePath != null
-                        ? InkWell(
-                            onTap: pickFile,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8),
-                                  border: Border.all(color: MyColors.grayDark)),
-                              height: 88.h,
-                              width: double.infinity,
-                              child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    if (_selectedImage != null)
-                                      Row(
-                                        children: [
-                                          Image.file(
-                                            File(filePath.toString()),
-                                            height: 88.h,
-                                            width: 355.w,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ],
-                                      )
-                                    else ...[
-                                      Text(
-                                        AppStrings.addAttachImage,
-                                        style: TextStyle(
-                                            fontSize: 10.sp,
-                                            fontWeight: FontWeight.w600,
-                                            color: MyColors.lightGrey),
-                                      ),
-                                      SvgPicture.asset(Assets.addImage)
-                                    ],
-                                  ]),
-                            ),
-                          )
-                        : Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              border: Border.all(color: MyColors.lightred),
-                            ),
-                            height: 88.h,
-                            width: MediaQuery.of(context).size.height,
-                            child: SvgPicture.asset(
-                              Assets.pdf,
-                              width: 27,
-                              height: 32,
-                            ),
-                          ),
-                    SizedBox(
-                      height: 20.h,
-                    ),
-                    Text(
-                      AppStrings.briefDesc,
-                      style: TextStyle(
-                          fontSize: 13.sp,
-                          fontWeight: FontWeight.w500,
-                          color: MyColors.black1),
-                    ),
-                    SizedBox(
-                      height: 10.h,
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8.r),
-                          border: Border.all(color: MyColors.grayDark)),
-                      height: 114.h,
-                      width: double.infinity,
-                      child: Padding(
-                        padding: EdgeInsets.only(left: 8),
-                        child: TextField(
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: AppStrings.briefDesc,
-                            hintStyle: TextStyle(
-                                fontSize: 10.sp,
-                                fontWeight: FontWeight.w600,
-                                color: MyColors.lightGrey),
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10.h,
-                    ),
-                    SizedBox(
-                      height: 34.h,
-                    ),
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: CustomizeButton(
-                          borderColor: MyColors.btnColor,
-                          radius: 100.r,
-                          text: AppStrings.accept,
-                          height: 45.h,
-                          width: 155.w,
-                          color: MyColors.btnColor,
-                          textColor: MyColors.white,
-                          onTap: () {
-                            _showDialogeBox(context);
-                          }),
-                    ),
-                    SizedBox(
-                      height: 20.h,
-                    ),
-                  ],
+                  ),
                 ),
               ),
             ),
-          ),
-        ),
+          );
+        }
       ),
     );
   }

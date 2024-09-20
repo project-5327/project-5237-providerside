@@ -102,12 +102,13 @@ class BaseClient {
   }
 
   // PUT request
-  static Future<dynamic> put({String? api, dynamic payloadObj}) async {
-    var uri = baseUrl + (api ?? "");
+  static Future<dynamic> put(
+      {String? api, Map<String, dynamic>? payloadObj}) async {
+    // Make the request
     try {
       var response = await dio.put(
-        uri,
-        data: payloadObj,
+        api ?? "",
+        data: payloadObj ?? {},
       );
       return response;
     } on DioException catch (e) {
@@ -125,8 +126,8 @@ class BaseClient {
         debugPrint(e.message);
       }
     }
-    return null;
   }
+
 
   // DELETE request
   static Future<dynamic> delete({String? api}) async {

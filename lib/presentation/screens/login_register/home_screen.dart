@@ -46,280 +46,245 @@ class _HomeScreenState extends State<HomeScreen> {
     final responsive = ResponsiveCheck(context);
     return responsive.isMobile || responsive.isTablet
         ? Consumer<HomeProvider>(
-            builder: (context, homeprovider, child) {
-              return SafeArea(
-                child: Scaffold(
-                  appBar: AppBar(
-                    leading: Padding(
-                      padding: const EdgeInsets.only(top: 10),
-                      child: InkWell(
-                        onTap: () {
-                          Get.to(const NotificationScreen());
-                        },
-                        child: Stack(alignment: Alignment.topRight, children: [
-                          SvgPicture.asset(Assets.bell),
-                          SvgPicture.asset(Assets.dot)
-                        ]),
-                      ),
+      builder: (context, homeprovider, child) {
+        return SafeArea(
+          child: Scaffold(
+            appBar: AppBar(
+              leading: Padding(
+                padding: const EdgeInsets.only(top: 10),
+                child: InkWell(
+                  onTap: () {
+                    Get.to(const NotificationScreen());
+                  },
+                  child: Stack(
+                    alignment: Alignment.topRight,
+                    children: [
+                      SvgPicture.asset(Assets.bell),
+                      SvgPicture.asset(Assets.dot),
+                    ],
+                  ),
+                ),
+              ),
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Discover Projects',
+                    style: TextStyle(
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w600,
                     ),
-                    title: Row(
+                  ),
+                  Switch(
+                    value: _isSwitched,
+                    onChanged: _toggleSwitch,
+                    activeColor: Colors.blue,
+                    inactiveThumbColor: Colors.grey,
+                    inactiveTrackColor: Colors.grey[300],
+                  ),
+                ],
+              ),
+            ),
+            body: SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.sp),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SearchField(),
+                    SizedBox(height: 27.h),
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Discover Projects',
+                          'Recent Proposal',
                           style: TextStyle(
-                              fontSize: 16.sp, fontWeight: FontWeight.w600),
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.w500,
+                            color: MyColors.black2,
+                          ),
                         ),
-                        Switch(
-                          value: _isSwitched,
-                          onChanged: _toggleSwitch,
-                          activeColor: Colors.blue,
-                          inactiveThumbColor: Colors.grey,
-                          inactiveTrackColor: Colors.grey[300],
-                        )
-                        //SvgPicture.asset(Assets.filter),
+                        homeprovider.proposalDataDoc?.projects?.isEmpty ?? true
+                            ? SizedBox.shrink()
+                            : InkWell(
+                          onTap: () {
+                            // Handle 'See All' tap here
+                          },
+                          child: Text(
+                            'See All',
+                            style: TextStyle(
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.w300,
+                              color: MyColors.blue,
+                            ),
+                          ),
+                        ),
                       ],
                     ),
-                  ),
-                  body: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20.sp),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        //  _pages[currentIndex],
-                        const SearchField(),
-                        SizedBox(
-                          height: 27.h,
+                    SizedBox(height: 20.h),
+                    homeprovider.proposalDataDoc?.projects?.isEmpty ?? true
+                        ? Container(
+                      alignment: Alignment.center,
+                      height: MediaQuery.of(context).size.height * 0.14,
+                      child: Text(
+                        "No Categories Found",
+                        style: GoogleFonts.inter(
+                          textStyle: TextStyle(
+                            fontSize: 20.sp,
+                            fontWeight: FontWeight.w600,
+                            color: MyColors.black,
+                          ),
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      ),
+                    )
+                        : ListView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: homeprovider.proposalDataDoc?.projects?.length,
+                      itemBuilder: (context, index) {
+                        DateTime createdAt = DateTime.parse(
+                          homeprovider.proposalDataDoc?.projects?[index].createdAt ?? "",
+                        );
+                        return Column(
                           children: [
-                            Text(
-                              'Recent Proposal ',
-                              style: TextStyle(
-                                  fontSize: 16.sp,
-                                  fontWeight: FontWeight.w500,
-                                  color: MyColors.black2),
-                            ),
-                            homeprovider.proposalDataDoc?.projects?.length == 0
-                                ? SizedBox.shrink()
-                                : Text(
-                                    'See All',
-                                    style: TextStyle(
-                                        fontSize: 12.sp,
-                                        fontWeight: FontWeight.w300,
-                                        color: MyColors.blue),
-                                  ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 20.h,
-                        ),
-                        homeprovider.proposalDataDoc?.projects?.length == 0
-                            ? Container(
-                                alignment: Alignment.center,
-                                height:
-                                    MediaQuery.of(context).size.height * 0.14,
-                                child: Text(
-                                  "No Categories Found",
-                                  style: GoogleFonts.inter(
-                                    textStyle: TextStyle(
-                                        fontSize: 20.sp,
-                                        fontWeight: FontWeight.w600,
-                                        color: MyColors.black),
-                                  ),
-                                ),
-                              )
-                            : Container(
-                                height: MediaQuery.of(context).size.height,
-                                child: ListView.builder(
-                                  itemCount: homeprovider
-                                      .proposalDataDoc?.projects?.length,
-                                  itemBuilder: (context, index) {
-                                    DateTime createdAt = DateTime.parse(
-                                        homeprovider.proposalDataDoc
-                                                ?.projects?[index].createdAt ??
-                                            "");
-                                    print(
-                                        "image: ${homeprovider.proposalDataDoc?.projects?[index].attachment ?? ""}");
-                                    return Column(
-                                      children: [
-                                        InkWell(
-                                          onTap: () {
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    ProjectDetailScreen(
-                                                  isFromHomeScreen: true,
-                                                  proposalListData: homeprovider
-                                                          .proposalDataDoc
-                                                          ?.projects?[index] ??
-                                                      ProposalListData(),
-                                                ),
-                                              ),
-                                            );
-                                          },
-                                          child: DiscoverContainer(
-                                              time: timeago.format(
-                                                createdAt,
-                                              ),
-                                              image: homeprovider
-                                                      .proposalDataDoc
-                                                      ?.projects?[index]
-                                                      .attachment ??
-                                                  "",
-                                              username: homeprovider
-                                                      .proposalDataDoc
-                                                      ?.projects?[index]
-                                                      .clientId
-                                                      ?.userName ??
-                                                  "",
-                                              text1: homeprovider
-                                                      .proposalDataDoc
-                                                      ?.projects?[index]
-                                                      .title ??
-                                                  "",
-                                              text2:
-                                                  "\$ ${homeprovider.proposalDataDoc?.projects?[index].budget?.min} - \$ ${homeprovider.proposalDataDoc?.projects?[index].budget?.max}",
-                                              text3: 'Location',
-                                              rate: 'Rate'),
-                                        ),
-                                        Divider(
-                                          color: MyColors.grey.withOpacity(0.4),
-                                          thickness: 1,
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                ),
-                              ),
-                      ],
-                    ),
-                  ),
-                ),
-              );
-            },
-          )
-        : Consumer<HomeProvider>(builder: (context, homeprovider, child) {
-            return SafeArea(
-              child: Scaffold(
-                body: ScrollConfiguration(
-                  behavior: const ScrollBehavior().copyWith(scrollbars: false),
-                  child: ListView(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 33.w, vertical: 31.h),
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            AppStrings.home,
-                            style: GoogleFonts.inter(
-                              textStyle: TextStyle(
-                                  fontSize: 20.sp,
-                                  fontWeight: FontWeight.w600,
-                                  color: MyColors.black),
-                            ),
-                          ),
-                          SvgPicture.asset(Assets.filter)
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 22,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            AppStrings.recentProposal,
-                            style: GoogleFonts.inter(
-                              textStyle: TextStyle(
-                                  fontSize: 20.sp,
-                                  fontWeight: FontWeight.w500,
-                                  color: MyColors.black),
-                            ),
-                          ),
-                          Text(
-                            AppStrings.seeAll,
-                            style: GoogleFonts.inter(
-                              textStyle: TextStyle(
-                                  fontSize: 16.sp,
-                                  fontWeight: FontWeight.w400,
-                                  color: MyColors.blue),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 22.h,
-                      ),
-                      GridView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 3,
-                                mainAxisSpacing: 14,
-                                crossAxisSpacing: 35,
-                                childAspectRatio: 3 / 2,
-                                mainAxisExtent: 207),
-                        itemCount:
-                            homeprovider.proposalDataDoc?.projects?.length,
-                        itemBuilder: (context, gridIndex) {
-                          DateTime createdAt = DateTime.parse(homeprovider
-                                  .proposalDataDoc
-                                  ?.projects?[gridIndex]
-                                  .createdAt ??
-                              "");
-                          return GestureDetector(
+                            InkWell(
                               onTap: () {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => ProjectDetailScreen(
                                       isFromHomeScreen: true,
-                                      proposalListData: homeprovider
-                                              .proposalDataDoc
-                                              ?.projects?[gridIndex] ??
-                                          ProposalListData(),
+                                      proposalListData: homeprovider.proposalDataDoc?.projects?[index] ?? ProposalListData(),
                                     ),
                                   ),
                                 );
                               },
-                              child: ProjectComp(
-                                  time: timeago.format(
-                                    createdAt,
-                                  ),
-                                  image: homeprovider.proposalDataDoc
-                                          ?.projects?[gridIndex].attachment ??
-                                      "",
-                                  username: homeprovider
-                                          .proposalDataDoc
-                                          ?.projects?[gridIndex]
-                                          .clientId
-                                          ?.userName ??
-                                      "",
-                                  text1: homeprovider.proposalDataDoc
-                                          ?.projects?[gridIndex].title ??
-                                      "",
-                                  text2:
-                                      "\$ ${homeprovider.proposalDataDoc?.projects?[gridIndex].budget?.min} - \$ ${homeprovider.proposalDataDoc?.projects?[gridIndex].budget?.max}",
-                                  text3: 'Location',
-                                  rate: 'Rate',
-                                  skill: homeprovider
-                                          .proposalDataDoc
-                                          ?.projects?[gridIndex]
-                                          .skillsRequired ??
-                                      []));
-                        },
-                      )
-                    ],
-                  ),
+                              child: DiscoverContainer(
+                                time: timeago.format(createdAt),
+                                image: homeprovider.proposalDataDoc?.projects?[index].attachment ?? "",
+                                username: homeprovider.proposalDataDoc?.projects?[index].clientId?.userName ?? "",
+                                text1: homeprovider.proposalDataDoc?.projects?[index].title ?? "",
+                                text2: "\$${homeprovider.proposalDataDoc?.projects?[index].budget?.min} - \$${homeprovider.proposalDataDoc?.projects?[index].budget?.max}",
+                                text3: 'Location',
+                                rate: 'Rate',
+                              ),
+                            ),
+                            Divider(
+                              color: MyColors.grey.withOpacity(0.4),
+                              thickness: 1,
+                            ),
+                          ],
+                        );
+                      },
+                    ),
+                  ],
                 ),
               ),
-            );
-          });
+            ),
+          ),
+        );
+      },
+    )
+        : Consumer<HomeProvider>(builder: (context, homeprovider, child) {
+      return SafeArea(
+        child: Scaffold(
+          body: SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 33.w, vertical: 31.h),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        AppStrings.home,
+                        style: GoogleFonts.inter(
+                          textStyle: TextStyle(
+                            fontSize: 20.sp,
+                            fontWeight: FontWeight.w600,
+                            color: MyColors.black,
+                          ),
+                        ),
+                      ),
+                      SvgPicture.asset(Assets.filter),
+                    ],
+                  ),
+                  const SizedBox(height: 22),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        AppStrings.recentProposal,
+                        style: GoogleFonts.inter(
+                          textStyle: TextStyle(
+                            fontSize: 20.sp,
+                            fontWeight: FontWeight.w500,
+                            color: MyColors.black,
+                          ),
+                        ),
+                      ),
+                      Text(
+                        AppStrings.seeAll,
+                        style: GoogleFonts.inter(
+                          textStyle: TextStyle(
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.w400,
+                            color: MyColors.blue,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 22.h),
+                  GridView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3,
+                      mainAxisSpacing: 14,
+                      crossAxisSpacing: 35,
+                      childAspectRatio: 3 / 2,
+                      mainAxisExtent: 207,
+                    ),
+                    itemCount: homeprovider.proposalDataDoc?.projects?.length,
+                    itemBuilder: (context, gridIndex) {
+                      DateTime createdAt = DateTime.parse(
+                        homeprovider.proposalDataDoc?.projects?[gridIndex].createdAt ?? "",
+                      );
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ProjectDetailScreen(
+                                isFromHomeScreen: true,
+                                proposalListData: homeprovider.proposalDataDoc?.projects?[gridIndex] ?? ProposalListData(),
+                              ),
+                            ),
+                          );
+                        },
+                        child: ProjectComp(
+                          time: timeago.format(createdAt),
+                          image: homeprovider.proposalDataDoc?.projects?[gridIndex].attachment ?? "",
+                          username: homeprovider.proposalDataDoc?.projects?[gridIndex].clientId?.userName ?? "",
+                          text1: homeprovider.proposalDataDoc?.projects?[gridIndex].title ?? "",
+                          text2: "\$${homeprovider.proposalDataDoc?.projects?[gridIndex].budget?.min} - \$${homeprovider.proposalDataDoc?.projects?[gridIndex].budget?.max}",
+                          text3: 'Location',
+                          rate: 'Rate',
+                          skill: homeprovider.proposalDataDoc?.projects?[gridIndex].title != null
+                              ? [homeprovider.proposalDataDoc?.projects?[gridIndex].title ?? ""]
+                              : [],
+                        ),
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      );
+    });
   }
 }
