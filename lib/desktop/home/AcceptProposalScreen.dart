@@ -297,8 +297,8 @@ class _AcceptProposalScreenState extends State<AcceptProposalScreen> {
                                 Provider.of<ProposalProvider>(context,
                                         listen: false)
                                     .createProposals(
-                                  context: context,
-                                  // projectData: proposalData,
+                                  context,
+                                  widget.proposalListData.sId ?? "",
                                 );
                               });
                               _showDialogeBox(context);

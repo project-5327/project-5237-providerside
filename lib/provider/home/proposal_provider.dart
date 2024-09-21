@@ -42,7 +42,7 @@ class ProposalProvider with ChangeNotifier {
   String? get errorMessage => _errorMessage;
   bool get isSuccess => _isSuccess;
 
-  Future<void> createProposals({required BuildContext context}) async {
+  Future<void> createProposals(BuildContext context, String proposalId) async {
     _loading = true;
     _errorMessage = null;
     notifyListeners();
