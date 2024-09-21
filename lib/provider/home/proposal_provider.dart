@@ -55,7 +55,7 @@ class ProposalProvider with ChangeNotifier {
           await MultipartFile.fromFile(file!.path,
               filename: file!.path, contentType: MediaType('image', 'jpg')),
         ],
-      'projectId': '66ed389638993904863e8daa',
+      'projectId': proposalId,
       'proposalTitle': titleController.text,
       'proposalDescription': descriptionController.text,
       'estimatedTime': datetimeController.text,
