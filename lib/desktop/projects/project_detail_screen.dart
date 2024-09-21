@@ -96,7 +96,7 @@ class ProjectDetailScreen extends StatelessWidget {
                               height: 5.h,
                             ),
                             Text(
-                              //  proposalListData.clientId?.userName ??
+                                proposalListData.clientId?.userName ??
                               "",
                               style: TextStyle(
                                   fontSize: 17.sp,
@@ -141,7 +141,7 @@ class ProjectDetailScreen extends StatelessWidget {
                                 height: 33.h,
                               ),
                               Text(
-                                // proposalListData.title ??
+                                proposalListData.title ??
                                 "",
                                 style: TextStyle(
                                     fontSize: 12,
@@ -159,8 +159,7 @@ class ProjectDetailScreen extends StatelessWidget {
                                     color: MyColors.black),
                               ),
                               Text(
-                                "",
-                                // '\$${proposalListData.budget?.min} - \$${proposalListData.budget?.max}',
+                               '\$${proposalListData.budget?.min} - \$${proposalListData.budget?.max}',
                                 style: TextStyle(
                                     fontSize: 14.sp,
                                     fontWeight: FontWeight.w500,
@@ -177,8 +176,7 @@ class ProjectDetailScreen extends StatelessWidget {
                                     color: MyColors.black),
                               ),
                               Text(
-                                "",
-                                // proposalListData.timelineType ?? "",
+                                proposalListData.timelineType ?? "",
                                 style: TextStyle(
                                     fontSize: 14.sp,
                                     fontWeight: FontWeight.w500,
@@ -201,7 +199,7 @@ class ProjectDetailScreen extends StatelessWidget {
                                     fontWeight: FontWeight.w400,
                                     color: MyColors.black),
                                 softWrap: true,
-                                //  proposalListData.description ??
+                                 proposalListData.description ??
                                 "",
                               ),
                               SizedBox(
@@ -215,8 +213,8 @@ class ProjectDetailScreen extends StatelessWidget {
                                     margin: EdgeInsets.only(right: 12.w),
                                     child: CustomizeTagContainer(
                                       tag:
-                                          //  proposalListData
-                                          //         .skillsRequired?[index] ??
+                                           proposalListData
+                                                 .skillsRequired?[index] ??
                                           "",
                                     ),
                                   );

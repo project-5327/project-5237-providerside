@@ -29,6 +29,7 @@ class ProposalProvider with ChangeNotifier {
 
   set setFIle(File? image) {
     _selectedImage = image;
+    debugPrint('=========>  file ${_selectedImage}');
     notifyListeners();
   }
 
@@ -48,82 +49,54 @@ class ProposalProvider with ChangeNotifier {
     notifyListeners();
 
     final ApiService apiService = ApiService();
-
-    final proposalData = {
-      if (file != null)
-        'proposalImage': [
-          await MultipartFile.fromFile(file!.path,
-              filename: file!.path, contentType: MediaType('image', 'jpg')),
+    debugPrint('=========> file path  ${file}');
+     final proposalData = {
+       if (file != null)
+         'proposalImage': [
+           await MultipartFile.fromFile(file!.path,
+               filename: file!.path, contentType: MediaType('image', 'jpg')),
         ],
-      'projectId': proposalId,
-      'proposalTitle': titleController.text,
-      'proposalDescription': descriptionController.text,
-      'estimatedTime': datetimeController.text,
-      'proposedBudget': rateController.text,
-      'address': addressController.text,
+       'projectId': proposalId,
+       'proposalTitle': titleController.text,
+       'proposalDescription': descriptionController.text,
+       'estimatedTime': datetimeController.text,
+       'proposedBudget': rateController.text,
+       'address': addressController.text,
     };
     try {
-      Response response = await apiService.createProposal(proposalData);
+       Response response = await apiService.createProposal(proposalData);
 
-      debugPrint("Response data: ${response.data}");
-      debugPrint("Response status code: ${response.statusCode}");
+       debugPrint("Response data: ${response.data}");
+       debugPrint("Response status code: ${response.statusCode}");
 
-      if (response.data != null && response.statusCode == 201) {
-        ScaffoldMessenger.of(context).showSnackBar(
+       if (response.data != null && response.statusCode == 201) {
+         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(response.data['message'])),
         );
-        debugPrint("Response message: ${response.data['message']}");
-        _isSuccess = true;
+         debugPrint("Response message: ${response.data['message']}");
+         _isSuccess = true;
       } else {
-        _errorMessage = response.data['message'] ?? 'Failed to create project.';
-        debugPrint("Error message: ${response.data['message']}");
+         _errorMessage = response.data['message'] ?? 'Failed to create project.';
+          debugPrint("Error message: ${response.data['message']}");
 
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(_errorMessage!)),
+         ScaffoldMessenger.of(context).showSnackBar(
+           SnackBar(content: Text(_errorMessage!)),
         );
-        _isSuccess = false;
+         _isSuccess = false;
       }
     } catch (e) {
-      _errorMessage = 'An error occurred. Please try again.';
-      debugPrint("Exception occurred: ${e.toString()}");
+       _errorMessage = 'An error occurred. Please try again.';
+       debugPrint("Exception occurred: ${e.toString()}");
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(_errorMessage!)),
+       ScaffoldMessenger.of(context).showSnackBar(
+         SnackBar(content: Text(_errorMessage!)),
       );
       _isSuccess = false;
     }
 
-    _loading = false;
-    notifyListeners();
+     _loading = false;
+     notifyListeners();
   }
 
-  // Future<void> acceptProposalPutApi(String proposalId) async {
-  //   isLoading = true;
-  //   errorMessage = null;
-  //   notifyListeners();
 
-  //   await ApiService()
-  //       .acceptProposalApi(
-  //           proposalId,
-  //           titleController.text,
-  //           datetimeController.text,
-  //           rateController.text,
-  //           addressController.text,
-  //           descriptionController.text)
-  //       .then((response) {
-  //     print('===> ${response.status}');
-  //     if (response.status == 200) {
-  //       isLoading = false;
-  //       notifyListeners();
-  //     } else {
-  //       isLoading = false;
-  //       notifyListeners();
-  //       ToastComp.showToast(
-  //         'Something went wrong!',
-  //         backgroundColor: Colors.black,
-  //         textColor: Colors.white,
-  //       );
-  //     }
-  //   });
-  // }
 }

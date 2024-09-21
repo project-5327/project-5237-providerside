@@ -13,6 +13,7 @@ import 'package:provider/provider.dart';
 import '../../presentation/constants/assets.dart';
 import '../../presentation/constants/color.dart';
 import '../../presentation/constants/strings.dart';
+import '../../presentation/screens/login_register/message.dart';
 import '../../presentation/screens/my_contracts/send_screen.dart';
 import '../../presentation/widgets/Customize_textfield.dart';
 import '../../presentation/widgets/customize_button.dart';
@@ -321,6 +322,7 @@ class _AcceptProposalScreenState extends State<AcceptProposalScreen> {
   void _showDialogeBox(context) {
     final responsive = ResponsiveCheck(context);
     Get.defaultDialog(
+      barrierDismissible:false,
       titlePadding: EdgeInsets.only(top: 86.h, bottom: 25.h),
       contentPadding: EdgeInsets.symmetric(horizontal: 55.w),
       title: "\$Proposal accepted",
@@ -358,9 +360,10 @@ class _AcceptProposalScreenState extends State<AcceptProposalScreen> {
                 color: MyColors.btnColor,
                 textColor: MyColors.white,
                 onTap: () {
-                  Navigator.popUntil(
+                  Navigator.pushAndRemoveUntil(
                     context,
-                    (route) => route.isFirst,
+                    MaterialPageRoute(builder: (context) => MessageScreen()),
+                        (Route<dynamic> route) => false,  // This will remove all previous routes
                   );
                 },
               ),
