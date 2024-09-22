@@ -3,11 +3,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:project_5237_provider/desktop/onboarding/create_profile.dart';
+import 'package:project_5237_provider/presentation/screens/create_profile/profile/profile_detail.dart';
 
 import '../../config/baseclient/CustomInterceptor.dart';
 import '../../config/baseclient/base_client.dart';
 import '../../config/baseclient/endpoints.dart';
-
 
 class RegisterProvider extends ChangeNotifier {
   //Register API Implement
@@ -68,11 +69,14 @@ class RegisterProvider extends ChangeNotifier {
         debugPrint("message======>${response.data['message']}");
         CustomInterceptor.setToken(token);
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(response.data['message'])),
+          SnackBar(
+            content: Text(response.data['message']),
+          ),
         );
-        _isLoading = false;
 
+        _isLoading = false;
         notifyListeners();
+        Get.to(CreateYourProfileScreen());
         return true;
       } else {
         _errorMessage = 'Invalid credentials';
@@ -99,51 +103,51 @@ class RegisterProvider extends ChangeNotifier {
     debugPrint("===password=====>${passwordController.text.trim()}");
     debugPrint("===isClient=====>${repeatPasswordController.text.trim()}");
     /*if (formKeyRegist.currentState?.validate() ?? false) {*/
-      // If the form is valid, proceed with the login
-      /*final name = nameController.text.trim();*/
+    // If the form is valid, proceed with the login
+    /*final name = nameController.text.trim();*/
     final fname = fnameController.text.trim();
     final lname = lnameController.text.trim();
-      final email = emailController.text.trim();
-      final password = passwordController.text.trim();
-      final repeatPassword = repeatPasswordController.text.trim();
+    final email = emailController.text.trim();
+    final password = passwordController.text.trim();
+    final repeatPassword = repeatPasswordController.text.trim();
 
-      debugPrint("name=====>$fname");
+    debugPrint("name=====>$fname");
     debugPrint("name=====>$lname");
-      debugPrint("Email=====>$email");
-      debugPrint("password=====>$password");
-      debugPrint("isClient=====>$isClient");
+    debugPrint("Email=====>$email");
+    debugPrint("password=====>$password");
+    debugPrint("isClient=====>$isClient");
 
-      final success = await signUp(
-        context: context,
-        name: fname + lname,
-        email: email,
-        password: password,
-      );
+    final success = await signUp(
+      context: context,
+      name: fname + lname,
+      email: email,
+      password: password,
+    );
 
-      if (success) {
-       /* Navigator.pushReplacement(
+    if (success) {
+      /* Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => LoginPage()),
         );*/
-        Future.delayed(const Duration(seconds: 5), () {
-          fnameController.clear();
-          lnameController.clear();
-          emailController.clear();
-          passwordController.clear();
-          repeatPasswordController.clear();
-        });
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(errorMessage ?? 'Registration failed')),
-        );
-      }
-    }/* else {
+      Future.delayed(const Duration(seconds: 5), () {
+        fnameController.clear();
+        lnameController.clear();
+        emailController.clear();
+        passwordController.clear();
+        repeatPasswordController.clear();
+      });
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(errorMessage ?? 'Registration failed')),
+      );
+    }
+  } /* else {
 
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(errorMessage ?? "Field can\'t empty")),
       );
     }*/
- /* }*/
+  /* }*/
 
   // Validation
   var obscureText = false;

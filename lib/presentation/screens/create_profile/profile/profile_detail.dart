@@ -33,50 +33,51 @@ class ProfileDetail extends StatelessWidget {
   }
 
   _mobileView(BuildContext context) {
-    return Consumer<OnbaordingProvider>(builder: (context, onboardingProvider, child) {
-        return StaticProfileLayout(
-          middleContentBuilder: () => Form(
-            /*key: formKey,*/
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: 30.h),
-                EditCreateProfile(
-                  align: TextAlign.start,
-                  ontap: () {},
-                  validator: (value) =>
-                      onboardingProvider.validateTitle(value ?? ""),
-                  controller: onboardingProvider.titleController,
-                  text: AppStrings.createProfileText1,
-                  text1: AppStrings.createProfileLorem,
-                  feildText: AppStrings.titletext,
-                  labelText: AppStrings.title,
-                  color: MyColors.lightGrey,
-                ),
-                SizedBox(height: 158.h),
-                Center(
-                    child: CustomizeButton(
-                        borderColor: MyColors.btnColor,
-                        radius: 100.r,
-                        text: AppStrings.next,
-                        height: 40.h,
-                        width: 334.w,
-                        color: MyColors.btnColor,
-                        textColor: MyColors.white,
-                        onTap: () {
-                          //if (formKey.currentState!.validate()) {
-                          debugPrint('====>  profile details : ${onboardingProvider.titleController}');
-                          profileController.nextPage();
-                          Get.to(() => Profile2());
-                          //   }
-                        })),
-                SizedBox(height: 42.h),
-              ],
-            ),
+    return Consumer<OnbaordingProvider>(
+        builder: (context, onboardingProvider, child) {
+      return StaticProfileLayout(
+        middleContentBuilder: () => Form(
+          /*key: formKey,*/
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: 30.h),
+              EditCreateProfile(
+                align: TextAlign.start,
+                ontap: () {},
+                validator: (value) =>
+                    onboardingProvider.validateTitle(value ?? ""),
+                controller: onboardingProvider.titleController,
+                text: AppStrings.createProfileText1,
+                text1: AppStrings.createProfileLorem,
+                feildText: AppStrings.titletext,
+                labelText: AppStrings.title,
+                color: MyColors.lightGrey,
+              ),
+              SizedBox(height: 158.h),
+              Center(
+                  child: CustomizeButton(
+                      borderColor: MyColors.btnColor,
+                      radius: 100.r,
+                      text: AppStrings.next,
+                      height: 40.h,
+                      width: 334.w,
+                      color: MyColors.btnColor,
+                      textColor: MyColors.white,
+                      onTap: () {
+                        //if (formKey.currentState!.validate()) {
+                        debugPrint(
+                            '====>  profile details : ${onboardingProvider.titleController}');
+                        profileController.nextPage();
+                        Get.to(() => Profile2());
+                        //   }
+                      })),
+              SizedBox(height: 42.h),
+            ],
           ),
-        );
-      }
-    );
+        ),
+      );
+    });
   }
 
   _deskTopview(BuildContext context) {

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:project_5237_provider/presentation/screens/dashboard/dashboard_view.dart';
 import '../../config/baseclient/base_client.dart';
 import '../../config/baseclient/endpoints.dart';
 
@@ -16,15 +17,17 @@ class OnbaordingProvider extends ChangeNotifier {
   final TextEditingController _pincodeController = TextEditingController();
   final TextEditingController _countryController = TextEditingController();
   final TextEditingController _titleController = TextEditingController();
-  final TextEditingController _profileDescriptionController = TextEditingController();
+  final TextEditingController _profileDescriptionController =
+      TextEditingController();
   final TextEditingController _hourlyRateController = TextEditingController();
   final TextEditingController _phoneNumberController = TextEditingController();
 
-   // add experiance
+  // add experiance
   final TextEditingController _companyNameController = TextEditingController();
   final TextEditingController _roleController = TextEditingController();
   final TextEditingController _locationController = TextEditingController();
-  final TextEditingController _EmployementTypeController = TextEditingController();
+  final TextEditingController _EmployementTypeController =
+      TextEditingController();
   final TextEditingController _startDateController = TextEditingController();
   final TextEditingController _endDateController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
@@ -32,18 +35,19 @@ class OnbaordingProvider extends ChangeNotifier {
   final TextEditingController _description1Controller = TextEditingController();
 
   //education
-  final TextEditingController _degreeORCertificateController = TextEditingController();
-  final TextEditingController _instituteNameController = TextEditingController();
+  final TextEditingController _degreeORCertificateController =
+      TextEditingController();
+  final TextEditingController _instituteNameController =
+      TextEditingController();
   final TextEditingController _FeildOfStudyController = TextEditingController();
   final TextEditingController _location1Controller = TextEditingController();
   final TextEditingController _startDate1Controller = TextEditingController();
   final TextEditingController _endDate1Controller = TextEditingController();
 
-
   File? _selectedImage;
 
- String _contryName ="";
- String _cityName ="";
+  String _contryName = "";
+  String _cityName = "";
   // Controllers for experience fields
   final List<Map<String, dynamic>> _experiences = [];
 
@@ -51,10 +55,10 @@ class OnbaordingProvider extends ChangeNotifier {
   final List<Map<String, dynamic>> _education = [];
 
   // Controllers for skills
-   List<String> _skills = [];
+  List<String> _skills = [];
 
   // Controllers for languages
-   List<String> _languages = [];
+  List<String> _languages = [];
 
   bool _isLoading = false;
   String? _errorMessage;
@@ -79,30 +83,31 @@ class OnbaordingProvider extends ChangeNotifier {
   TextEditingController get companyNameController => _companyNameController;
   TextEditingController get roleController => _roleController;
   TextEditingController get locationController => _locationController;
-  TextEditingController get employementTypeController => _EmployementTypeController;
+  TextEditingController get employementTypeController =>
+      _EmployementTypeController;
   TextEditingController get startDateController => _startDateController;
   TextEditingController get endDateController => _endDateController;
   TextEditingController get descriptionController => _descriptionController;
 
   TextEditingController get description1Controller => _description1Controller;
 
-  TextEditingController get degreeORCertificateController => _degreeORCertificateController;
+  TextEditingController get degreeORCertificateController =>
+      _degreeORCertificateController;
   TextEditingController get instituteNameController => _instituteNameController;
   TextEditingController get feildOfStudyController => _FeildOfStudyController;
   TextEditingController get location1Controller => _location1Controller;
   TextEditingController get startDate1Controller => _startDate1Controller;
   TextEditingController get endDate1Controller => _endDate1Controller;
 
-  List<String>  get languages => _languages;
+  List<String> get languages => _languages;
 
-  List<String>  get skills => _skills;
+  List<String> get skills => _skills;
 
-  String  get countryName => _contryName;
+  String get countryName => _contryName;
 
-  String get cityName =>_cityName;
+  String get cityName => _cityName;
 
   File? get selectedImage => _selectedImage;
-
 
   set setImage(File image) {
     _selectedImage = image;
@@ -115,13 +120,13 @@ class OnbaordingProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  set contryName(String val ) {
+  set contryName(String val) {
     _cityName = val;
     debugPrint('======> countryname ${_cityName}');
     notifyListeners();
   }
 
-  set cityName(String val ) {
+  set cityName(String val) {
     _contryName = val;
     debugPrint('======> cityname ${_contryName}');
     notifyListeners();
@@ -129,13 +134,10 @@ class OnbaordingProvider extends ChangeNotifier {
 
   set setSkill(List<String> val) {
     _skills = val;
-   /* print('======> _skills ${descriptionController}');*/
+    /* print('======> _skills ${descriptionController}');*/
     debugPrint('======> _skills ${_skills}');
     notifyListeners();
   }
-
-
-
 
   /*List<FilterModel> _priceDataList = [];
   List<FilterModel> get priceDataList => _priceDataList;
@@ -144,7 +146,6 @@ class OnbaordingProvider extends ChangeNotifier {
     _priceDataList = val;
     notifyListeners();
   }*/
-
 
   // Add experience
   void addExperience(String companyName, String role, String employmentType,
@@ -174,6 +175,7 @@ class OnbaordingProvider extends ChangeNotifier {
     });
     notifyListeners();
   }
+
   // Add skill
   void addSkill(String skill) {
     _skills.add(skill);
@@ -212,7 +214,7 @@ class OnbaordingProvider extends ChangeNotifier {
       "profileDescription": _profileDescriptionController.text.trim(),
       "hourlyRate": _hourlyRateController.text.trim() ?? '',
       "phoneNumber": _phoneNumberController.text.trim(),
-      "profileImage" : _selectedImage ?? null
+      "profileImage": _selectedImage ?? null
     };
 
     try {
@@ -225,11 +227,17 @@ class OnbaordingProvider extends ChangeNotifier {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(response.data['message'])),
         );
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => const DashBoardView()),
+          (Route<dynamic> route) => false,
+        );
         _isLoading = false;
         notifyListeners();
         return true;
       } else {
         _errorMessage = 'Failed to register user';
+        debugPrint("message======>${response.data['message']}");
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(response.data['message'])),
         );
@@ -238,6 +246,7 @@ class OnbaordingProvider extends ChangeNotifier {
         return false;
       }
     } catch (e) {
+      debugPrint("message======>${e}");
       _errorMessage = 'An error occurred. Please try again.';
       _isLoading = false;
       notifyListeners();
@@ -268,14 +277,12 @@ class OnbaordingProvider extends ChangeNotifier {
     return null;
   }
 
-
   String? validateCompany(String value) {
     if (value.isEmpty) {
       return "This field can't be empty";
     }
     return null;
   }
-
 
   String? validateHourlyRate(String value) {
     if (value.isEmpty) {
@@ -290,7 +297,6 @@ class OnbaordingProvider extends ChangeNotifier {
     }
     return null;
   }
-
 
   String? validateFeildOfStudy(String value) {
     if (value.isEmpty) {
@@ -313,7 +319,6 @@ class OnbaordingProvider extends ChangeNotifier {
     return null;
   }
 
-
   String? validateDegreeOrCertifcate(String value) {
     if (value.isEmpty) {
       return "This field can't be empty";
@@ -335,15 +340,12 @@ class OnbaordingProvider extends ChangeNotifier {
     return null;
   }
 
-
   String? validateEmployementType(String value) {
     if (value.isEmpty) {
       return "This field can't be empty";
     }
     return null;
   }
-
-
 
   String? validateDescription(String value) {
     if (value.isEmpty) {
@@ -352,8 +354,6 @@ class OnbaordingProvider extends ChangeNotifier {
     return null;
   }
 
-
-
   String? validateRole(String value) {
     if (value.isEmpty) {
       return "This field can't be empty";
@@ -361,14 +361,12 @@ class OnbaordingProvider extends ChangeNotifier {
     return null;
   }
 
-
   String? validateAddress(String value) {
     if (value.isEmpty) {
       return "This field can't be empty";
     }
     return null;
   }
-
 
   String? validatefname(String value) {
     if (value.isEmpty) {
@@ -389,17 +387,5 @@ class OnbaordingProvider extends ChangeNotifier {
       return "This field can't be empty";
     }
     return null;
-
   }
-
-
-
-
-
 }
-
-
-
-
-
-

@@ -31,7 +31,14 @@ class _Profile8widgetState extends State<Profile8widget> {
   XFile? _selectedImage;
 
   final List<String> countries = ['USA', 'India', 'Canada', 'Japan'];
-  final List<String> city = ['Delhi', 'Gurugram', 'Patiala', 'Chandigarh', 'Ludhiana', 'Bathinda'];
+  final List<String> city = [
+    'Delhi',
+    'Gurugram',
+    'Patiala',
+    'Chandigarh',
+    'Ludhiana',
+    'Bathinda'
+  ];
 
   Future<void> _pickImage() async {
     final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
@@ -44,7 +51,8 @@ class _Profile8widgetState extends State<Profile8widget> {
 
   @override
   Widget build(BuildContext context) {
-    final responsive = MediaQuery.of(context).size.width < 600; // Responsive check
+    final responsive =
+        MediaQuery.of(context).size.width < 600; // Responsive check
     return Consumer<OnbaordingProvider>(
       builder: (context, onboardingProvider, child) {
         return Column(
@@ -58,12 +66,18 @@ class _Profile8widgetState extends State<Profile8widget> {
                   SizedBox(height: 35.h),
                   Text(
                     AppStrings.addContactInfo,
-                    style: TextStyle(color: MyColors.black, fontSize: 20.sp, fontWeight: FontWeight.w600),
+                    style: TextStyle(
+                        color: MyColors.black,
+                        fontSize: 20.sp,
+                        fontWeight: FontWeight.w600),
                   ),
                   SizedBox(height: 15.h),
                   Text(
                     AppStrings.lorem2,
-                    style: TextStyle(color: MyColors.grey, fontSize: responsive ? 10.sp : 13.sp, fontWeight: FontWeight.w400),
+                    style: TextStyle(
+                        color: MyColors.grey,
+                        fontSize: responsive ? 10.sp : 13.sp,
+                        fontWeight: FontWeight.w400),
                   ),
                   SizedBox(height: 10.h),
                   Center(
@@ -72,7 +86,8 @@ class _Profile8widgetState extends State<Profile8widget> {
                         CircleAvatar(
                           radius: 50.r,
                           backgroundImage: _selectedImage != null
-                              ? FileImage(File(_selectedImage!.path)) as ImageProvider
+                              ? FileImage(File(_selectedImage!.path))
+                                  as ImageProvider
                               : AssetImage('assets/images/uploadImage.png'),
                         ),
                         Positioned(
@@ -80,7 +95,8 @@ class _Profile8widgetState extends State<Profile8widget> {
                           right: 0,
                           child: GestureDetector(
                             onTap: _pickImage,
-                            child: SvgPicture.asset(Assets.editSqIC, height: 30.h, width: 30.w),
+                            child: SvgPicture.asset(Assets.editSqIC,
+                                height: 30.h, width: 30.w),
                           ),
                         ),
                       ],
@@ -89,21 +105,24 @@ class _Profile8widgetState extends State<Profile8widget> {
                   SizedBox(height: 19.h),
                   CustomTextFormField(
                     controller: onboardingProvider.fnameController,
-                    validator: (value) => onboardingProvider.validatefname(value ?? ''),
+                    validator: (value) =>
+                        onboardingProvider.validatefname(value ?? ''),
                     title: AppStrings.firstName,
                     text: AppStrings.enterHere,
                   ),
                   SizedBox(height: 13.h),
                   CustomTextFormField(
                     controller: onboardingProvider.lnameController,
-                    validator: (value) => onboardingProvider.validatelname(value ?? ''),
+                    validator: (value) =>
+                        onboardingProvider.validatelname(value ?? ''),
                     title: AppStrings.lastName,
                     text: AppStrings.enterHere,
                   ),
                   SizedBox(height: 13.h),
                   CustomTextFormField(
                     controller: onboardingProvider.addressController,
-                    validator: (value) => onboardingProvider.validateAddress(value ?? ''),
+                    validator: (value) =>
+                        onboardingProvider.validateAddress(value ?? ''),
                     title: '${AppStrings.address}*',
                     text: AppStrings.address,
                   ),
@@ -114,7 +133,8 @@ class _Profile8widgetState extends State<Profile8widget> {
                       Flexible(
                         child: CustomTextFormField(
                           controller: onboardingProvider.pincodeController,
-                          validator: (value) => onboardingProvider.validateZipcode(value ?? ''),
+                          validator: (value) =>
+                              onboardingProvider.validateZipcode(value ?? ''),
                           fillcolor: const Color(0xffC4C4C4),
                           title: AppStrings.pincode,
                           text: AppStrings.enterHere,
@@ -124,7 +144,8 @@ class _Profile8widgetState extends State<Profile8widget> {
                       Flexible(
                         child: CustomTextFormField(
                           controller: onboardingProvider.phoneNumberController,
-                          validator: (value) => onboardingProvider.validatePhone(value ?? ''),
+                          validator: (value) =>
+                              onboardingProvider.validatePhone(value ?? ''),
                           fillcolor: const Color(0xffC4C4C4),
                           title: AppStrings.phone,
                           text: '+61 | 989876363474',
@@ -139,7 +160,11 @@ class _Profile8widgetState extends State<Profile8widget> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(AppStrings.city, style: TextStyle(color: MyColors.black, fontSize: 12.sp, fontWeight: FontWeight.w600)),
+                          Text(AppStrings.city,
+                              style: TextStyle(
+                                  color: MyColors.black,
+                                  fontSize: 12.sp,
+                                  fontWeight: FontWeight.w600)),
                           SizedBox(height: 5.h),
                           CustomDropdownContainer(
                             width: 153.w,
@@ -158,7 +183,11 @@ class _Profile8widgetState extends State<Profile8widget> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(AppStrings.countryName, style: TextStyle(color: MyColors.black, fontSize: 12.sp, fontWeight: FontWeight.w600)),
+                          Text(AppStrings.countryName,
+                              style: TextStyle(
+                                  color: MyColors.black,
+                                  fontSize: 12.sp,
+                                  fontWeight: FontWeight.w600)),
                           SizedBox(height: 5.h),
                           CustomDropdownContainer(
                             width: 153.w,
@@ -186,19 +215,19 @@ class _Profile8widgetState extends State<Profile8widget> {
                       color: MyColors.btnColor,
                       textColor: MyColors.white,
                       onTap: () {
-                        debugPrint('====>  profile details : ${onboardingProvider.fnameController}');
-                        debugPrint('====>  profile details : ${onboardingProvider.lnameController}');
-                        debugPrint('====>  profile details : ${onboardingProvider.addressController}');
-                        debugPrint('====>  profile details : ${onboardingProvider.pincodeController}');
-                        debugPrint('====>  profile details : ${onboardingProvider.phoneNumberController}');
+                        debugPrint(
+                            '====>  profile details : ${onboardingProvider.fnameController}');
+                        debugPrint(
+                            '====>  profile details : ${onboardingProvider.lnameController}');
+                        debugPrint(
+                            '====>  profile details : ${onboardingProvider.addressController}');
+                        debugPrint(
+                            '====>  profile details : ${onboardingProvider.pincodeController}');
+                        debugPrint(
+                            '====>  profile details : ${onboardingProvider.phoneNumberController}');
                         onboardingProvider.submitUserDetails(context: context);
                         if (formKey.currentState!.validate()) {
                           profileController.nextPage();
-                          Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(builder: (context) => const DashBoardView()),
-                                (Route<dynamic> route) => false,
-                          );
                         }
                       },
                     ),
