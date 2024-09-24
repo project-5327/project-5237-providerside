@@ -41,7 +41,7 @@ class MyAccountScreen extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15),
                     child: Form(
-                      key: formKey,
+                     /* key: formKey,*/
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -239,7 +239,7 @@ class MyAccountScreen extends StatelessWidget {
                                 debugPrint("isClient=====>${registerProvider.isClient}");
                                 registerProvider.signUpBtn(
                                     context: context);
-                                /*if (formKey.currentState!.validate()) {
+                               /* if (formKey.currentState!.validate()) {
                                   Get.to(() => CreateYourProfile());
                                 }*/
                               },

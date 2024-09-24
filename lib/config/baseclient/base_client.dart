@@ -75,24 +75,37 @@ class BaseClient {
   }
 
   // POST request
-  static Future<dynamic> post(
-      {String? api, Map<String, dynamic>? payloadObj}) async {
-    // Make the request
+  static Future<dynamic> post({
+    String? api,
+    Map<String, dynamic>? payloadObj,
+    FormData? formData,
+    Map<String, dynamic>? queryParams,
+  }) async {
     try {
+      // Make the POST request
       var response = await dio.post(
-        api ?? "",
-        data: payloadObj ?? {},
+        api ?? "", // Ensure a valid URL
+        data: formData ?? payloadObj, // Use FormData if available, else payload
+        queryParameters: queryParams ?? {}, // Add query parameters if provided
+        options: Options(
+          headers: {
+            'Authorization': 'Bearer your_token_here', // Add authorization if needed
+            // 'Content-Type' will automatically be set by dio for FormData
+          },
+        ),
       );
+      debugPrint("Post statusCode ======>${response.statusCode}");
       return response;
     } on DioException catch (e) {
+      // Handle Dio exceptions
       if (e.type == DioException.connectionTimeout) {
-        ApiNotRespondingException("Connection Timeout");
+        throw ApiNotRespondingException("Connection Timeout");
       } else if (e.type == DioException.receiveTimeout) {
-        ApiNotRespondingException("Connection Timeout");
+        throw ApiNotRespondingException("Connection Timeout");
       } else if (e.type == DioException.connectionError) {
-        ApiNotRespondingException("No Internet Connection");
+        throw ApiNotRespondingException("No Internet Connection");
       } else if (e.response != null) {
-        debugPrint(e.response!.data);
+        debugPrint(e.response!.data.toString());
         debugPrint(e.response!.headers.toString());
       } else {
         debugPrint(e.requestOptions.toString());
@@ -100,6 +113,7 @@ class BaseClient {
       }
     }
   }
+
 
   // PUT request
   static Future<dynamic> put(

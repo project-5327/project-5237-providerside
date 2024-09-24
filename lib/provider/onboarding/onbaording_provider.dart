@@ -1,9 +1,12 @@
 import 'dart:io';
 
+import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project_5237_provider/presentation/screens/dashboard/dashboard_view.dart';
 import '../../config/baseclient/base_client.dart';
 import '../../config/baseclient/endpoints.dart';
+import 'package:http_parser/src/media_type.dart';
 
 class OnbaordingProvider extends ChangeNotifier {
   // Form key
@@ -25,6 +28,7 @@ class OnbaordingProvider extends ChangeNotifier {
   // add experiance
   final TextEditingController _companyNameController = TextEditingController();
   final TextEditingController _roleController = TextEditingController();
+  final TextEditingController _DurationController = TextEditingController();
   final TextEditingController _locationController = TextEditingController();
   final TextEditingController _EmployementTypeController =
       TextEditingController();
@@ -44,6 +48,21 @@ class OnbaordingProvider extends ChangeNotifier {
   final TextEditingController _startDate1Controller = TextEditingController();
   final TextEditingController _endDate1Controller = TextEditingController();
 
+
+
+
+  final TextEditingController _projectNameController =
+  TextEditingController();
+  final TextEditingController _projectDescriptionCOntroller =
+  TextEditingController();
+  final TextEditingController _startDate2Controller = TextEditingController();
+  final TextEditingController _endDate2Controller = TextEditingController();
+
+
+  final TextEditingController _proficiancyController = TextEditingController();
+
+bool _isOngoin = false;
+
   File? _selectedImage;
 
   String _contryName = "";
@@ -51,11 +70,16 @@ class OnbaordingProvider extends ChangeNotifier {
   // Controllers for experience fields
   final List<Map<String, dynamic>> _experiences = [];
 
+  final List<Map<String, dynamic>> _addYourPersonalProject = [];
+  final List<Map<String, dynamic>> _addLanguages = [];
+
   // Controllers for education fields
   final List<Map<String, dynamic>> _education = [];
 
   // Controllers for skills
   List<String> _skills = [];
+
+  List<String> _technologies = [];
 
   // Controllers for languages
   List<String> _languages = [];
@@ -82,6 +106,7 @@ class OnbaordingProvider extends ChangeNotifier {
 
   TextEditingController get companyNameController => _companyNameController;
   TextEditingController get roleController => _roleController;
+  TextEditingController get durationController => _DurationController;
   TextEditingController get locationController => _locationController;
   TextEditingController get employementTypeController =>
       _EmployementTypeController;
@@ -91,6 +116,7 @@ class OnbaordingProvider extends ChangeNotifier {
 
   TextEditingController get description1Controller => _description1Controller;
 
+
   TextEditingController get degreeORCertificateController =>
       _degreeORCertificateController;
   TextEditingController get instituteNameController => _instituteNameController;
@@ -99,9 +125,18 @@ class OnbaordingProvider extends ChangeNotifier {
   TextEditingController get startDate1Controller => _startDate1Controller;
   TextEditingController get endDate1Controller => _endDate1Controller;
 
+ TextEditingController get proficiancyController => _proficiancyController;
+
+  TextEditingController get projectNameController => _projectNameController;
+  TextEditingController get projectDescriptionCOntroller => _projectDescriptionCOntroller;
+  TextEditingController get startDate2Controller => _startDate2Controller;
+  TextEditingController get endDate2Controller => _endDate2Controller;
+
   List<String> get languages => _languages;
 
   List<String> get skills => _skills;
+
+  List<String> get technlogies => _technologies;
 
   String get countryName => _contryName;
 
@@ -109,6 +144,7 @@ class OnbaordingProvider extends ChangeNotifier {
 
   File? get selectedImage => _selectedImage;
 
+  File? get file => _selectedImage;
   set setImage(File image) {
     _selectedImage = image;
     notifyListeners();
@@ -139,6 +175,15 @@ class OnbaordingProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+
+
+  set setTechnologies(List<String> val) {
+    _technologies = val;
+    /* print('======> _skills ${descriptionController}');*/
+    debugPrint('======> _skills ${_technologies}');
+    notifyListeners();
+  }
+
   /*List<FilterModel> _priceDataList = [];
   List<FilterModel> get priceDataList => _priceDataList;
 
@@ -162,6 +207,20 @@ class OnbaordingProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void addYourPersonalProject(String projectName, String ProjectDescr,
+       String startDate, String endDate, List<String> technologies, bool isOngoing) {
+    _addYourPersonalProject.add({
+      "projectName": projectName,
+      "description" : ProjectDescr,
+      "startDate": startDate,
+      "endDate": endDate,
+      "technologies": technologies,
+      "isOngoing":isOngoing
+    });
+    notifyListeners();
+  }
+
+
   // Add education
   void addEducation(String institutionName, String degree, String fieldOfStudy,
       String location, String startDate, String endDate) {
@@ -174,6 +233,28 @@ class OnbaordingProvider extends ChangeNotifier {
       "endDate": endDate,
     });
     notifyListeners();
+  }
+
+
+
+  void addYourLangauges(List<String> languages, String proficiency) {
+    List<Map<String, dynamic>> _addLanguages = [];
+
+    for (String language in languages) {
+      // Create a map for each language
+      Map<String, dynamic> languageData = {
+        "languageName": language,
+        // Only include proficiency level if it's not empty
+        if (proficiency.isNotEmpty) "proficiencyLevel": proficiency,
+      };
+      _addLanguages.add(languageData); // Add the map to the list
+    }
+
+    // Call notifyListeners or send this data to backend
+    notifyListeners();
+
+    // You would store _addLanguages and send it as part of the formData later
+    debugPrint('Selected languages and proficiency: $_addLanguages');
   }
 
   // Add skill
@@ -199,54 +280,88 @@ class OnbaordingProvider extends ChangeNotifier {
     _errorMessage = null;
     notifyListeners();
 
-    final userData = {
-      "firstName": _fnameController.text.trim(),
-      "lastName": _lnameController.text.trim(),
-      "address": _addressController.text.trim(),
-      "city": _cityController.text.trim(),
-      "pincode": _pincodeController.text.trim(),
-      "country": _countryController.text.trim(),
-      "title": _titleController.text.trim(),
-      "experience": _experiences,
-      "education": _education,
-      "skills": _skills,
-      "languages": _languages,
-      "profileDescription": _profileDescriptionController.text.trim(),
-      "hourlyRate": _hourlyRateController.text.trim() ?? '',
-      "phoneNumber": _phoneNumberController.text.trim(),
-      "profileImage": _selectedImage ?? null
-    };
-
     try {
+      // Prepare FormData for multipart/form-data request
+      FormData formData = FormData.fromMap({
+        "firstName": _fnameController.text.trim(),
+        "lastName": _lnameController.text.trim(),
+        "address": _addressController.text.trim(),
+        "city": _cityController.text.trim(),
+        "pincode": _pincodeController.text.trim(),
+        "country": _countryController.text.trim(),
+        "title": _titleController.text.trim(),
+
+        // Experience field as a list of objects
+        "experience": _experiences,
+
+        // Education field as a list of objects
+        "education": _education,
+
+        // Skills as a list of strings
+        "skills": _skills,
+
+        // Languages as a list of objects
+        "languages": _addLanguages, // Assuming this is the list generated earlier
+
+        "profileDescription": _profileDescriptionController.text.trim(),
+        "hourlyRate": _hourlyRateController.text.trim(),
+        "phoneNumber": _phoneNumberController.text.trim(),
+
+        // Personal projects as a list of objects
+        "personalProjects": _addYourPersonalProject,
+
+        // Profile image file (if available)
+        "profileImage": file != null
+            ? await MultipartFile.fromFile(
+          file!.path,
+          filename: file!.path.split('/').last,
+          contentType: MediaType('image', 'jpg'),
+        )
+            : null,
+      });
+
+      // DEBUG: Print each field from FormData
+      debugPrint('======= Form Data Sent to Backend =======');
+      formData.fields.forEach((field) {
+        debugPrint('${field.key}: ${field.value}');
+      });
+
+      if (file != null) {
+        debugPrint('Profile Image: ${file!.path}');
+      }
+
+      debugPrint('======= End of Form Data =======');
+
+      // Make API request
       final response = await BaseClient.post(
         api: EndPoints.ONBOARDING,
-        payloadObj: userData,
+        formData: formData,
       );
 
       if (response != null && response.statusCode == 201) {
+        debugPrint('Response data: ${response.data}');
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(response.data['message'])),
         );
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(builder: (context) => const DashBoardView()),
-          (Route<dynamic> route) => false,
+              (Route<dynamic> route) => false,
         );
         _isLoading = false;
         notifyListeners();
         return true;
       } else {
         _errorMessage = 'Failed to register user';
-        debugPrint("message======>${response.data['message']}");
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(response.data['message'])),
+          SnackBar(content: Text(response.data['message'] ?? 'Something went wrong')),
         );
         _isLoading = false;
         notifyListeners();
         return false;
       }
     } catch (e) {
-      debugPrint("message======>${e}");
+      debugPrint("Error: ${e.toString()}");
       _errorMessage = 'An error occurred. Please try again.';
       _isLoading = false;
       notifyListeners();
@@ -254,21 +369,6 @@ class OnbaordingProvider extends ChangeNotifier {
     }
   }
 
-  // Method to validate and submit the form
-  void registerUser({required BuildContext context}) async {
-    if (formKeyRegist.currentState?.validate() ?? false) {
-      final success = await submitUserDetails(context: context);
-      if (success) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('User registered successfully')),
-        );
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(errorMessage ?? 'Registration failed')),
-        );
-      }
-    }
-  }
 
   String? validateTitle(String value) {
     if (value.isEmpty) {

@@ -103,7 +103,7 @@ class _Profile5State extends State<Profile5> {
                             //   value = selectedCheckBoxValue;
                             /* print("====> _selected languagelist ${_selectedLanguages.length}");*/
                           },
-                          whenEmpty: 'Select Location',
+                          whenEmpty: 'Select skills',
                         ),
                       ),
                       SizedBox(height: 15.h),

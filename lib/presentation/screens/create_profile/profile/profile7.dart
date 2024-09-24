@@ -16,6 +16,7 @@ import '../../../../provider/onboarding/onbaording_provider.dart';
 import '../../../constants/responsive_view.dart';
 import '../../../constants/strings.dart';
 import '../../../widgets/customize_button.dart';
+import 'components/personal-project.dart';
 import 'components/profile8widget.dart';
 import 'static_profile.dart';
 
@@ -172,7 +173,7 @@ class Profile7 extends StatelessWidget {
 
                                 if (formKey.currentState!.validate()) {
                                   profileController.nextPage();
-                                  Get.to(() => Profile8());
+                                  Get.to(() => AddYourPersonalProject());
                                 }
                               },
                             ),
