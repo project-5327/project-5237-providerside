@@ -68,25 +68,25 @@ class ApiService {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getString('userToken');
   }
-
-  Future<Response> createProposal(Map<String, dynamic> data) async {
-    try {
-      final SharedPreferences prefs = await SharedPreferences.getInstance();
-      String? token = await getToken();
-
-      if (token != null) {
-        _dio.options.headers['Authorization'] = 'Bearer $token';
-      } else {
-        throw Exception('Token not found');
-      }
-
-      final response = await _dio.post(
-        'https://project5237.zatest.biz/api/proposal',
-        data: FormData.fromMap(data),
-      );
-      return response;
-    } on DioError catch (e) {
-      return e.response ?? Response(requestOptions: RequestOptions(path: ''));
-    }
-  }
 }
+//   Future<Response> createProposal(Map<String, dynamic> data) async {
+//     try {
+//       final SharedPreferences prefs = await SharedPreferences.getInstance();
+//       String? token = await getToken();
+
+//       if (token != null) {
+//         _dio.options.headers['Authorization'] = 'Bearer $token';
+//       } else {
+//         throw Exception('Token not found');
+//       }
+
+//       final response = await _dio.post(
+//         'https://project5237.zatest.biz/api/proposal',
+//         data: FormData.fromMap(data),
+//       );
+//       return response;
+//     } on DioError catch (e) {
+//       return e.response ?? Response(requestOptions: RequestOptions(path: ''));
+//     }
+//   }
+// }
