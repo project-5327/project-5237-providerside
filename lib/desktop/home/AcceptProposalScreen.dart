@@ -70,12 +70,12 @@ class _AcceptProposalScreenState extends State<AcceptProposalScreen> {
   TextEditingController rateController = TextEditingController();
   TextEditingController addressController = TextEditingController();
 
-  final List<String> _options = [
-    'Web Design',
-    'Mockup',
-    'Web Design',
-    'Mockup'
-  ];
+  // final List<String> _options = [
+  //   'Web Design',
+  //   'Mockup',
+  //   'Web Design',
+  //   'Mockup'
+  // ];
 
   @override
   Widget build(BuildContext context) {
