@@ -54,7 +54,7 @@ class DiscoverContainer extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                width: 12.h,
+                width: 5.h,
               ),
               Container(
                 margin: EdgeInsets.only(right: 8.w),
@@ -83,7 +83,7 @@ class DiscoverContainer extends StatelessWidget {
             ],
           ),
           SizedBox(
-            height: 13.h,
+            height: 5.h,
           ),
           Text(
             text1,
@@ -93,7 +93,7 @@ class DiscoverContainer extends StatelessWidget {
                 color: MyColors.black2),
           ),
           SizedBox(
-            height: 13.h,
+            height: 5.h,
           ),
           ListTile(
             title: Text(
@@ -129,7 +129,7 @@ class DiscoverContainer extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 13.h,
+            height: 5.h,
           ),
           const CustomizeTagContainer(tag: 'Time range'),
         ],

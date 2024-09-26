@@ -62,124 +62,126 @@ class _ProfileScreenState extends State<ProfileScreen> {
           style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 25.0),
-        child: Column(children: [
-          SizedBox(
-            height: 50.h,
-          ),
-          if (_selectedImage != null)
-            Center(
-              child: CircleAvatar(
-                radius: 50.r,
-                backgroundImage: NetworkImage(
-                  _selectedImage!.path,
-                ),
-              ),
-            )
-          else ...[
-            Stack(children: [
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 25.0),
+          child: Column(children: [
+            SizedBox(
+              height: 50.h,
+            ),
+            if (_selectedImage != null)
               Center(
-                  child: CircleAvatar(
-                radius: 50.r,
-                //     borderRadius: BorderRadius.circular(100.r),
-                backgroundImage: AssetImage(
-                  'assets/images/uploadImage.png',
+                child: CircleAvatar(
+                  radius: 50.r,
+                  backgroundImage: NetworkImage(
+                    _selectedImage!.path,
+                  ),
                 ),
-              )),
-              Positioned(
-                  top: 40.0,
-                  right: 0.0,
-                  left: 50.0,
-                  child: GestureDetector(
-                      //  iconSize: 20,
-                      onTap: () {
-                        _pickImage();
-                      },
-                      child: SvgPicture.asset(Assets.editSqIC)))
-            ]),
-          ],
-          Center(
-            child: CustomTextFormField(
-              validator: (value) =>
-                  formController.validateUserName(value ?? ''),
-              controller: userController,
-              text: AppStrings.enterHere,
-              title: AppStrings.userName,
-              style: TextStyle(
-                fontSize: 13.sp,
-                fontWeight: FontWeight.w500,
-                color: MyColors.black1,
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 12.h,
-          ),
-          Center(
-            child: CustomTextFormField(
-              validator: (value) => formController.validateEmail(value ?? ''),
-              controller: emailController,
-              text: AppStrings.enterHere,
-              title: AppStrings.emailText,
-              style: TextStyle(
-                fontSize: 13.sp,
-                fontWeight: FontWeight.w500,
-                color: MyColors.black1,
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 12.h,
-          ),
-          Center(
-            child: Obx(
-              () => CustomTextFormField(
-                obscureText: formController.obscureText.value,
+              )
+            else ...[
+              Stack(children: [
+                Center(
+                    child: CircleAvatar(
+                  radius: 50.r,
+                  //     borderRadius: BorderRadius.circular(100.r),
+                  backgroundImage: AssetImage(
+                    'assets/images/uploadImage.png',
+                  ),
+                )),
+                Positioned(
+                    top: 40.0,
+                    right: 0.0,
+                    left: 50.0,
+                    child: GestureDetector(
+                        //  iconSize: 20,
+                        onTap: () {
+                          _pickImage();
+                        },
+                        child: SvgPicture.asset(Assets.editSqIC)))
+              ]),
+            ],
+            Center(
+              child: CustomTextFormField(
                 validator: (value) =>
-                    formController.validatePassword(value ?? ''),
-                controller: passwordController,
+                    formController.validateUserName(value ?? ''),
+                controller: userController,
                 text: AppStrings.enterHere,
-                title: AppStrings.passWord1,
+                title: AppStrings.userName,
                 style: TextStyle(
                   fontSize: 13.sp,
                   fontWeight: FontWeight.w500,
                   color: MyColors.black1,
                 ),
-                icon: IconButton(
-                  onPressed: () {
-                    formController.togglePasswordVisibility();
-                  },
-                  icon: Icon(
-                    formController.obscureText.value
-                        ? Icons.visibility_off
-                        : Icons.visibility,
+              ),
+            ),
+            SizedBox(
+              height: 12.h,
+            ),
+            Center(
+              child: CustomTextFormField(
+                validator: (value) => formController.validateEmail(value ?? ''),
+                controller: emailController,
+                text: AppStrings.enterHere,
+                title: AppStrings.emailText,
+                style: TextStyle(
+                  fontSize: 13.sp,
+                  fontWeight: FontWeight.w500,
+                  color: MyColors.black1,
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 12.h,
+            ),
+            Center(
+              child: Obx(
+                () => CustomTextFormField(
+                  obscureText: formController.obscureText.value,
+                  validator: (value) =>
+                      formController.validatePassword(value ?? ''),
+                  controller: passwordController,
+                  text: AppStrings.enterHere,
+                  title: AppStrings.passWord1,
+                  style: TextStyle(
+                    fontSize: 13.sp,
+                    fontWeight: FontWeight.w500,
+                    color: MyColors.black1,
+                  ),
+                  icon: IconButton(
+                    onPressed: () {
+                      formController.togglePasswordVisibility();
+                    },
+                    icon: Icon(
+                      formController.obscureText.value
+                          ? Icons.visibility_off
+                          : Icons.visibility,
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-          SizedBox(
-            height: 150.h,
-          ),
-          Center(
-            child: CustomizeButton(
-              borderColor: MyColors.btnColor,
-              radius: 100.r,
-              text: AppStrings.save,
-              height: 40.h,
-              width: 334.w,
-              color: MyColors.btnColor,
-              textColor: MyColors.white,
-              onTap: () {
-                //  Get.to(() => AddProjects());
-              },
+            SizedBox(
+              height: 150.h,
             ),
-          ),
-          SizedBox(
-            height: 53.h,
-          ),
-        ]),
+            Center(
+              child: CustomizeButton(
+                borderColor: MyColors.btnColor,
+                radius: 100.r,
+                text: AppStrings.save,
+                height: 40.h,
+                width: 334.w,
+                color: MyColors.btnColor,
+                textColor: MyColors.white,
+                onTap: () {
+                  //  Get.to(() => AddProjects());
+                },
+              ),
+            ),
+            SizedBox(
+              height: 53.h,
+            ),
+          ]),
+        ),
       ),
     ));
   }

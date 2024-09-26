@@ -15,6 +15,7 @@ class ProjectComp extends StatelessWidget {
   final String rate;
   final String text2;
   final String text3;
+  final int count;
   final List<String> skill;
   const ProjectComp({
     super.key,
@@ -26,12 +27,13 @@ class ProjectComp extends StatelessWidget {
     required this.time,
     required this.rate,
     required this.skill,
+    required this.count,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 15.h),
+      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
       decoration: BoxDecoration(
         border: Border.all(width: 1.w, color: MyColors.grey3),
         borderRadius: BorderRadius.circular(12.r),
@@ -44,12 +46,13 @@ class ProjectComp extends StatelessWidget {
               ClipRRect(
                 child: SvgPicture.asset(
                   Assets.profile_img,
-                  height: 35.h,
-                  width: 35.w,
+                  height: 40.h,
+                  width: 40.w,
+                  fit: BoxFit.cover,
                 ),
               ),
               SizedBox(
-                width: 12.h,
+                width: 12.w,
               ),
               Container(
                 margin: EdgeInsets.only(right: 8.w),
@@ -85,7 +88,7 @@ class ProjectComp extends StatelessWidget {
             text1,
             style: GoogleFonts.inter(
               textStyle: TextStyle(
-                  fontSize: 12.sp,
+                  fontSize: 15.sp,
                   fontWeight: FontWeight.w600,
                   color: MyColors.black),
             ),
@@ -141,32 +144,38 @@ class ProjectComp extends StatelessWidget {
               ),
             ],
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: List.generate(
-              3,
-              (index) {
-                return Container(
-                  alignment: Alignment.center,
-                  margin: EdgeInsets.only(
-                    top: 18.h,
-                  ),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(6.r),
-                      color: MyColors.tagCont),
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 33.w, vertical: 6.h),
-                  child: Text(
-                    skill[index],
-                    style: GoogleFonts.inter(
-                      textStyle: TextStyle(
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.w400,
-                          color: MyColors.black),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: List.generate(
+                count,
+                (index) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 5),
+                    child: Container(
+                      alignment: Alignment.center,
+                      margin: EdgeInsets.only(
+                        top: 18.h,
+                      ),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(6.r),
+                          color: MyColors.tagCont),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 33.w, vertical: 6.h),
+                      child: Text(
+                        skill[index],
+                        style: GoogleFonts.inter(
+                          textStyle: TextStyle(
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.w400,
+                              color: MyColors.black),
+                        ),
+                      ),
                     ),
-                  ),
-                );
-              },
+                  );
+                },
+              ),
             ),
           )
         ],

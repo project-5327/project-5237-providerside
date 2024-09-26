@@ -12,6 +12,7 @@ import 'package:project_5237_provider/presentation/constants/color.dart';
 import 'package:project_5237_provider/presentation/constants/responsive_view.dart';
 import 'package:project_5237_provider/presentation/constants/strings.dart';
 import 'package:project_5237_provider/presentation/screens/login_register/notification.dart';
+import 'package:project_5237_provider/presentation/screens/my_contracts/map_screen.dart';
 import 'package:project_5237_provider/presentation/widgets/customize_button.dart';
 import 'package:project_5237_provider/presentation/widgets/discover_project_cont.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -84,8 +85,8 @@ class ProjectDetailScreen extends StatelessWidget {
                             ClipRRect(
                               borderRadius: BorderRadius.circular(100.r),
                               child: Container(
-                                width: 71.h,
-                                height: 71.w,
+                                width: 67.w,
+                                height: 71.h,
                                 child: Image.asset('assets/images/image.jpeg',
                                     fit: BoxFit.cover),
                                 decoration:
@@ -96,18 +97,17 @@ class ProjectDetailScreen extends StatelessWidget {
                               height: 5.h,
                             ),
                             Text(
-                                proposalListData.clientId?.userName ??
-                              "",
+                              proposalListData.clientId?.userName ?? "",
                               style: TextStyle(
                                   fontSize: 17.sp,
                                   fontWeight: FontWeight.w500,
                                   color: MyColors.white),
                             ),
                             Text(
-                              "",
-                              // timeago.format(
-                              //   createdAt,
-                              // ),
+                              //  "",
+                              timeago.format(
+                                createdAt,
+                              ),
                               style: TextStyle(
                                   fontSize: 12.sp,
                                   fontWeight: FontWeight.w400,
@@ -141,10 +141,9 @@ class ProjectDetailScreen extends StatelessWidget {
                                 height: 33.h,
                               ),
                               Text(
-                                proposalListData.title ??
-                                "",
+                                proposalListData.title ?? "",
                                 style: TextStyle(
-                                    fontSize: 12,
+                                    fontSize: 13,
                                     fontWeight: FontWeight.w600,
                                     color: MyColors.black2),
                               ),
@@ -154,16 +153,16 @@ class ProjectDetailScreen extends StatelessWidget {
                               Text(
                                 'Budget',
                                 style: TextStyle(
-                                    fontSize: 12.sp,
-                                    fontWeight: FontWeight.w500,
-                                    color: MyColors.black),
+                                    fontSize: 13.sp,
+                                    fontWeight: FontWeight.w600,
+                                    color: MyColors.black2),
                               ),
                               Text(
-                               '\$${proposalListData.budget?.min} - \$${proposalListData.budget?.max}',
+                                '\$${proposalListData.budget?.min} - \$${proposalListData.budget?.max}',
                                 style: TextStyle(
                                     fontSize: 14.sp,
                                     fontWeight: FontWeight.w500,
-                                    color: MyColors.black),
+                                    color: MyColors.black2),
                               ),
                               SizedBox(
                                 height: 18.h,
@@ -171,16 +170,38 @@ class ProjectDetailScreen extends StatelessWidget {
                               Text(
                                 'Time Range',
                                 style: TextStyle(
-                                    fontSize: 12.sp,
-                                    fontWeight: FontWeight.w500,
+                                    fontSize: 13.sp,
+                                    fontWeight: FontWeight.w600,
                                     color: MyColors.black),
                               ),
-                              Text(
-                                proposalListData.timelineType ?? "",
-                                style: TextStyle(
-                                    fontSize: 14.sp,
-                                    fontWeight: FontWeight.w500,
-                                    color: MyColors.black),
+                              Row(
+                                children: [
+                                  Text(
+                                    proposalListData.timelineType ?? "medium",
+                                    style: TextStyle(
+                                        fontSize: 14.sp,
+                                        fontWeight: FontWeight.w500,
+                                        color: MyColors.black),
+                                  ),
+                                  Spacer(),
+                                  InkWell(
+                                    onTap: () => Get.to(MapScreen()),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        SvgPicture.asset(Assets.location),
+                                        SizedBox(width: 4.w),
+                                        Text(
+                                          "Location",
+                                          style: TextStyle(
+                                              fontSize: 12.sp,
+                                              fontWeight: FontWeight.w500,
+                                              color: MyColors.blue),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
                               ),
                               SizedBox(
                                 height: 16.h,
@@ -199,8 +220,7 @@ class ProjectDetailScreen extends StatelessWidget {
                                     fontWeight: FontWeight.w400,
                                     color: MyColors.black),
                                 softWrap: true,
-                                 proposalListData.description ??
-                                "",
+                                proposalListData.description ?? "",
                               ),
                               SizedBox(
                                 height: 26.h,
@@ -212,9 +232,8 @@ class ProjectDetailScreen extends StatelessWidget {
                                   return Container(
                                     margin: EdgeInsets.only(right: 12.w),
                                     child: CustomizeTagContainer(
-                                      tag:
-                                           proposalListData
-                                                 .skillsRequired?[index] ??
+                                      tag: proposalListData
+                                              .skillsRequired?[index] ??
                                           "",
                                     ),
                                   );
@@ -256,6 +275,7 @@ class ProjectDetailScreen extends StatelessWidget {
                             textColor: MyColors.white,
                             borderColor: MyColors.btnColor,
                             onTap: () {
+                              Get.back();
                               //  Get.to(() => SendProposalScreen());
                             },
                           ),

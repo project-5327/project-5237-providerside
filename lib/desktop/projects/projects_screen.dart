@@ -116,6 +116,12 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
                                   );
                                 },
                                 child: ProjectComp(
+                                  count: homeprovider
+                                          .proposalDataDoc
+                                          ?.projects?[gridIndex]
+                                          .skillsRequired
+                                          ?.length ??
+                                      0,
                                   time: timeago.format(createdAt,
                                       locale: 'en_short'),
                                   image: homeprovider.proposalDataDoc

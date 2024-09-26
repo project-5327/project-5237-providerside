@@ -61,53 +61,61 @@ class _ChatScreenState extends State<ChatScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          leading: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 5),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(100),
-              child: Image.asset('assets/images/girl2.png',
-                  height: 44.h, width: 44.w, fit: BoxFit.cover),
-            ),
-          ),
-          title: Align(
-            alignment: Alignment.centerRight,
-            child: PopupMenuButton(
-              onSelected: (value) =>
-                  _handlePopUpItem(value.toString(), context),
-              constraints: BoxConstraints(
-                maxWidth: 145.w,
-              ),
-              itemBuilder: (BuildContext context) {
-                return {"Block", 'Report', 'Remove'}.map((String choice) {
-                  return PopupMenuItem(
-                    value:
-                        choice.toLowerCase(), // Correct usage of toLowerCase()
-                    child: Container(
-                      height: 40.h,
-                      width: 125.w,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(4.r),
-                        color: MyColors.btnColor.withOpacity(0.3),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 10, vertical: 5),
-                        child: Text(
-                          choice,
-                          style: TextStyle(
-                            color: MyColors.btnColor,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                      ),
-                    ),
-                  );
-                }).toList();
+            backgroundColor: MyColors.white,
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back_ios),
+              onPressed: () {
+                Navigator.pop(context);
               },
             ),
-          ),
-        ),
+            title: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 5),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(100),
+                child: Image.asset('assets/images/girl2.png',
+                    height: 44.h, width: 40.w, fit: BoxFit.cover),
+              ),
+            ),
+            actions: [
+              Align(
+                alignment: Alignment.centerRight,
+                child: PopupMenuButton(
+                  onSelected: (value) =>
+                      _handlePopUpItem(value.toString(), context),
+                  constraints: BoxConstraints(
+                    maxWidth: 145.w,
+                  ),
+                  itemBuilder: (BuildContext context) {
+                    return {"Block", 'Report', 'Remove'}.map((String choice) {
+                      return PopupMenuItem(
+                        value: choice
+                            .toLowerCase(), // Correct usage of toLowerCase()
+                        child: Container(
+                          height: 40.h,
+                          width: 125.w,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(4.r),
+                            color: MyColors.btnColor.withOpacity(0.3),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 5),
+                            child: Text(
+                              choice,
+                              style: TextStyle(
+                                color: MyColors.btnColor,
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ),
+                        ),
+                      );
+                    }).toList();
+                  },
+                ),
+              ),
+            ]),
         body: Column(
           children: [
             Expanded(

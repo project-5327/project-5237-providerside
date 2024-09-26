@@ -13,6 +13,7 @@ import 'package:project_5237_provider/presentation/screens/login_register/home_s
 import 'package:project_5237_provider/presentation/screens/login_register/message.dart';
 import 'package:project_5237_provider/presentation/screens/main_screen%20.dart';
 import 'package:project_5237_provider/presentation/screens/milestones/milestone.dart';
+import 'package:project_5237_provider/presentation/screens/my_contracts/my_contacts.dart';
 import 'package:project_5237_provider/presentation/screens/update_Project/chat_screen.dart';
 
 class DashBoardView extends StatefulWidget {
@@ -28,7 +29,8 @@ class _DashBoardViewState extends State<DashBoardView> {
 
   final List<Widget> _pages = [
     const HomeScreen(),
-    const ProjectsScreen(),
+    MycontractScreen(),
+    //const ProjectsScreen(),
     const MilestoneScreen(),
     const MessageChatScreen1(),
     const MyProject(),

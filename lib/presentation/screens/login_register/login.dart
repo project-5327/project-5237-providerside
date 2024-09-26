@@ -180,14 +180,14 @@ class LoginScreen extends StatelessWidget {
 
                               if (loginSuccess) {
                                 Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            //StockHubPage()
-                                            // AddStockRequest()
-                                            ProposalSendScreen())
-                                    //  DashBoardView()),
-                                    );
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          //StockHubPage()
+                                          // AddStockRequest()
+                                          //  ProposalSendScreen())
+                                          DashBoardView()),
+                                );
                                 Future.delayed(const Duration(seconds: 5), () {
                                   loginProvider.emailController.clear();
                                   loginProvider.passwordController.clear();

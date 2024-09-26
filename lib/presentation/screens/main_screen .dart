@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:project_5237_provider/presentation/screens/login_register/Add_projects.dart';
 import 'package:project_5237_provider/presentation/screens/login_register/credit.dart';
+import 'package:project_5237_provider/presentation/screens/login_register/profile_screen.dart';
+import 'package:project_5237_provider/presentation/screens/my_contracts/my_contacts.dart';
 import 'package:project_5237_provider/presentation/screens/update_Project/chat_screen.dart';
 import '../constants/assets.dart';
 import '../constants/color.dart';
@@ -22,10 +24,12 @@ class _MainScreenState extends State<MainScreen> {
 
   final List<Widget> _screens = [
     const HomeScreen(),
-    const DiscoverProjects(),
+    MycontractScreen(),
+    //  const DiscoverProjects(),
     DebitCredit(),
     const ChatScreen(),
-    const AddProjects(),
+
+    ProfileScreen()
   ];
 
   @override

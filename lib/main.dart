@@ -8,6 +8,7 @@ import 'package:project_5237_provider/presentation/constants/responsive_view.dar
 import 'package:project_5237_provider/provider/auth/login_provider.dart';
 import 'package:project_5237_provider/provider/auth/register_provider.dart';
 import 'package:project_5237_provider/provider/auth/verifyOTP_provider.dart';
+import 'package:project_5237_provider/provider/filter_provider.dart';
 import 'package:project_5237_provider/provider/home/proposal_provider.dart';
 import 'package:project_5237_provider/provider/onboarding/onbaording_provider.dart';
 import 'package:project_5237_provider/routes/page_routes.dart';
@@ -31,6 +32,7 @@ void main() {
       ChangeNotifierProvider(create: (context) => HomeProvider()),
       ChangeNotifierProvider(create: (context) => OnbaordingProvider()),
       ChangeNotifierProvider(create: (_) => ProposalProvider()),
+      ChangeNotifierProvider(create: (_) => FilterProvider()),
     ],
     child: const MyApp(),
   ));

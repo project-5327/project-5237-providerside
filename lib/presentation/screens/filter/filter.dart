@@ -84,10 +84,15 @@ class _FilterScreenState extends State<FilterScreen> {
                           size: 18.sp,
                           fontweight: FontWeight.w600,
                         ),
-                        Icon(
-                          Icons.close,
-                          color: MyColors.white,
-                          size: 14.sp,
+                        IconButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          icon: Icon(
+                            Icons.close,
+                            color: MyColors.white,
+                            size: 14.sp,
+                          ),
                         )
                       ],
                     ),

@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:project_5237_provider/presentation/constants/color.dart';
+import 'package:project_5237_provider/provider/home/proposal_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../../constants/assets.dart';
 import '../../widgets/contract_widgets.dart';
@@ -23,41 +26,69 @@ class _SendScreenState extends State<SendScreen> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<ProposalProvider>(context, listen: false)
+          .fetchAllProposal(context);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(height: 20.h),
-          InkWell(
-            onTap: () => _handleProjectTileTap(0),
-            child: ProjectTile2(
-              image: Assets.bag,
-              title: 'Project 1',
-              title1: 'Joseph Aina',
-              subtitle: 'Monday, 5th January - 11:50pm',
-              trailingText: '\$Rate',
-              image1: 'assets/images/girl2.png',
-              isExpanded: expandedIndex == 0,
-            ),
+    return Consumer<ProposalProvider>(
+        builder: (context, proposalProvider, child) {
+      final proposals = proposalProvider.proposalByUser?.data;
+      debugPrint("proposal data ========> ${proposals}");
+      if (proposalProvider.loading) {
+        return Center(
+          child: CircularProgressIndicator(
+            color: MyColors.blue,
           ),
-          SizedBox(height: 20.h),
-          InkWell(
-            onTap: () => _handleProjectTileTap(1),
-            child: ProjectTile2(
-              image: Assets.bag,
-              title: 'Project 2',
-              title1: 'Tayo Israel',
-              subtitle: 'Monday, 5th January - 11:50pm',
-              trailingText: '\$Rate',
-              image1: 'assets/images/girl2.png',
-              isExpanded: expandedIndex == 1,
-            ),
+        );
+      }
+      if (proposals == null || proposals.isEmpty) {
+        return const Center(
+          child: Text("No proposals available"),
+        );
+      }
+      return SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              SizedBox(height: 20.h),
+              ListView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: proposals.length,
+                  itemBuilder: (context, index) {
+                    final proposal = proposals![index];
+
+                    return InkWell(
+                      //  onTap: () => _handleProjectTileTap(0),
+                      child: ProjectTile2(
+                        proposal: proposal,
+                        image: Assets.bag,
+                        title: proposal.projectId?.title,
+                        title1:
+                            '${proposal.clientDetails?.firstName} ${proposal.clientDetails?.lastName}',
+                        subtitle: proposal.createdAt,
+                        trailingText:
+                            '\$${(proposal.proposedBudget?.numberDecimal)}',
+                        image1: proposal.clientDetails?.profileImage ??
+                            'https://pub-261021c7b68740ffba855a7e8a6f3c1e.r2.dev/undefined/vasily-koloda-8CqDvPuo_kI-unsplash.jpg',
+                      ),
+                    );
+                  }),
+              SizedBox(height: 20.h),
+            ],
           ),
-          SizedBox(height: 20.h),
-        ],
-      ),
-    );
+        ),
+      );
+    });
   }
 }
 
@@ -125,30 +156,29 @@ class _PdfContainerState extends State<PdfContainer> {
 
 class TextWidget extends StatelessWidget {
   final String text;
+  final fontFamily;
   final size;
-  final String? fontFamily;
-  final TextAlign? align;
+  final align;
   final Color color;
   final fontweight;
   const TextWidget(
       {super.key,
       required this.text,
       this.size,
+      this.align,
       required this.color,
       this.fontweight,
-      this.align,
       this.fontFamily});
 
   @override
   Widget build(BuildContext context) {
     return Text(
-      textAlign: align ?? TextAlign.start,
       text,
       style: TextStyle(
-          fontFamily: fontFamily ?? 'Montserrat',
           fontSize: size,
           fontWeight: fontweight,
-          color: color),
+          color: color,
+          fontFamily: fontFamily),
     );
   }
 }
