@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
+import 'package:project_5237_provider/config/baseclient/base_client.dart';
+import 'package:project_5237_provider/config/baseclient/endpoints.dart';
+import 'package:project_5237_provider/data/models/project_model.dart';
 import '../../data/services/api_services.dart';
 
 class ProjectProvider with ChangeNotifier {
@@ -10,6 +13,7 @@ class ProjectProvider with ChangeNotifier {
   bool get loading => _loading;
   String? get errorMessage => _errorMessage;
   bool get isSuccess => _isSuccess;
+  ProjectModel? projectmodel;
 
   Future<void> createProject({
     required BuildContext context,
@@ -54,5 +58,49 @@ class ProjectProvider with ChangeNotifier {
 
     _loading = false;
     notifyListeners();
+  }
+
+  Future<void> fetchAllProjects(BuildContext context) async {
+    _loading = true;
+    notifyListeners();
+    try {
+      final response = await BaseClient.get(
+        api: EndPoints.PROJECTS,
+      );
+
+      if (response != null && response.statusCode == 200) {
+        final data = response.data;
+        debugPrint('response ==========> ${data}');
+
+        if (data != null) {
+          projectmodel = ProjectModel.fromJson(data);
+          _errorMessage = '';
+          debugPrint('====All Projects retrieved successfully.=====');
+          debugPrint(
+              "All Project details======> :${projectmodel?.data?.projects}");
+        } else {
+          _errorMessage = 'No data found';
+          debugPrint('Error=======> No data found');
+        }
+      } else {
+        debugPrint('Error=======> ${response?.statusCode}, ${response?.data}');
+        _errorMessage = response?.data['message'] ?? 'Failed to load data';
+        debugPrint('Error: ${response?.statusCode}, ${response?.data}');
+      }
+    } catch (e) {
+      _errorMessage = 'An error occurred while fetching data';
+      debugPrint("Error======> ${e.toString()}");
+    } finally {
+      _loading = false;
+      notifyListeners();
+    }
+
+    void _showSnackBar(BuildContext context, String? message) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(message ?? "Error")),
+        );
+      }
+    }
   }
 }

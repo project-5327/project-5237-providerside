@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:project_5237_provider/controller/form_controller.dart';
+import 'package:project_5237_provider/presentation/screens/main_screen%20.dart';
 import 'package:project_5237_provider/presentation/screens/my_contracts/send_screen.dart';
 
 import '../../constants/color.dart';
@@ -42,7 +43,8 @@ class _EditprofileState extends State<Editprofile>
       child: Scaffold(
         appBar: AppBar(
           leading: IconButton(
-            onPressed: () => Get.back(),
+            onPressed: () => Navigator.push(
+                context, MaterialPageRoute(builder: (context) => MainScreen())),
             icon: Icon(
               Icons.arrow_back_ios,
               color: MyColors.black,
@@ -60,6 +62,7 @@ class _EditprofileState extends State<Editprofile>
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               TabBar(
+                dividerHeight: 0,
                 indicator: BoxDecoration(
                   color: Colors.transparent,
                   border: Border(
@@ -130,20 +133,20 @@ class Catagory extends StatelessWidget {
           Stack(children: [
             SizedBox(
               height: 158.h,
-              width: 168.w,
+              width: 150.w,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(100.r),
                 child: Image.asset(
                   'assets/images/image.jpeg',
-                  height: 158.h,
-                  width: 158.w,
+                  height: 148.h,
+                  width: 140.w,
                   fit: BoxFit.cover,
                 ),
               ),
             ),
             Positioned(
-              top: 115,
-              left: 140,
+              top: 90,
+              left: 100,
               child: Container(
                 height: 36.h,
                 width: 34.w,
@@ -197,30 +200,25 @@ class Catagory extends StatelessWidget {
           SizedBox(
             height: 12.h,
           ),
-          Center(
-            child: Obx(
-              () => CustomTextFormField(
-                obscureText: formController.obscureText.value,
-                validator: (value) =>
-                    formController.validatePassword(value ?? ''),
-                controller: passwordController,
-                text: '****************',
-                title: 'Password',
-                style: TextStyle(
-                  fontSize: 13.sp,
-                  fontWeight: FontWeight.w500,
-                  color: Color(0xff222222),
-                ),
-                icon: IconButton(
-                  onPressed: () {
-                    formController.togglePasswordVisibility();
-                  },
-                  icon: Icon(
-                    formController.obscureText.value
-                        ? Icons.visibility_off
-                        : Icons.visibility,
-                  ),
-                ),
+          CustomTextFormField(
+            obscureText: formController.obscureText.value,
+            validator: (value) => formController.validatePassword(value ?? ''),
+            controller: passwordController,
+            text: '****************',
+            title: 'Password',
+            style: TextStyle(
+              fontSize: 13.sp,
+              fontWeight: FontWeight.w500,
+              color: Color(0xff222222),
+            ),
+            icon: IconButton(
+              onPressed: () {
+                formController.togglePasswordVisibility();
+              },
+              icon: Icon(
+                formController.obscureText.value
+                    ? Icons.visibility_off
+                    : Icons.visibility,
               ),
             ),
           ),
@@ -237,7 +235,7 @@ class Catagory extends StatelessWidget {
               color: MyColors.btnColor,
               textColor: MyColors.white,
               onTap: () {
-                Get.to(() => AddProjects());
+                // Get.to(() => AddProjects());
               },
             ),
           ),

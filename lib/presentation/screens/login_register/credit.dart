@@ -121,9 +121,7 @@ class DebitCredit extends StatelessWidget {
                       width: 334.w,
                       color: MyColors.btnColor,
                       textColor: MyColors.white,
-                      onTap: () {
-                        Get.to(Editprofile());
-                      },
+                      onTap: () {},
                     ),
                   ),
                 ],

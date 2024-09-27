@@ -30,7 +30,7 @@ class CustomizeButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final reponsive = ResponsiveCheck(context);
-    return InkWell(
+    return GestureDetector(
       onTap: onTap,
       child: Container(
         width: width,

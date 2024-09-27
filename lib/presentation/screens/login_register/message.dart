@@ -102,6 +102,7 @@ class _MessageScreenState extends State<MessageScreen>
         body: Column(
           children: [
             TabBar(
+              dividerHeight: 0,
               indicator: BoxDecoration(
                 color: Colors.transparent,
                 border: Border(

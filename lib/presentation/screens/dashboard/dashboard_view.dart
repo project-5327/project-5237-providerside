@@ -29,8 +29,8 @@ class _DashBoardViewState extends State<DashBoardView> {
 
   final List<Widget> _pages = [
     const HomeScreen(),
-    MycontractScreen(),
-    //const ProjectsScreen(),
+    // MycontractScreen(),
+    const ProjectsScreen(),
     const MilestoneScreen(),
     const MessageChatScreen1(),
     const MyProject(),

@@ -50,8 +50,7 @@ class _ChatScreenState extends State<ChatScreen> {
           isSentByMe: true,
           time: formattedTime,
         ));
-        messageController
-            .clear(); // Clear the text field after sending a message
+        messageController.clear();
       });
     }
   }
@@ -131,52 +130,47 @@ class _ChatScreenState extends State<ChatScreen> {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 10, vertical: 10),
-                      child: InkWell(
-                        onTap: () {
-                          Get.to(MycontractScreen());
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                          child: Column(
-                            crossAxisAlignment: message.isSentByMe
-                                ? CrossAxisAlignment.end
-                                : CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                constraints: BoxConstraints(maxWidth: 200.w),
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 10, vertical: 10),
-                                decoration: BoxDecoration(
-                                  color: MyColors.btnColor,
-                                  borderRadius: message.isSentByMe
-                                      ? BorderRadius.only(
-                                          topLeft: Radius.circular(15.r),
-                                          topRight: Radius.circular(15.r),
-                                          bottomLeft: Radius.circular(15.r),
-                                        )
-                                      : BorderRadius.only(
-                                          topLeft: Radius.circular(15.r),
-                                          topRight: Radius.circular(15.r),
-                                          bottomRight: Radius.circular(15.r),
-                                        ),
-                                ),
-                                child: TextWidget(
-                                  text: message.text,
-                                  color: MyColors.white,
-                                  size: 12.sp,
-                                  fontweight: FontWeight.w400,
-                                ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: Column(
+                          crossAxisAlignment: message.isSentByMe
+                              ? CrossAxisAlignment.end
+                              : CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              constraints: BoxConstraints(maxWidth: 200.w),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 10),
+                              decoration: BoxDecoration(
+                                color: MyColors.btnColor,
+                                borderRadius: message.isSentByMe
+                                    ? BorderRadius.only(
+                                        topLeft: Radius.circular(15.r),
+                                        topRight: Radius.circular(15.r),
+                                        bottomLeft: Radius.circular(15.r),
+                                      )
+                                    : BorderRadius.only(
+                                        topLeft: Radius.circular(15.r),
+                                        topRight: Radius.circular(15.r),
+                                        bottomRight: Radius.circular(15.r),
+                                      ),
                               ),
-                              SizedBox(
-                                  height: 5
-                                      .h), // Adjusts spacing between message and time
-                              TextWidget(
-                                text: message.time,
-                                color: MyColors.black.withOpacity(0.7),
-                                size: 10.sp,
+                              child: TextWidget(
+                                text: message.text,
+                                color: MyColors.white,
+                                size: 12.sp,
+                                fontweight: FontWeight.w400,
                               ),
-                            ],
-                          ),
+                            ),
+                            SizedBox(
+                                height: 5
+                                    .h), // Adjusts spacing between message and time
+                            TextWidget(
+                              text: message.time,
+                              color: MyColors.black.withOpacity(0.7),
+                              size: 10.sp,
+                            ),
+                          ],
                         ),
                       ),
                     ),
@@ -189,41 +183,36 @@ class _ChatScreenState extends State<ChatScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  InkWell(
-                    onTap: () {
-                      Get.to(MycontractScreen());
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30.r),
-                        color: const Color(0xffF1F1F1),
-                      ),
-                      height: 50.h,
-                      width: 234.w,
-                      child: TextFormField(
-                        controller: messageController,
-                        decoration: InputDecoration(
-                          fillColor: const Color(0xffF1F1F1),
-                          suffixIcon: Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: SvgPicture.asset(
-                              Assets.menu,
-                              height: 18.h,
-                              width: 18.w,
-                              fit: BoxFit.contain,
-                            ),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30.r),
+                      color: const Color(0xffF1F1F1),
+                    ),
+                    height: 50.h,
+                    width: 234.w,
+                    child: TextFormField(
+                      controller: messageController,
+                      decoration: InputDecoration(
+                        fillColor: const Color(0xffF1F1F1),
+                        suffixIcon: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: SvgPicture.asset(
+                            Assets.menu,
+                            height: 18.h,
+                            width: 18.w,
+                            fit: BoxFit.contain,
                           ),
-                          hintText: 'Type Something....',
-                          hintStyle: TextStyle(
-                            fontSize: 13.sp,
-                            fontWeight: FontWeight.w400,
-                            color: MyColors.grey,
-                          ),
-                          contentPadding: const EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 16),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30.r),
-                          ),
+                        ),
+                        hintText: 'Type Something....',
+                        hintStyle: TextStyle(
+                          fontSize: 13.sp,
+                          fontWeight: FontWeight.w400,
+                          color: MyColors.grey,
+                        ),
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 16),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30.r),
                         ),
                       ),
                     ),

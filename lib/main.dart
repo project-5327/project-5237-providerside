@@ -11,6 +11,7 @@ import 'package:project_5237_provider/provider/auth/verifyOTP_provider.dart';
 import 'package:project_5237_provider/provider/filter_provider.dart';
 import 'package:project_5237_provider/provider/home/proposal_provider.dart';
 import 'package:project_5237_provider/provider/onboarding/onbaording_provider.dart';
+import 'package:project_5237_provider/provider/onboarding/project_provider.dart';
 import 'package:project_5237_provider/routes/page_routes.dart';
 import 'package:project_5237_provider/provider/home/home_provider.dart';
 import 'package:provider/provider.dart';
@@ -33,6 +34,7 @@ void main() {
       ChangeNotifierProvider(create: (context) => OnbaordingProvider()),
       ChangeNotifierProvider(create: (_) => ProposalProvider()),
       ChangeNotifierProvider(create: (_) => FilterProvider()),
+      ChangeNotifierProvider(create: (_) => ProjectProvider()),
     ],
     child: const MyApp(),
   ));
