@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:project_5237_provider/data/models/proposal_by_user.dart';
 import 'package:project_5237_provider/desktop/onboarding/onboarding1.dart';
 import 'package:project_5237_provider/presentation/constants/responsive_view.dart';
 
@@ -9,6 +10,7 @@ import 'package:project_5237_provider/provider/auth/login_provider.dart';
 import 'package:project_5237_provider/provider/auth/register_provider.dart';
 import 'package:project_5237_provider/provider/auth/verifyOTP_provider.dart';
 import 'package:project_5237_provider/provider/filter_provider.dart';
+import 'package:project_5237_provider/provider/freelancer_provider/freelancer_provider.dart';
 import 'package:project_5237_provider/provider/home/proposal_provider.dart';
 import 'package:project_5237_provider/provider/onboarding/onbaording_provider.dart';
 import 'package:project_5237_provider/provider/onboarding/project_provider.dart';
@@ -35,6 +37,7 @@ void main() {
       ChangeNotifierProvider(create: (_) => ProposalProvider()),
       ChangeNotifierProvider(create: (_) => FilterProvider()),
       ChangeNotifierProvider(create: (_) => ProjectProvider()),
+      ChangeNotifierProvider(create: (_) => FreelancerProvider()),
     ],
     child: const MyApp(),
   ));

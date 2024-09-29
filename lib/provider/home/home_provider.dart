@@ -67,7 +67,7 @@ class HomeProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> createProposal({
+  Future<bool> createProposal({
     required BuildContext context,
     required Map<String, dynamic> proposalData,
   }) async {
@@ -84,32 +84,29 @@ class HomeProvider extends ChangeNotifier {
       debugPrint("Response status code: ${response.statusCode}");
 
       if (response.data != null && response.statusCode == 201) {
-        // Project creation success
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(response.data['message'])),
         );
         debugPrint("Response message: ${response.data['message']}");
-        _isSuccess = true;
+        return true;
       } else {
         _errorMessage = response.data['message'] ?? 'Failed to create project.';
         debugPrint("Error message: ${response.data['message']}");
-
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(_errorMessage!)),
         );
-        _isSuccess = false;
+        return false;
       }
     } catch (e) {
       _errorMessage = 'An error occurred. Please try again.';
       debugPrint("Exception occurred: ${e.toString()}");
-
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(_errorMessage!)),
       );
-      _isSuccess = false;
+      return false;
+    } finally {
+      _isLoading = false;
+      notifyListeners();
     }
-
-    _isLoading = false;
-    notifyListeners();
   }
 }

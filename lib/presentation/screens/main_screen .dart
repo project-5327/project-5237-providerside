@@ -17,7 +17,12 @@ import 'message/discover_projects.dart';
 
 class MainScreen extends StatefulWidget {
   int? selectedIndex;
-  MainScreen({super.key, this.selectedIndex});
+  // final List<String>? selectedFilters;
+
+  MainScreen({
+    super.key,
+    this.selectedIndex,
+  });
   @override
   State<MainScreen> createState() => _MainScreenState();
 }
@@ -27,12 +32,10 @@ class _MainScreenState extends State<MainScreen> {
 
   final List<Widget> _screens = [
     const HomeScreen(),
-    MycontractScreen(),
-    //  const DiscoverProjects(),
+    const AllProjects(),
     DebitCredit(),
-    MessageScreen(),
+    const MessageScreen(),
     Editprofile()
-    // ProfileScreen()
   ];
 
   @override

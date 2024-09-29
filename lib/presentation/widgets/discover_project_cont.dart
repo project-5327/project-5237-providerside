@@ -167,7 +167,7 @@ class DiscoverContainer1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 200.h,
+      height: 220.h,
       width: 352.w,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -201,14 +201,14 @@ class DiscoverContainer1 extends StatelessWidget {
                   style: GoogleFonts.inter(
                     textStyle: TextStyle(
                       fontSize: 17.sp,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w600,
                       color: MyColors.black,
                     ),
                   ),
                 ),
               ),
               SizedBox(
-                width: MediaQuery.of(context).size.width * 0.04,
+                width: MediaQuery.of(context).size.width * 0.05,
               ),
               Text(
                 timeago.format(DateTime.parse(time)),
@@ -227,9 +227,9 @@ class DiscoverContainer1 extends StatelessWidget {
           Text(
             text1,
             style: TextStyle(
-                fontSize: 12.sp,
-                fontWeight: FontWeight.w600,
-                color: MyColors.black2),
+                fontSize: 13.sp,
+                fontWeight: FontWeight.w500,
+                color: MyColors.black1),
           ),
           SizedBox(
             height: 5.h,
@@ -237,7 +237,7 @@ class DiscoverContainer1 extends StatelessWidget {
           Text(
             rate,
             style: TextStyle(
-                fontSize: 14.sp,
+                fontSize: 13.sp,
                 fontWeight: FontWeight.w600,
                 color: MyColors.black),
           ),
@@ -259,10 +259,10 @@ class DiscoverContainer1 extends StatelessWidget {
                 color: MyColors.black),
           ),
           SizedBox(
-            height: 5.h,
+            height: 10.h,
           ),
           SizedBox(
-            height: 20,
+            height: 22,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: tags.length,
@@ -281,9 +281,9 @@ class DiscoverContainer1 extends StatelessWidget {
             color: MyColors.grey,
             thickness: 0.5,
           ),
-          SizedBox(
-            height: 5.h,
-          ),
+          // SizedBox(
+          //   height: 5.h,
+          // ),
         ],
       ),
     );

@@ -1,308 +1,343 @@
-// class FreelancerDetails {
-//   int? status;
-//   String? message;
-//   Data data;
+class FreelancerDetail {
+  int? status;
+  String? message;
+  Data? data;
 
-//   FreelancerDetails({this.status, this.message, this.data});
+  FreelancerDetail({this.status, this.message, this.data});
 
-//   FreelancerDetails.fromJson(Map<String, dynamic> json) {
-//     status = json['status'] ?? 0; // Provide a default value
-//     message = json['message'] ?? ''; // Provide a default value
-//     data = json['data'] != null ? Data.fromJson(json['data']) : null;
-//   }
+  FreelancerDetail.fromJson(Map<String, dynamic> json) {
+    status = json['status'];
+    message = json['message'];
+    data = json['data'] != null ? Data.fromJson(json['data']) : null;
+  }
 
-//   Map<String, dynamic> toJson() {
-//     return {
-//       'status': status,
-//       'message': message,
-//       'data': data?.toJson(),
-//     };
-//   }
-// }
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = {};
+    data['status'] = this.status;
+    data['message'] = this.message;
+    if (this.data != null) {
+      data['data'] = this.data?.toJson();
+    }
+    return data;
+  }
+}
 
-// class Data {
-//   UserDetails userDetails;
+class Data {
+  UserDetails? userDetails;
 
-//   Data({required this.userDetails});
+  Data({this.userDetails});
 
-//   Data.fromJson(Map<String, dynamic> json) {
-//     userDetails = (json['userDetails'] != null
-//         ? UserDetails.fromJson(json['userDetails'])
-//         : null)!;
-//   }
+  Data.fromJson(Map<String, dynamic> json) {
+    userDetails = json['userDetails'] != null
+        ? UserDetails.fromJson(json['userDetails'])
+        : null;
+  }
 
-//   Map<String, dynamic> toJson() {
-//     return {
-//       'userDetails': userDetails?.toJson(),
-//     };
-//   }
-// }
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = {};
+    if (this.userDetails != null) {
+      data['userDetails'] = this.userDetails?.toJson();
+    }
+    return data;
+  }
+}
 
-// class UserDetails {
-//   String sId;
-//   String user;
-//   String firstName;
-//   String lastName;
-//   String address;
-//   String city;
-//   String pincode;
-//   String country;
-//   String title;
-//   List<Experience> experience;
-//   List<Education> education;
-//   List<String> skills;
-//   List<Languages> languages;
-//   String profileDescription;
-//   int hourlyRate;
-//   String phoneNumber;
-//   String profileImage;
-//   String createdAt;
-//   String updatedAt;
-//   int iV;
-//   List<PersonalProjects> personalProjects;
+class UserDetails {
+  String? sId;
+  User? user;
+  String? firstName;
+  String? lastName;
+  String? address;
+  String? city;
+  String? pincode;
+  String? country;
+  String? title;
+  List<Experience>? experience;
+  List<Education>? education;
+  List<String>? skills;
+  List<Languages>? languages;
+  String? profileDescription;
+  int? hourlyRate;
+  String? phoneNumber;
+  String? profileImage;
+  String? createdAt;
+  String? updatedAt;
+  int? iV;
+  List<dynamic>? personalProjects; // Changed to dynamic list for flexibility
 
-//   UserDetails({
-//     this.sId,
-//     this.user,
-//     this.firstName,
-//     this.lastName,
-//     this.address,
-//     this.city,
-//     this.pincode,
-//     this.country,
-//     this.title,
-//     this.experience,
-//     this.education,
-//     this.skills,
-//     this.languages,
-//     this.profileDescription,
-//     this.hourlyRate,
-//     this.phoneNumber,
-//     this.profileImage,
-//     this.createdAt,
-//     this.updatedAt,
-//     this.iV,
-//     this.personalProjects,
-//   });
+  UserDetails({
+    this.sId,
+    this.user,
+    this.firstName,
+    this.lastName,
+    this.address,
+    this.city,
+    this.pincode,
+    this.country,
+    this.title,
+    this.experience,
+    this.education,
+    this.skills,
+    this.languages,
+    this.profileDescription,
+    this.hourlyRate,
+    this.phoneNumber,
+    this.profileImage,
+    this.createdAt,
+    this.updatedAt,
+    this.iV,
+    this.personalProjects,
+  });
 
-//   UserDetails.fromJson(Map<String, dynamic> json) {
-//     sId = json['_id'];
-//     user = json['user'] ?? '';
-//     firstName = json['firstName'] ?? '';
-//     lastName = json['lastName'] ?? '';
-//     address = json['address'] ?? '';
-//     city = json['city'] ?? '';
-//     pincode = json['pincode'] ?? '';
-//     country = json['country'] ?? '';
-//     title = json['title'] ?? '';
+  UserDetails.fromJson(Map<String, dynamic> json) {
+    sId = json['_id'];
+    user = json['user'] != null ? User.fromJson(json['user']) : null;
+    firstName = json['firstName'];
+    lastName = json['lastName'];
+    address = json['address'];
+    city = json['city'];
+    pincode = json['pincode'];
+    country = json['country'];
+    title = json['title'];
+    if (json['experience'] != null) {
+      experience = (json['experience'] as List)
+          .map((v) => Experience.fromJson(v))
+          .toList();
+    }
+    if (json['education'] != null) {
+      education = (json['education'] as List)
+          .map((v) => Education.fromJson(v))
+          .toList();
+    }
+    skills = json['skills'] != null ? List<String>.from(json['skills']) : [];
+    if (json['languages'] != null) {
+      languages = (json['languages'] as List)
+          .map((v) => Languages.fromJson(v))
+          .toList();
+    }
+    profileDescription = json['profileDescription'];
+    hourlyRate = json['hourlyRate'];
+    phoneNumber = json['phoneNumber'];
+    profileImage = json['profileImage'];
+    createdAt = json['createdAt'];
+    updatedAt = json['updatedAt'];
+    iV = json['__v'];
+    personalProjects = json['personalProjects'] ?? [];
+  }
 
-//     experience = (json['experience'] as List)
-//             ?.map((e) => Experience.fromJson(e))
-//             ?.toList() ??
-//         [];
-//     education = (json['education'] as List)
-//             ?.map((e) => Education.fromJson(e))
-//             ?.toList() ??
-//         [];
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = {};
+    data['_id'] = this.sId;
+    if (this.user != null) {
+      data['user'] = this.user?.toJson();
+    }
+    data['firstName'] = this.firstName;
+    data['lastName'] = this.lastName;
+    data['address'] = this.address;
+    data['city'] = this.city;
+    data['pincode'] = this.pincode;
+    data['country'] = this.country;
+    data['title'] = this.title;
+    if (this.experience != null) {
+      data['experience'] = this.experience?.map((v) => v.toJson()).toList();
+    }
+    if (this.education != null) {
+      data['education'] = this.education?.map((v) => v.toJson()).toList();
+    }
+    data['skills'] = this.skills;
+    if (this.languages != null) {
+      data['languages'] = this.languages?.map((v) => v.toJson()).toList();
+    }
+    data['profileDescription'] = this.profileDescription;
+    data['hourlyRate'] = this.hourlyRate;
+    data['phoneNumber'] = this.phoneNumber;
+    data['profileImage'] = this.profileImage;
+    data['createdAt'] = this.createdAt;
+    data['updatedAt'] = this.updatedAt;
+    data['__v'] = this.iV;
+    if (this.personalProjects != null) {
+      data['personalProjects'] = this.personalProjects;
+    }
+    return data;
+  }
+}
 
-//     skills = List<String>.from(json['skills'] ?? []);
-//     languages = (json['languages'] as List)
-//             ?.map((e) => Languages.fromJson(e))
-//             ?.toList() ??
-//         [];
+class User {
+  String? sId;
+  String? userName;
+  String? email;
+  String? password;
+  bool? isClient;
+  bool? isAdmin;
+  String? createdAt;
+  String? updatedAt;
+  int? iV;
+  String? resetPasswordExpires;
+  String? resetPasswordOTP;
+  List<dynamic>? connections;
 
-//     profileDescription = json['profileDescription'] ?? '';
-//     hourlyRate = json['hourlyRate'] ?? 0; // Provide a default value
-//     phoneNumber = json['phoneNumber'] ?? '';
-//     profileImage = json['profileImage'] ?? '';
-//     createdAt = json['createdAt'] ?? '';
-//     updatedAt = json['updatedAt'] ?? '';
-//     iV = json['__v'] ?? 0; // Provide a default value
-//     personalProjects = (json['personalProjects'] as List)
-//             ?.map((e) => PersonalProjects.fromJson(e))
-//             ?.toList() ??
-//         [];
-//   }
+  User({
+    this.sId,
+    this.userName,
+    this.email,
+    this.password,
+    this.isClient,
+    this.isAdmin,
+    this.createdAt,
+    this.updatedAt,
+    this.iV,
+    this.resetPasswordExpires,
+    this.resetPasswordOTP,
+    this.connections,
+  });
 
-//   Map<String, dynamic> toJson() {
-//     return {
-//       '_id': sId,
-//       'user': user,
-//       'firstName': firstName,
-//       'lastName': lastName,
-//       'address': address,
-//       'city': city,
-//       'pincode': pincode,
-//       'country': country,
-//       'title': title,
-//       'experience': experience?.map((e) => e.toJson())?.toList(),
-//       'education': education?.map((e) => e.toJson())?.toList(),
-//       'skills': skills,
-//       'languages': languages?.map((e) => e.toJson())?.toList(),
-//       'profileDescription': profileDescription,
-//       'hourlyRate': hourlyRate,
-//       'phoneNumber': phoneNumber,
-//       'profileImage': profileImage,
-//       'createdAt': createdAt,
-//       'updatedAt': updatedAt,
-//       '__v': iV,
-//       'personalProjects': personalProjects?.map((e) => e.toJson())?.toList(),
-//     };
-//   }
-// }
+  User.fromJson(Map<String, dynamic> json) {
+    sId = json['_id'];
+    userName = json['userName'];
+    email = json['email'];
+    password = json['password'];
+    isClient = json['isClient'];
+    isAdmin = json['isAdmin'];
+    createdAt = json['createdAt'];
+    updatedAt = json['updatedAt'];
+    iV = json['__v'];
+    resetPasswordExpires = json['resetPasswordExpires'];
+    resetPasswordOTP = json['resetPasswordOTP'];
+    connections = json['connections'] ?? [];
+  }
 
-// class Experience {
-//   String companyName;
-//   String role;
-//   String duration;
-//   String description;
-//   String employmentType;
-//   String location;
-//   String startDate;
-//   String endDate;
-//   String sId;
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = {};
+    data['_id'] = this.sId;
+    data['userName'] = this.userName;
+    data['email'] = this.email;
+    data['password'] = this.password;
+    data['isClient'] = this.isClient;
+    data['isAdmin'] = this.isAdmin;
+    data['createdAt'] = this.createdAt;
+    data['updatedAt'] = this.updatedAt;
+    data['__v'] = this.iV;
+    data['resetPasswordExpires'] = this.resetPasswordExpires;
+    data['resetPasswordOTP'] = this.resetPasswordOTP;
+    data['connections'] = this.connections;
+    return data;
+  }
+}
 
-//   Experience({
-//     this.companyName,
-//     this.role,
-//     this.duration,
-//     this.description,
-//     this.employmentType,
-//     this.location,
-//     this.startDate,
-//     this.endDate,
-//     this.sId,
-//   });
+class Experience {
+  String? companyName;
+  String? role;
+  String? duration;
+  String? description;
+  String? employmentType;
+  String? location;
+  String? startDate;
+  String? endDate;
+  String? sId;
 
-//   Experience.fromJson(Map<String, dynamic> json) {
-//     companyName = json['companyName'] ?? '';
-//     role = json['role'] ?? '';
-//     duration = json['duration'] ?? '';
-//     description = json['description'] ?? '';
-//     employmentType = json['employmentType'] ?? '';
-//     location = json['location'] ?? '';
-//     startDate = json['startDate'] ?? '';
-//     endDate = json['endDate'] ?? '';
-//     sId = json['_id'];
-//   }
+  Experience({
+    this.companyName,
+    this.role,
+    this.duration,
+    this.description,
+    this.employmentType,
+    this.location,
+    this.startDate,
+    this.endDate,
+    this.sId,
+  });
 
-//   Map<String, dynamic> toJson() {
-//     return {
-//       'companyName': companyName,
-//       'role': role,
-//       'duration': duration,
-//       'description': description,
-//       'employmentType': employmentType,
-//       'location': location,
-//       'startDate': startDate,
-//       'endDate': endDate,
-//       '_id': sId,
-//     };
-//   }
-// }
+  Experience.fromJson(Map<String, dynamic> json) {
+    companyName = json['companyName'];
+    role = json['role'];
+    duration = json['duration'];
+    description = json['description'];
+    employmentType = json['employmentType'];
+    location = json['location'];
+    startDate = json['startDate'];
+    endDate = json['endDate'];
+    sId = json['_id'];
+  }
 
-// class Education {
-//   String institutionName;
-//   String degree;
-//   String yearOfCompletion;
-//   String location;
-//   String startDate;
-//   String endDate;
-//   String sId;
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = {};
+    data['companyName'] = this.companyName;
+    data['role'] = this.role;
+    data['duration'] = this.duration;
+    data['description'] = this.description;
+    data['employmentType'] = this.employmentType;
+    data['location'] = this.location;
+    data['startDate'] = this.startDate;
+    data['endDate'] = this.endDate;
+    data['_id'] = this.sId;
+    return data;
+  }
+}
 
-//   Education({
-//     this.institutionName,
-//     this.degree,
-//     this.yearOfCompletion,
-//     this.location,
-//     this.startDate,
-//     this.endDate,
-//     this.sId,
-//   });
+class Education {
+  String? institutionName;
+  String? degree;
+  String? yearOfCompletion;
+  String? fieldOfStudy;
+  String? location;
+  String? startDate;
+  String? endDate;
+  String? sId;
 
-//   Education.fromJson(Map<String, dynamic> json) {
-//     institutionName = json['institutionName'] ?? '';
-//     degree = json['degree'] ?? '';
-//     yearOfCompletion = json['yearOfCompletion'] ?? '';
-//     location = json['location'] ?? '';
-//     startDate = json['startDate'] ?? '';
-//     endDate = json['endDate'] ?? '';
-//     sId = json['_id'];
-//   }
+  Education({
+    this.institutionName,
+    this.degree,
+    this.yearOfCompletion,
+    this.fieldOfStudy,
+    this.location,
+    this.startDate,
+    this.endDate,
+    this.sId,
+  });
 
-//   Map<String, dynamic> toJson() {
-//     return {
-//       'institutionName': institutionName,
-//       'degree': degree,
-//       'yearOfCompletion': yearOfCompletion,
-//       'location': location,
-//       'startDate': startDate,
-//       'endDate': endDate,
-//       '_id': sId,
-//     };
-//   }
-// }
+  Education.fromJson(Map<String, dynamic> json) {
+    institutionName = json['institutionName'];
+    degree = json['degree'];
+    yearOfCompletion = json['yearOfCompletion'];
+    fieldOfStudy = json['fieldOfStudy'];
+    location = json['location'];
+    startDate = json['startDate'];
+    endDate = json['endDate'];
+    sId = json['_id'];
+  }
 
-// class Languages {
-//   String languageName;
-//   String proficiencyLevel;
-//   String sId;
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = {};
+    data['institutionName'] = this.institutionName;
+    data['degree'] = this.degree;
+    data['yearOfCompletion'] = this.yearOfCompletion;
+    data['fieldOfStudy'] = this.fieldOfStudy;
+    data['location'] = this.location;
+    data['startDate'] = this.startDate;
+    data['endDate'] = this.endDate;
+    data['_id'] = this.sId;
+    return data;
+  }
+}
 
-//   Languages({this.languageName, this.proficiencyLevel, this.sId});
+class Languages {
+  String? name;
+  String? proficiency;
+  String? sId;
 
-//   Languages.fromJson(Map<String, dynamic> json) {
-//     languageName = json['languageName'] ?? '';
-//     proficiencyLevel = json['proficiencyLevel'] ?? '';
-//     sId = json['_id'];
-//   }
+  Languages({this.name, this.proficiency, this.sId});
 
-//   Map<String, dynamic> toJson() {
-//     return {
-//       'languageName': languageName,
-//       'proficiencyLevel': proficiencyLevel,
-//       '_id': sId,
-//     };
-//   }
-// }
+  Languages.fromJson(Map<String, dynamic> json) {
+    name = json['name'];
+    proficiency = json['proficiency'];
+    sId = json['_id'];
+  }
 
-// class PersonalProjects {
-//   String projectName;
-//   String description;
-//   String startDate;
-//   String endDate;
-//   List<String> technologies;
-//   bool isOngoing;
-//   String sId;
-
-//   PersonalProjects({
-//     this.projectName,
-//     this.description,
-//     this.startDate,
-//     this.endDate,
-//     this.technologies,
-//     this.isOngoing,
-//     this.sId,
-//   });
-
-//   PersonalProjects.fromJson(Map<String, dynamic> json) {
-//     projectName = json['projectName'] ?? '';
-//     description = json['description'] ?? '';
-//     startDate = json['startDate'] ?? '';
-//     endDate = json['endDate'] ?? '';
-//     technologies = List<String>.from(json['technologies'] ?? []);
-//     isOngoing = json['isOngoing'] ?? false; // Provide a default value
-//     sId = json['_id'];
-//   }
-
-//   Map<String, dynamic> toJson() {
-//     return {
-//       'projectName': projectName,
-//       'description': description,
-//       'startDate': startDate,
-//       'endDate': endDate,
-//       'technologies': technologies,
-//       'isOngoing': isOngoing,
-//       '_id': sId,
-//     };
-//   }
-// }
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = {};
+    data['name'] = this.name;
+    data['proficiency'] = this.proficiency;
+    data['_id'] = this.sId;
+    return data;
+  }
+}

@@ -5,7 +5,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:project_5237_provider/presentation/constants/assets.dart';
 import 'package:project_5237_provider/presentation/constants/color.dart';
 import 'package:project_5237_provider/presentation/constants/strings.dart';
-import 'package:project_5237_provider/presentation/screens/my_contracts/send_screen.dart';
 
 class ProjectComp extends StatelessWidget {
   final String text1;

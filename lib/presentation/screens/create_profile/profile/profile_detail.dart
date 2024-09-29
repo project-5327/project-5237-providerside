@@ -19,7 +19,7 @@ import '../../../widgets/customize_button.dart';
 import 'profile2.dart';
 
 class ProfileDetail extends StatelessWidget {
-  final formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _profileDetailKey = GlobalKey<FormState>();
   final FormController formController = Get.put(FormController());
   final TextEditingController skillsController = TextEditingController();
   final ProfileController profileController = Get.put(ProfileController());
@@ -37,7 +37,7 @@ class ProfileDetail extends StatelessWidget {
         builder: (context, onboardingProvider, child) {
       return StaticProfileLayout(
         middleContentBuilder: () => Form(
-          /*key: formKey,*/
+          key: _profileDetailKey,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -65,12 +65,13 @@ class ProfileDetail extends StatelessWidget {
                       color: MyColors.btnColor,
                       textColor: MyColors.white,
                       onTap: () {
-                        //if (formKey.currentState!.validate()) {
-                        debugPrint(
-                            '====>  profile details : ${onboardingProvider.titleController}');
-                        profileController.nextPage();
-                        Get.to(() => Profile2());
-                        //   }
+                        if (_profileDetailKey.currentState!.validate()) {
+                          debugPrint(
+                              '====>  profile details : ${onboardingProvider.titleController}');
+                          profileController.nextPage();
+                          Get.to(() => Profile2());
+                          //   }
+                        }
                       })),
               SizedBox(height: 42.h),
             ],

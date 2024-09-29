@@ -24,7 +24,7 @@ class ApiService {
       }
 
       final response = await _dio.post(
-        '/projects',
+        '/proposal',
         data: data,
       );
 

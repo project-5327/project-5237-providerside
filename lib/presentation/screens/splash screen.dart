@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:project_5237_provider/desktop/onboarding/onboarding1.dart';
-import 'package:project_5237_provider/desktop/onboarding/onboarding3.dart';
-import 'package:project_5237_provider/desktop/projects/projects_screen.dart';
-import 'package:project_5237_provider/presentation/screens/create_profile/create_your_profile.dart';
-import 'package:project_5237_provider/presentation/screens/milestones/milestone.dart';
+
+import 'package:project_5237_provider/presentation/screens/login_register/register.dart';
+import 'package:project_5237_provider/presentation/screens/main_screen%20.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:async';
-import '../constants/assets.dart';
-import 'create_profile/my_account.dart';
-import 'login_register/login.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -16,14 +12,43 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  bool isLoggedIn = false;
+
   @override
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 3), () {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (_) => LoginScreen()),
+    _checkLoginStatus();
+  }
+
+  Future<void> _checkLoginStatus() async {
+    await Future.delayed(Duration(milliseconds: 4400));
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString('auth_token');
+
+    if (token != null && token.isNotEmpty) {
+      isLoggedIn = true;
+    }
+
+    if (mounted) {
+      _navigateBasedOnLoginStatus();
+    }
+  }
+
+  void _navigateBasedOnLoginStatus() {
+    if (isLoggedIn) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => MainScreen()
+            //  MainScreen()
+            ),
       );
-    });
+    } else {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => RegisterScreen()),
+      );
+    }
   }
 
   @override
@@ -31,11 +56,12 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
-          child: SvgPicture.asset(
-        Assets.splashScreen,
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-      )),
+        child: SvgPicture.asset(
+          'assets/splash_screen.svg',
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+        ),
+      ),
     );
   }
 }

@@ -74,6 +74,80 @@ class BaseClient {
     return null;
   }
 
+  static Future<Response<dynamic>?> getByToken({
+    String? api,
+    String? token,
+  }) async {
+    try {
+      var response = await dio.get(
+        api ?? "",
+        //queryParameters: ,
+        options: Options(
+          headers: {
+            if (token != null && token.isNotEmpty)
+              "Authorization": "Bearer $token",
+          },
+        ),
+      );
+      return response;
+    } on DioException catch (e) {
+      if (e.type == DioException.connectionTimeout) {
+        throw ApiNotRespondingException("Connection Timeout");
+      } else if (e.type == DioException.receiveTimeout) {
+        throw ApiNotRespondingException("Connection Timeout");
+      } else if (e.type == DioException.connectionError) {
+        throw ApiNotRespondingException("No Internet Connection");
+      } else if (e.response != null) {
+        debugPrint(e.response!.data);
+        debugPrint(e.response!.headers.toString());
+      } else {
+        debugPrint(e.requestOptions.headers.toString());
+        debugPrint(e.toString());
+      }
+    } catch (e) {
+      throw ApiNotRespondingException(e.toString());
+    }
+    return null;
+  }
+
+  static Future<Response<dynamic>?> putByToken({
+    String? api,
+    String? token,
+    FormData? formData,
+    // Map<String, dynamic>? payloadObj
+  }) async {
+    try {
+      var response = await dio.put(
+        api ?? "",
+        data: formData ?? {},
+        options: Options(
+          headers: {
+            if (token != null && token.isNotEmpty)
+              "Authorization": "Bearer $token",
+          },
+        ),
+      );
+      return response;
+    } on DioException catch (e) {
+      if (e.type == DioException.connectionTimeout) {
+        throw ApiNotRespondingException("Connection Timeout");
+      } else if (e.type == DioException.receiveTimeout) {
+        throw ApiNotRespondingException("Connection Timeout");
+      } else if (e.type == DioException.connectionError) {
+        throw ApiNotRespondingException("No Internet Connection");
+      } else if (e.response != null) {
+        debugPrint(e.response!.data);
+        debugPrint(e.response!.headers.toString());
+      } else {
+        debugPrint(e.requestOptions.headers.toString());
+        debugPrint(e.toString());
+      }
+    } catch (e) {
+      throw ApiNotRespondingException(e.toString());
+    }
+    return null;
+  }
+
   // POST request
   static Future<dynamic> post({
     String? api,
@@ -89,7 +163,8 @@ class BaseClient {
         queryParameters: queryParams ?? {}, // Add query parameters if provided
         options: Options(
           headers: {
-            'Authorization': 'Bearer your_token_here', // Add authorization if needed
+            'Authorization':
+                'Bearer your_token_here', // Add authorization if needed
             // 'Content-Type' will automatically be set by dio for FormData
           },
         ),
@@ -113,7 +188,6 @@ class BaseClient {
       }
     }
   }
-
 
   // PUT request
   static Future<dynamic> put(
@@ -141,7 +215,6 @@ class BaseClient {
       }
     }
   }
-
 
   // DELETE request
   static Future<dynamic> delete({String? api}) async {

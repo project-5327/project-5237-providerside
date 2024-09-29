@@ -31,7 +31,7 @@ class _MyProjectsScreenState extends State<MyProjectsScreen> {
             children: List.generate(
               12,
               (index) {
-                return const ProjectComp();
+                return const ProjectComp1();
               },
             ),
           ),
@@ -62,8 +62,8 @@ class _MyProjectsScreenState extends State<MyProjectsScreen> {
   }
 }
 
-class ProjectComp extends StatelessWidget {
-  const ProjectComp({super.key});
+class ProjectComp1 extends StatelessWidget {
+  const ProjectComp1({super.key});
 
   @override
   Widget build(BuildContext context) {

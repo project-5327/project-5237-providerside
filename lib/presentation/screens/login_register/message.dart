@@ -44,22 +44,25 @@ class _MessageScreenState extends State<MessageScreen>
         appBar: AppBar(
           automaticallyImplyLeading: false,
           title: isSearching
-              ? Container(
-                  height: 50.h,
-                  width: 277.w,
-                  child: TextFormField(
-                    controller: searchController,
-                    decoration: InputDecoration(
-                      suffixIcon: Icon(CupertinoIcons.search),
-                      hintText: 'Search',
-                      hintStyle: TextStyle(
-                          fontSize: 15.sp,
-                          fontWeight: FontWeight.w400,
-                          color: MyColors.lightGrey),
-                      contentPadding: const EdgeInsets.symmetric(
-                          vertical: 10, horizontal: 16),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
+              ? Padding(
+                  padding: const EdgeInsets.only(top: 5),
+                  child: Container(
+                    height: 50.h,
+                    width: 277.w,
+                    child: TextFormField(
+                      controller: searchController,
+                      decoration: InputDecoration(
+                        suffixIcon: Icon(CupertinoIcons.search),
+                        hintText: 'Search',
+                        hintStyle: TextStyle(
+                            fontSize: 15.sp,
+                            fontWeight: FontWeight.w400,
+                            color: MyColors.lightGrey),
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 16),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
                       ),
                     ),
                   ),

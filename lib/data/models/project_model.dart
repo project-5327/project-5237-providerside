@@ -163,13 +163,15 @@ class ClientId {
   String? sId;
   String? userName;
   String? email;
+  String? profileImage;
 
-  ClientId({this.sId, this.userName, this.email});
+  ClientId({this.sId, this.userName, this.email, this.profileImage});
 
   ClientId.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
     userName = json['userName'];
     email = json['email'];
+    profileImage = json['profileImg'];
   }
 
   Map<String, dynamic> toJson() {
@@ -177,6 +179,7 @@ class ClientId {
     data['_id'] = sId;
     data['userName'] = userName;
     data['email'] = email;
+    data['profileImg'] = profileImage;
     return data;
   }
 }

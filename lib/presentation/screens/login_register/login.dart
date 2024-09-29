@@ -21,7 +21,7 @@ class LoginScreen extends StatelessWidget {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   final FormController formController = Get.put(FormController());
-  final formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -97,7 +97,7 @@ class LoginScreen extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20.w),
                   child: Form(
-                    /* key: formKey,*/
+                    key: loginFormKey,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -120,6 +120,7 @@ class LoginScreen extends StatelessWidget {
                         SizedBox(height: 18.h),
                         Center(
                           child: CustomTextFormField(
+                            obscureText: loginProvider.obscureText,
                             validator: (value) =>
                                 loginProvider.validatePassword(value ?? ""),
                             controller: loginProvider.passwordController,
@@ -158,58 +159,65 @@ class LoginScreen extends StatelessWidget {
                           ),
                         ),
                         SizedBox(height: 27.5.h),
-                        Center(
-                          child: CustomizeButton(
-                            borderColor: MyColors.btnColor,
-                            radius: 100.r,
-                            text: 'Login',
-                            height: 40.h,
-                            width: 334.w,
+                        if (loginProvider.isLoading)
+                          Center(
+                              child: CircularProgressIndicator(
                             color: MyColors.btnColor,
-                            textColor: MyColors.white,
-                            onTap: () async {
-                              bool loginSuccess = await loginProvider.login(
-                                context: context,
-                                email: loginProvider.emailController.text,
-                                password: loginProvider.passwordController.text,
-                              );
-                              print(
-                                  "email=======> ${loginProvider.emailController.text}");
-                              print(
-                                  "password=======> ${loginProvider.passwordController.text}");
-
-                              if (loginSuccess) {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          //StockHubPage()
-                                          // AddStockRequest()
-                                          //  ProposalSendScreen())
-                                          DashBoardView()),
+                          ))
+                        else
+                          Center(
+                            child: CustomizeButton(
+                              borderColor: MyColors.btnColor,
+                              radius: 100.r,
+                              text: 'Login',
+                              height: 40.h,
+                              width: 334.w,
+                              color: MyColors.btnColor,
+                              textColor: MyColors.white,
+                              onTap: () async {
+                                bool loginSuccess = await loginProvider.login(
+                                  context: context,
+                                  email: loginProvider.emailController.text,
+                                  password:
+                                      loginProvider.passwordController.text,
                                 );
-                                Future.delayed(const Duration(seconds: 5), () {
-                                  loginProvider.emailController.clear();
-                                  loginProvider.passwordController.clear();
-                                });
-                              } else {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(
-                                      'Login failed. Please check your credentials and try again.',
-                                      style: TextStyle(
-                                        fontSize: 15.sp,
-                                        fontWeight: FontWeight.w500,
-                                        color: MyColors.black1,
+                                print(
+                                    "email=======> ${loginProvider.emailController.text}");
+                                print(
+                                    "password=======> ${loginProvider.passwordController.text}");
+                                if (loginFormKey.currentState?.validate() ??
+                                    false) {
+                                  if (loginSuccess) {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              DashBoardView()),
+                                    );
+                                    Future.delayed(const Duration(seconds: 5),
+                                        () {
+                                      loginProvider.emailController.clear();
+                                      loginProvider.passwordController.clear();
+                                    });
+                                  } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                          'Login failed. Please check your credentials and try again.',
+                                          style: TextStyle(
+                                            fontSize: 15.sp,
+                                            fontWeight: FontWeight.w500,
+                                            color: MyColors.black1,
+                                          ),
+                                        ),
+                                        backgroundColor: Colors.red,
                                       ),
-                                    ),
-                                    backgroundColor: Colors.red,
-                                  ),
-                                );
-                              }
-                            },
+                                    );
+                                  }
+                                }
+                              },
+                            ),
                           ),
-                        ),
                         SizedBox(height: 27.5.h),
                         Center(
                           child: RichText(

@@ -17,7 +17,7 @@ import '../../widgets/customize_button.dart';
 
 class MyAccountScreen extends StatelessWidget {
   MyAccountScreen({super.key});
-  final formKey = GlobalKey<FormState>();
+  //final _accountKey = GlobalKey<FormState>();
   final FormController formcontroller = Get.put(FormController());
   final TextEditingController lastNameController = TextEditingController();
   final TextEditingController firstnameController = TextEditingController();
@@ -30,120 +30,75 @@ class MyAccountScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<RegisterProvider>(
         builder: (context, registerProvider, child) {
-        return SafeArea(
-          child: Scaffold(
-            body: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  CreateProfileWidget(),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
-                    child: Form(
-                     /* key: formKey,*/
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            height: 15.h,
-                          ),
-                          CustomTextFormField(
-                            controller: registerProvider.fnameController,
-                            validator: (value) =>
-                                formcontroller.validateFirstName(value ?? ''),
-                            title: 'First Name',
-                            text: 'Enter your name',
-                          ),
-                          SizedBox(
-                            height: 27.h,
-                          ),
-                          CustomTextFormField(
-                            controller: registerProvider.lnameController,
-                            validator: (value) =>
-                                formcontroller.validateLastName(value ?? ''),
-                            title: 'Last Name',
-                            text: 'Enter your name',
-                          ),
-                          SizedBox(
-                            height: 27.h,
-                          ),
+      return SafeArea(
+        child: Scaffold(
+          body: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                CreateProfileWidget(),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: Form(
+                    // key: _accountKey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: 15.h,
+                        ),
+                        CustomTextFormField(
+                          controller: registerProvider.fnameController,
+                          validator: (value) =>
+                              formcontroller.validateFirstName(value ?? ''),
+                          title: 'First Name',
+                          text: 'Enter your name',
+                        ),
+                        SizedBox(
+                          height: 27.h,
+                        ),
+                        CustomTextFormField(
+                          controller: registerProvider.lnameController,
+                          validator: (value) =>
+                              formcontroller.validateLastName(value ?? ''),
+                          title: 'Last Name',
+                          text: 'Enter your name',
+                        ),
+                        SizedBox(
+                          height: 27.h,
+                        ),
 
-                          // Obx(
+                        // Obx(
 
-                          SizedBox(
-                            height: 47.h,
+                        SizedBox(
+                          height: 47.h,
+                        ),
+                        Center(
+                          child: TextWidget(
+                            align: TextAlign.center,
+                            text: 'Complete your free account \nsetup',
+                            color: MyColors.black,
+                            size: 16.sp,
+                            fontweight: FontWeight.w600,
                           ),
-                          Center(
-                            child: TextWidget(
-                              align: TextAlign.center,
-                              text: 'Complete your free account \nsetup',
-                              color: MyColors.black,
-                              size: 16.sp,
-                              fontweight: FontWeight.w600,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 35.h,
-                          ),
-                          Center(
-                            child: Row(
-                              children: [
-                                Obx(
-                                  () => InkWell(
-                                    onTap: () =>
-                                        containerController.toggelSelection(0),
-                                    child: Container(
-                                      alignment: Alignment.center,
-                                      height: 18.h,
-                                      width: 18.w,
-                                      child: containerController.selectedcont[0]
-                                          ? Icon(
-                                              size: 12.sp,
-                                              Icons.check,
-                                              color: MyColors.white,
-                                            )
-                                          : null,
-                                      decoration: BoxDecoration(
-                                          color: containerController.selectedcont[0]
-                                              ? Color(0xffFF4C4A)
-                                              : MyColors.white,
-                                          borderRadius: BorderRadius.circular(4.r),
-                                          border: Border.all(
-                                              width: 2.w,
-                                              color:
-                                                  MyColors.black.withOpacity(0.3))),
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 7.w,
-                                ),
-                                TextWidget(
-                                  text:
-                                      'Yes! Send me genuinely useful emails every now \nand \nthen to help me get the most out of Upwork.',
-                                  color: MyColors.black.withOpacity(0.5),
-                                  size: 10.sp,
-                                  fontweight: FontWeight.w500,
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            height: 20.h,
-                          ),
-                          Row(
+                        ),
+                        SizedBox(
+                          height: 35.h,
+                        ),
+                        Center(
+                          child: Row(
                             children: [
                               Obx(
                                 () => InkWell(
                                   onTap: () =>
-                                      containerController.toggelSelection(1),
+                                      containerController.toggelSelection(0),
                                   child: Container(
                                     alignment: Alignment.center,
                                     height: 18.h,
                                     width: 18.w,
-                                    child: containerController.selectedcont[1]
+                                    child: containerController.selectedcont[0]
                                         ? Icon(
                                             size: 12.sp,
                                             Icons.check,
@@ -151,114 +106,164 @@ class MyAccountScreen extends StatelessWidget {
                                           )
                                         : null,
                                     decoration: BoxDecoration(
-                                        color: containerController.selectedcont[1]
-                                            ? Color(0xffFF4C4A)
-                                            : MyColors.white,
-                                        borderRadius: BorderRadius.circular(4.r),
+                                        color:
+                                            containerController.selectedcont[0]
+                                                ? Color(0xffFF4C4A)
+                                                : MyColors.white,
+                                        borderRadius:
+                                            BorderRadius.circular(4.r),
                                         border: Border.all(
                                             width: 2.w,
-                                            color:
-                                                MyColors.black.withOpacity(0.3))),
+                                            color: MyColors.black
+                                                .withOpacity(0.3))),
                                   ),
                                 ),
                               ),
                               SizedBox(
-                                width: 10.w,
+                                width: 7.w,
                               ),
-                              RichText(
-                                textAlign: TextAlign.start,
-                                text: TextSpan(
-                                  text: 'Yes, I understand and agree to the ',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 12.sp,
-                                    color: MyColors.black.withOpacity(0.5),
-                                  ),
-                                  children: <TextSpan>[
-                                    TextSpan(
-                                      text: 'UPTECHUNT \nTerms',
-                                      style: TextStyle(
-                                        fontSize: 12.sp,
-                                        fontWeight: FontWeight.w600,
-                                        color: Color(0xffFF4C4A),
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                              TextWidget(
+                                text:
+                                    'Yes! Send me genuinely useful emails every now \nand \nthen to help me get the most out of Upwork.',
+                                color: MyColors.black.withOpacity(0.5),
+                                size: 10.sp,
+                                fontweight: FontWeight.w500,
                               ),
                             ],
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 30),
-                            child: RichText(
+                        ),
+                        SizedBox(
+                          height: 20.h,
+                        ),
+                        Row(
+                          children: [
+                            Obx(
+                              () => InkWell(
+                                onTap: () =>
+                                    containerController.toggelSelection(1),
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  height: 18.h,
+                                  width: 18.w,
+                                  child: containerController.selectedcont[1]
+                                      ? Icon(
+                                          size: 12.sp,
+                                          Icons.check,
+                                          color: MyColors.white,
+                                        )
+                                      : null,
+                                  decoration: BoxDecoration(
+                                      color: containerController.selectedcont[1]
+                                          ? Color(0xffFF4C4A)
+                                          : MyColors.white,
+                                      borderRadius: BorderRadius.circular(4.r),
+                                      border: Border.all(
+                                          width: 2.w,
+                                          color:
+                                              MyColors.black.withOpacity(0.3))),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 10.w,
+                            ),
+                            RichText(
                               textAlign: TextAlign.start,
                               text: TextSpan(
-                                text: 'of Service, ',
+                                text: 'Yes, I understand and agree to the ',
                                 style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   fontSize: 12.sp,
-                                  color: Color(0xffFF4C4A),
+                                  color: MyColors.black.withOpacity(0.5),
                                 ),
                                 children: <TextSpan>[
                                   TextSpan(
-                                    text: 'including the ',
+                                    text: 'UPTECHUNT \nTerms',
                                     style: TextStyle(
                                       fontSize: 12.sp,
-                                      fontWeight: FontWeight.w500,
-                                      color: MyColors.black.withOpacity(0.5),
+                                      fontWeight: FontWeight.w600,
+                                      color: Color(0xffFF4C4A),
                                     ),
                                   ),
-                                  TextSpan(
-                                      text:
-                                          'User Agreement and \n Privacy Policy. ',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 12.sp,
-                                          color: Color(0xffFF4C4A))),
                                 ],
                               ),
                             ),
-                          ),
-                          SizedBox(
-                            height: 35.h,
-                          ),
-                          Center(
-                            child: CustomizeButton(
-                              borderColor: MyColors.btnColor,
-                              radius: 100.r,
-                              text: 'Create your Account',
-                              height: 40.h,
-                              width: 334.w,
-                              color: MyColors.btnColor,
-                              textColor: MyColors.white,
-                              onTap: () {
-                                debugPrint("name=====>${registerProvider.fnameController}");
-                                debugPrint("name=====>${registerProvider.lnameController}");
-                                debugPrint("Email=====>${registerProvider.emailController}");
-                                debugPrint("password=====>${registerProvider.passwordController}");
-                                debugPrint("isClient=====>${registerProvider.isClient}");
-                                registerProvider.signUpBtn(
-                                    context: context);
-                               /* if (formKey.currentState!.validate()) {
-                                  Get.to(() => CreateYourProfile());
-                                }*/
-                              },
+                          ],
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 30),
+                          child: RichText(
+                            textAlign: TextAlign.start,
+                            text: TextSpan(
+                              text: 'of Service, ',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 12.sp,
+                                color: Color(0xffFF4C4A),
+                              ),
+                              children: <TextSpan>[
+                                TextSpan(
+                                  text: 'including the ',
+                                  style: TextStyle(
+                                    fontSize: 12.sp,
+                                    fontWeight: FontWeight.w500,
+                                    color: MyColors.black.withOpacity(0.5),
+                                  ),
+                                ),
+                                TextSpan(
+                                    text:
+                                        'User Agreement and \n Privacy Policy. ',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 12.sp,
+                                        color: Color(0xffFF4C4A))),
+                              ],
                             ),
                           ),
-                          SizedBox(
-                            height: 42.h,
+                        ),
+                        SizedBox(
+                          height: 35.h,
+                        ),
+                        Center(
+                          child: CustomizeButton(
+                            borderColor: MyColors.btnColor,
+                            radius: 100.r,
+                            text: 'Create your Account',
+                            height: 40.h,
+                            width: 334.w,
+                            color: MyColors.btnColor,
+                            textColor: MyColors.white,
+                            onTap: () {
+                              debugPrint(
+                                  "name=====>${registerProvider.fnameController}");
+                              debugPrint(
+                                  "name=====>${registerProvider.lnameController}");
+                              debugPrint(
+                                  "Email=====>${registerProvider.emailController}");
+                              debugPrint(
+                                  "password=====>${registerProvider.passwordController}");
+                              debugPrint(
+                                  "isClient=====>${registerProvider.isClient}");
+                              registerProvider.signUpBtn(context: context);
+                              // if (_accountKey.currentState!.validate()) {
+                              Get.to(() => CreateYourProfile());
+                              // }
+                            },
                           ),
-                        ],
-                      ),
+                        ),
+                        SizedBox(
+                          height: 42.h,
+                        ),
+                      ],
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
-        );
-      }
-    );
+        ),
+      );
+    });
   }
 }
 

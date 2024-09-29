@@ -15,4 +15,5 @@ class EndPoints {
   static const String FREELANCERS = "/api/auth/getAllFreelancers";
   static const String FILTER = "/api/projects/filter";
   static const String USERPROPOSALS = '/api/proposals/sent';
+  static const String USERDETAILS = '/api/user/details';
 }

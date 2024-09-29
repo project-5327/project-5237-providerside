@@ -70,9 +70,9 @@ class _MessageChatScreen1State extends State<MessageChatScreen1>
                     fontWeight: FontWeight.w600,
                   ),
                   tabs: const [
-                    Tab(text: 'Catogory1'),
-                    Tab(text: 'Catogory2'),
-                    Tab(text: 'Catogory3')
+                    Tab(text: 'Client'),
+                    Tab(text: 'Send Proposal'),
+                    Tab(text: 'Miscellaneous')
                   ],
                 ),
               ],

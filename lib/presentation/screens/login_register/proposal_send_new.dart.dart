@@ -6,10 +6,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:project_5237_provider/data/models/project_model.dart';
 import 'package:project_5237_provider/presentation/constants/assets.dart';
 import 'package:project_5237_provider/presentation/constants/color.dart';
 import 'package:project_5237_provider/presentation/constants/responsive_view.dart';
 import 'package:project_5237_provider/presentation/constants/strings.dart';
+import 'package:project_5237_provider/presentation/screens/login_register/succesfully.dart';
 import 'package:project_5237_provider/presentation/screens/my_contracts/send_screen.dart';
 import 'package:project_5237_provider/presentation/widgets/Customize_textfield.dart';
 import 'package:project_5237_provider/presentation/widgets/customize_button.dart';
@@ -17,7 +19,8 @@ import 'package:project_5237_provider/provider/home/home_provider.dart';
 import 'package:provider/provider.dart';
 
 class ProposalSendScreen extends StatefulWidget {
-  const ProposalSendScreen({super.key});
+  final Projects? projects;
+  const ProposalSendScreen({super.key, this.projects});
 
   @override
   State<ProposalSendScreen> createState() => _ProposalSendScreenState();
@@ -43,13 +46,14 @@ class _ProposalSendScreenState extends State<ProposalSendScreen> {
     }
   }
 
+  final GlobalKey<FormState> _proposalKey = GlobalKey<FormState>();
+
   TextEditingController dateTimeController = TextEditingController();
   TextEditingController rateController = TextEditingController();
   TextEditingController addressController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
   @override
   void dispose() {
-    // Dispose of each controller to release resources
     dateTimeController.dispose();
     rateController.dispose();
     addressController.dispose();
@@ -76,193 +80,212 @@ class _ProposalSendScreenState extends State<ProposalSendScreen> {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 18),
               child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        IconButton(
-                            onPressed: () {
-                              Get.back();
-                            },
-                            icon: Icon(
-                              Icons.arrow_back,
-                              size: 16.sp,
-                            )),
-                        Text(
-                          'Send Proposal',
-                          style: TextStyle(
-                              fontSize: 16.sp, fontWeight: FontWeight.w600),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 35.h,
-                    ),
-                    CustomTextFormField(
-                      controller: dateTimeController,
-                      text: 'Select date & Time',
-                      title: AppStrings.dateTime,
-                      style: TextStyle(
-                          fontSize: 13.sp,
-                          fontWeight: FontWeight.w500,
-                          color: MyColors.black1),
-                    ),
-                    SizedBox(
-                      height: 20.h,
-                    ),
-                    CustomTextFormField(
-                      controller: rateController,
-                      text: "Input desired rate",
-                      title: AppStrings.rate,
-                      style: TextStyle(
-                          fontSize: 13.sp,
-                          fontWeight: FontWeight.w500,
-                          color: MyColors.black1),
-                    ),
-                    SizedBox(
-                      height: 20.h,
-                    ),
-                    CustomTextFormField(
-                      controller: addressController,
-                      text: AppStrings.inputAddress,
-                      title: AppStrings.address,
-                      style: TextStyle(
-                          fontSize: 13.sp,
-                          fontWeight: FontWeight.w500,
-                          color: MyColors.black1),
-                    ),
-                    SizedBox(
-                      height: 20.h,
-                    ),
-                    Text(
-                      AppStrings.attachImage,
-                      style: TextStyle(
-                        fontSize: 13.sp,
-                        fontWeight: FontWeight.w600,
-                        color: MyColors.black1,
+                child: Form(
+                  key: _proposalKey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          IconButton(
+                              onPressed: () {
+                                Get.back();
+                              },
+                              icon: Icon(
+                                Icons.arrow_back_ios,
+                                // size: 16.sp,
+                              )),
+                          Text(
+                            'Send Proposal',
+                            style: TextStyle(
+                                fontSize: 16.sp, fontWeight: FontWeight.w600),
+                          ),
+                        ],
                       ),
-                    ),
-                    SizedBox(height: 10.h),
-                    InkWell(
-                      onTap: pickFile,
-                      child: Container(
-                        height: 88.h,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          border: Border.all(color: MyColors.grayDark),
+                      SizedBox(
+                        height: 35.h,
+                      ),
+                      CustomTextFormField(
+                        controller: dateTimeController,
+                        text: 'Select date & Time',
+                        title: AppStrings.dateTime,
+                        style: TextStyle(
+                            fontSize: 13.sp,
+                            fontWeight: FontWeight.w500,
+                            color: MyColors.black1),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter a date & time';
+                          }
+                          return null;
+                        },
+                      ),
+                      SizedBox(
+                        height: 20.h,
+                      ),
+                      CustomTextFormField(
+                        controller: rateController,
+                        text: "Input desired rate",
+                        title: AppStrings.rate,
+                        style: TextStyle(
+                            fontSize: 13.sp,
+                            fontWeight: FontWeight.w500,
+                            color: MyColors.black1),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter a rate.';
+                          }
+                          return null;
+                        },
+                      ),
+                      SizedBox(
+                        height: 20.h,
+                      ),
+                      CustomTextFormField(
+                        controller: addressController,
+                        text: AppStrings.inputAddress,
+                        title: AppStrings.address,
+                        style: TextStyle(
+                            fontSize: 13.sp,
+                            fontWeight: FontWeight.w500,
+                            color: MyColors.black1),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter a address';
+                          }
+                          return null;
+                        },
+                      ),
+                      SizedBox(
+                        height: 20.h,
+                      ),
+                      Text(
+                        AppStrings.attachImage,
+                        style: TextStyle(
+                          fontSize: 13.sp,
+                          fontWeight: FontWeight.w600,
+                          color: MyColors.black1,
                         ),
-                        child: Center(
-                          child: _selectedImage != null
-                              ? Image.file(File(_selectedImage!.path),
-                                  height: 88.h, fit: BoxFit.cover)
-                              : Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      AppStrings.addAttachImage,
-                                      style: TextStyle(
-                                        fontSize: 13.sp,
-                                        fontWeight: FontWeight.w600,
-                                        color: MyColors.lightGrey,
+                      ),
+                      SizedBox(height: 10.h),
+                      InkWell(
+                        onTap: pickFile,
+                        child: Container(
+                          height: 88.h,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(color: MyColors.grayDark),
+                          ),
+                          child: Center(
+                            child: _selectedImage != null
+                                ? Image.file(File(_selectedImage!.path),
+                                    height: 88.h, fit: BoxFit.cover)
+                                : Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        AppStrings.addAttachImage,
+                                        style: TextStyle(
+                                          fontSize: 13.sp,
+                                          fontWeight: FontWeight.w600,
+                                          color: MyColors.lightGrey,
+                                        ),
                                       ),
-                                    ),
-                                    SvgPicture.asset(Assets.addImage),
-                                  ],
-                                ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20.h,
-                    ),
-                    Text(
-                      AppStrings.briefDesc,
-                      style: TextStyle(
-                          fontSize: 13.sp,
-                          fontWeight: FontWeight.w500,
-                          color: MyColors.black1),
-                    ),
-                    SizedBox(
-                      height: 10.h,
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8.r),
-                          border: Border.all(color: MyColors.grayDark)),
-                      height: 114.h,
-                      width: double.infinity,
-                      child: Padding(
-                        padding: EdgeInsets.only(left: 8),
-                        child: TextField(
-                          controller: descriptionController,
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: AppStrings.briefDesc,
-                            hintStyle: TextStyle(
-                                fontSize: 10.sp,
-                                fontWeight: FontWeight.w600,
-                                color: MyColors.black1),
+                                      SvgPicture.asset(Assets.addImage),
+                                    ],
+                                  ),
                           ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 10.h,
-                    ),
-                    SizedBox(
-                      height: 34.h,
-                    ),
-                    Center(
-                        child: CustomizeButton(
-                      borderColor: MyColors.btnColor,
-                      radius: 100.r,
-                      text: "Send",
-                      height: 45.h,
-                      width: 155.w,
-                      color: MyColors.btnColor,
-                      textColor: MyColors.white,
-                      onTap: homeProvider.isLoading
-                          ? () {} // Provide an empty function when loading
-                          : () {
-                              final proposalData = {
-                                'projectId': '66e9859bdc6a4196ec9e7c28',
-                                'userId': '66e283a5bead499cbf15cb45',
-                                'proposalTitle': 'testing proposal get',
-                                'proposalDescription':
-                                    // descriptionController.text,
-                                    'I propose a comprehensive web development solution that includes both frontend and backend components.',
-                                'estimatedTime': 4,
-                                'proposedBudget': "100",
-                                // rateController.text.toString(),
-                                'status': 'Submitted',
-                                'address': "123 stain",
-                                //addressController.text,
-                                'proposalImage': [
-                                  //  _selectedImage!.path,
-                                  'https://pub-261021c7b68740ffba855a7e8a6f3c1e.r2.dev//proposals/Screenshot 2024-08-16 160914.png'
-                                ],
-                                '_id': '66ec0ab238993904863e849c',
-                                'createdAt': '2024-09-19T11:27:46.016Z',
-                                //dateTimeController.text,
-                                'updatedAt': '2024-09-19T11:27:46.016Z',
-                                // 'userName': 'asdoe',
-                                //'email': 'harshittext3@gmail.com',
-                              };
+                      SizedBox(
+                        height: 20.h,
+                      ),
+                      Text(
+                        AppStrings.briefDesc,
+                        style: TextStyle(
+                            fontSize: 13.sp,
+                            fontWeight: FontWeight.w500,
+                            color: MyColors.black1),
+                      ),
+                      SizedBox(
+                        height: 10.h,
+                      ),
+                      TextFormField(
+                        maxLines: 3,
+                        controller: descriptionController,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter a Description.';
+                          }
+                          return null;
+                        },
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          hintText: AppStrings.briefDesc,
+                          hintStyle: TextStyle(
+                              fontSize: 10.sp,
+                              fontWeight: FontWeight.w600,
+                              color: MyColors.black1),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10.h,
+                      ),
+                      SizedBox(
+                        height: 34.h,
+                      ),
+                      Center(
+                          child: CustomizeButton(
+                        borderColor: MyColors.btnColor,
+                        radius: 100.r,
+                        text: "Send",
+                        height: 45.h,
+                        width: 155.w,
+                        color: MyColors.btnColor,
+                        textColor: MyColors.white,
+                        onTap: homeProvider.isLoading
+                            ? () {}
+                            : () async {
+                                if (_proposalKey.currentState!.validate()) {
+                                  final proposalData = {
+                                    //  'userId': widget.freelancers?.user?.sId,
+                                    'proposalTitle': 'testing proposal get',
+                                    'proposalDescription':
+                                        descriptionController.text,
+                                    'estimatedTime': 4,
+                                    'proposedBudget':
+                                        rateController.text.toString(),
+                                    'address': addressController.text,
+                                    'proposalImage': [
+                                      'https://pub-261021c7b68740ffba855a7e8a6f3c1e.r2.dev//proposals/Screenshot 2024-08-16 160914.png'
+                                    ],
+                                    'createdAt': dateTimeController.text,
+                                  };
 
-                              // Trigger the API call
-                              Provider.of<HomeProvider>(context, listen: false)
-                                  .createProposal(
-                                context: context,
-                                proposalData: proposalData,
-                              );
-                            },
-                    )),
-                    SizedBox(
-                      height: 20.h,
-                    ),
-                  ],
+                                  bool isSuccessful =
+                                      await Provider.of<HomeProvider>(context,
+                                              listen: false)
+                                          .createProposal(
+                                              context: context,
+                                              proposalData: proposalData);
+
+                                  if (isSuccessful) {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              SuccesfullyScreen()),
+                                    );
+                                  }
+                                }
+                              },
+                      )),
+                      SizedBox(
+                        height: 20.h,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -307,6 +330,7 @@ class _ProposalSendScreenState extends State<ProposalSendScreen> {
                         height: 35.h,
                       ),
                       CustomTextFormField(
+                        readOnly: false,
                         controller: dateTimeController,
                         text: "Select date & Time",
                         title: AppStrings.dateTime,
@@ -319,6 +343,7 @@ class _ProposalSendScreenState extends State<ProposalSendScreen> {
                         height: 20.h,
                       ),
                       CustomTextFormField(
+                        readOnly: false,
                         controller: rateController,
                         text: "Input desired rate",
                         title: AppStrings.rate,
@@ -331,6 +356,7 @@ class _ProposalSendScreenState extends State<ProposalSendScreen> {
                         height: 20.h,
                       ),
                       CustomTextFormField(
+                        readOnly: false,
                         controller: addressController,
                         text: AppStrings.inputAddress,
                         title: AppStrings.address,

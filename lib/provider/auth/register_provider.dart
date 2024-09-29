@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:project_5237_provider/desktop/onboarding/create_profile.dart';
+import 'package:project_5237_provider/presentation/screens/create_profile/create_your_profile.dart';
 import 'package:project_5237_provider/presentation/screens/create_profile/profile/profile_detail.dart';
 
 import '../../config/baseclient/CustomInterceptor.dart';
@@ -12,7 +13,7 @@ import '../../config/baseclient/endpoints.dart';
 
 class RegisterProvider extends ChangeNotifier {
   //Register API Implement
-  final formKeyRegist = GlobalKey<FormState>();
+  final registerKeyRegist = GlobalKey<FormState>();
   final TextEditingController _fnameController = TextEditingController();
   final TextEditingController _lnameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
@@ -125,10 +126,10 @@ class RegisterProvider extends ChangeNotifier {
     );
 
     if (success) {
-      /* Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => LoginPage()),
-        );*/
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => CreateYourProfile()),
+      );
       Future.delayed(const Duration(seconds: 5), () {
         fnameController.clear();
         lnameController.clear();

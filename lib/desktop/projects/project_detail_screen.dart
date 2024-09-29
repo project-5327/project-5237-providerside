@@ -17,15 +17,14 @@ import 'package:project_5237_provider/presentation/widgets/customize_button.dart
 import 'package:project_5237_provider/presentation/widgets/discover_project_cont.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
-class ProjectDetailScreen extends StatelessWidget {
+class ProposalDetailScreen extends StatelessWidget {
   final bool isFromHomeScreen;
   final ProposalListData proposalListData;
-
-  const ProjectDetailScreen(
+  const ProposalDetailScreen(
       {super.key,
       required this.isFromHomeScreen,
       required this.proposalListData});
-  @override
+
   Widget build(BuildContext context) {
     DateTime createdAt = DateTime.parse(proposalListData.createdAt ?? "");
     final responsive = ResponsiveCheck(context);

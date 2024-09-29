@@ -57,7 +57,7 @@ class CustomizeListTile extends StatelessWidget {
           borderRadius: BorderRadius.circular(100.r),
           child: Image.asset(
             image,
-            height: 48.h,
+            height: 45.h,
             width: 43.w,
             fit: BoxFit.cover,
           )),
@@ -79,7 +79,7 @@ class CustomizeListTile extends StatelessWidget {
                       color: MyColors.black),
                 ),
                 SizedBox(
-                  width: 120.w,
+                  width: 100.w,
                 ),
                 Text(
                   time,
