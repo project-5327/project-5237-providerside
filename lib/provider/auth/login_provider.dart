@@ -1,7 +1,4 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../config/baseclient/CustomInterceptor.dart';
 import '../../config/baseclient/base_client.dart';
@@ -104,8 +101,6 @@ class LoginProvider extends ChangeNotifier {
       );
 
       if (success) {
-        /* Get.to(() => DashBoardView());*/
-
         Future.delayed(const Duration(seconds: 5), () {
           emailController.clear();
           passwordController.clear();
@@ -214,10 +209,10 @@ class LoginProvider extends ChangeNotifier {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? email = prefs.getString('email');
       final response = await BaseClient.post(
-        api: EndPoints.VERIFY_OTP,
+        api: EndPoints.RESETPASSWORD,
         payloadObj: {
           'email': email,
-          'otp': otp,
+          // 'otp': otp,
           'newPassword': newPassword,
         },
       );

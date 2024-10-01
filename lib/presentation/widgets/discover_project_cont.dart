@@ -17,6 +17,7 @@ class DiscoverContainer extends StatelessWidget {
   final String rate;
   final String text2;
   final String text3;
+  final String timerange;
 
   DiscoverContainer({
     super.key,
@@ -27,13 +28,14 @@ class DiscoverContainer extends StatelessWidget {
     required this.username,
     required this.time,
     required this.rate,
+    required this.timerange,
   });
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 200.h,
-      width: 352.w,
+      //width: 352.w,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
@@ -56,7 +58,7 @@ class DiscoverContainer extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                width: 5.h,
+                width: 10.h,
               ),
               Container(
                 margin: EdgeInsets.only(right: 8.w),
@@ -85,30 +87,30 @@ class DiscoverContainer extends StatelessWidget {
             ],
           ),
           SizedBox(
-            height: 5.h,
+            height: 10.h,
           ),
-          Text(
-            text1,
-            style: TextStyle(
-                fontSize: 12.sp,
-                fontWeight: FontWeight.w600,
-                color: MyColors.black2),
-          ),
-          SizedBox(
-            height: 5.h,
+          Padding(
+            padding: const EdgeInsets.only(left: 5),
+            child: Text(
+              text1,
+              style: TextStyle(
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w600,
+                  color: MyColors.black2),
+            ),
           ),
           ListTile(
             title: Text(
               rate,
               style: TextStyle(
-                  fontSize: 12.sp,
+                  fontSize: 14.sp,
                   fontWeight: FontWeight.w500,
                   color: MyColors.black),
             ),
             subtitle: Text(
               text2,
               style: TextStyle(
-                  fontSize: 14.sp,
+                  fontSize: 12.sp,
                   fontWeight: FontWeight.w500,
                   color: MyColors.black),
             ),
@@ -133,7 +135,26 @@ class DiscoverContainer extends StatelessWidget {
           SizedBox(
             height: 5.h,
           ),
-          const CustomizeTagContainer(tag: 'Time range'),
+          Container(
+            height: 30.h,
+            width: 270.w,
+            decoration: BoxDecoration(
+              color: MyColors.tagCont,
+              borderRadius: BorderRadius.circular(6),
+            ),
+            child: Center(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1),
+                child: Text(
+                  formatDateTime(timerange),
+                  style: TextStyle(
+                      fontSize: 12.sp,
+                      fontWeight: FontWeight.w500,
+                      color: MyColors.black),
+                ),
+              ),
+            ),
+          )
         ],
       ),
     );
@@ -297,19 +318,22 @@ class CustomizeTagContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 25.h,
-      width: 91.w,
+      height: 30.h,
+      //  width: 100.w,
       decoration: BoxDecoration(
         color: MyColors.tagCont,
         borderRadius: BorderRadius.circular(6),
       ),
       child: Center(
-        child: Text(
-          tag,
-          style: TextStyle(
-              fontSize: 10.sp,
-              fontWeight: FontWeight.w500,
-              color: MyColors.black),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1),
+          child: Text(
+            tag,
+            style: TextStyle(
+                fontSize: 12.sp,
+                fontWeight: FontWeight.w500,
+                color: MyColors.black),
+          ),
         ),
       ),
     );

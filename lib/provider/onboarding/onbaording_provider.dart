@@ -48,20 +48,15 @@ class OnbaordingProvider extends ChangeNotifier {
   final TextEditingController _startDate1Controller = TextEditingController();
   final TextEditingController _endDate1Controller = TextEditingController();
 
-
-
-
-  final TextEditingController _projectNameController =
-  TextEditingController();
+  final TextEditingController _projectNameController = TextEditingController();
   final TextEditingController _projectDescriptionCOntroller =
-  TextEditingController();
+      TextEditingController();
   final TextEditingController _startDate2Controller = TextEditingController();
   final TextEditingController _endDate2Controller = TextEditingController();
 
-
   final TextEditingController _proficiancyController = TextEditingController();
 
-bool _isOngoin = false;
+  bool _isOngoin = false;
 
   File? _selectedImage;
 
@@ -116,7 +111,6 @@ bool _isOngoin = false;
 
   TextEditingController get description1Controller => _description1Controller;
 
-
   TextEditingController get degreeORCertificateController =>
       _degreeORCertificateController;
   TextEditingController get instituteNameController => _instituteNameController;
@@ -125,10 +119,11 @@ bool _isOngoin = false;
   TextEditingController get startDate1Controller => _startDate1Controller;
   TextEditingController get endDate1Controller => _endDate1Controller;
 
- TextEditingController get proficiancyController => _proficiancyController;
+  TextEditingController get proficiancyController => _proficiancyController;
 
   TextEditingController get projectNameController => _projectNameController;
-  TextEditingController get projectDescriptionCOntroller => _projectDescriptionCOntroller;
+  TextEditingController get projectDescriptionCOntroller =>
+      _projectDescriptionCOntroller;
   TextEditingController get startDate2Controller => _startDate2Controller;
   TextEditingController get endDate2Controller => _endDate2Controller;
 
@@ -170,12 +165,9 @@ bool _isOngoin = false;
 
   set setSkill(List<String> val) {
     _skills = val;
-    /* print('======> _skills ${descriptionController}');*/
     debugPrint('======> _skills ${_skills}');
     notifyListeners();
   }
-
-
 
   set setTechnologies(List<String> val) {
     _technologies = val;
@@ -207,19 +199,23 @@ bool _isOngoin = false;
     notifyListeners();
   }
 
-  void addYourPersonalProject(String projectName, String ProjectDescr,
-       String startDate, String endDate, List<String> technologies, bool isOngoing) {
+  void addYourPersonalProject(
+      String projectName,
+      String ProjectDescr,
+      String startDate,
+      String endDate,
+      List<String> technologies,
+      bool isOngoing) {
     _addYourPersonalProject.add({
       "projectName": projectName,
-      "description" : ProjectDescr,
+      "description": ProjectDescr,
       "startDate": startDate,
       "endDate": endDate,
       "technologies": technologies,
-      "isOngoing":isOngoing
+      "isOngoing": isOngoing
     });
     notifyListeners();
   }
-
 
   // Add education
   void addEducation(String institutionName, String degree, String fieldOfStudy,
@@ -234,8 +230,6 @@ bool _isOngoin = false;
     });
     notifyListeners();
   }
-
-
 
   void addYourLangauges(List<String> languages, String proficiency) {
     List<Map<String, dynamic>> _addLanguages = [];
@@ -301,7 +295,8 @@ bool _isOngoin = false;
         "skills": _skills,
 
         // Languages as a list of objects
-        "languages": _addLanguages, // Assuming this is the list generated earlier
+        "languages":
+            _addLanguages, // Assuming this is the list generated earlier
 
         "profileDescription": _profileDescriptionController.text.trim(),
         "hourlyRate": _hourlyRateController.text.trim(),
@@ -313,10 +308,10 @@ bool _isOngoin = false;
         // Profile image file (if available)
         "profileImage": file != null
             ? await MultipartFile.fromFile(
-          file!.path,
-          filename: file!.path.split('/').last,
-          contentType: MediaType('image', 'jpg'),
-        )
+                file!.path,
+                filename: file!.path.split('/').last,
+                contentType: MediaType('image', 'jpg'),
+              )
             : null,
       });
 
@@ -346,7 +341,7 @@ bool _isOngoin = false;
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(builder: (context) => const DashBoardView()),
-              (Route<dynamic> route) => false,
+          (Route<dynamic> route) => false,
         );
         _isLoading = false;
         notifyListeners();
@@ -354,7 +349,9 @@ bool _isOngoin = false;
       } else {
         _errorMessage = 'Failed to register user';
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(response.data['message'] ?? 'Something went wrong')),
+          SnackBar(
+              content:
+                  Text(response.data['message'] ?? 'Something went wrong')),
         );
         _isLoading = false;
         notifyListeners();
@@ -368,7 +365,6 @@ bool _isOngoin = false;
       return false;
     }
   }
-
 
   String? validateTitle(String value) {
     if (value.isEmpty) {

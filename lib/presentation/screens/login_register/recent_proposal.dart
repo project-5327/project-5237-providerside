@@ -20,14 +20,14 @@ import 'package:timeago/timeago.dart' as timeago;
 
 import '../../constants/assets.dart';
 
-class AllProjects extends StatefulWidget {
-  const AllProjects({super.key});
+class RecentProposal extends StatefulWidget {
+  const RecentProposal({super.key});
 
   @override
-  State<AllProjects> createState() => _AllProjectsState();
+  State<RecentProposal> createState() => _RecentProposalState();
 }
 
-class _AllProjectsState extends State<AllProjects> {
+class _RecentProposalState extends State<RecentProposal> {
   bool _isSwitched = true;
 
   void _toggleSwitch(bool value) {
@@ -62,24 +62,12 @@ class _AllProjectsState extends State<AllProjects> {
                       },
                       icon: Icon(Icons.arrow_back_ios),
                     ),
-                    title: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'App Name',
-                          style: TextStyle(
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        Switch(
-                          value: _isSwitched,
-                          onChanged: _toggleSwitch,
-                          activeColor: Colors.blue,
-                          inactiveThumbColor: Colors.grey,
-                          inactiveTrackColor: Colors.grey[300],
-                        ),
-                      ],
+                    title: Text(
+                      'Recent Proposal',
+                      style: TextStyle(
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ),
                   body: homeprovider.isLoading
@@ -90,43 +78,11 @@ class _AllProjectsState extends State<AllProjects> {
                         )
                       : SingleChildScrollView(
                           child: Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 20.sp),
+                            padding: EdgeInsets.symmetric(horizontal: 10.sp),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 const SearchField(),
-                                SizedBox(height: 27.h),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      'Recent Proposal',
-                                      style: TextStyle(
-                                        fontSize: 16.sp,
-                                        fontWeight: FontWeight.w500,
-                                        color: MyColors.black1,
-                                      ),
-                                    ),
-                                    homeprovider.proposalDataDoc?.projects
-                                                ?.isEmpty ??
-                                            true
-                                        ? SizedBox.shrink()
-                                        : InkWell(
-                                            onTap: () {
-                                              // Handle 'See All' tap here
-                                            },
-                                            child: Text(
-                                              'See All',
-                                              style: TextStyle(
-                                                fontSize: 12.sp,
-                                                fontWeight: FontWeight.w400,
-                                                color: MyColors.blue,
-                                              ),
-                                            ),
-                                          ),
-                                  ],
-                                ),
                                 SizedBox(height: 20.h),
                                 homeprovider.proposalDataDoc?.projects
                                             ?.isEmpty ??
@@ -180,6 +136,11 @@ class _AllProjectsState extends State<AllProjects> {
                                                   );
                                                 },
                                                 child: DiscoverContainer(
+                                                  timerange: homeprovider
+                                                          .proposalDataDoc
+                                                          ?.projects?[index]
+                                                          .deadline ??
+                                                      "",
                                                   time:
                                                       timeago.format(createdAt),
                                                   image: homeprovider

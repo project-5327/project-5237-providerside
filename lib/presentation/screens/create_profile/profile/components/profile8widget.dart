@@ -148,7 +148,7 @@ class _Profile8widgetState extends State<Profile8widget> {
                               onboardingProvider.validatePhone(value ?? ''),
                           fillcolor: const Color(0xffC4C4C4),
                           title: AppStrings.phone,
-                          text: '+61 | 989876363474',
+                          text: 'Enter here...',
                         ),
                       ),
                     ],
@@ -157,50 +157,132 @@ class _Profile8widgetState extends State<Profile8widget> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(AppStrings.city,
-                              style: TextStyle(
-                                  color: MyColors.black,
-                                  fontSize: 12.sp,
-                                  fontWeight: FontWeight.w600)),
-                          SizedBox(height: 5.h),
-                          CustomDropdownContainer(
-                            width: 153.w,
-                            hint: 'eg, Delhi',
-                            selectedValue: onboardingProvider.cityName,
-                            onChanged: (String? newValue) {
-                              if (newValue != null) {
-                                onboardingProvider.cityName = newValue;
-                              }
-                            },
-                            items: city,
-                          ),
-                        ],
+                      Flexible(
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(AppStrings.city,
+                                  style: TextStyle(
+                                      color: MyColors.black,
+                                      fontSize: 12.sp,
+                                      fontWeight: FontWeight.w600)),
+                              SizedBox(height: 5.h),
+                              Container(
+                                // width: MediaQuery.of(context).size.width*0.1,
+                                height: 80,
+                                child: DropdownButtonFormField<String>(
+                                  decoration: InputDecoration(
+                                    fillColor:
+                                        Theme.of(context).colorScheme.onPrimary,
+                                    focusColor:
+                                        Theme.of(context).colorScheme.onPrimary,
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(8)),
+                                      borderSide: BorderSide(
+                                        color: MyColors.lightGrey,
+                                        width: 1.5,
+                                      ),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(8.0)),
+                                      borderSide: BorderSide(
+                                        //  color: MyColors.blue,
+                                        width: 1.5,
+                                      ),
+                                    ),
+                                  ),
+                                  value: onboardingProvider.cityName != null &&
+                                          city.contains(
+                                              onboardingProvider.cityName)
+                                      ? onboardingProvider.cityName
+                                      : null, // Ensure the value is from the city list
+                                  onChanged: (String? newValue) {
+                                    setState(() {
+                                      onboardingProvider.cityName = newValue!;
+                                    });
+                                  },
+                                  items: city.map<DropdownMenuItem<String>>(
+                                      (String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Text(value),
+                                    );
+                                  }).toList(),
+                                  hint: Text('eg, Delhi',
+                                      style: TextStyle(
+                                          color: MyColors.black,
+                                          fontSize: 12.sp,
+                                          fontWeight: FontWeight.w500)),
+                                ),
+                              ),
+                            ]),
                       ),
                       SizedBox(width: 15.w),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(AppStrings.countryName,
-                              style: TextStyle(
-                                  color: MyColors.black,
-                                  fontSize: 12.sp,
-                                  fontWeight: FontWeight.w600)),
-                          SizedBox(height: 5.h),
-                          CustomDropdownContainer(
-                            width: 153.w,
-                            hint: 'eg, India',
-                            selectedValue: onboardingProvider.countryName,
-                            onChanged: (String? newValue) {
-                              if (newValue != null) {
-                                onboardingProvider.contryName = newValue;
-                              }
-                            },
-                            items: countries,
-                          ),
-                        ],
+                      Flexible(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(AppStrings.countryName,
+                                style: TextStyle(
+                                    color: MyColors.black,
+                                    fontSize: 12.sp,
+                                    fontWeight: FontWeight.w600)),
+                            SizedBox(height: 5.h),
+                            Container(
+                              // width: MediaQuery.of(context).size.width,
+                              height: 80,
+                              child: DropdownButtonFormField<String>(
+                                decoration: InputDecoration(
+                                  fillColor:
+                                      Theme.of(context).colorScheme.onPrimary,
+                                  focusColor:
+                                      Theme.of(context).colorScheme.onPrimary,
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(8)),
+                                    borderSide: BorderSide(
+                                      color: MyColors.lightGrey,
+                                      width: 1.5,
+                                    ),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(8.0)),
+                                    borderSide: BorderSide(
+                                      //    color: MyColors.blue,
+                                      width: 1.5,
+                                    ),
+                                  ),
+                                ),
+                                value: onboardingProvider.cityName != null &&
+                                        city.contains(
+                                            onboardingProvider.cityName)
+                                    ? onboardingProvider.cityName
+                                    : null, //
+
+                                onChanged: (String? newValue) {
+                                  setState(() {
+                                    onboardingProvider.contryName = newValue!;
+                                  });
+                                },
+                                items: countries.map<DropdownMenuItem<String>>(
+                                    (String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(value),
+                                  );
+                                }).toList(),
+                                hint: Text('eg, India',
+                                    style: TextStyle(
+                                        color: MyColors.black,
+                                        fontSize: 12.sp,
+                                        fontWeight: FontWeight.w500)),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
@@ -225,6 +307,10 @@ class _Profile8widgetState extends State<Profile8widget> {
                             '====>  profile details : ${onboardingProvider.pincodeController}');
                         debugPrint(
                             '====>  profile details : ${onboardingProvider.phoneNumberController}');
+                        debugPrint(
+                            '====>  profile details : ${onboardingProvider.cityController}');
+                        debugPrint(
+                            '====>  profile details : ${onboardingProvider.countryController}');
                         onboardingProvider.submitUserDetails(context: context);
                         if (formKey.currentState!.validate()) {
                           profileController.nextPage();
@@ -232,6 +318,7 @@ class _Profile8widgetState extends State<Profile8widget> {
                       },
                     ),
                   ),
+                  SizedBox(height: 31.h),
                 ],
               ),
             ),

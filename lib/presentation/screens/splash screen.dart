@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:project_5237_provider/presentation/screens/create_profile/profile/profile8.dart';
 
 import 'package:project_5237_provider/presentation/screens/login_register/register.dart';
 import 'package:project_5237_provider/presentation/screens/main_screen%20.dart';
@@ -39,9 +40,7 @@ class _SplashScreenState extends State<SplashScreen> {
     if (isLoggedIn) {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => MainScreen()
-            //  MainScreen()
-            ),
+        MaterialPageRoute(builder: (context) => MainScreen()),
       );
     } else {
       Navigator.pushReplacement(

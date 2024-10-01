@@ -43,8 +43,6 @@ class CustomInterceptor extends Interceptor {
     return prefs.getString('userToken');
   }
 
-
-
   static void setToken(String token) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString('userToken', token);

@@ -63,7 +63,7 @@ class UserDetails {
   String? createdAt;
   String? updatedAt;
   int? iV;
-  List<dynamic>? personalProjects; // Changed to dynamic list for flexibility
+  List<dynamic>? personalProjects;
 
   UserDetails({
     this.sId,
@@ -122,7 +122,12 @@ class UserDetails {
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
     iV = json['__v'];
-    personalProjects = json['personalProjects'] ?? [];
+    if (json['personalProjects'] != null) {
+      personalProjects = [];
+      json['personalProjects'].forEach((v) {
+        personalProjects?.add(PersonalProjects.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -156,7 +161,8 @@ class UserDetails {
     data['updatedAt'] = this.updatedAt;
     data['__v'] = this.iV;
     if (this.personalProjects != null) {
-      data['personalProjects'] = this.personalProjects;
+      data['personalProjects'] =
+          this.personalProjects?.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -337,6 +343,47 @@ class Languages {
     final Map<String, dynamic> data = {};
     data['name'] = this.name;
     data['proficiency'] = this.proficiency;
+    data['_id'] = this.sId;
+    return data;
+  }
+}
+
+class PersonalProjects {
+  String? projectName;
+  String? description;
+  String? startDate;
+  String? endDate;
+  List<String>? technologies;
+  bool? isOngoing;
+  String? sId;
+
+  PersonalProjects(
+      {this.projectName,
+      this.description,
+      this.startDate,
+      this.endDate,
+      this.technologies,
+      this.isOngoing,
+      this.sId});
+
+  PersonalProjects.fromJson(Map<String, dynamic> json) {
+    projectName = json['projectName'];
+    description = json['description'];
+    startDate = json['startDate'];
+    endDate = json['endDate'];
+    technologies = json['technologies'].cast<String>();
+    isOngoing = json['isOngoing'];
+    sId = json['_id'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['projectName'] = this.projectName;
+    data['description'] = this.description;
+    data['startDate'] = this.startDate;
+    data['endDate'] = this.endDate;
+    data['technologies'] = this.technologies;
+    data['isOngoing'] = this.isOngoing;
     data['_id'] = this.sId;
     return data;
   }

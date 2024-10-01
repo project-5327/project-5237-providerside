@@ -98,9 +98,11 @@ class _DiscoverProjectsState extends State<DiscoverProjects> {
                       text3: 'Location',
                       username: 'Jason Jones',
                       time: '5 hours agoo',
+                      timerange: "range",
                       rate: 'Rate'),
                 ),
                 DiscoverContainer(
+                    timerange: "range",
                     text1:
                         "Lorem Ipsum has been the industry's standard dummy text ever since the  1500s",
                     text2: '1000 - 2000',

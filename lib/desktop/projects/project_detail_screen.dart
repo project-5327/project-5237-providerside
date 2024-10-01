@@ -12,7 +12,9 @@ import 'package:project_5237_provider/presentation/constants/color.dart';
 import 'package:project_5237_provider/presentation/constants/responsive_view.dart';
 import 'package:project_5237_provider/presentation/constants/strings.dart';
 import 'package:project_5237_provider/presentation/screens/login_register/notification.dart';
+import 'package:project_5237_provider/presentation/screens/main_screen%20.dart';
 import 'package:project_5237_provider/presentation/screens/my_contracts/map_screen.dart';
+import 'package:project_5237_provider/presentation/screens/my_contracts/send_screen.dart';
 import 'package:project_5237_provider/presentation/widgets/customize_button.dart';
 import 'package:project_5237_provider/presentation/widgets/discover_project_cont.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -55,7 +57,7 @@ class ProposalDetailScreen extends StatelessWidget {
                                 ),
                               ),
                               title: Text(
-                                'Projects Details',
+                                'Proposal Details',
                                 style: TextStyle(
                                     color: MyColors.white,
                                     fontSize: 16.sp,
@@ -226,7 +228,7 @@ class ProposalDetailScreen extends StatelessWidget {
                               ),
                               Row(
                                   children: List.generate(
-                                3,
+                                proposalListData.skillsRequired?.length ?? 0,
                                 (index) {
                                   return Container(
                                     margin: EdgeInsets.only(right: 12.w),
@@ -274,8 +276,11 @@ class ProposalDetailScreen extends StatelessWidget {
                             textColor: MyColors.white,
                             borderColor: MyColors.btnColor,
                             onTap: () {
-                              Get.back();
-                              //  Get.to(() => SendProposalScreen());
+                              _showDialogBox(
+                                  context,
+                                  "Do you want to reject this proposal?",
+                                  "Yes",
+                                  "No");
                             },
                           ),
                         ],
@@ -552,6 +557,88 @@ class ProposalDetailScreen extends StatelessWidget {
               ],
             ),
           );
+  }
+
+  void _showDialogBox(
+    BuildContext context,
+    String text,
+    //String text1,
+    String btntext1,
+    String btntext2,
+  ) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+              title: Center(
+                child: TextWidget(
+                  text: 'Are you Sure?',
+                  color: MyColors.btnColor,
+                  size: 20.sp,
+                  fontweight: FontWeight.w700,
+                ),
+              ),
+              content: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: TextWidget(
+                  text: text,
+                  color: MyColors.black,
+                  size: 12.sp,
+                  fontweight: FontWeight.w500,
+                ),
+              ),
+              actions: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    TextButton(
+                      style: TextButton.styleFrom(
+                          backgroundColor: MyColors.btnColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(100),
+                            side: BorderSide(color: MyColors.btnColor),
+                          )),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => MainScreen()));
+                      },
+                      child: TextWidget(
+                        text: btntext1,
+                        color: MyColors.white,
+                        size: 12.sp,
+                        fontweight: FontWeight.w500,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 10.w,
+                    ),
+                    TextButton(
+                      style: TextButton.styleFrom(
+                          backgroundColor: MyColors.white,
+                          shape: RoundedRectangleBorder(
+                            side: BorderSide(color: MyColors.btnColor),
+                            borderRadius: BorderRadius.circular(100),
+                          )),
+                      onPressed: () {
+                        Get.back();
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: TextWidget(
+                          text: btntext2,
+                          color: MyColors.black,
+                          size: 12.sp,
+                          fontweight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ],
+                )
+              ]);
+        });
   }
 }
 

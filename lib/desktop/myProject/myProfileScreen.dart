@@ -32,7 +32,6 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
 
   ImagePicker _picker = ImagePicker();
 
-  // Using GetX for state management of _selectedImage
   final Rx<XFile?> _selectedImage = Rx<XFile?>(null);
 
   Future<void> _pickImage() async {

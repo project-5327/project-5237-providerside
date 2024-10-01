@@ -31,9 +31,8 @@ class _AcceptProposalScreenState extends State<AcceptProposalScreen> {
   ImagePicker _picker = ImagePicker();
   XFile? _selectedImage;
   String? filePath;
-  File? _file; // This will store the selected file
+  File? _file;
 
-  // Pick a file (either image or document)
   Future<void> pickFile() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles();
 
@@ -46,18 +45,15 @@ class _AcceptProposalScreenState extends State<AcceptProposalScreen> {
         _file = File(file.path!); // Store the selected file
       });
 
-      // Log the file details
       print('File Name: ${filePath}');
       print('File Path: ${file.path}');
       print('File Extension: ${file.extension}');
       print('File Size: ${file.size}');
     } else {
-      // User canceled the picker
       print('No file selected');
     }
   }
 
-  // Remove the selected file
   void removeFile() {
     setState(() {
       filePath = null;
@@ -322,7 +318,7 @@ class _AcceptProposalScreenState extends State<AcceptProposalScreen> {
   void _showDialogeBox(context) {
     final responsive = ResponsiveCheck(context);
     Get.defaultDialog(
-      barrierDismissible:false,
+      barrierDismissible: false,
       titlePadding: EdgeInsets.only(top: 86.h, bottom: 25.h),
       contentPadding: EdgeInsets.symmetric(horizontal: 55.w),
       title: "\$Proposal accepted",
@@ -363,7 +359,8 @@ class _AcceptProposalScreenState extends State<AcceptProposalScreen> {
                   Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(builder: (context) => MessageScreen()),
-                        (Route<dynamic> route) => false,  // This will remove all previous routes
+                    (Route<dynamic> route) =>
+                        false, // This will remove all previous routes
                   );
                 },
               ),

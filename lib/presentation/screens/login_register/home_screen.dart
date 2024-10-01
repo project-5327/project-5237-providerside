@@ -93,9 +93,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: SearchField(),
                       ),
-                      SizedBox(
-                        height: 27.h,
-                      ),
+                      // SizedBox(
+                      //   height: 27.h,
+                      // ),
                       SizedBox(
                         height: 750.h,
                         child: ListView.builder(
@@ -103,13 +103,14 @@ class _HomeScreenState extends State<HomeScreen> {
                             itemBuilder: (BuildContext context, int index) {
                               final project = projects?.projects?[index];
 
-                              return GestureDetector(
+                              return InkWell(
                                 onTap: () {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) => ProjectDetails(
-                                              projectModel: project)));
+                                              projectModel: project,
+                                              title: "Project Details")));
                                 },
                                 child: DiscoverContainer1(
                                   tags: project!.skillsRequired ?? [],

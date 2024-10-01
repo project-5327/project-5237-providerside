@@ -11,7 +11,6 @@ class BaseClient {
   static late String baseUrl;
   static Dio dio = Dio();
 
-  // Initialize with base URL and load the auth token from storage
   static Future<void> initialize(String url) async {
     baseUrl = url;
     dio = Dio();
@@ -82,44 +81,6 @@ class BaseClient {
       var response = await dio.get(
         api ?? "",
         //queryParameters: ,
-        options: Options(
-          headers: {
-            if (token != null && token.isNotEmpty)
-              "Authorization": "Bearer $token",
-          },
-        ),
-      );
-      return response;
-    } on DioException catch (e) {
-      if (e.type == DioException.connectionTimeout) {
-        throw ApiNotRespondingException("Connection Timeout");
-      } else if (e.type == DioException.receiveTimeout) {
-        throw ApiNotRespondingException("Connection Timeout");
-      } else if (e.type == DioException.connectionError) {
-        throw ApiNotRespondingException("No Internet Connection");
-      } else if (e.response != null) {
-        debugPrint(e.response!.data);
-        debugPrint(e.response!.headers.toString());
-      } else {
-        debugPrint(e.requestOptions.headers.toString());
-        debugPrint(e.toString());
-      }
-    } catch (e) {
-      throw ApiNotRespondingException(e.toString());
-    }
-    return null;
-  }
-
-  static Future<Response<dynamic>?> putByToken({
-    String? api,
-    String? token,
-    FormData? formData,
-    // Map<String, dynamic>? payloadObj
-  }) async {
-    try {
-      var response = await dio.put(
-        api ?? "",
-        data: formData ?? {},
         options: Options(
           headers: {
             if (token != null && token.isNotEmpty)
@@ -240,6 +201,38 @@ class BaseClient {
       }
     }
     return null;
+  }
+
+  static Future<dynamic> puttoken(
+      {String? api, Map<String, dynamic>? payloadObj, String? token}) async {
+    // Make the request
+    try {
+      var response = await dio.put(
+        api ?? "",
+        data: payloadObj ?? {},
+        options: Options(
+          headers: {
+            if (token != null && token.isNotEmpty)
+              "Authorization": "Bearer $token",
+          },
+        ),
+      );
+      return response;
+    } on DioException catch (e) {
+      if (e.type == DioException.connectionTimeout) {
+        ApiNotRespondingException("Connection Timeout");
+      } else if (e.type == DioException.receiveTimeout) {
+        ApiNotRespondingException("Connection Timeout");
+      } else if (e.type == DioException.connectionError) {
+        ApiNotRespondingException("No Internet Connection");
+      } else if (e.response != null) {
+        debugPrint(e.response!.data);
+        debugPrint(e.response!.headers.toString());
+      } else {
+        debugPrint(e.requestOptions.toString());
+        debugPrint(e.message);
+      }
+    }
   }
 
   static Future<bool> isAuthenticated() async {

@@ -5,6 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:project_5237_provider/controller/form_controller.dart';
+import 'package:project_5237_provider/data/models/freelancer_model.dart';
+import 'package:project_5237_provider/data/models/proposal_by_user.dart';
 import 'package:project_5237_provider/presentation/screens/main_screen%20.dart';
 import 'package:project_5237_provider/presentation/screens/my_contracts/send_screen.dart';
 import 'package:project_5237_provider/provider/freelancer_provider/freelancer_provider.dart';
@@ -15,6 +17,7 @@ import '../../widgets/Customize_textfield.dart';
 import '../../widgets/customize_button.dart';
 import '../message/forget_password.dart';
 import 'Add_projects.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 class Editprofile extends StatefulWidget {
   Editprofile({super.key});
@@ -104,7 +107,7 @@ class _EditprofileState extends State<Editprofile>
                 child: TabBarView(
                   controller: _tabController,
                   children: [
-                    Catagory(),
+                    Category(),
                     Catagory2(),
                   ],
                 ),
@@ -117,27 +120,25 @@ class _EditprofileState extends State<Editprofile>
   }
 }
 
-class Catagory extends StatefulWidget {
-  Catagory({super.key});
+class Category extends StatefulWidget {
+  Category({super.key});
 
   @override
-  State<Catagory> createState() => _CatagoryState();
+  State<Category> createState() => _CategoryState();
 }
 
-class _CatagoryState extends State<Catagory> {
+class _CategoryState extends State<Category> {
   final TextEditingController userController = TextEditingController();
-
-  final FormController formController = FormController();
-  final GlobalKey<FormState> _editKey = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
-
-  final TextEditingController passwordController = TextEditingController();
+  final GlobalKey<FormState> _editKey = GlobalKey<FormState>();
   File? _image;
   final picker = ImagePicker();
+  final FocusNode _focusNode = FocusNode();
 
   @override
   void initState() {
     super.initState();
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final freelancerProvider =
           Provider.of<FreelancerProvider>(context, listen: false);
@@ -159,11 +160,15 @@ class _CatagoryState extends State<Catagory> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Consumer<FreelancerProvider>(
       builder: (context, freelancerProvider, child) {
-        final freelancer =
-            freelancerProvider.freelancerModel?.data?.userDetails;
+        final freelancer = freelancerProvider.freelancerModel;
 
         return SingleChildScrollView(
           child: Form(
@@ -188,7 +193,8 @@ class _CatagoryState extends State<Catagory> {
                                 fit: BoxFit.cover,
                               )
                             : Image.network(
-                                freelancer?.profileImage ?? "",
+                                freelancer?.profileImage ??
+                                    "https://s3-alpha-sig.figma.com/img/3f16/acab/f42dbab07ac7002f3428f90210da277d?Expires=1728259200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=cMZEA~D1zzHDYPI--zVMXN2IGQHuWUD6UAHMEreq6OaraVmJKvwBtpx2JnWdUWSB5BoR6XHuRiYZXdOnFadnSyFiO326DF5pIFZigIZKpCMCOsB-u9m-kdFtPv8Rkv0ku2xfV72wK6BQfxLzrrNvLwFkxS6hewo18cdDf6qjkkoOpYPuADBVEGvI589cEKqlMFa~EryEJTFBq-TO~yuLZKAp9MOuk2VW9c7x6Pnst7FEUggqqO44g0O4BGdUfkQfyWEVtE2ipzcjExcYORNPRvUY8FWW8v1M0bLtiFWKWPzts~Vm5fKdEJTUhPSbVRNKX-AnqZxjd7nTQJcNPrP~qw__",
                                 height: 148.h,
                                 width: 140.w,
                                 fit: BoxFit.cover,
@@ -196,8 +202,8 @@ class _CatagoryState extends State<Catagory> {
                       ),
                     ),
                     Positioned(
-                      top: 90,
-                      left: 110,
+                      top: 110,
+                      left: 120,
                       child: Container(
                         height: 36.h,
                         width: 34.w,
@@ -218,13 +224,18 @@ class _CatagoryState extends State<Catagory> {
                   ],
                 ),
                 SizedBox(height: 16.h),
+
                 Center(
                   child: CustomTextFormField(
                     readOnly: false,
-                    validator: (value) =>
-                        formController.validateUserName(value ?? ''),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter a valid username';
+                      }
+                      return null;
+                    },
                     controller: userController,
-                    text: freelancer?.user?.userName,
+                    text: freelancer?.user?.userName ?? '',
                     title: 'User Name',
                     style: TextStyle(
                       fontSize: 13.sp,
@@ -235,13 +246,13 @@ class _CatagoryState extends State<Catagory> {
                   ),
                 ),
                 SizedBox(height: 12.h),
+
+                // Email Field
                 Center(
                   child: CustomTextFormField(
-                    readOnly: false,
-                    // validator: (value) =>
-                    //     formController.validateEmail(value ?? ''),
+                    readOnly: true,
                     controller: emailController,
-                    text: freelancer?.user?.email,
+                    text: freelancer?.user?.email ?? '',
                     title: 'Email',
                     style: TextStyle(
                       fontSize: 13.sp,
@@ -251,31 +262,7 @@ class _CatagoryState extends State<Catagory> {
                   ),
                 ),
                 SizedBox(height: 12.h),
-                // CustomTextFormField(
-                //   readOnly: true,
-                //   // obscureText: !formController.obscureText.value,
-                //   // validator: (value) =>
-                //   //     formController.validatePassword(value ?? ''),
-                //   controller: passwordController,
-                //   text: "***********",
-                //   //  freelancer?.user?.password.toString(),
-                //   title: 'Password',
-                //   style: TextStyle(
-                //     fontSize: 13.sp,
-                //     fontWeight: FontWeight.w500,
-                //     color: Color(0xff222222),
-                //   ),
-                //   icon: IconButton(
-                //     onPressed: () {
-                //       formController.togglePasswordVisibility();
-                //     },
-                //     icon: Icon(
-                //       formController.obscureText.value
-                //           ? Icons.visibility_off
-                //           : Icons.visibility,
-                //     ),
-                //   ),
-                // ),
+
                 SizedBox(height: 30.h),
                 if (freelancerProvider.loading)
                   Center(
@@ -285,31 +272,43 @@ class _CatagoryState extends State<Catagory> {
                 else
                   Center(
                     child: CustomizeButton(
-                        borderColor: MyColors.btnColor,
-                        radius: 100.r,
-                        text: 'Update',
-                        height: 40.h,
-                        width: 334.w,
-                        color: MyColors.btnColor,
-                        textColor: MyColors.white,
-                        onTap: () async {
-                          // if (userController.text.isNotEmpty && _image != null) {
+                      borderColor: MyColors.btnColor,
+                      radius: 100.r,
+                      text: 'Update',
+                      height: 40.h,
+                      width: 334.w,
+                      color: MyColors.btnColor,
+                      textColor: MyColors.white,
+                      onTap: () async {
+                        if (_editKey.currentState!.validate() &&
+                            _image != null) {
                           bool isUpdated =
                               await freelancerProvider.updateProfile(
-                            imagePath:
-                                // "https://pub-261021c7b68740ffba855a7e8a6f3c1e.r2.dev/undefined/Screenshot 2024-07-14 at 16.00.40.png",
-                                _image!.path,
+                            imagePath: _image!.path,
                             context: context,
-                            username: "harsh",
-                            // userController
-                            //     .text,
+                            username: userController.text,
                           );
+
                           if (isUpdated) {
-                            Get.to(MainScreen());
+                            setState(() {});
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text(
+                                    'Failed to update profile. Please try again.'),
+                              ),
+                            );
                           }
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text(
+                                  'Please enter valid information and select an image'),
+                            ),
+                          );
                         }
-                        // },
-                        ),
+                      },
+                    ),
                   ),
                 SizedBox(height: 53.h),
               ],
@@ -321,92 +320,127 @@ class _CatagoryState extends State<Catagory> {
   }
 }
 
-class Catagory2 extends StatelessWidget {
+class Catagory2 extends StatefulWidget {
   Catagory2({super.key});
+
+  @override
+  State<Catagory2> createState() => _Catagory2State();
+}
+
+class _Catagory2State extends State<Catagory2> {
   final TextEditingController userController = TextEditingController();
+
   final FormController formController = FormController();
 
   final TextEditingController emailController = TextEditingController();
+
   final TextEditingController passwordController = TextEditingController();
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final freelancerProvider =
+          Provider.of<FreelancerProvider>(context, listen: false);
+      freelancerProvider.fetchFreelancerDetail(context);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Consumer<FreelancerProvider>(
         builder: (context, freelancerProvider, child) {
-      final freelancer = freelancerProvider
-          .freelancerModel?.data?.userDetails?.personalProjects;
+      debugPrint(
+          "Freelancer Projects ========> ${freelancerProvider.personalProjects}");
+
+      final List<dynamic> personalProjectsList =
+          freelancerProvider.freelancerModel?.personalProjects ?? [];
+
       return SingleChildScrollView(
         child: Column(
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: ListView.builder(
-                  itemCount: freelancer?.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    final projects = freelancer?[index];
-                    return Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          height: 20.h,
-                        ),
-                        Center(
-                          child: Row(
-                            children: [
-                              TextWidget(
-                                text: "Project name",
-                                color: MyColors.black,
-                                size: 17.sp,
-                                fontweight: FontWeight.w500,
-                              ),
-                              SizedBox(
-                                width: 100.w,
-                              ),
-                              TextWidget(
-                                text: '17 days ago',
-                                color: MyColors.grey,
-                                size: 12.sp,
-                                fontweight: FontWeight.w400,
-                              ),
-                            ],
+              child: Container(
+                height: 800.h,
+                child: freelancerProvider.loading
+                    ? Center(
+                        child: CircularProgressIndicator(color: MyColors.blue))
+                    : personalProjectsList.isEmpty
+                        ? Center(
+                            child: TextWidget(
+                              text: "No Projects found",
+                              color: MyColors.black,
+                              size: 17.sp,
+                              fontweight: FontWeight.w500,
+                            ),
+                          )
+                        : ListView.builder(
+                            itemCount: personalProjectsList.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              final personalProject =
+                                  personalProjectsList[index];
+                              return Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      TextWidget(
+                                        text:
+                                            personalProject?.projectName ?? "",
+                                        color: MyColors.black,
+                                        size: 17.sp,
+                                        fontweight: FontWeight.w500,
+                                      ),
+                                      SizedBox(width: 100.w),
+                                      TextWidget(
+                                        text: timeago.format(
+                                          DateTime.tryParse(
+                                                  personalProject?.endDate ??
+                                                      "") ??
+                                              DateTime.now(),
+                                        ),
+                                        color: MyColors.grey,
+                                        size: 12.sp,
+                                        fontweight: FontWeight.w400,
+                                      ),
+                                    ],
+                                  ),
+                                  TextWidget(
+                                    text: personalProject?.description ??
+                                        "No description available.",
+                                    color: MyColors.black,
+                                    size: 12.sp,
+                                    fontweight: FontWeight.w500,
+                                  ),
+                                ],
+                              );
+                            },
                           ),
-                        ),
-                        TextWidget(
-                          text: "Lorem ipsum dolor sit amet consectetur...",
-                          color: MyColors.black,
-                          size: 12.sp,
-                          fontweight: FontWeight.w500,
-                        ),
-                        SizedBox(
-                          height: 400.h,
-                        ),
-                      ],
-                    );
-                  }),
+              ),
             ),
             Center(
               child: CustomizeButton(
-                  borderColor: MyColors.btnColor,
-                  radius: 100.r,
-                  text: 'Update',
-                  height: 40.h,
-                  width: 334.w,
-                  color: MyColors.btnColor,
-                  textColor: MyColors.white,
-                  onTap: () {
-                    Get.to(MainScreen());
-                  }),
+                borderColor: MyColors.btnColor,
+                radius: 100.r,
+                text: 'Update',
+                height: 40.h,
+                width: 334.w,
+                color: MyColors.btnColor,
+                textColor: MyColors.white,
+                onTap: () {
+                  Get.to(MainScreen());
+                },
+              ),
             ),
-            SizedBox(
-              height: 53.h,
-            ),
+            SizedBox(height: 53.h),
           ],
         ),
       );
     });
   }
 }
+                          
 
 // class Catagory2 extends StatelessWidget {
 //   const Catagory2({super.key});

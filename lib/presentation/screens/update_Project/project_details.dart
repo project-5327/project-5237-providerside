@@ -18,7 +18,9 @@ import 'package:timeago/timeago.dart' as timeago;
 
 class ProjectDetails extends StatefulWidget {
   final Projects? projectModel;
-  const ProjectDetails({super.key, required this.projectModel});
+  final String title;
+  const ProjectDetails(
+      {super.key, required this.projectModel, required this.title});
 
   @override
   State<ProjectDetails> createState() => _ProjectDetailsState();
@@ -27,7 +29,6 @@ class ProjectDetails extends StatefulWidget {
 class _ProjectDetailsState extends State<ProjectDetails> {
   @override
   Widget build(BuildContext context) {
-    // DateTime createdAt = DateTime.parse(proposalListData.createdAt ?? "");
     final responsive = ResponsiveCheck(context);
     final projects = widget.projectModel;
 
@@ -74,7 +75,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
                         color: MyColors.white,
                       ),
                       title: Text(
-                        'Project Details',
+                        widget.title,
                         style: TextStyle(
                             color: MyColors.white,
                             fontSize: 16.sp,
@@ -158,7 +159,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
                       Text(
                         projects?.title ?? "Project name",
                         style: TextStyle(
-                            fontSize: 14,
+                            fontSize: 13.sp,
                             fontWeight: FontWeight.w600,
                             color: MyColors.black2),
                       ),
@@ -169,14 +170,14 @@ class _ProjectDetailsState extends State<ProjectDetails> {
                         'Budget',
                         style: TextStyle(
                             fontSize: 14.sp,
-                            fontWeight: FontWeight.w500,
+                            fontWeight: FontWeight.w600,
                             color: MyColors.black),
                       ),
                       Text(
                         '\$${projects?.budget?.min.toString()}-\$${projects?.budget?.max.toString()}' ??
                             '\$1,000 - \$2,000',
                         style: TextStyle(
-                            fontSize: 14.sp,
+                            fontSize: 13.sp,
                             fontWeight: FontWeight.w500,
                             color: MyColors.black),
                       ),
@@ -215,25 +216,31 @@ class _ProjectDetailsState extends State<ProjectDetails> {
                       Text(
                         "Experience",
                         style: TextStyle(
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w500,
+                            fontSize: 13.sp,
+                            fontWeight: FontWeight.w600,
                             color: MyColors.black),
                       ),
                       Text(
                         projects?.experienceLevel ?? "",
                         style: TextStyle(
-                            fontSize: 12.sp,
+                            fontSize: 13.sp,
                             fontWeight: FontWeight.w500,
                             color: MyColors.black),
                       ),
                       SizedBox(
                         height: 16.h,
                       ),
-
+                      Text(
+                        "Description",
+                        style: TextStyle(
+                            fontSize: 13.sp,
+                            fontWeight: FontWeight.w600,
+                            color: MyColors.black),
+                      ),
                       Text(
                           textAlign: TextAlign.justify,
                           style: TextStyle(
-                              fontSize: 12,
+                              fontSize: 13.sp,
                               fontWeight: FontWeight.w400,
                               color: MyColors.black),
                           softWrap: true,

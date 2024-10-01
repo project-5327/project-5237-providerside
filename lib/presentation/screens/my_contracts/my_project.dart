@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:project_5237_provider/presentation/screens/main_screen%20.dart';
 import 'package:project_5237_provider/presentation/screens/my_contracts/send_screen.dart';
 import 'package:project_5237_provider/provider/home/proposal_provider.dart';
 import 'package:provider/provider.dart';
@@ -52,7 +53,8 @@ class _MyProposalState extends State<MyProposal> {
           appBar: AppBar(
             leading: IconButton(
               onPressed: () {
-                Navigator.pop(context);
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => MainScreen()));
               },
               icon: Icon(Icons.arrow_back_ios),
               color: MyColors.black,

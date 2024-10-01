@@ -10,7 +10,8 @@ class FreelancerProvider with ChangeNotifier {
   bool _loading = false;
   String? _errorMessage;
   bool _isSuccess = false;
-  FreelancerDetail? freelancerModel;
+  UserDetails? freelancerModel;
+  PersonalProjects? personalProjects;
 
   bool get loading => _loading;
   String? get errorMessage => _errorMessage;
@@ -18,7 +19,7 @@ class FreelancerProvider with ChangeNotifier {
 
   Future<bool> updateProfile({
     required BuildContext context,
-    required String imagePath, // Clarify that this is a file path
+    required String imagePath,
     required String username,
   }) async {
     _loading = true;
@@ -27,22 +28,21 @@ class FreelancerProvider with ChangeNotifier {
     String? token = await CustomInterceptor.getToken();
 
     try {
-      FormData formData = FormData.fromMap({
-        "username": username,
-        "profileImage": imagePath,
-      });
-
-      final response = await BaseClient.putByToken(
-        api: EndPoints.USERDETAILS,
-        token: token,
-        formData: formData,
-      );
+      final response = await BaseClient.puttoken(
+          api: EndPoints.USERDETAILS,
+          token: token,
+          payloadObj: {
+            "userName": username,
+            "profileImage": imagePath,
+          });
 
       debugPrint("Response: ${response?.data}");
 
       if (response?.statusCode == 200) {
         if (response?.data is Map<String, dynamic> &&
             response?.data['message'] is String) {
+          debugPrint('Full Response: ${response?.data}');
+
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(response!.data['message'])),
           );
@@ -80,7 +80,7 @@ class FreelancerProvider with ChangeNotifier {
       notifyListeners();
     }
 
-    return false; // If we reach here, update failed, return false
+    return false;
   }
 
   String getFileExtension(String filePath) {
@@ -102,11 +102,10 @@ class FreelancerProvider with ChangeNotifier {
         debugPrint('response ==========> ${data}');
 
         if (data != null) {
-          freelancerModel = FreelancerDetail.fromJson(data);
+          freelancerModel = UserDetails.fromJson(data);
           _errorMessage = '';
           debugPrint('==== Freelancers retrieved successfully.=====');
-          debugPrint(
-              "Freelancer details======> :${freelancerModel?.data?.userDetails}");
+          debugPrint("Freelancer details======> :${freelancerModel}");
         } else {
           _errorMessage = 'No data found';
           debugPrint('Error=======> No data found');
@@ -130,6 +129,46 @@ class FreelancerProvider with ChangeNotifier {
           SnackBar(content: Text(message ?? "Error")),
         );
       }
+    }
+  }
+
+  Future<void> fetchFreelancerProjects(BuildContext context) async {
+    _loading = true;
+    notifyListeners();
+    String? token = await CustomInterceptor.getToken();
+    try {
+      final response = await BaseClient.getByToken(
+        api: EndPoints
+            .USERDETAILS, // Assuming USERPROJECTS is the correct API for personal projects.
+        token: token,
+      );
+
+      if (response != null && response.statusCode == 200) {
+        final data = response.data;
+        debugPrint('response ==========> ${data}');
+
+        if (data != null) {
+          // Parse the projects data properly
+          freelancerModel = UserDetails.fromJson(data);
+          personalProjects =
+              (freelancerModel?.personalProjects ?? []) as PersonalProjects?;
+          _errorMessage = '';
+          debugPrint('==== Projects retrieved successfully.=====');
+          debugPrint("Freelancer Projects======> :${personalProjects}");
+        } else {
+          _errorMessage = 'No data found';
+          debugPrint('Error=======> No data found');
+        }
+      } else {
+        _errorMessage = response?.data['message'] ?? 'Failed to load data';
+        debugPrint('Error: ${response?.statusCode}, ${response?.data}');
+      }
+    } catch (e) {
+      _errorMessage = 'An error occurred while fetching data';
+      debugPrint("Error======> ${e.toString()}");
+    } finally {
+      _loading = false;
+      notifyListeners();
     }
   }
 }

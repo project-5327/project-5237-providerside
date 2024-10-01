@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:project_5237_provider/presentation/screens/login_register/Add_projects.dart';
 import 'package:project_5237_provider/presentation/screens/login_register/EditProfile.dart';
-import 'package:project_5237_provider/presentation/screens/login_register/all_projects.dart';
+import 'package:project_5237_provider/presentation/screens/login_register/recent_proposal.dart';
 import 'package:project_5237_provider/presentation/screens/login_register/credit.dart';
 import 'package:project_5237_provider/presentation/screens/login_register/message.dart';
-import 'package:project_5237_provider/presentation/screens/login_register/profile_screen.dart';
-import 'package:project_5237_provider/presentation/screens/my_contracts/my_contacts.dart';
-import 'package:project_5237_provider/presentation/screens/update_Project/chat_screen.dart';
 import '../constants/assets.dart';
 import '../constants/color.dart';
 import 'login_register/home_screen.dart';
@@ -32,7 +28,7 @@ class _MainScreenState extends State<MainScreen> {
 
   final List<Widget> _screens = [
     const HomeScreen(),
-    const AllProjects(),
+    const RecentProposal(),
     DebitCredit(),
     const MessageScreen(),
     Editprofile()
@@ -40,10 +36,7 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
-    setState(() {
-      // _selectedIndex = widget.selectedIndex!;
-    });
+    setState(() {});
     super.initState();
   }
 

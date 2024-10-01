@@ -113,51 +113,51 @@ class ProposalProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> createProposal({
-    required BuildContext context,
-    required Map<String, dynamic> proposalData,
-  }) async {
-    _loading = true;
-    _errorMessage = null;
-    notifyListeners();
+  // Future<void> createProposal({
+  //   required BuildContext context,
+  //   required Map<String, dynamic> proposalData,
+  // }) async {
+  //   _loading = true;
+  //   _errorMessage = null;
+  //   notifyListeners();
 
-    final ApiService apiService = ApiService();
+  //   final ApiService apiService = ApiService();
 
-    try {
-      Response response = await apiService.createProposal(proposalData);
+  //   try {
+  //     Response response = await apiService.createProposal(proposalData);
 
-      debugPrint("Response data: ${response.data}");
-      debugPrint("Response status code: ${response.statusCode}");
+  //     debugPrint("Response data: ${response.data}");
+  //     debugPrint("Response status code: ${response.statusCode}");
 
-      if (response.data != null && response.statusCode == 201) {
-        // Project creation success
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(response.data['message'])),
-        );
-        debugPrint("Response message: ${response.data['message']}");
-        _isSuccess = true;
-      } else {
-        _errorMessage = response.data['message'] ?? 'Failed to create project.';
-        debugPrint("Error message: ${response.data['message']}");
+  //     if (response.data != null && response.statusCode == 201) {
+  //       // Project creation success
+  //       ScaffoldMessenger.of(context).showSnackBar(
+  //         SnackBar(content: Text(response.data['message'])),
+  //       );
+  //       debugPrint("Response message: ${response.data['message']}");
+  //       _isSuccess = true;
+  //     } else {
+  //       _errorMessage = response.data['message'] ?? 'Failed to create project.';
+  //       debugPrint("Error message: ${response.data['message']}");
 
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(_errorMessage!)),
-        );
-        _isSuccess = false;
-      }
-    } catch (e) {
-      _errorMessage = 'An error occurred. Please try again.';
-      debugPrint("Exception occurred: ${e.toString()}");
+  //       ScaffoldMessenger.of(context).showSnackBar(
+  //         SnackBar(content: Text(_errorMessage!)),
+  //       );
+  //       _isSuccess = false;
+  //     }
+  //   } catch (e) {
+  //     _errorMessage = 'An error occurred. Please try again.';
+  //     debugPrint("Exception occurred: ${e.toString()}");
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(_errorMessage!)),
-      );
-      _isSuccess = false;
-    }
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       SnackBar(content: Text(_errorMessage!)),
+  //     );
+  //     _isSuccess = false;
+  //   }
 
-    _loading = false;
-    notifyListeners();
-  }
+  //   _loading = false;
+  //   notifyListeners();
+  // }
 
   Future<void> fetchAllProposal(BuildContext context) async {
     _loading = true;

@@ -24,6 +24,7 @@ class CustomTextFormField extends StatelessWidget {
   final keyboardType;
   final int? maxlines;
   final bool? readOnly;
+  final FocusNode? focusNode;
   final String? Function(String?)? validator;
   const CustomTextFormField(
       {super.key,
@@ -42,7 +43,8 @@ class CustomTextFormField extends StatelessWidget {
       this.maxlines,
       this.fillcolor,
       this.width,
-      this.height});
+      this.height,
+      this.focusNode});
 
   @override
   Widget build(BuildContext context) {
@@ -65,6 +67,7 @@ class CustomTextFormField extends StatelessWidget {
           height: height,
           width: width,
           child: TextFormField(
+            focusNode: focusNode,
             maxLines: obscureText ? 1 : null, // Restrict to 1 line if obscured
             readOnly: readOnly ?? false,
             keyboardType: keyboardType,
