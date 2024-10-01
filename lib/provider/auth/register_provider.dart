@@ -1,11 +1,7 @@
 // ignore_for_file: use_build_context_synchronously, prefer_final_fields
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:project_5237_provider/desktop/onboarding/create_profile.dart';
 import 'package:project_5237_provider/presentation/screens/create_profile/create_your_profile.dart';
-import 'package:project_5237_provider/presentation/screens/create_profile/profile/profile_detail.dart';
 
 import '../../config/baseclient/CustomInterceptor.dart';
 import '../../config/baseclient/base_client.dart';
@@ -14,34 +10,38 @@ import '../../config/baseclient/endpoints.dart';
 class RegisterProvider extends ChangeNotifier {
   //Register API Implement
   final registerKeyRegist = GlobalKey<FormState>();
-  final TextEditingController _fnameController = TextEditingController();
-  final TextEditingController _lnameController = TextEditingController();
+  // final TextEditingController _fnameController = TextEditingController();
+  // final TextEditingController _lnameController = TextEditingController();
+  final TextEditingController _fullNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _repeatPasswordController =
       TextEditingController();
   bool _isLoading = false;
+  bool checkBox1 = false;
+  bool checkBox2 = false;
   String? _errorMessage;
-  String _selectedValue = 'Client';
+  // String _selectedValue = 'Client';
 
   bool get isLoading => _isLoading;
 
-  String get isSelectedClient => _selectedValue;
-  bool get isClient => isSelectedClient == "Client" ? true : false;
+  // String get isSelectedClient => _selectedValue;
+  // bool get isClient => isSelectedClient == "Client" ? true : false;
 
   String? get errorMessage => _errorMessage;
-  TextEditingController get fnameController => _fnameController;
-  TextEditingController get lnameController => _lnameController;
+  // TextEditingController get fnameController => _fnameController;
+  // TextEditingController get lnameController => _lnameController;
+  TextEditingController get fullNameController => _fullNameController;
   TextEditingController get emailController => _emailController;
   TextEditingController get passwordController => _passwordController;
   TextEditingController get repeatPasswordController =>
       _repeatPasswordController;
 
 //Setter
-  void setClient(String value) {
-    _selectedValue = value;
-    notifyListeners(); // Notify listeners about the change
-  }
+//   void setClient(String value) {
+//     _selectedValue = value;
+//     notifyListeners(); // Notify listeners about the change
+//   }
 
   Future<bool> signUp(
       {required BuildContext context,
@@ -77,7 +77,6 @@ class RegisterProvider extends ChangeNotifier {
 
         _isLoading = false;
         notifyListeners();
-        Get.to(CreateYourProfileScreen());
         return true;
       } else {
         _errorMessage = 'Invalid credentials';
@@ -98,29 +97,14 @@ class RegisterProvider extends ChangeNotifier {
   }
 
   signUpBtn({required BuildContext context}) async {
-    debugPrint("===name=====>${fnameController.text.trim()}");
-    debugPrint("===name=====>${lnameController.text.trim()}");
-    debugPrint("===Email=====>${emailController.text.trim}");
-    debugPrint("===password=====>${passwordController.text.trim()}");
-    debugPrint("===isClient=====>${repeatPasswordController.text.trim()}");
-    /*if (formKeyRegist.currentState?.validate() ?? false) {*/
-    // If the form is valid, proceed with the login
-    /*final name = nameController.text.trim();*/
-    final fname = fnameController.text.trim();
-    final lname = lnameController.text.trim();
+    final fullName = fullNameController.text.trim();
     final email = emailController.text.trim();
     final password = passwordController.text.trim();
-    final repeatPassword = repeatPasswordController.text.trim();
-
-    debugPrint("name=====>$fname");
-    debugPrint("name=====>$lname");
-    debugPrint("Email=====>$email");
-    debugPrint("password=====>$password");
-    debugPrint("isClient=====>$isClient");
+    // final repeatPassword = repeatPasswordController.text.trim();
 
     final success = await signUp(
       context: context,
-      name: fname + lname,
+      name: fullName,
       email: email,
       password: password,
     );
@@ -130,13 +114,12 @@ class RegisterProvider extends ChangeNotifier {
         context,
         MaterialPageRoute(builder: (context) => CreateYourProfile()),
       );
-      Future.delayed(const Duration(seconds: 5), () {
-        fnameController.clear();
-        lnameController.clear();
-        emailController.clear();
-        passwordController.clear();
-        repeatPasswordController.clear();
-      });
+      // fnameController.clear();
+      // lnameController.clear();
+      fullNameController.clear();
+      emailController.clear();
+      passwordController.clear();
+      repeatPasswordController.clear();
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(errorMessage ?? 'Registration failed')),
@@ -169,9 +152,7 @@ class RegisterProvider extends ChangeNotifier {
 // validate username
   String? validateUserName(String value) {
     if (value.isEmpty) {
-      return "Username can't be empty";
-    } else if (value.length < 4) {
-      return 'Username must be at least 4 characters.';
+      return "Full Name can't be empty";
     }
     return null;
   }

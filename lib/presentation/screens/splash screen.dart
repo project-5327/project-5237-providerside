@@ -1,11 +1,11 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:project_5237_provider/presentation/screens/create_profile/profile/profile8.dart';
+import 'dart:async';
 
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:project_5237_provider/presentation/constants/color.dart';
 import 'package:project_5237_provider/presentation/screens/login_register/register.dart';
 import 'package:project_5237_provider/presentation/screens/main_screen%20.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:async';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -53,13 +53,47 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: Center(
-        child: SvgPicture.asset(
-          'assets/splash_screen.svg',
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-        ),
+      backgroundColor: MyColors.blue,
+      body: Stack(
+        children: [
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  "App Name",
+                  style: TextStyle(
+                      color: MyColors.white,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 40),
+                ),
+              ],
+            ),
+          ),
+          Positioned(
+            top: -30,
+            left: 0,
+            height: 200,
+            width: 200,
+            child: SvgPicture.asset(
+              'assets/svg_icon/circle1.svg',
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+            ),
+          ),
+          Positioned(
+            bottom: 0,
+            right: -50,
+            height: 200,
+            width: 200,
+            child: SvgPicture.asset(
+              'assets/svg_icon/circle2.svg',
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+            ),
+          ),
+        ],
       ),
     );
   }
