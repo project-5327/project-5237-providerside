@@ -144,7 +144,7 @@ class _Profile2State extends State<Profile2> {
                           radius: 100.r,
                           text: AppStrings.next,
                           height: 40.h,
-                          width: 150.w,
+                          width: 120.w,
                           color: _isNextButtonEnabled
                               ? MyColors.btnColor
                               : MyColors.btnDisable,

@@ -42,7 +42,8 @@ class StaticProfileLayout extends StatelessWidget {
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                        SizedBox(width: 75.w),
+                        // SizedBox(width: 75.w),
+                        Spacer(),
                         Obx(() => Text(
                               '${profileController.currentIndex.value + 1}/8',
                               style: TextStyle(
@@ -51,6 +52,7 @@ class StaticProfileLayout extends StatelessWidget {
                                 fontWeight: FontWeight.w400,
                               ),
                             )),
+                        SizedBox(width: 10.w),
                       ],
                     ),
                     SizedBox(height: 45.h),

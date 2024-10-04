@@ -422,9 +422,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               },
                             ),
                           ),
-                        SizedBox(
-                          height: 23.h,
-                        ),
+                        SizedBox(height: 23.h),
                         Center(
                           child: RichText(
                             text: TextSpan(
@@ -451,6 +449,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             ),
                           ),
                         ),
+                        SizedBox(height: 23.h),
                       ],
                     ),
                   ),
