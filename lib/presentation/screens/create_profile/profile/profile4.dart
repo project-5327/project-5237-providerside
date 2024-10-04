@@ -31,7 +31,7 @@ class Profile4 extends StatefulWidget {
 class _Profile4State extends State<Profile4> {
   final ProfileController profileController = Get.put(ProfileController());
 
-  final formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _profile4Key = GlobalKey<FormState>();
 
   final FormController formController = Get.put(FormController());
 
@@ -54,7 +54,8 @@ class _Profile4State extends State<Profile4> {
 
   _mobileView(BuildContext context) {
     return StaticProfileLayout(
-      middleContentBuilder: () => Form(key: formKey, child: Profilewidget4()),
+      middleContentBuilder: () =>
+          Form(key: _profile4Key, child: Profilewidget4()),
     );
   }
 
@@ -131,6 +132,13 @@ class _Profile4State extends State<Profile4> {
                   SizedBox(
                     height: 25.h,
                   ),
+                  TextWidget(
+                    align: TextAlign.start,
+                    text: "Languages you know",
+                    color: Color(0xff222222),
+                    size: 13.sp,
+                    fontweight: FontWeight.w500,
+                  ),
                   Container(
                     width: 307.w,
                     decoration: BoxDecoration(
@@ -187,7 +195,7 @@ class _Profile4State extends State<Profile4> {
                             )
                           else
                             DropdownButton<String>(
-                              borderRadius: BorderRadius.circular(6.0),
+                              borderRadius: BorderRadius.circular(8.0),
                               isDense: true,
                               value: null,
                               hint: const Text(AppStrings.chooseyourLanguages),
@@ -199,8 +207,8 @@ class _Profile4State extends State<Profile4> {
                               isExpanded: true,
                               icon: Icon(
                                 Icons.arrow_drop_down,
-                                color: MyColors.grey,
-                                size: 30.sp,
+                                color: MyColors.lightGrey,
+                                size: 32.sp,
                               ),
                               items: _languages.map((String language) {
                                 return DropdownMenuItem<String>(

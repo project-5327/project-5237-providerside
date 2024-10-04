@@ -207,8 +207,8 @@ class AwaitingMilestones extends StatelessWidget {
   void _showDialogeBox(context) {
     final responsive = ResponsiveCheck(context);
     Get.defaultDialog(
-      titlePadding: EdgeInsets.only(top: 86.h, bottom: 25.h),
-      contentPadding: EdgeInsets.symmetric(horizontal: 55.w),
+      titlePadding: EdgeInsets.only(top: 20.h, bottom: 10.h),
+      contentPadding: EdgeInsets.symmetric(horizontal: 20),
       title: AppStrings.areYouSure,
       titleStyle: TextStyle(
           fontSize: 20.sp,
@@ -230,10 +230,10 @@ class AwaitingMilestones extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 36.h,
+            height: 20.h,
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            //  mainAxisAlignment: MainAxisAlignment.center,
             children: [
               CustomizeButton(
                 borderColor: MyColors.btnColor,
@@ -248,7 +248,7 @@ class AwaitingMilestones extends StatelessWidget {
                 },
               ),
               SizedBox(
-                width: 10.w,
+                width: 5.w,
               ),
               CustomizeButton(
                 borderColor: MyColors.btnColor,
@@ -265,7 +265,7 @@ class AwaitingMilestones extends StatelessWidget {
             ],
           ),
           SizedBox(
-            height: 89.h,
+            height: 20.h,
           )
         ],
       ),

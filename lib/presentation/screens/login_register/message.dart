@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -26,6 +27,9 @@ class _MessageScreenState extends State<MessageScreen>
     );
   }
 
+  bool isSearching = false;
+  TextEditingController searchController = TextEditingController();
+
   @override
   void dispose() {
     _tabController.dispose();
@@ -39,20 +43,69 @@ class _MessageScreenState extends State<MessageScreen>
       child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Messages',
-                style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600),
-              ),
-              SvgPicture.asset(Assets.search)
-            ],
-          ),
+          title: isSearching
+              ? Padding(
+                  padding: const EdgeInsets.only(top: 5),
+                  child: Container(
+                    height: 50.h,
+                    width: 277.w,
+                    child: TextFormField(
+                      controller: searchController,
+                      decoration: InputDecoration(
+                        suffixIcon: Icon(CupertinoIcons.search),
+                        hintText: 'Search',
+                        hintStyle: TextStyle(
+                            fontSize: 15.sp,
+                            fontWeight: FontWeight.w400,
+                            color: MyColors.lightGrey),
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 16),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                      ),
+                    ),
+                  ),
+                )
+              : Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Messages',
+                      style: TextStyle(
+                          fontSize: 16.0, fontWeight: FontWeight.w600),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          isSearching = true;
+                        });
+                      },
+                      child: SvgPicture.asset(Assets.search),
+                    )
+                  ],
+                ),
+          actions: isSearching
+              ? [
+                  Padding(
+                    padding: const EdgeInsets.only(right: 10),
+                    child: IconButton(
+                      icon: Icon(Icons.clear),
+                      onPressed: () {
+                        setState(() {
+                          isSearching = false;
+                          searchController.clear();
+                        });
+                      },
+                    ),
+                  )
+                ]
+              : [],
         ),
         body: Column(
           children: [
             TabBar(
+              dividerHeight: 0,
               indicator: BoxDecoration(
                 color: Colors.transparent,
                 border: Border(

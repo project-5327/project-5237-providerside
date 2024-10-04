@@ -7,6 +7,7 @@ import 'package:project_5237_provider/presentation/screens/login_register/credit
 import 'package:project_5237_provider/presentation/screens/login_register/notification.dart';
 import 'package:project_5237_provider/presentation/screens/login_register/proposal.dart';
 import 'package:project_5237_provider/presentation/screens/my_contracts/map_screen.dart';
+import 'package:project_5237_provider/presentation/screens/my_contracts/send_screen.dart';
 
 import '../../constants/assets.dart';
 import '../../constants/color.dart';
@@ -231,19 +232,20 @@ class _HomeProjectDetailsState extends State<HomeProjectDetails> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   CustomizeButton(
-                    text: 'Accept',
-                    height: 40.h,
-                    width: 154.w,
-                    color: MyColors.btnColor,
-                    textColor: MyColors.white,
-                    borderColor: MyColors.btnColor,
-                    radius: 100.r,
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(builder: (_) => MainScreen()),
-                      );
-                    },
-                  ),
+                      text: 'Accept',
+                      height: 40.h,
+                      width: 154.w,
+                      color: MyColors.btnColor,
+                      textColor: MyColors.white,
+                      borderColor: MyColors.btnColor,
+                      radius: 100.r,
+                      onTap: () {
+                        _showDialogBox(
+                            context,
+                            "Do you want to Accept this proposal?",
+                            "Yes",
+                            "No");
+                      }),
                   SizedBox(
                     width: 14.w,
                   ),
@@ -256,7 +258,8 @@ class _HomeProjectDetailsState extends State<HomeProjectDetails> {
                     textColor: MyColors.white,
                     borderColor: MyColors.btnColor,
                     onTap: () {
-                      Get.to(() => ProposalScreen());
+                      _showDialogBox(context,
+                          "Do you want to Reject this proposal?", "Yes", "No");
                     },
                   ),
                 ],
@@ -269,5 +272,81 @@ class _HomeProjectDetailsState extends State<HomeProjectDetails> {
         ),
       ),
     );
+  }
+
+  void _showDialogBox(
+    BuildContext context,
+    String text,
+    //String text1,
+    String btntext1,
+    String btntext2,
+  ) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+              title: Center(
+                child: TextWidget(
+                  text: 'Are you Sure?',
+                  color: MyColors.btnColor,
+                  size: 20.sp,
+                  fontweight: FontWeight.w700,
+                ),
+              ),
+              content: TextWidget(
+                text: text,
+                color: MyColors.black,
+                size: 12,
+                fontweight: FontWeight.w500,
+              ),
+              actions: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    TextButton(
+                      style: TextButton.styleFrom(
+                          backgroundColor: MyColors.btnColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(100),
+                            side: BorderSide(color: MyColors.btnColor),
+                          )),
+                      onPressed: () {
+                        Get.back();
+                      },
+                      child: TextWidget(
+                        text: btntext1,
+                        color: MyColors.white,
+                        size: 12.sp,
+                        fontweight: FontWeight.w500,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 10.w,
+                    ),
+                    TextButton(
+                      style: TextButton.styleFrom(
+                          backgroundColor: MyColors.white,
+                          shape: RoundedRectangleBorder(
+                            side: BorderSide(color: MyColors.btnColor),
+                            borderRadius: BorderRadius.circular(100),
+                          )),
+                      onPressed: () {
+                        Get.back();
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: TextWidget(
+                          text: btntext2,
+                          color: MyColors.black,
+                          size: 12.sp,
+                          fontweight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ],
+                )
+              ]);
+        });
   }
 }

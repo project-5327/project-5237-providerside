@@ -8,9 +8,11 @@ import 'package:project_5237_provider/presentation/constants/responsive_view.dar
 import 'package:project_5237_provider/presentation/screens/create_profile/profile/add_education.dart';
 import 'package:project_5237_provider/presentation/screens/create_profile/profile/profile2.dart';
 import 'package:project_5237_provider/presentation/screens/create_profile/profile/profile4.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../controller/form_controller.dart';
 import '../../../../controller/profile_controller.dart';
+import '../../../../provider/onboarding/onbaording_provider.dart';
 import '../../../constants/color.dart';
 import '../../../constants/strings.dart';
 import '../../../widgets/Customize_textfield.dart';
@@ -29,7 +31,7 @@ class Profile3 extends StatefulWidget {
 
 class _Profile3State extends State<Profile3> {
   final ProfileController profileController = Get.put(ProfileController());
-  final formKey = GlobalKey<FormState>();
+  final _profile3Key = GlobalKey<FormState>();
   final FormController formController = Get.put(FormController());
   final TextEditingController controller = TextEditingController();
   bool _isNextButtonEnabled = false;
@@ -44,85 +46,102 @@ class _Profile3State extends State<Profile3> {
   }
 
   _mobileView(BuildContext context) {
-    return StaticProfileLayout(
-      middleContentBuilder: () => Form(
-        key: formKey,
-        child: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  SizedBox(height: 25.h),
-                  EditCreateProfile(
-                    ontap: () async {
-                      final result = await Get.to(() => const AddEducation());
-                      if (result != null && result == true) {
-                        setState(() {
-                          _isNextButtonEnabled = true;
-                        });
-                      }
-                    },
-                    validator: (value) =>
-                        formController.validateExperience(value),
-                    controller: controller,
-                    text: 'Let us know about your education.',
-                    text1: "Example : Bachelor's in Computer Science",
-                    feildText: '+Add Education',
-                  ),
-                  SizedBox(height: 158.h),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      CustomizeButton(
-                        borderColor: MyColors.btnColor,
-                        radius: 100.r,
-                        text: AppStrings.privious,
-                        height: 40.h,
-                        width: 150.w,
-                        color: MyColors.white,
-                        textColor: MyColors.btnColor,
-                        onTap: () {
-                          //  if (formKey.currentState!.validate()) {
-                          profileController.previousPage();
-                          Get.to(() => Profile2());
-                          //  }
-                        },
-                      ),
-                      SizedBox(
-                        width: 7.w,
-                      ),
-                      CustomizeButton(
-                        borderColor: MyColors.btnColor,
-                        radius: 100.r,
-                        text: AppStrings.next,
-                        height: 40.h,
-                        width: 150.w,
-                        color: _isNextButtonEnabled
-                            ? MyColors.btnColor
-                            : MyColors.btnDisable,
-                        textColor: MyColors.white,
-                        onTap: _isNextButtonEnabled
-                            ? () {
-                                // if (formKey.currentState!.validate()) {
-                                profileController.nextPage();
-                                Get.to(() => Profile4());
-                                //  }
-                              }
-                            : () {},
-                      )
-                    ],
-                  ),
-                  SizedBox(height: 42.h),
-                ],
+    return Consumer<OnbaordingProvider>(
+        builder: (context, onboardingProvider, child) {
+      return StaticProfileLayout(
+        middleContentBuilder: () => Form(
+          key: _profile3Key,
+          child: Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 15),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    SizedBox(height: 25.h),
+                    EditCreateProfile(
+                      ontap: () async {
+                        final result = await Get.to(() => const AddEducation());
+                        if (result != null && result == true) {
+                          setState(() {
+                            _isNextButtonEnabled = true;
+                          });
+                        }
+                      },
+                      validator: (value) =>
+                          formController.validateExperience(value),
+                      controller: controller,
+                      text: 'Let us know about your education.',
+                      text1: "Example : Bachelor's in Computer Science",
+                      feildText: '+Add Education',
+                    ),
+                    SizedBox(height: 158.h),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        CustomizeButton(
+                          borderColor: MyColors.btnColor,
+                          radius: 100.r,
+                          text: AppStrings.privious,
+                          height: 40.h,
+                          width: 150.w,
+                          color: MyColors.white,
+                          textColor: MyColors.btnColor,
+                          onTap: () {
+                            //  if (formKey.currentState!.validate()) {
+                            profileController.previousPage();
+                            Get.to(() => Profile2());
+                            //  }
+                          },
+                        ),
+                        SizedBox(
+                          width: 7.w,
+                        ),
+                        CustomizeButton(
+                          borderColor: MyColors.btnColor,
+                          radius: 100.r,
+                          text: AppStrings.next,
+                          height: 40.h,
+                          width: 150.w,
+                          color: _isNextButtonEnabled
+                              ? MyColors.btnColor
+                              : MyColors.btnDisable,
+                          textColor: MyColors.white,
+                          onTap: _isNextButtonEnabled
+                              ? () {
+                                  debugPrint(
+                                      '====>  education : ${onboardingProvider.degreeORCertificateController}');
+                                  debugPrint(
+                                      '====>  education : ${onboardingProvider.instituteNameController}');
+                                  debugPrint(
+                                      '====>  education : ${onboardingProvider.feildOfStudyController}');
+                                  debugPrint(
+                                      '====>  education : ${onboardingProvider.location1Controller.text}');
+                                  debugPrint(
+                                      '====>  education : ${onboardingProvider.locationController}');
+                                  debugPrint(
+                                      '====>  education : ${onboardingProvider.startDate1Controller}');
+                                  debugPrint(
+                                      '====>  education : ${onboardingProvider.endDate1Controller}');
+                                  // if (_profile3Key.currentState!.validate()) {
+                                  profileController.nextPage();
+                                  Get.to(() => Profile4());
+                                  //}
+                                }
+                              : () {},
+                        )
+                      ],
+                    ),
+                    SizedBox(height: 42.h),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
-    );
+      );
+    });
   }
 
   _deskTopView(BuildContext context) {

@@ -1,23 +1,20 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:project_5237_provider/presentation/constants/responsive_view.dart';
-import 'package:project_5237_provider/presentation/screens/dashboard/dashboard_view.dart';
-
+import 'package:provider/provider.dart';
 import '../../../../../controller/country_controller.dart';
 import '../../../../../controller/form_controller.dart';
 import '../../../../../controller/profile_controller.dart';
+import '../../../../../provider/onboarding/onbaording_provider.dart';
 import '../../../../constants/assets.dart';
 import '../../../../constants/color.dart';
 import '../../../../constants/strings.dart';
 import '../../../../widgets/Customize_textfield.dart';
 import '../../../../widgets/customize_button.dart';
-import '../../../login_register/login.dart';
-import '../../../my_contracts/send_screen.dart';
+import '../../../dashboard/dashboard_view.dart';
 
 class Profile8widget extends StatefulWidget {
   const Profile8widget({super.key});
@@ -30,12 +27,9 @@ class _Profile8widgetState extends State<Profile8widget> {
   final formKey = GlobalKey<FormState>();
   final ProfileController profileController = Get.put(ProfileController());
   final FormController formController = Get.put(FormController());
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController phoneController = TextEditingController();
-  final TextEditingController addressController = TextEditingController();
-  final TextEditingController zipcodeController = TextEditingController();
-  final TextEditingController cityController = TextEditingController();
-  final DropdownController dropdownController = Get.put(DropdownController());
+  final ImagePicker _picker = ImagePicker();
+  XFile? _selectedImage;
+
   final List<String> countries = ['USA', 'India', 'Canada', 'Japan'];
   final List<String> city = [
     'Delhi',
@@ -45,10 +39,6 @@ class _Profile8widgetState extends State<Profile8widget> {
     'Ludhiana',
     'Bathinda'
   ];
-
-  ImagePicker _picker = ImagePicker();
-
-  XFile? _selectedImage;
 
   Future<void> _pickImage() async {
     final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
@@ -61,211 +51,280 @@ class _Profile8widgetState extends State<Profile8widget> {
 
   @override
   Widget build(BuildContext context) {
-    final responsive = ResponsiveCheck(context);
-    return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Form(
-            key: formKey,
-            child: Column(
+    final responsive =
+        MediaQuery.of(context).size.width < 600; // Responsive check
+    return Consumer<OnbaordingProvider>(
+      builder: (context, onboardingProvider, child) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Form(
+              key: formKey,
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  SizedBox(
-                    height: 35.h,
+                  SizedBox(height: 35.h),
+                  Text(
+                    AppStrings.addContactInfo,
+                    style: TextStyle(
+                        color: MyColors.black,
+                        fontSize: 20.sp,
+                        fontWeight: FontWeight.w600),
                   ),
-                  TextWidget(
-                    align: TextAlign.start,
-                    text: AppStrings.addContactInfo,
-                    color: MyColors.black,
-                    size: 20.sp,
-                    fontweight: FontWeight.w600,
+                  SizedBox(height: 15.h),
+                  Text(
+                    AppStrings.lorem2,
+                    style: TextStyle(
+                        color: MyColors.grey,
+                        fontSize: responsive ? 10.sp : 13.sp,
+                        fontWeight: FontWeight.w400),
                   ),
-                  SizedBox(
-                    height: 15.h,
-                  ),
-                  TextWidget(
-                    align: TextAlign.start,
-                    text: AppStrings.lorem2,
-                    color: MyColors.grey,
-                    size: responsive.isMobile ? 10.sp : 13.sp,
-                    fontweight: FontWeight.w400,
-                  ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  if (_selectedImage != null)
-                    Center(
-                        child: ClipRRect(
-                      borderRadius: BorderRadius.circular(100.r),
-                      child: Image.file(
-                        File(_selectedImage!.path),
-                        height: responsive.isMobile ? 50.h : 79.h,
-                        width: responsive.isMobile ? 50.w : 69.w,
-                        fit: BoxFit.cover,
-                      ),
-                    ))
-                  else ...[
-                    Stack(children: [
-                      Center(
-                          child: ClipRRect(
-                        borderRadius: BorderRadius.circular(100.r),
-                        child: Image.asset(
-                          'assets/images/uploadImage.png',
-                          height: responsive.isMobile ? 50.h : 79.h,
-                          width: responsive.isMobile ? 50.w : 69.w,
-                          fit: BoxFit.cover,
+                  SizedBox(height: 10.h),
+                  Center(
+                    child: Stack(
+                      children: [
+                        CircleAvatar(
+                          radius: 50.r,
+                          backgroundImage: _selectedImage != null
+                              ? FileImage(File(_selectedImage!.path))
+                                  as ImageProvider
+                              : AssetImage('assets/images/uploadImage.png'),
                         ),
-                      )),
-                      Positioned(
-                          top: responsive.isMobile ? 20.0 : 35.0,
-                          right: 0.0,
-                          left: responsive.isMobile ? 50.0 : 60.0,
+                        Positioned(
+                          bottom: 0,
+                          right: 0,
                           child: GestureDetector(
-                              onTap: () {
-                                _pickImage();
-                              },
-                              child: SvgPicture.asset(Assets.editSqIC)))
-                    ]),
-                  ],
-                  SizedBox(
-                    height: 19.h,
+                            onTap: _pickImage,
+                            child: SvgPicture.asset(Assets.editSqIC,
+                                height: 30.h, width: 30.w),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
+                  SizedBox(height: 19.h),
                   CustomTextFormField(
-                    controller: nameController,
+                    controller: onboardingProvider.fnameController,
                     validator: (value) =>
-                        formController.validateUserName(value ?? ''),
-                    title: AppStrings.fullName,
+                        onboardingProvider.validatefname(value ?? ''),
+                    title: AppStrings.firstName,
                     text: AppStrings.enterHere,
                   ),
-                  SizedBox(
-                    height: 13.h,
-                  ),
+                  SizedBox(height: 13.h),
                   CustomTextFormField(
-                    controller: addressController,
+                    controller: onboardingProvider.lnameController,
                     validator: (value) =>
-                        formController.validateAddress(value ?? ''),
+                        onboardingProvider.validatelname(value ?? ''),
+                    title: AppStrings.lastName,
+                    text: AppStrings.enterHere,
+                  ),
+                  SizedBox(height: 13.h),
+                  CustomTextFormField(
+                    controller: onboardingProvider.addressController,
+                    validator: (value) =>
+                        onboardingProvider.validateAddress(value ?? ''),
                     title: '${AppStrings.address}*',
                     text: AppStrings.address,
                   ),
-                  SizedBox(
-                    height: 13.h,
-                  ),
+                  SizedBox(height: 13.h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Flexible(
                         child: CustomTextFormField(
-                          controller: zipcodeController,
+                          controller: onboardingProvider.pincodeController,
                           validator: (value) =>
-                              formController.validateZipcode(value ?? ''),
-                          fillcolor: Color(0xffC4C4C4),
+                              onboardingProvider.validateZipcode(value ?? ''),
+                          fillcolor: const Color(0xffC4C4C4),
                           title: AppStrings.pincode,
                           text: AppStrings.enterHere,
                         ),
                       ),
-                      SizedBox(
-                        width: 15.w,
-                      ),
+                      SizedBox(width: 15.w),
                       Flexible(
                         child: CustomTextFormField(
-                          controller: phoneController,
+                          controller: onboardingProvider.phoneNumberController,
                           validator: (value) =>
-                              formController.validatePhone(value ?? ''),
-                          fillcolor: Color(0xffC4C4C4),
+                              onboardingProvider.validatePhone(value ?? ''),
+                          fillcolor: const Color(0xffC4C4C4),
                           title: AppStrings.phone,
-                          text: '+61 | 989876363474',
+                          text: 'Enter here...',
                         ),
                       ),
                     ],
                   ),
-                  SizedBox(
-                    height: 13.h,
-                  ),
+                  SizedBox(height: 13.h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(AppStrings.city,
-                              style: TextStyle(
-                                  color: MyColors.black,
-                                  fontSize: 12.sp,
-                                  fontWeight: FontWeight.w600)),
-                          SizedBox(
-                            height: 5.h,
-                          ),
-                          CustomDropdownContainer(
-                            width: 153.w,
-                            hint: 'eg, Delhi',
-                            selectedValue:
-                                dropdownController.getValue('city') ?? '',
-                            onChanged: (String? newValue) {
-                              if (newValue != null) {
-                                dropdownController.updateValue(
-                                    'city', newValue);
-                              }
-                            },
-                            items: city,
-                          ),
-                        ],
+                      Flexible(
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(AppStrings.city,
+                                  style: TextStyle(
+                                      color: MyColors.black,
+                                      fontSize: 12.sp,
+                                      fontWeight: FontWeight.w600)),
+                              SizedBox(height: 5.h),
+                              Container(
+                                // width: MediaQuery.of(context).size.width*0.1,
+                                height: 80,
+                                child: DropdownButtonFormField<String>(
+                                  decoration: InputDecoration(
+                                    fillColor:
+                                        Theme.of(context).colorScheme.onPrimary,
+                                    focusColor:
+                                        Theme.of(context).colorScheme.onPrimary,
+                                    enabledBorder: OutlineInputBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(8)),
+                                      borderSide: BorderSide(
+                                        color: MyColors.lightGrey,
+                                        width: 1.5,
+                                      ),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(8.0)),
+                                      borderSide: BorderSide(
+                                        //  color: MyColors.blue,
+                                        width: 1.5,
+                                      ),
+                                    ),
+                                  ),
+                                  value: onboardingProvider.cityName != null &&
+                                          city.contains(
+                                              onboardingProvider.cityName)
+                                      ? onboardingProvider.cityName
+                                      : null, // Ensure the value is from the city list
+                                  onChanged: (String? newValue) {
+                                    setState(() {
+                                      onboardingProvider.cityName = newValue!;
+                                    });
+                                  },
+                                  items: city.map<DropdownMenuItem<String>>(
+                                      (String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Text(value),
+                                    );
+                                  }).toList(),
+                                  hint: Text('eg, Delhi',
+                                      style: TextStyle(
+                                          color: MyColors.black,
+                                          fontSize: 12.sp,
+                                          fontWeight: FontWeight.w500)),
+                                ),
+                              ),
+                            ]),
                       ),
-                      SizedBox(
-                        width: 15.w,
+                      SizedBox(width: 15.w),
+                      Flexible(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(AppStrings.countryName,
+                                style: TextStyle(
+                                    color: MyColors.black,
+                                    fontSize: 12.sp,
+                                    fontWeight: FontWeight.w600)),
+                            SizedBox(height: 5.h),
+                            Container(
+                              // width: MediaQuery.of(context).size.width,
+                              height: 80,
+                              child: DropdownButtonFormField<String>(
+                                decoration: InputDecoration(
+                                  fillColor:
+                                      Theme.of(context).colorScheme.onPrimary,
+                                  focusColor:
+                                      Theme.of(context).colorScheme.onPrimary,
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(8)),
+                                    borderSide: BorderSide(
+                                      color: MyColors.lightGrey,
+                                      width: 1.5,
+                                    ),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(8.0)),
+                                    borderSide: BorderSide(
+                                      //    color: MyColors.blue,
+                                      width: 1.5,
+                                    ),
+                                  ),
+                                ),
+                                value: onboardingProvider.cityName != null &&
+                                        city.contains(
+                                            onboardingProvider.cityName)
+                                    ? onboardingProvider.cityName
+                                    : null, //
+
+                                onChanged: (String? newValue) {
+                                  setState(() {
+                                    onboardingProvider.contryName = newValue!;
+                                  });
+                                },
+                                items: countries.map<DropdownMenuItem<String>>(
+                                    (String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(value),
+                                  );
+                                }).toList(),
+                                hint: Text('eg, India',
+                                    style: TextStyle(
+                                        color: MyColors.black,
+                                        fontSize: 12.sp,
+                                        fontWeight: FontWeight.w500)),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(AppStrings.countryName,
-                              style: TextStyle(
-                                  color: MyColors.black,
-                                  fontSize: 12.sp,
-                                  fontWeight: FontWeight.w600)),
-                          SizedBox(
-                            height: 5.h,
-                          ),
-                          CustomDropdownContainer(
-                              width: 153.w,
-                              hint: 'eg,India',
-                              selectedValue:
-                                  dropdownController.getValue('anotherCountry'),
-                              onChanged: (String? newValue) {
-                                if (newValue != null) {
-                                  dropdownController.updateValue(
-                                      'anotherCountry', newValue);
-                                }
-                              },
-                              items: countries),
-                        ],
-                      )
                     ],
                   ),
-                  SizedBox(
-                    height: 31.h,
-                  ),
+                  SizedBox(height: 31.h),
                   Center(
                     child: CustomizeButton(
                       borderColor: MyColors.btnColor,
                       radius: 100.r,
                       text: AppStrings.finish,
-                      height: responsive.isMobile ? 40.h : 45.h,
+                      height: responsive ? 40.h : 45.h,
                       width: 334.w,
                       color: MyColors.btnColor,
                       textColor: MyColors.white,
                       onTap: () {
+                        debugPrint(
+                            '====>  profile details : ${onboardingProvider.fnameController}');
+                        debugPrint(
+                            '====>  profile details : ${onboardingProvider.lnameController}');
+                        debugPrint(
+                            '====>  profile details : ${onboardingProvider.addressController}');
+                        debugPrint(
+                            '====>  profile details : ${onboardingProvider.pincodeController}');
+                        debugPrint(
+                            '====>  profile details : ${onboardingProvider.phoneNumberController}');
+                        debugPrint(
+                            '====>  profile details : ${onboardingProvider.cityController}');
+                        debugPrint(
+                            '====>  profile details : ${onboardingProvider.countryController}');
+                        onboardingProvider.submitUserDetails(context: context);
                         if (formKey.currentState!.validate()) {
                           profileController.nextPage();
-                          Get.to(() => DashBoardView());
                         }
                       },
                     ),
                   ),
-                ]),
-          )
-        ]);
+                  SizedBox(height: 31.h),
+                ],
+              ),
+            ),
+          ],
+        );
+      },
+    );
   }
 }

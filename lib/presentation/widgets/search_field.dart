@@ -36,8 +36,11 @@ class SearchField extends StatelessWidget {
           ),
         ),
         InkWell(
-            onTap: () {
+            onTap: () async {
               Get.to(FilterScreen());
+              // List<String>? selectedFilters = await Get.to(FilterScreen());
+              // if (selectedFilters != null && selectedFilters.isNotEmpty) {
+              //   _applyFilters(selectedFilters);
             },
             child: SvgPicture.asset(Assets.filter)),
       ],

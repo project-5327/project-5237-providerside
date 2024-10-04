@@ -7,6 +7,7 @@ import 'package:project_5237_provider/presentation/constants/responsive_view.dar
 import '../constants/assets.dart';
 import '../constants/color.dart';
 import '../screens/my_contracts/send_screen.dart';
+import 'Customize_textfield.dart';
 
 class CreateProfileWidget extends StatelessWidget {
   CreateProfileWidget({super.key});
@@ -59,6 +60,7 @@ class EditCreateProfile extends StatelessWidget {
   final String text;
   final String text1;
   final String feildText;
+  final String? labelText;
   final TextAlign? align;
 
   final Color? color;
@@ -70,6 +72,7 @@ class EditCreateProfile extends StatelessWidget {
       required this.text,
       required this.text1,
       required this.feildText,
+        this.labelText,
       this.controller,
       this.validator,
       required this.ontap,
@@ -109,9 +112,9 @@ class EditCreateProfile extends StatelessWidget {
           height: 25.h,
         ),
         TextFormField(
+          showCursor: false,
           onTap: ontap,
           textAlign: align ?? TextAlign.center,
-          readOnly: true,
           validator: validator,
           controller: controller,
           decoration: InputDecoration(

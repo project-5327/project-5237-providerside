@@ -41,6 +41,13 @@ class _DetailsTextfieldState extends State<DetailsTextfield> {
     }
   }
 
+  String selectedExperienceLevel = AppStrings.medium;
+  void _updateExperienceLevel(String level) {
+    setState(() {
+      selectedExperienceLevel = level;
+    });
+  }
+
   final TextEditingController _skillsController = TextEditingController();
   bool _showOptions = false;
 
@@ -68,6 +75,7 @@ class _DetailsTextfieldState extends State<DetailsTextfield> {
             SizedBox(height: 35.h),
             Center(
               child: CustomTextFormField(
+                readOnly: false,
                 controller: dateController,
                 text: AppStrings.selectDateTime,
                 title: AppStrings.dateTime,
@@ -81,6 +89,7 @@ class _DetailsTextfieldState extends State<DetailsTextfield> {
             SizedBox(height: 20.h),
             Center(
               child: CustomTextFormField(
+                readOnly: false,
                 controller: rateController,
                 text: AppStrings.inputDesiredRate,
                 title: AppStrings.rate,
@@ -94,6 +103,7 @@ class _DetailsTextfieldState extends State<DetailsTextfield> {
             SizedBox(height: 20.h),
             Center(
               child: CustomTextFormField(
+                readOnly: false,
                 controller: addressController,
                 text: AppStrings.inputAddress,
                 title: AppStrings.address,
@@ -259,10 +269,11 @@ class _DetailsTextfieldState extends State<DetailsTextfield> {
               ),
             ),
             SizedBox(height: 10.h),
-            const Toggell1(),
+            Toggell1(onExperienceLevelChanged: _updateExperienceLevel),
             SizedBox(height: 20.h),
             Center(
               child: CustomTextFormField(
+                readOnly: false,
                 text: 'Ex: 1-6 mnths',
                 controller: skillsController,
                 title: AppStrings.howLongYourWork,

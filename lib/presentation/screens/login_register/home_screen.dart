@@ -2,19 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:project_5237_provider/desktop/projects/components/project_comp.dart';
-import 'package:project_5237_provider/desktop/projects/project_detail_screen.dart';
+import 'package:project_5237_provider/desktop/projects/projects_screen.dart';
+import 'package:project_5237_provider/presentation/constants/assets.dart';
+import 'package:project_5237_provider/presentation/constants/color.dart';
 import 'package:project_5237_provider/presentation/constants/responsive_view.dart';
-import 'package:project_5237_provider/presentation/constants/strings.dart';
 import 'package:project_5237_provider/presentation/screens/login_register/notification.dart';
-
-import '../../constants/assets.dart';
-import '../../constants/color.dart';
-import '../../widgets/discover_project_cont.dart';
-import '../../widgets/search_field.dart';
-
-import '../main_screen .dart';
+import 'package:project_5237_provider/presentation/screens/update_Project/project_details.dart';
+import 'package:project_5237_provider/presentation/widgets/discover_project_cont.dart';
+import 'package:project_5237_provider/presentation/widgets/search_field.dart';
+import 'package:project_5237_provider/provider/onboarding/project_provider.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -24,7 +21,17 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final TextEditingController searchController = TextEditingController();
   bool _isSwitched = true;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<ProjectProvider>(context, listen: false)
+          .fetchAllProjects(context);
+    });
+  }
 
   void _toggleSwitch(bool value) {
     setState(() {
@@ -34,200 +41,96 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final responsive = ResponsiveCheck(context);
-    return responsive.isMobile || responsive.isTablet
-        ? SafeArea(
-            child: Scaffold(
-              appBar: AppBar(
-                leading: Padding(
-                  padding: const EdgeInsets.only(top: 10),
-                  child: InkWell(
-                    onTap: () {
-                      Get.to(const NotificationScreen());
-                    },
-                    child: Stack(alignment: Alignment.topRight, children: [
-                      SvgPicture.asset(Assets.bell),
-                      SvgPicture.asset(Assets.dot)
-                    ]),
-                  ),
-                ),
-                title: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Discover Projects',
-                      style: TextStyle(
-                          fontSize: 16.sp, fontWeight: FontWeight.w600),
-                    ),
-                    Switch(
-                      value: _isSwitched,
-                      onChanged: _toggleSwitch,
-                      activeColor: Colors.blue,
-                      inactiveThumbColor: Colors.grey,
-                      inactiveTrackColor: Colors.grey[300],
-                    )
-                    //SvgPicture.asset(Assets.filter),
-                  ],
-                ),
+    return ResponsiveView(
+      mobile: _mobileView(context),
+      desktop: ProjectsScreen(),
+      tablet: _mobileView(context),
+    );
+  }
+
+  _mobileView(BuildContext context) {
+    return Consumer<ProjectProvider>(
+        builder: (context, projectProvider, child) {
+      final projects = projectProvider.projectmodel?.data;
+      debugPrint("Projects==========> ${projects}");
+      return SafeArea(
+          child: Scaffold(
+        appBar: AppBar(
+          leading: Padding(
+            padding: const EdgeInsets.only(top: 15),
+            child: InkWell(
+              onTap: () {
+                Get.to(const NotificationScreen());
+              },
+              child: Stack(
+                alignment: Alignment.topRight,
+                children: [
+                  SvgPicture.asset(Assets.bell),
+                  SvgPicture.asset(Assets.dot),
+                ],
               ),
-              body: SingleChildScrollView(
+            ),
+          ),
+          title: Text(
+            'App Name',
+            style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600),
+          ),
+        ),
+        body: projectProvider.loading
+            ? Center(
+                child: CircularProgressIndicator(
+                  color: MyColors.blue,
+                ),
+              )
+            : SingleChildScrollView(
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20.sp),
+                  padding: EdgeInsets.symmetric(horizontal: 10.sp),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      //  _pages[currentIndex],
-                      const SearchField(),
-                      SizedBox(
-                        height: 27.h,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Recent Proposal ',
-                            style: TextStyle(
-                                fontSize: 16.sp,
-                                fontWeight: FontWeight.w500,
-                                color: MyColors.black2),
-                          ),
-                          Text(
-                            'See All',
-                            style: TextStyle(
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.w300,
-                                color: MyColors.blue),
-                          ),
-                        ],
+                      const Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: SearchField(),
                       ),
                       SizedBox(
-                        height: 20.h,
-                      ),
-                      InkWell(
-                        onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(builder: (_) => MainScreen()),
-                          );
-                        },
-                        child: DiscoverContainer(
-                            text1:
-                                "Lorem Ipsum has been the industry's standard dummy text ever since the  1500s",
-                            text2: '\$1000 - \$2000',
-                            image: 'assets/images/image.jpeg',
-                            text3: 'Location',
-                            username: 'Jason Jones',
-                            time: '5 hours agoo',
-                            rate: 'Rate'),
-                      ),
-                      Divider(
-                        color: MyColors.grey.withOpacity(0.4),
-                        thickness: 1,
-                      ),
-                      InkWell(
-                        onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(builder: (_) => MainScreen()),
-                          );
-                        },
-                        child: DiscoverContainer(
-                            text1:
-                                "Lorem Ipsum has been the industry's standard dummy text ever since the  1500s",
-                            text2: '\$1000 - \$2000',
-                            image: 'assets/images/image.jpeg',
-                            text3: 'Location',
-                            username: 'Jason Jones',
-                            time: '5 hours agoo',
-                            rate: 'Budget'),
+                        height: 750.h,
+                        child: ListView.builder(
+                            itemCount: projects?.projects?.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              final project = projects?.projects?[index];
+
+                              return InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => ProjectDetails(
+                                              projectModel: project,
+                                              title: "Project Details")));
+                                },
+                                child: DiscoverContainer1(
+                                  tags: project!.skillsRequired ?? [],
+                                  tagsLength: project.skillsRequired!.length,
+                                  text1: project.description ?? "Description",
+                                  text2:
+                                      "\$${project.budget?.min}-\$${project.budget?.max}",
+                                  image:
+                                      "https://pub-261021c7b68740ffba855a7e8a6f3c1e.r2.dev/undefined/vasily-koloda-8CqDvPuo_kI-unsplash.jpg",
+                                  text3: project.deadline ?? "deadline",
+                                  username: '${project.title}',
+                                  time: project.createdAt ??
+                                      "2023-09-20 12:34:56",
+                                  rate: "Budget",
+                                ),
+                              );
+                            }),
                       ),
                     ],
                   ),
                 ),
               ),
-            ),
-          )
-        : SafeArea(
-            child: Scaffold(
-              body: ScrollConfiguration(
-                behavior: const ScrollBehavior().copyWith(scrollbars: false),
-                child: ListView(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 33.w, vertical: 31.h),
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          AppStrings.home,
-                          style: GoogleFonts.inter(
-                            textStyle: TextStyle(
-                                fontSize: 20.sp,
-                                fontWeight: FontWeight.w600,
-                                color: MyColors.black),
-                          ),
-                        ),
-                        SvgPicture.asset(Assets.filter)
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 22,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          AppStrings.recentProposal,
-                          style: GoogleFonts.inter(
-                            textStyle: TextStyle(
-                                fontSize: 20.sp,
-                                fontWeight: FontWeight.w500,
-                                color: MyColors.black),
-                          ),
-                        ),
-                        Text(
-                          AppStrings.seeAll,
-                          style: GoogleFonts.inter(
-                            textStyle: TextStyle(
-                                fontSize: 16.sp,
-                                fontWeight: FontWeight.w400,
-                                color: MyColors.blue),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 22.h,
-                    ),
-                    GridView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 3,
-                              mainAxisSpacing: 14,
-                              crossAxisSpacing: 35,
-                              childAspectRatio: 3 / 2,
-                              mainAxisExtent: 207),
-                      itemCount: 16,
-                      itemBuilder: (context, gridIndex) {
-                        return GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => ProjectDetailScreen(
-                                    isFromHomeScreen: true,
-                                  ),
-                                ),
-                              );
-                            },
-                            child: const ProjectComp());
-                      },
-                    )
-                  ],
-                ),
-              ),
-            ),
-          );
+      ));
+    });
   }
 }

@@ -56,11 +56,13 @@ class _Profile8State extends State<Profile8> {
 
   @override
   Widget build(BuildContext context) {
-    return ResponsiveView(
+    return StaticProfileLayout(
+        middleContentBuilder: () =>
+            Profile8widget()); /*ResponsiveView(
       mobile: _mobileView(context),
       desktop: _deskTopView(context),
       tablet: _mobileView(context),
-    );
+    );*/
   }
 
   _mobileView(BuildContext context) {

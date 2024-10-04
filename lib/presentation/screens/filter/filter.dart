@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
+import 'package:project_5237_provider/presentation/screens/main_screen%20.dart';
+import 'package:project_5237_provider/provider/filter_provider.dart';
 
 import '../../constants/color.dart';
 import '../../widgets/customize_button.dart';
-import '../login_register/message.dart';
 import '../my_contracts/send_screen.dart';
+
+import 'package:provider/provider.dart';
 
 class FilterScreen extends StatefulWidget {
   const FilterScreen({super.key});
@@ -15,225 +17,186 @@ class FilterScreen extends StatefulWidget {
 }
 
 class _FilterScreenState extends State<FilterScreen> {
-  //bool _isChecked = false;
-
-  int? _selectedCheck;
+  Map<String, List<int>> _selectedChecks =
+      {}; // Separate selection per category
   Map<String, bool> _isExpanded = {
     'Sort': false,
     'Tags': false,
     'Rate': false,
+    'Category': false,
+    'Subcategory': false,
+    'Skills': false,
+    'Timeline': false,
+    'Budget': false,
   };
+
+  late Map<String, List<String>> _filterOptions;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final filterProvider =
+          Provider.of<FilterProvider>(context, listen: false);
+      filterProvider.fetchAllFilters(context).then((_) {
+        setState(() {
+          _filterOptions = filterProvider.getFilterOptions();
+          for (var key in _filterOptions.keys) {
+            _selectedChecks[key] = [];
+          }
+        });
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              Container(
-                height: 36.h,
-                width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(color: MyColors.btnColor),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Consumer<FilterProvider>(
+      builder: (context, filterProvider, child) {
+        return SafeArea(
+            child: Scaffold(
+          body: filterProvider.loading
+              ? Center(
+                  child: CircularProgressIndicator(color: MyColors.blue),
+                )
+              : SingleChildScrollView(
+                  child: Column(
                     children: [
-                      TextWidget(
-                        text: 'Filter',
-                        color: MyColors.white,
-                        size: 18.sp,
-                        fontweight: FontWeight.w600,
+                      Container(
+                        height: 36.h,
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(color: MyColors.btnColor),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 15),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              TextWidget(
+                                text: 'Filter',
+                                color: MyColors.white,
+                                size: 18.sp,
+                                fontweight: FontWeight.w600,
+                              ),
+                              IconButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                icon: Icon(
+                                  Icons.close,
+                                  color: MyColors.white,
+                                  size: 14.sp,
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
                       ),
-                      Icon(
-                        Icons.close,
-                        color: MyColors.white,
-                        size: 14.sp,
-                      )
+                      ..._filterOptions.keys.map((key) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 1),
+                          child: FilterContainer(
+                            text: key,
+                            isExpanded: _isExpanded[key]!,
+                            onTap: () {
+                              setState(() {
+                                _isExpanded[key] = !_isExpanded[key]!;
+                              });
+                            },
+                            child: _isExpanded[key]!
+                                ? ListView.builder(
+                                    shrinkWrap: true,
+                                    physics: NeverScrollableScrollPhysics(),
+                                    itemCount: _filterOptions[key]!.length,
+                                    itemBuilder: (context, index) {
+                                      return Align(
+                                        alignment: Alignment.topLeft,
+                                        child: Row(
+                                          children: [
+                                            Checkbox(
+                                              value: _selectedChecks[key]!
+                                                  .contains(index),
+                                              onChanged: (bool? value) {
+                                                setState(() {
+                                                  if (value == true) {
+                                                    _selectedChecks[key]!
+                                                        .add(index);
+                                                  } else {
+                                                    _selectedChecks[key]!
+                                                        .remove(index);
+                                                  }
+                                                });
+                                              },
+                                            ),
+                                            RichTextWidget(
+                                              text: _filterOptions[key]![index],
+                                              text1: '( ${index + 1} )',
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    },
+                                  )
+                                : Container(),
+                          ),
+                        );
+                      }).toList(),
+                      SizedBox(height: 430.h),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 25),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Center(
+                              child: CustomizeButton(
+                                borderColor: MyColors.btnColor,
+                                radius: 0.r,
+                                text: 'Apply Filter',
+                                height: 35.h,
+                                width: 143.w,
+                                color: MyColors.btnColor,
+                                textColor: MyColors.white,
+                                onTap: () {
+                                  List<String> selectedFilters = [];
+                                  for (var key in _filterOptions.keys) {
+                                    for (var index in _selectedChecks[key]!) {
+                                      selectedFilters
+                                          .add(_filterOptions[key]![index]);
+                                    }
+                                  }
+                                  Navigator.pop(context, selectedFilters);
+
+                                  debugPrint(
+                                      'Selected Filters======> $selectedFilters');
+                                },
+                              ),
+                            ),
+                            Center(
+                              child: CustomizeButton(
+                                borderColor: MyColors.btnColor,
+                                radius: 0.r,
+                                text: 'Reset Filter',
+                                height: 35.h,
+                                width: 143.w,
+                                color: MyColors.btnColor,
+                                textColor: MyColors.white,
+                                onTap: () {
+                                  setState(() {
+                                    _selectedChecks.clear();
+                                    _isExpanded
+                                        .updateAll((key, value) => false);
+                                  });
+                                },
+                              ),
+                            ),
+                            SizedBox(height: 3.h),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 ),
-              ),
-              FilterContainer(
-                text: 'Sort',
-                isExpanded: _isExpanded['Sort']!,
-                onTap: () {
-                  setState(() {
-                    _isExpanded['Sort'] = !_isExpanded['Sort']!;
-                  });
-                },
-                child: _isExpanded['Sort']!
-                    ? Column(
-                        children: [
-                          // Add Rate Options Here
-                          Align(
-                              alignment: Alignment.topLeft,
-                              child: Row(
-                                children: [
-                                  Checkbox(
-                                      value: _selectedCheck == 0,
-                                      onChanged: (bool? value) {
-                                        setState(() {
-                                          _selectedCheck =
-                                              value == true ? 0 : null;
-                                        });
-                                      }),
-                                  RichTextWidget(
-                                      text: 'R\$ 10 - R\$ 200 ',
-                                      text1: '( 2 )'),
-                                ],
-                              )),
-                          Align(
-                              alignment: Alignment.topLeft,
-                              child: Row(
-                                children: [
-                                  Checkbox(
-                                      value: _selectedCheck == 1,
-                                      onChanged: (bool? value) {
-                                        setState(() {
-                                          _selectedCheck =
-                                              value == true ? 1 : null;
-                                        });
-                                      }),
-                                  RichTextWidget(
-                                      text: 'R\$ 300 - R\$ 700 ',
-                                      text1: '( 1 )'),
-                                ],
-                              )),
-                          Align(
-                              alignment: Alignment.topLeft,
-                              child: Row(
-                                children: [
-                                  Checkbox(
-                                      value: _selectedCheck == 2,
-                                      onChanged: (bool? value) {
-                                        setState(() {
-                                          _selectedCheck =
-                                              value == true ? 2 : null;
-                                        });
-                                      }),
-                                  RichTextWidget(
-                                      text: 'R\$ 1000 + ', text1: '( 1 )'),
-                                ],
-                              )),
-                        ],
-                      )
-                    : Container(),
-              ),
-              SizedBox(
-                height: 2.h,
-              ),
-              FilterContainer(
-                text: 'Rate',
-                isExpanded: _isExpanded['Rate']!,
-                onTap: () {
-                  setState(() {
-                    _isExpanded['Rate'] = !_isExpanded['Rate']!;
-                  });
-                },
-                child: _isExpanded['Rate']!
-                    ? Column(
-                        children: [
-                          // Add Rate Options Here
-                          Align(
-                              alignment: Alignment.topLeft,
-                              child: Row(
-                                children: [
-                                  Checkbox(
-                                      value: _selectedCheck == 0,
-                                      onChanged: (bool? value) {
-                                        setState(() {
-                                          _selectedCheck =
-                                              value == true ? 0 : null;
-                                        });
-                                      }),
-                                  RichTextWidget(
-                                      text: 'R\$ 10 - R\$ 200 ',
-                                      text1: '( 2 )'),
-                                ],
-                              )),
-                          Align(
-                              alignment: Alignment.topLeft,
-                              child: Row(
-                                children: [
-                                  Checkbox(
-                                      value: _selectedCheck == 1,
-                                      onChanged: (bool? value) {
-                                        setState(() {
-                                          _selectedCheck =
-                                              value == true ? 1 : null;
-                                        });
-                                      }),
-                                  RichTextWidget(
-                                      text: 'R\$ 300 - R\$ 700 ',
-                                      text1: '( 1 )'),
-                                ],
-                              )),
-                          Align(
-                              alignment: Alignment.topLeft,
-                              child: Row(
-                                children: [
-                                  Checkbox(
-                                      value: _selectedCheck == 2,
-                                      onChanged: (bool? value) {
-                                        setState(() {
-                                          _selectedCheck =
-                                              value == true ? 2 : null;
-                                        });
-                                      }),
-                                  RichTextWidget(
-                                      text: 'R\$ 1000 + ', text1: '( 1 )'),
-                                ],
-                              )),
-                        ],
-                      )
-                    : Container(),
-              ),
-              SizedBox(
-                height: 430.h,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Center(
-                        child: CustomizeButton(
-                      borderColor: MyColors.btnColor,
-                      radius: 0.r,
-                      text: 'Apply Filter',
-                      height: 35.h,
-                      width: 143.w,
-                      color: MyColors.btnColor,
-                      textColor: MyColors.white,
-                      onTap: () {
-                        Get.to(MessageScreen());
-                      },
-                    )),
-                    Center(
-                        child: CustomizeButton(
-                      borderColor: MyColors.btnColor,
-                      radius: 0.r,
-                      text: 'Reset Filter',
-                      height: 35.h,
-                      width: 143.w,
-                      color: MyColors.btnColor,
-                      textColor: MyColors.white,
-                      onTap: () {
-                        Get.to(MessageScreen());
-                      },
-                    )),
-                    SizedBox(
-                      height: 3.h,
-                    ),
-                  ],
-                ),
-              )
-            ],
-          ),
-        ),
-      ),
+        ));
+      },
     );
   }
 }

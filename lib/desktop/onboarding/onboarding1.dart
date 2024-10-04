@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:project_5237_provider/desktop/onboarding/onboarding3.dart';
-import 'package:project_5237_provider/presentation/constants/color.dart';
-import 'package:project_5237_provider/presentation/constants/strings.dart';
-import 'package:project_5237_provider/presentation/screens/dashboard/dashboard_view.dart';
+import 'package:provider/provider.dart';
 
+import '../../presentation/constants/assets.dart';
+import '../../presentation/constants/color.dart';
+import '../../presentation/constants/fonts.dart';
+import '../../presentation/constants/strings.dart';
+import '../../presentation/screens/dashboard/dashboard_view.dart';
+import '../../presentation/screens/login_register/register.dart';
+import '../../presentation/screens/message/forget_password.dart';
+import '../../provider/auth/login_provider.dart';
 import 'appname.dart';
-import 'onboarding2.dart';
 
 class OnbarodingScreen1 extends StatefulWidget {
   const OnbarodingScreen1({super.key});
@@ -20,6 +25,7 @@ class _OnbarodingScreen1State extends State<OnbarodingScreen1> {
 
   @override
   Widget build(BuildContext context) {
+    final loginProvider = Provider.of<LoginProvider>(context);
     return Scaffold(
       body: Row(
         children: [
@@ -45,7 +51,7 @@ class _OnbarodingScreen1State extends State<OnbarodingScreen1> {
                         ),
                       ],
                     ),
-                    width: 400.0, // Width of the form container
+                    width: 400.0,
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -66,44 +72,62 @@ class _OnbarodingScreen1State extends State<OnbarodingScreen1> {
                           ),
                         ),
                         const SizedBox(height: 32.0),
-                        const Text(
-                          AppStrings.email,
+                        Text(
+                          "EMAIL",
                           style: TextStyle(
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.bold,
+                            fontSize: 14.0,
+                            fontFamily: Fonts.fontsinter,
+                            fontWeight: FontWeight.w400,
                             color: Color(0xff999999),
                           ),
                         ),
-                        const SizedBox(height: 8.0),
                         TextFormField(
-                          decoration: const InputDecoration(
+                          validator: (value) =>
+                              loginProvider.validateEmail(value ?? ""),
+                          controller: loginProvider.emailController,
+                          decoration: InputDecoration(
                             hintText: AppStrings.enterUrEmail,
                             enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.black),
+                              borderSide: BorderSide(
+                                  color: MyColors.grey.withOpacity(0.7)),
                             ),
                             focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.black),
+                              borderSide: BorderSide(
+                                  color: MyColors.grey.withOpacity(0.7)),
                             ),
                           ),
                         ),
-                        const SizedBox(height: 16.0),
-                        const Text(
+                        const SizedBox(height: 5.0),
+                        Text(
                           AppStrings.passWord,
                           style: TextStyle(
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.bold,
+                            fontSize: 14.0,
+                            fontFamily: Fonts.fontsinter,
+                            fontWeight: FontWeight.w400,
                             color: Color(0xff999999),
                           ),
                         ),
-                        const SizedBox(height: 8.0),
                         TextFormField(
-                          decoration: const InputDecoration(
+                          validator: (value) =>
+                              loginProvider.validatePassword(value ?? ""),
+                          controller: loginProvider.passwordController,
+                          obscureText: loginProvider.obscureText,
+                          decoration: InputDecoration(
                             hintText: AppStrings.enterUrPassWord,
                             enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.black),
+                              borderSide: BorderSide(
+                                  color: MyColors.grey.withOpacity(0.7)),
                             ),
+                            suffixIcon: IconButton(
+                                onPressed: () {
+                                  loginProvider.togglePasswordVisibility();
+                                },
+                                icon: Icon(loginProvider.obscureText
+                                    ? Icons.visibility_off
+                                    : Icons.visibility)),
                             focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.black),
+                              borderSide: BorderSide(
+                                  color: MyColors.grey.withOpacity(0.7)),
                             ),
                           ),
                         ),
@@ -125,13 +149,23 @@ class _OnbarodingScreen1State extends State<OnbarodingScreen1> {
                               ],
                             ),
                             TextButton(
-                              onPressed: () {},
-                              child: Text(
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                        //StockHubPage()
+                                        // AddStockRequest()
+                                        ForgetPasswordScreen()));
+                              },
+                              child: const Text(
                                 AppStrings.forgetPassword,
                                 style: TextStyle(
-                                  color: MyColors.btnColor,
+                                  fontFamily: 'inter',
+                                  color: Color(0xff176AA7),
                                   fontSize: 14.0,
-                                  fontWeight: FontWeight.bold,
+                                  fontWeight: FontWeight.w400,
+                                  decorationColor: Color(0xff176AA7),
                                   decoration: TextDecoration.underline,
                                 ),
                               ),
@@ -139,37 +173,83 @@ class _OnbarodingScreen1State extends State<OnbarodingScreen1> {
                           ],
                         ),
                         const SizedBox(height: 32.0),
-                        SizedBox(
-                          width: double.infinity,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => DashBoardView()));
-                              //  Get.to(DashBoardView());
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: MyColors.blue,
-                              padding: EdgeInsets.all(10),
-                              textStyle: TextStyle(
-                                fontSize: 16.0,
-                                fontWeight: FontWeight.bold,
+                        if (loginProvider.isLoading)
+                          const CircularProgressIndicator()
+                        else
+                          SizedBox(
+                            width: double.infinity,
+                            child: ElevatedButton(
+                              onPressed: () async {
+                                bool loginSuccess = await loginProvider.login(
+                                  context: context,
+                                  email: loginProvider.emailController.text,
+                                  password:
+                                  loginProvider.passwordController.text,
+                                );
+                                print(
+                                    "email=======> ${loginProvider.emailController.text}");
+                                print(
+                                    "password=======> ${loginProvider.passwordController.text}");
+
+                                if (loginSuccess) {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                        //StockHubPage()
+                                        // AddStockRequest()
+                                        DashBoardView()),
+                                  );
+                                  Future.delayed(const Duration(seconds: 5),
+                                          () {
+                                        loginProvider.emailController.clear();
+                                        loginProvider.passwordController.clear();
+                                      });
+                                } else {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                        'Login failed. Please check your credentials and try again.',
+                                        style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w500,
+                                          color: MyColors.black1,
+                                        ),
+                                      ),
+                                      backgroundColor: Colors.red,
+                                    ),
+                                  );
+                                }
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: MyColors.blue,
+                                padding: const EdgeInsets.all(10),
+                                textStyle: const TextStyle(
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
                               ),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(
-                                    8.0), // Small circle at the corners
-                              ),
-                            ),
-                            child: const Text(
-                              AppStrings.signIn,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    AppStrings.signIn,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: Fonts.fontsinter,
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                  SizedBox(width: 5),
+                                  SvgPicture.asset(Assets.check),
+                                ],
                               ),
                             ),
                           ),
-                        ),
                         const SizedBox(height: 16.0),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -182,13 +262,20 @@ class _OnbarodingScreen1State extends State<OnbarodingScreen1> {
                             ),
                             TextButton(
                               onPressed: () {
-                                Get.to(Onboarding2Screen());
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                        //StockHubPage()
+                                        // AddStockRequest()
+                                        RegisterScreen()));
                               },
                               child: Text(
                                 AppStrings.register,
                                 style: TextStyle(
                                   fontSize: 14.0,
-                                  fontWeight: FontWeight.bold,
+                                  fontFamily: Fonts.fontsinter,
+                                  fontWeight: FontWeight.w500,
                                   color: MyColors.btnColor,
                                 ),
                               ),

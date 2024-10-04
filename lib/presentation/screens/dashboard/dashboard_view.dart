@@ -1,6 +1,8 @@
 import 'package:easy_sidemenu/easy_sidemenu.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:project_5237_provider/desktop/message_chat/messages_chat.dart';
 import 'package:project_5237_provider/desktop/myProject/myProject.dart';
 import 'package:project_5237_provider/desktop/projects/projects_screen.dart';
 import 'package:project_5237_provider/presentation/constants/fonts.dart';
@@ -11,6 +13,7 @@ import 'package:project_5237_provider/presentation/screens/login_register/home_s
 import 'package:project_5237_provider/presentation/screens/login_register/message.dart';
 import 'package:project_5237_provider/presentation/screens/main_screen%20.dart';
 import 'package:project_5237_provider/presentation/screens/milestones/milestone.dart';
+import 'package:project_5237_provider/presentation/screens/my_contracts/my_contacts.dart';
 import 'package:project_5237_provider/presentation/screens/update_Project/chat_screen.dart';
 
 class DashBoardView extends StatefulWidget {
@@ -23,36 +26,14 @@ class DashBoardView extends StatefulWidget {
 
 class _DashBoardViewState extends State<DashBoardView> {
   int _currentIndex = 0;
-  // final List<Widget> _pages = const [
-  //   AddProjects(),
-  //   Scaffold(),
-  //   Scaffold(),
-  //   AddProjects(),
-  //   AddProjects(),
-  // ];
+
   final List<Widget> _pages = [
     const HomeScreen(),
+    // MycontractScreen(),
     const ProjectsScreen(),
     const MilestoneScreen(),
-    const ChatScreen(),
+    const MessageChatScreen1(),
     const MyProject(),
-
-    // //0
-    // const HomeProjectDetails(),
-    // const ProposalScreen(),
-    // const SuccesfullyScreen(),
-    // const NotificationScreen(),
-
-    // const BookedClient(),
-    // const AddProjects(),
-    // const AddProject1(),
-    // const ForgetPasswordScreen(),
-    // const OtpScreen(),
-    // const ChangePassword(),
-    // const MilestoneScreen(),
-    // const MycontractScreen(),
-    // //2
-    // const ChatScreen(),
   ];
   SideMenuController sideMenu = SideMenuController();
   PageController pageController = PageController();
@@ -186,8 +167,27 @@ class _DashBoardViewState extends State<DashBoardView> {
                 icon: const Icon(Icons.message),
               ),
             ],
-            footer: responsive.isTablet
-                ? null
+            footer: responsive.isTablet || responsive.isDesktopHeight
+                ? Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    margin: EdgeInsets.only(top: 40.h, bottom: 50.h),
+                    child: Row(
+                      children: [
+                        SvgPicture.asset(
+                            "assets/svg_icon/majesticons_logout.svg"),
+                        const SizedBox(width: 10),
+                        Text(
+                          "Logout",
+                          style: TextStyle(
+                            fontFamily: Fonts.fontsinter,
+                            fontSize: 18,
+                            color: const Color.fromRGBO(34, 49, 63, 1),
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
                 : Container(
                     height: 300,
                     padding: const EdgeInsets.symmetric(horizontal: 20),

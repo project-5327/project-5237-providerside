@@ -68,6 +68,7 @@ class _AcceptProposalState extends State<AcceptProposal> {
                 SizedBox(height: 35.h),
                 Center(
                   child: CustomTextFormField(
+                    readOnly: false,
                     controller: dateController,
                     text: '09/07/2024 & 11:30 AM',
                     title: AppStrings.dateTime,
@@ -89,11 +90,13 @@ class _AcceptProposalState extends State<AcceptProposal> {
                       fontWeight: FontWeight.w500,
                       color: MyColors.black1,
                     ),
+                    readOnly: false,
                   ),
                 ),
                 SizedBox(height: 20.h),
                 Center(
                   child: CustomTextFormField(
+                    readOnly: false,
                     controller: addressController,
                     text: 'Lorem Ipsum is simply dummy text',
                     title: AppStrings.address,

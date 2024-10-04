@@ -62,6 +62,7 @@ class _MilestoneScreenState extends State<MilestoneScreen>
                       height: 10.h,
                     ),
                     TabBar(
+                      dividerHeight: 0,
                       indicator: BoxDecoration(
                         color: Colors.transparent,
                         border: Border(
