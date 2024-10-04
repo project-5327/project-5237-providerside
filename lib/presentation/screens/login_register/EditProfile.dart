@@ -294,6 +294,7 @@ class _CategoryState extends State<Category> {
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
+                                backgroundColor: Colors.red,
                                 content: Text(
                                     'Failed to update profile. Please try again.'),
                               ),
@@ -302,6 +303,7 @@ class _CategoryState extends State<Category> {
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
+                              backgroundColor: Colors.red,
                               content: Text(
                                   'Please enter valid information and select an image'),
                             ),
@@ -349,11 +351,8 @@ class _Catagory2State extends State<Catagory2> {
   Widget build(BuildContext context) {
     return Consumer<FreelancerProvider>(
         builder: (context, freelancerProvider, child) {
-      debugPrint(
-          "Freelancer Projects ========> ${freelancerProvider.personalProjects}");
-
-      final List<dynamic> personalProjectsList =
-          freelancerProvider.freelancerModel?.personalProjects ?? [];
+      // final List<dynamic> personalProjectsList =
+      //     freelancerProvider.freelancerModel?.personalProjects ?? [];
 
       return SingleChildScrollView(
         child: Column(
@@ -362,61 +361,48 @@ class _Catagory2State extends State<Catagory2> {
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Container(
                 height: 800.h,
-                child: freelancerProvider.loading
-                    ? Center(
-                        child: CircularProgressIndicator(color: MyColors.blue))
-                    : personalProjectsList.isEmpty
-                        ? Center(
-                            child: TextWidget(
-                              text: "No Projects found",
+                child: ListView.builder(
+                  itemCount: 1,
+                  // personalProjectsList.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    //  final personalProject = personalProjectsList[index];
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            TextWidget(
+                              text: "Project Name",
+                              //personalProject?.projectName ?? "",
                               color: MyColors.black,
                               size: 17.sp,
                               fontweight: FontWeight.w500,
                             ),
-                          )
-                        : ListView.builder(
-                            itemCount: personalProjectsList.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              final personalProject =
-                                  personalProjectsList[index];
-                              return Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    children: [
-                                      TextWidget(
-                                        text:
-                                            personalProject?.projectName ?? "",
-                                        color: MyColors.black,
-                                        size: 17.sp,
-                                        fontweight: FontWeight.w500,
-                                      ),
-                                      SizedBox(width: 100.w),
-                                      TextWidget(
-                                        text: timeago.format(
-                                          DateTime.tryParse(
-                                                  personalProject?.endDate ??
-                                                      "") ??
-                                              DateTime.now(),
-                                        ),
-                                        color: MyColors.grey,
-                                        size: 12.sp,
-                                        fontweight: FontWeight.w400,
-                                      ),
-                                    ],
-                                  ),
-                                  TextWidget(
-                                    text: personalProject?.description ??
-                                        "No description available.",
-                                    color: MyColors.black,
-                                    size: 12.sp,
-                                    fontweight: FontWeight.w500,
-                                  ),
-                                ],
-                              );
-                            },
-                          ),
+                            SizedBox(width: 100.w),
+                            TextWidget(
+                              text: timeago.format(
+                                DateTime.tryParse("2024-10-04T15:56:30.852Z") ??
+                                    DateTime.now(),
+                              ),
+                              color: MyColors.grey,
+                              size: 12.sp,
+                              fontweight: FontWeight.w400,
+                            ),
+                          ],
+                        ),
+                        TextWidget(
+                          text:
+                              //  personalProject?.description ??
+                              "Lorem ipsum dolor sit amet consectetur.",
+                          color: MyColors.black,
+                          size: 12.sp,
+                          fontweight: FontWeight.w500,
+                        ),
+                      ],
+                    );
+                  },
+                ),
               ),
             ),
             Center(

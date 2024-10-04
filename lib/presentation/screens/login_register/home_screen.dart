@@ -93,9 +93,6 @@ class _HomeScreenState extends State<HomeScreen> {
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: SearchField(),
                       ),
-                      // SizedBox(
-                      //   height: 27.h,
-                      // ),
                       SizedBox(
                         height: 750.h,
                         child: ListView.builder(

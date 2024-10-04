@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:project_5237_provider/presentation/screens/login_register/EditProfile.dart';
+import 'package:project_5237_provider/presentation/screens/login_register/freelancer_profile.dart';
 import 'package:project_5237_provider/presentation/screens/login_register/recent_proposal.dart';
-import 'package:project_5237_provider/presentation/screens/login_register/credit.dart';
 import 'package:project_5237_provider/presentation/screens/login_register/message.dart';
+import 'package:project_5237_provider/presentation/screens/my_contracts/map_screen.dart';
 import '../constants/assets.dart';
 import '../constants/color.dart';
 import 'login_register/home_screen.dart';
-
-import 'message/discover_projects.dart';
 
 class MainScreen extends StatefulWidget {
   int? selectedIndex;
@@ -29,9 +27,11 @@ class _MainScreenState extends State<MainScreen> {
   final List<Widget> _screens = [
     const HomeScreen(),
     const RecentProposal(),
-    DebitCredit(),
+    MapScreen(),
     const MessageScreen(),
-    Editprofile()
+    FreelancerProfile()
+
+    //  Editprofile()
   ];
 
   @override
@@ -94,7 +94,7 @@ class _MainScreenState extends State<MainScreen> {
                 ),
                 bottomNavItem(
                   title: "",
-                  icon: Assets.wallet,
+                  icon: Assets.location,
                   isSelected:
                       widget.selectedIndex == 2 || widget.selectedIndex == 17,
                   onTap: () {
