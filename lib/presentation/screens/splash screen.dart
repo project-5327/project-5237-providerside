@@ -8,6 +8,8 @@ import 'package:project_5237_provider/presentation/screens/main_screen%20.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
+
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
@@ -22,7 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future<void> _checkLoginStatus() async {
-    await Future.delayed(Duration(milliseconds: 4400));
+    await Future.delayed(const Duration(milliseconds: 4400));
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString('auth_token');
@@ -45,7 +47,7 @@ class _SplashScreenState extends State<SplashScreen> {
     } else {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => RegisterScreen()),
+        MaterialPageRoute(builder: (context) => const RegisterScreen()),
       );
     }
   }

@@ -4,13 +4,11 @@ import 'package:get/get.dart';
 import 'package:project_5237_provider/controller/profile_controller.dart';
 import 'package:project_5237_provider/presentation/constants/responsive_view.dart';
 
-import '../constants/assets.dart';
 import '../constants/color.dart';
 import '../screens/my_contracts/send_screen.dart';
-import 'Customize_textfield.dart';
 
 class CreateProfileWidget extends StatelessWidget {
-  CreateProfileWidget({super.key});
+  const CreateProfileWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

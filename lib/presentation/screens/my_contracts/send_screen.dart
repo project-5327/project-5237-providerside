@@ -1,9 +1,7 @@
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
 import 'package:project_5237_provider/presentation/constants/color.dart';
 import 'package:project_5237_provider/provider/home/proposal_provider.dart';
 import 'package:provider/provider.dart';
@@ -12,6 +10,8 @@ import '../../constants/assets.dart';
 import '../../widgets/contract_widgets.dart';
 
 class SendScreen extends StatefulWidget {
+  const SendScreen({super.key});
+
   @override
   _SendScreenState createState() => _SendScreenState();
 }
@@ -39,7 +39,7 @@ class _SendScreenState extends State<SendScreen> {
     return Consumer<ProposalProvider>(
         builder: (context, proposalProvider, child) {
       final proposals = proposalProvider.proposalByUser?.data;
-      debugPrint("proposal data ========> ${proposals}");
+      debugPrint("proposal data ========> $proposals");
       if (proposalProvider.loading) {
         return Center(
           child: CircularProgressIndicator(
@@ -65,7 +65,7 @@ class _SendScreenState extends State<SendScreen> {
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: proposals.length,
                   itemBuilder: (context, index) {
-                    final proposal = proposals![index];
+                    final proposal = proposals[index];
 
                     return InkWell(
                       //  onTap: () => _handleProjectTileTap(0),
@@ -127,7 +127,7 @@ class _PdfContainerState extends State<PdfContainer> {
         height: 57.h,
         width: 161.w,
         decoration: BoxDecoration(
-          color: Color(0xffBEBEBE),
+          color: const Color(0xffBEBEBE),
           border: Border.all(width: 1.16),
           borderRadius: BorderRadius.circular(10.r),
         ),

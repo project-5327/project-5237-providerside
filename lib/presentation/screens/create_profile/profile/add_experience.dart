@@ -3,8 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:project_5237_provider/presentation/constants/strings.dart';
-import 'package:project_5237_provider/presentation/screens/create_profile/profile/profile3.dart';
-import 'package:project_5237_provider/presentation/screens/create_profile/profile/profile4.dart';
 import 'package:project_5237_provider/presentation/screens/my_contracts/send_screen.dart';
 import 'package:project_5237_provider/presentation/widgets/Customize_textfield.dart';
 import 'package:provider/provider.dart';
@@ -13,7 +11,6 @@ import '../../../../provider/onboarding/onbaording_provider.dart';
 import '../../../constants/assets.dart';
 import '../../../constants/color.dart';
 import '../../../widgets/customize_button.dart';
-import 'profile2.dart';
 
 class AddExperience extends StatelessWidget {
   const AddExperience({super.key});
@@ -49,7 +46,7 @@ class AddExperience extends StatelessWidget {
                 ),
                 Center(
                   child: Container(
-                    padding: EdgeInsets.all(14.0),
+                    padding: const EdgeInsets.all(14.0),
                     height: 440.h,
                     width: 335.w,
                     decoration: BoxDecoration(

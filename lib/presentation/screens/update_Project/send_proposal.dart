@@ -33,10 +33,10 @@ class _SendProposalScreenState extends State<SendProposalScreen> {
         ),
         body: SingleChildScrollView(
             child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 18),
+                padding: const EdgeInsets.symmetric(horizontal: 18),
                 child: DetailsTextfield(
                   onTap: () {
-                    Get.to(() => SuccesfullyScreen());
+                    Get.to(() => const SuccesfullyScreen());
                   },
                 ))),
       ),

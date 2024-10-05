@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -83,7 +82,7 @@ class AwaitingMilestones extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 14.w),
             child: Column(
               children: [
-                Container(
+                SizedBox(
                   height: 300.h,
                   child: ListView.builder(
                       itemCount: 4,
@@ -110,7 +109,7 @@ class AwaitingMilestones extends StatelessWidget {
                                   children: [
                                     Container(
                                       padding:
-                                          EdgeInsets.fromLTRB(65, 0, 65, 10),
+                                          const EdgeInsets.fromLTRB(65, 0, 65, 10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                           border: Border(
@@ -216,7 +215,7 @@ class AwaitingMilestones extends StatelessWidget {
           fontWeight: FontWeight.w700),
       content: Column(
         children: [
-          Container(
+          SizedBox(
             width: responsive.isMobile || responsive.isTablet
                 ? double.infinity
                 : 240.w,

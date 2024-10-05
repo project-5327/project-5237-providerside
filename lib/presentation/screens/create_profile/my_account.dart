@@ -34,7 +34,7 @@ class MyAccountScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                CreateProfileWidget(),
+                const CreateProfileWidget(),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: Form(
@@ -95,17 +95,10 @@ class MyAccountScreen extends StatelessWidget {
                                     alignment: Alignment.center,
                                     height: 18.h,
                                     width: 18.w,
-                                    child: containerController.selectedcont[0]
-                                        ? Icon(
-                                            size: 12.sp,
-                                            Icons.check,
-                                            color: MyColors.white,
-                                          )
-                                        : null,
                                     decoration: BoxDecoration(
                                         color:
                                             containerController.selectedcont[0]
-                                                ? Color(0xffFF4C4A)
+                                                ? const Color(0xffFF4C4A)
                                                 : MyColors.white,
                                         borderRadius:
                                             BorderRadius.circular(4.r),
@@ -113,6 +106,13 @@ class MyAccountScreen extends StatelessWidget {
                                             width: 2.w,
                                             color: MyColors.black
                                                 .withOpacity(0.3))),
+                                    child: containerController.selectedcont[0]
+                                        ? Icon(
+                                            size: 12.sp,
+                                            Icons.check,
+                                            color: MyColors.white,
+                                          )
+                                        : null,
                                   ),
                                 ),
                               ),
@@ -142,6 +142,15 @@ class MyAccountScreen extends StatelessWidget {
                                   alignment: Alignment.center,
                                   height: 18.h,
                                   width: 18.w,
+                                  decoration: BoxDecoration(
+                                      color: containerController.selectedcont[1]
+                                          ? const Color(0xffFF4C4A)
+                                          : MyColors.white,
+                                      borderRadius: BorderRadius.circular(4.r),
+                                      border: Border.all(
+                                          width: 2.w,
+                                          color:
+                                              MyColors.black.withOpacity(0.3))),
                                   child: containerController.selectedcont[1]
                                       ? Icon(
                                           size: 12.sp,
@@ -149,15 +158,6 @@ class MyAccountScreen extends StatelessWidget {
                                           color: MyColors.white,
                                         )
                                       : null,
-                                  decoration: BoxDecoration(
-                                      color: containerController.selectedcont[1]
-                                          ? Color(0xffFF4C4A)
-                                          : MyColors.white,
-                                      borderRadius: BorderRadius.circular(4.r),
-                                      border: Border.all(
-                                          width: 2.w,
-                                          color:
-                                              MyColors.black.withOpacity(0.3))),
                                 ),
                               ),
                             ),
@@ -179,7 +179,7 @@ class MyAccountScreen extends StatelessWidget {
                                     style: TextStyle(
                                       fontSize: 12.sp,
                                       fontWeight: FontWeight.w600,
-                                      color: Color(0xffFF4C4A),
+                                      color: const Color(0xffFF4C4A),
                                     ),
                                   ),
                                 ],
@@ -196,7 +196,7 @@ class MyAccountScreen extends StatelessWidget {
                               style: TextStyle(
                                 fontWeight: FontWeight.w500,
                                 fontSize: 12.sp,
-                                color: Color(0xffFF4C4A),
+                                color: const Color(0xffFF4C4A),
                               ),
                               children: <TextSpan>[
                                 TextSpan(
@@ -213,7 +213,7 @@ class MyAccountScreen extends StatelessWidget {
                                     style: TextStyle(
                                         fontWeight: FontWeight.w500,
                                         fontSize: 12.sp,
-                                        color: Color(0xffFF4C4A))),
+                                        color: const Color(0xffFF4C4A))),
                               ],
                             ),
                           ),

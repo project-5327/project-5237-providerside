@@ -28,7 +28,7 @@ class AcceptProposalScreen extends StatefulWidget {
 }
 
 class _AcceptProposalScreenState extends State<AcceptProposalScreen> {
-  ImagePicker _picker = ImagePicker();
+  final ImagePicker _picker = ImagePicker();
   XFile? _selectedImage;
   String? filePath;
   File? _file;
@@ -41,11 +41,11 @@ class _AcceptProposalScreenState extends State<AcceptProposalScreen> {
 
       setState(() {
         filePath = file.path;
-        debugPrint("========> file path ${filePath}");
+        debugPrint("========> file path $filePath");
         _file = File(file.path!); // Store the selected file
       });
 
-      print('File Name: ${filePath}');
+      print('File Name: $filePath');
       print('File Path: ${file.path}');
       print('File Extension: ${file.extension}');
       print('File Size: ${file.size}');
@@ -83,7 +83,7 @@ class _AcceptProposalScreenState extends State<AcceptProposalScreen> {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 18),
               child: Center(
-                child: Container(
+                child: SizedBox(
                   width: 500.sp,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -257,7 +257,7 @@ class _AcceptProposalScreenState extends State<AcceptProposalScreen> {
                         height: 114.h,
                         width: double.infinity,
                         child: Padding(
-                          padding: EdgeInsets.only(left: 8),
+                          padding: const EdgeInsets.only(left: 8),
                           child: TextField(
                             controller: proposalProvider.descriptionController,
                             decoration: InputDecoration(
@@ -358,7 +358,7 @@ class _AcceptProposalScreenState extends State<AcceptProposalScreen> {
                 onTap: () {
                   Navigator.pushAndRemoveUntil(
                     context,
-                    MaterialPageRoute(builder: (context) => MessageScreen()),
+                    MaterialPageRoute(builder: (context) => const MessageScreen()),
                     (Route<dynamic> route) =>
                         false, // This will remove all previous routes
                   );

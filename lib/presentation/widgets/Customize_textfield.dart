@@ -63,7 +63,7 @@ class CustomTextFormField extends StatelessWidget {
               ),
         ),
         SizedBox(height: 5.h),
-        Container(
+        SizedBox(
           height: height,
           width: width,
           child: TextFormField(

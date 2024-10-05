@@ -66,7 +66,7 @@ class RegisterProvider extends ChangeNotifier {
       if (response != null && response.statusCode == 201) {
         final token = response.data["data"]['token'];
         debugPrint("Data======>${response.data}");
-        debugPrint("Token======>${token}");
+        debugPrint("Token======tokennnnnnnnnnn>$token");
         debugPrint("message======>${response.data['message']}");
         CustomInterceptor.setToken(token);
         ScaffoldMessenger.of(context).showSnackBar(

@@ -11,13 +11,13 @@ class ProposalDataResponse {
     status = json['status'];
     message = json['message'];
     data =
-        json['data'] != null ? new ProposalData.fromJson(json['data']) : null;
+        json['data'] != null ? ProposalData.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['status'] = this.status;
-    data['message'] = this.message;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['status'] = status;
+    data['message'] = message;
     if (this.data != null) {
       data['data'] = this.data!.toJson();
     }
@@ -38,7 +38,7 @@ class ProposalData {
     if (json['projects'] != null) {
       projects = <ProposalListData>[];
       json['projects'].forEach((v) {
-        projects!.add(new ProposalListData.fromJson(v));
+        projects!.add(ProposalListData.fromJson(v));
       });
     }
     currentPage = json['currentPage'];
@@ -47,13 +47,13 @@ class ProposalData {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.projects != null) {
-      data['projects'] = this.projects!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (projects != null) {
+      data['projects'] = projects!.map((v) => v.toJson()).toList();
     }
-    data['currentPage'] = this.currentPage;
-    data['totalPages'] = this.totalPages;
-    data['totalProjects'] = this.totalProjects;
+    data['currentPage'] = currentPage;
+    data['totalPages'] = totalPages;
+    data['totalProjects'] = totalProjects;
     return data;
   }
 }
@@ -98,10 +98,10 @@ class ProposalListData {
 
   ProposalListData.fromJson(Map<String, dynamic> json) {
     budget =
-        json['budget'] != null ? new Budget.fromJson(json['budget']) : null;
+        json['budget'] != null ? Budget.fromJson(json['budget']) : null;
     sId = json['_id'];
     clientId = json['clientId'] != null
-        ? new ClientId.fromJson(json['clientId'])
+        ? ClientId.fromJson(json['clientId'])
         : null;
     title = json['title'];
     description = json['description'];
@@ -120,28 +120,28 @@ class ProposalListData {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.budget != null) {
-      data['budget'] = this.budget!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (budget != null) {
+      data['budget'] = budget!.toJson();
     }
-    data['_id'] = this.sId;
-    if (this.clientId != null) {
-      data['clientId'] = this.clientId!.toJson();
+    data['_id'] = sId;
+    if (clientId != null) {
+      data['clientId'] = clientId!.toJson();
     }
-    data['title'] = this.title;
-    data['description'] = this.description;
-    data['category'] = this.category;
-    data['subCategory'] = this.subCategory;
-    data['skillsRequired'] = this.skillsRequired;
-    data['deadline'] = this.deadline;
-    data['experienceLevel'] = this.experienceLevel;
-    data['Attachment'] = this.attachment;
-    data['TimelineType'] = this.timelineType;
-    data['projectTime'] = this.projectTime;
-    data['status'] = this.status;
-    data['createdAt'] = this.createdAt;
-    data['updatedAt'] = this.updatedAt;
-    data['__v'] = this.iV;
+    data['title'] = title;
+    data['description'] = description;
+    data['category'] = category;
+    data['subCategory'] = subCategory;
+    data['skillsRequired'] = skillsRequired;
+    data['deadline'] = deadline;
+    data['experienceLevel'] = experienceLevel;
+    data['Attachment'] = attachment;
+    data['TimelineType'] = timelineType;
+    data['projectTime'] = projectTime;
+    data['status'] = status;
+    data['createdAt'] = createdAt;
+    data['updatedAt'] = updatedAt;
+    data['__v'] = iV;
     return data;
   }
 }
@@ -158,9 +158,9 @@ class Budget {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['min'] = this.min;
-    data['max'] = this.max;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['min'] = min;
+    data['max'] = max;
     return data;
   }
 }
@@ -179,10 +179,10 @@ class ClientId {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['_id'] = this.sId;
-    data['userName'] = this.userName;
-    data['email'] = this.email;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['_id'] = sId;
+    data['userName'] = userName;
+    data['email'] = email;
     return data;
   }
 }

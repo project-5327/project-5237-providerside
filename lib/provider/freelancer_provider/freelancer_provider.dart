@@ -1,15 +1,13 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:project_5237_provider/config/baseclient/CustomInterceptor.dart';
 import 'package:project_5237_provider/config/baseclient/base_client.dart';
 import 'package:project_5237_provider/config/baseclient/endpoints.dart';
 import 'package:project_5237_provider/data/models/freelancer_model.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class FreelancerProvider with ChangeNotifier {
   bool _loading = false;
   String? _errorMessage;
-  bool _isSuccess = false;
+  final bool _isSuccess = false;
   UserDetails? freelancerModel;
   PersonalProjects? personalProjects;
 
@@ -50,7 +48,7 @@ class FreelancerProvider with ChangeNotifier {
         } else {
           debugPrint("Unexpected response format");
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Unexpected response format.')),
+            const SnackBar(content: Text('Unexpected response format.')),
           );
         }
       } else {
@@ -99,13 +97,13 @@ class FreelancerProvider with ChangeNotifier {
 
       if (response != null && response.statusCode == 200) {
         final data = response.data;
-        debugPrint('response ==========> ${data}');
+        debugPrint('response ==========> $data');
 
         if (data != null) {
           freelancerModel = UserDetails.fromJson(data);
           _errorMessage = '';
           debugPrint('==== Freelancers retrieved successfully.=====');
-          debugPrint("Freelancer details======> :${freelancerModel}");
+          debugPrint("Freelancer details======> :$freelancerModel");
         } else {
           _errorMessage = 'No data found';
           debugPrint('Error=======> No data found');
@@ -123,7 +121,7 @@ class FreelancerProvider with ChangeNotifier {
       notifyListeners();
     }
 
-    void _showSnackBar(BuildContext context, String? message) {
+    void showSnackBar(BuildContext context, String? message) {
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(message ?? "Error")),
@@ -145,7 +143,7 @@ class FreelancerProvider with ChangeNotifier {
 
       if (response != null && response.statusCode == 200) {
         final data = response.data;
-        debugPrint('response ==========> ${data}');
+        debugPrint('response ==========> $data');
 
         if (data != null) {
           // Parse the projects data properly
@@ -154,7 +152,7 @@ class FreelancerProvider with ChangeNotifier {
               (freelancerModel?.personalProjects ?? []) as PersonalProjects?;
           _errorMessage = '';
           debugPrint('==== Projects retrieved successfully.=====');
-          debugPrint("Freelancer Projects======> :${personalProjects}");
+          debugPrint("Freelancer Projects======> :$personalProjects");
         } else {
           _errorMessage = 'No data found';
           debugPrint('Error=======> No data found');

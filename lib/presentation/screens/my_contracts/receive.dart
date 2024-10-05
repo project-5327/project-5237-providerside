@@ -7,8 +7,6 @@ import 'package:project_5237_provider/provider/home/proposal_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../../constants/color.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class ReceivedProposal extends StatefulWidget {
   const ReceivedProposal({super.key});

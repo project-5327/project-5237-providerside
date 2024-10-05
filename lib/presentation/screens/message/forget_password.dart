@@ -15,7 +15,7 @@ import '../../widgets/customize_button.dart';
 import 'otp_screen.dart';
 
 class ForgetPasswordScreen extends StatefulWidget {
-  ForgetPasswordScreen({super.key});
+  const ForgetPasswordScreen({super.key});
 
   @override
   State<ForgetPasswordScreen> createState() => _ForgetPasswordScreenState();
@@ -52,7 +52,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
               onPressed: () {
                 Get.back();
               },
-              icon: Icon(Icons.arrow_back_ios),
+              icon: const Icon(Icons.arrow_back_ios),
               color: MyColors.black,
             ),
             title: Text(
@@ -98,7 +98,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                         style: TextStyle(
                             fontSize: 13.sp,
                             fontWeight: FontWeight.w500,
-                            color: Color(0xff222222)),
+                            color: const Color(0xff222222)),
                       ),
                     ),
                     SizedBox(
@@ -122,7 +122,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => OtpScreen()),
+                                builder: (context) => const OtpScreen()),
                           );
                           Future.delayed(const Duration(seconds: 5), () {
                             loginProvider.emailController.clear();
@@ -183,14 +183,14 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                       padding: const EdgeInsets.symmetric(horizontal: 120.0),
                       child: Center(
                         child: Container(
-                            padding: EdgeInsets.all(16.0),
+                            padding: const EdgeInsets.all(16.0),
                             height: 300.0,
                             // width: 200.w,
                             decoration: BoxDecoration(
                                 color: MyColors.blueContainer,
                                 borderRadius: BorderRadius.circular(12.r)),
                             child: Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 30.0),
+                              padding: const EdgeInsets.symmetric(horizontal: 30.0),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -232,7 +232,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                                       fontSize: 14.0,
                                       fontFamily: Fonts.fontsMontserrat,
                                       fontWeight: FontWeight.w400,
-                                      color: Color(0xff999999),
+                                      color: const Color(0xff999999),
                                     ),
                                   ),
                                   TextFormField(
@@ -278,7 +278,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                              builder: (context) => OtpScreen()),
+                                              builder: (context) => const OtpScreen()),
                                         );
                                         Future.delayed(const Duration(seconds: 5),
                                                 () {

@@ -72,9 +72,9 @@ class VerifyOTPProvider extends ChangeNotifier {
 
     try {
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      String? _email = prefs.getString('email');
+      String? email = prefs.getString('email');
 
-      if (_email == null) {
+      if (email == null) {
         _errorMessage = 'Email not found. Please try again.';
         _isLoading = false;
         notifyListeners();
@@ -84,7 +84,7 @@ class VerifyOTPProvider extends ChangeNotifier {
       final response = await BaseClient.post(
         api: EndPoints.VERIFY_OTP,
         payloadObj: {
-          'email': _email,
+          'email': email,
           'otp': otp,
         },
       );

@@ -6,7 +6,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:project_5237_provider/presentation/screens/login_register/Add_projects.dart';
-import 'package:project_5237_provider/presentation/screens/main_screen%20.dart';
 import 'package:project_5237_provider/presentation/screens/my_contracts/send_screen.dart';
 import 'package:project_5237_provider/presentation/widgets/customize_button.dart';
 
@@ -14,7 +13,6 @@ import '../../constants/assets.dart';
 import '../../constants/color.dart';
 import '../../constants/strings.dart';
 import '../../widgets/Customize_textfield.dart';
-import 'succesfully.dart';
 
 class AddProject1 extends StatefulWidget {
   const AddProject1({super.key});
@@ -24,7 +22,7 @@ class AddProject1 extends StatefulWidget {
 }
 
 class _AddProject1State extends State<AddProject1> {
-  ImagePicker _picker = ImagePicker();
+  final ImagePicker _picker = ImagePicker();
   XFile? _selectedImage;
 
   Future<void> _pickImage() async {
@@ -69,7 +67,7 @@ class _AddProject1State extends State<AddProject1> {
       ),
       body: SingleChildScrollView(
           child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 18),
+              padding: const EdgeInsets.symmetric(horizontal: 18),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -118,6 +116,11 @@ class _AddProject1State extends State<AddProject1> {
                   InkWell(
                     onTap: _pickImage,
                     child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(color: MyColors.grayDark)),
+                      height: 88.h,
+                      width: 355.w,
                       child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -144,11 +147,6 @@ class _AddProject1State extends State<AddProject1> {
                               SvgPicture.asset(Assets.addImage)
                             ],
                           ]),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          border: Border.all(color: MyColors.grayDark)),
-                      height: 88.h,
-                      width: 355.w,
                     ),
                   ),
                   SizedBox(
@@ -165,8 +163,13 @@ class _AddProject1State extends State<AddProject1> {
                     height: 10.h,
                   ),
                   Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8.r),
+                        border: Border.all(color: MyColors.grayDark)),
+                    height: 114.h,
+                    width: 355.w,
                     child: Padding(
-                      padding: EdgeInsets.only(left: 8),
+                      padding: const EdgeInsets.only(left: 8),
                       child: TextField(
                         decoration: InputDecoration(
                           border: InputBorder.none,
@@ -178,11 +181,6 @@ class _AddProject1State extends State<AddProject1> {
                         ),
                       ),
                     ),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8.r),
-                        border: Border.all(color: MyColors.grayDark)),
-                    height: 114.h,
-                    width: 355.w,
                   ),
                   SizedBox(
                     height: 10.h,
@@ -271,7 +269,7 @@ class _AddProject1State extends State<AddProject1> {
                           // Navigator.of(context).push(
                           //   MaterialPageRoute(builder: (_) => MainScreen()),
                           // );
-                          Get.to(() => AddProjects());
+                          Get.to(() => const AddProjects());
                         }),
                   ),
                   SizedBox(

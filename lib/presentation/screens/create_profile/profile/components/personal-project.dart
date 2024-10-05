@@ -1,14 +1,10 @@
-import 'dart:io';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:multiselect/multiselect.dart';
-import 'package:project_5237_provider/presentation/screens/login_register/Add_projects.dart';
-import 'package:project_5237_provider/presentation/screens/main_screen%20.dart';
 import 'package:project_5237_provider/presentation/screens/my_contracts/send_screen.dart';
 import 'package:project_5237_provider/presentation/widgets/customize_button.dart';
 import 'package:provider/provider.dart';
@@ -18,7 +14,6 @@ import '../../../../constants/assets.dart';
 import '../../../../constants/color.dart';
 import '../../../../constants/strings.dart';
 import '../../../../widgets/Customize_textfield.dart';
-import '../../../../widgets/toggels.dart';
 import '../profile6.dart';
 import '../profile8.dart';
 
@@ -30,7 +25,7 @@ class AddYourPersonalProject extends StatefulWidget {
 }
 
 class _AddYourPersonalProjectState extends State<AddYourPersonalProject> {
-  ImagePicker _picker = ImagePicker();
+  final ImagePicker _picker = ImagePicker();
   XFile? _selectedImage;
   bool isOngoing = false;
 
@@ -48,10 +43,10 @@ class _AddYourPersonalProjectState extends State<AddYourPersonalProject> {
   TextEditingController projectCataController = TextEditingController();
 
   TextEditingController skillsController = TextEditingController();
-  bool _showOptions = false;
+  final bool _showOptions = false;
   final TextEditingController _skillsController = TextEditingController();
   final List<String> _skills = ['JavaScript', 'Node.js', 'MongoDB', 'React'];
-  List<String> _selectedSkills = [];
+  final List<String> _selectedSkills = [];
 
   final List<String> _options = [
     'Web Design',
@@ -80,7 +75,7 @@ class _AddYourPersonalProjectState extends State<AddYourPersonalProject> {
         ),
         body: SingleChildScrollView(
             child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 18),
+                padding: const EdgeInsets.symmetric(horizontal: 18),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -122,7 +117,7 @@ class _AddYourPersonalProjectState extends State<AddYourPersonalProject> {
                           hintStyle: TextStyle(
                               fontSize: 12.sp,
                               fontWeight: FontWeight.w500,
-                              color: Color(0xff2A1E17)),
+                              color: const Color(0xff2A1E17)),
                           contentPadding: const EdgeInsets.symmetric(
                               vertical: 3, horizontal: 7),
                           border: OutlineInputBorder(
@@ -178,7 +173,7 @@ class _AddYourPersonalProjectState extends State<AddYourPersonalProject> {
                       size: 13.sp,
                       fontweight: FontWeight.w600,
                     ),
-                    Container(
+                    SizedBox(
                       width: MediaQuery.of(context).size.width / 1,
                       height: 100,
                       //   padding: const EdgeInsets.all(8.0),
@@ -188,7 +183,7 @@ class _AddYourPersonalProjectState extends State<AddYourPersonalProject> {
                           focusColor: Theme.of(context).colorScheme.onPrimary,
                           enabledBorder: OutlineInputBorder(
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(8)),
+                                  const BorderRadius.all(Radius.circular(8)),
                               borderSide: BorderSide(
                                   color: MyColors.black, width: 1.5)),
                           focusedBorder: const OutlineInputBorder(
@@ -266,7 +261,7 @@ class _AddYourPersonalProjectState extends State<AddYourPersonalProject> {
                                   onboardingProvider.setTechnologies =
                                       _selectedSkills,
                                   isOngoing = true);
-                              Get.to(() => Profile8());
+                              Get.to(() => const Profile8());
                             }
                             //  },
                             ),

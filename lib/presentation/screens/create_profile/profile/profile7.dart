@@ -8,7 +8,6 @@ import 'package:project_5237_provider/presentation/constants/color.dart';
 import 'package:project_5237_provider/presentation/screens/create_profile/profile/profile6.dart';
 import 'package:project_5237_provider/presentation/screens/create_profile/profile/profile8.dart';
 import 'package:project_5237_provider/presentation/screens/my_contracts/send_screen.dart';
-import 'package:project_5237_provider/presentation/widgets/create_profile_widget.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../controller/profile_controller.dart';
@@ -17,7 +16,6 @@ import '../../../constants/responsive_view.dart';
 import '../../../constants/strings.dart';
 import '../../../widgets/customize_button.dart';
 import 'components/personal-project.dart';
-import 'components/profile8widget.dart';
 import 'static_profile.dart';
 
 class Profile7 extends StatelessWidget {
@@ -177,7 +175,7 @@ class Profile7 extends StatelessWidget {
 
                               if (formKey.currentState!.validate()) {
                                 profileController.nextPage();
-                                Get.to(() => AddYourPersonalProject());
+                                Get.to(() => const AddYourPersonalProject());
                               }
                             },
                           ),
@@ -210,7 +208,7 @@ class Profile7 extends StatelessWidget {
         ),
         Flexible(
             child: Center(
-                child: Container(
+                child: SizedBox(
                     //  height: 450.h,
                     width: 336.w,
                     child: Column(
@@ -366,7 +364,7 @@ class Profile7 extends StatelessWidget {
                                     // if (formKey.currentState != null &&
                                     //     formKey.currentState!.validate()) {
                                     profileController.nextPage();
-                                    Get.to(() => Profile8());
+                                    Get.to(() => const Profile8());
                                   }
                                   //  },
                                   ),

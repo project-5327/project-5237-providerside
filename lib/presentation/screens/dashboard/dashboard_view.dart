@@ -7,14 +7,10 @@ import 'package:project_5237_provider/desktop/myProject/myProject.dart';
 import 'package:project_5237_provider/desktop/projects/projects_screen.dart';
 import 'package:project_5237_provider/presentation/constants/fonts.dart';
 import 'package:project_5237_provider/presentation/constants/responsive_view.dart';
-import 'package:project_5237_provider/presentation/screens/login_register/Add_projects.dart';
 
 import 'package:project_5237_provider/presentation/screens/login_register/home_screen.dart';
-import 'package:project_5237_provider/presentation/screens/login_register/message.dart';
 import 'package:project_5237_provider/presentation/screens/main_screen%20.dart';
 import 'package:project_5237_provider/presentation/screens/milestones/milestone.dart';
-import 'package:project_5237_provider/presentation/screens/my_contracts/my_contacts.dart';
-import 'package:project_5237_provider/presentation/screens/update_Project/chat_screen.dart';
 
 class DashBoardView extends StatefulWidget {
   // final int? currentIndex;
@@ -42,7 +38,7 @@ class _DashBoardViewState extends State<DashBoardView> {
   void initState() {
     // Connect SideMenuController and PageController together
     sideMenu.addListener((index) {
-      print('sideMenuindex:${index}');
+      print('sideMenuindex:$index');
       _currentIndex = index;
 
       pageController.jumpToPage(index);
@@ -326,7 +322,7 @@ class _DashBoardViewState extends State<DashBoardView> {
                           'assets/icons/search.svg',
                           width: 18.0,
                           height: 18.0,
-                          color: Color.fromRGBO(215, 220, 224, 1),
+                          color: const Color.fromRGBO(215, 220, 224, 1),
                         ),
                       ),
                       // contentPadding: const EdgeInsets.symmetric(horizontal: 5),

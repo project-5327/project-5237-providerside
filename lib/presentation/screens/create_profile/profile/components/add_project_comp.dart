@@ -52,13 +52,13 @@ class _AddProjectComponentState extends State<AddProjectComponent> {
   }
 
   bool _showOptions = false;
-  List<String> _options = [
+  final List<String> _options = [
     'Web Design',
     'Mockup',
     'App development',
     'Designing'
   ];
-  List<String> _selectedSkills = [];
+  final List<String> _selectedSkills = [];
 
   final TextEditingController _skillsController = TextEditingController();
   final TextEditingController dateController = TextEditingController();
@@ -401,14 +401,14 @@ class _AddProjectComponenet1State extends State<AddProjectComponenet1> {
                       Expanded(
                         child: TextFormField(
                           controller: projectTimeController,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             prefixIcon: Icon(Icons.search),
                             labelText: 'Search',
                             border: OutlineInputBorder(),
                           ),
                         ),
                       ),
-                      SizedBox(width: 10),
+                      const SizedBox(width: 10),
                       DropdownButton<String>(
                         value: _selectedValue,
                         onChanged: (String? newValue) {

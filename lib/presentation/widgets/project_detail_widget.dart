@@ -9,7 +9,7 @@ import '../constants/color.dart';
 import 'discover_project_cont.dart';
 
 class ProjectDetailsWidget extends StatelessWidget {
-  ProjectDetailsWidget({super.key});
+  const ProjectDetailsWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -51,9 +51,9 @@ class ProjectDetailsWidget extends StatelessWidget {
                     child: Container(
                       width: 71.h,
                       height: 71.w,
+                      decoration: const BoxDecoration(shape: BoxShape.circle),
                       child: Image.asset('assets/images/image.jpeg',
                           fit: BoxFit.cover),
-                      decoration: BoxDecoration(shape: BoxShape.circle),
                     ),
                   ),
                   SizedBox(

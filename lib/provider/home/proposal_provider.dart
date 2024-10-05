@@ -6,9 +6,7 @@ import 'package:project_5237_provider/config/baseclient/CustomInterceptor.dart';
 import 'package:project_5237_provider/config/baseclient/base_client.dart';
 import 'package:project_5237_provider/config/baseclient/endpoints.dart';
 import 'package:project_5237_provider/data/models/proposal_by_user.dart';
-import '../../data/models/proposal_accept_model.dart';
 import '../../data/services/api_services.dart';
-import '../../presentation/widgets/toast_comp.dart';
 
 import 'package:http_parser/http_parser.dart';
 
@@ -33,7 +31,7 @@ class ProposalProvider with ChangeNotifier {
 
   set setFIle(File? image) {
     _selectedImage = image;
-    debugPrint('=========>  file ${_selectedImage}');
+    debugPrint('=========>  file $_selectedImage');
     notifyListeners();
   }
 
@@ -55,7 +53,7 @@ class ProposalProvider with ChangeNotifier {
     notifyListeners();
 
     final ApiService apiService = ApiService();
-    debugPrint('=========> file path  ${file}');
+    debugPrint('=========> file path  $file');
     final proposalData = {
       if (file != null)
         'proposalImage': [
@@ -168,7 +166,7 @@ class ProposalProvider with ChangeNotifier {
 
       if (response != null && response.statusCode == 200) {
         final data = response.data;
-        debugPrint('response ==========> ${data}');
+        debugPrint('response ==========> $data');
 
         if (data is List) {
           proposalByUser =
@@ -180,7 +178,7 @@ class ProposalProvider with ChangeNotifier {
 
         _errorMessage = '';
         debugPrint('====Proposals retrieved successfully.=====');
-        debugPrint("Proposal details======> :${data}");
+        debugPrint("Proposal details======> :$data");
 
         _loading = false;
         notifyListeners();

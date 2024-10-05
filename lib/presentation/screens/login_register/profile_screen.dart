@@ -1,8 +1,5 @@
-import 'dart:io';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -15,7 +12,6 @@ import '../../constants/color.dart';
 import '../../constants/strings.dart';
 import '../../widgets/Customize_textfield.dart';
 import '../../widgets/customize_button.dart';
-import 'Add_projects.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -32,7 +28,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-  ImagePicker _picker = ImagePicker();
+  final ImagePicker _picker = ImagePicker();
 
   XFile? _selectedImage;
 
@@ -84,7 +80,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     child: CircleAvatar(
                   radius: 50.r,
                   //     borderRadius: BorderRadius.circular(100.r),
-                  backgroundImage: AssetImage(
+                  backgroundImage: const AssetImage(
                     'assets/images/uploadImage.png',
                   ),
                 )),

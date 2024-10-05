@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:project_5237_provider/data/models/proposal_data_response.dart';
-import 'package:project_5237_provider/desktop/myProject/myProjectsScreens.dart';
 import 'package:project_5237_provider/desktop/projects/components/project_comp.dart';
 import 'package:project_5237_provider/desktop/projects/project_detail_screen.dart';
 import 'package:project_5237_provider/presentation/constants/color.dart';
@@ -60,7 +58,7 @@ class _RecentProposalState extends State<RecentProposal> {
                             MaterialPageRoute(
                                 builder: (context) => MainScreen()));
                       },
-                      icon: Icon(Icons.arrow_back_ios),
+                      icon: const Icon(Icons.arrow_back_ios),
                     ),
                     title: Text(
                       'Recent Proposal',
@@ -105,7 +103,7 @@ class _RecentProposalState extends State<RecentProposal> {
                                       )
                                     : ListView.builder(
                                         shrinkWrap: true,
-                                        physics: NeverScrollableScrollPhysics(),
+                                        physics: const NeverScrollableScrollPhysics(),
                                         itemCount: homeprovider
                                             .proposalDataDoc?.projects?.length,
                                         itemBuilder: (context, index) {

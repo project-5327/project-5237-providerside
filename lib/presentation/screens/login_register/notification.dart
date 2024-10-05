@@ -5,7 +5,6 @@ import 'package:project_5237_provider/presentation/screens/login_register/EditPr
 
 import '../../constants/color.dart';
 import '../../widgets/Catagory1.dart';
-import '../message/discover_projects.dart';
 
 class NotificationScreen extends StatelessWidget {
   const NotificationScreen({super.key});
@@ -50,7 +49,7 @@ class NotificationScreen extends StatelessWidget {
                 InkWell(
                   onTap: () {
                     //Payment page
-                    Get.to(() => Editprofile());
+                    Get.to(() => const Editprofile());
                   },
                   child: const CustomizeListTile(
                       image: 'assets/images/girl1.png',

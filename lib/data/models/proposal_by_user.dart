@@ -18,8 +18,8 @@ class ProposalByUser {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
-    data['status'] = this.status;
-    data['message'] = this.message;
+    data['status'] = status;
+    data['message'] = message;
     if (this.data != null) {
       data['data'] = this.data?.map((v) => v.toJson()).toList();
     }
@@ -89,28 +89,28 @@ class Data {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
-    data['_id'] = this.sId;
-    if (this.projectId != null) {
-      data['projectId'] = this.projectId?.toJson();
+    data['_id'] = sId;
+    if (projectId != null) {
+      data['projectId'] = projectId?.toJson();
     }
-    data['userId'] = this.userId;
-    data['proposalTitle'] = this.proposalTitle;
-    data['proposalDescription'] = this.proposalDescription;
-    data['estimatedTime'] = this.estimatedTime;
-    if (this.proposedBudget != null) {
-      data['proposedBudget'] = this.proposedBudget?.toJson();
+    data['userId'] = userId;
+    data['proposalTitle'] = proposalTitle;
+    data['proposalDescription'] = proposalDescription;
+    data['estimatedTime'] = estimatedTime;
+    if (proposedBudget != null) {
+      data['proposedBudget'] = proposedBudget?.toJson();
     }
-    data['status'] = this.status;
-    data['address'] = this.address;
-    data['proposalImage'] = this.proposalImage;
-    data['createdAt'] = this.createdAt;
-    data['updatedAt'] = this.updatedAt;
-    data['__v'] = this.iV;
-    if (this.freelancerDetails != null) {
-      data['freelancerDetails'] = this.freelancerDetails?.toJson();
+    data['status'] = status;
+    data['address'] = address;
+    data['proposalImage'] = proposalImage;
+    data['createdAt'] = createdAt;
+    data['updatedAt'] = updatedAt;
+    data['__v'] = iV;
+    if (freelancerDetails != null) {
+      data['freelancerDetails'] = freelancerDetails?.toJson();
     }
-    if (this.clientDetails != null) {
-      data['clientDetails'] = this.clientDetails?.toJson();
+    if (clientDetails != null) {
+      data['clientDetails'] = clientDetails?.toJson();
     }
     return data;
   }
@@ -134,12 +134,12 @@ class ProjectId {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
-    data['_id'] = this.sId;
-    if (this.clientId != null) {
-      data['clientId'] = this.clientId?.toJson();
+    data['_id'] = sId;
+    if (clientId != null) {
+      data['clientId'] = clientId?.toJson();
     }
-    data['title'] = this.title;
-    data['description'] = this.description;
+    data['title'] = title;
+    data['description'] = description;
     return data;
   }
 }
@@ -159,9 +159,9 @@ class ClientId {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
-    data['_id'] = this.sId;
-    data['userName'] = this.userName;
-    data['email'] = this.email;
+    data['_id'] = sId;
+    data['userName'] = userName;
+    data['email'] = email;
     return data;
   }
 }
@@ -192,7 +192,7 @@ class ProposedBudget {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
-    data['\$numberDecimal'] = this.numberDecimal; // Escape the '$' symbol
+    data['\$numberDecimal'] = numberDecimal; // Escape the '$' symbol
     return data;
   }
 }
@@ -217,11 +217,11 @@ class FreelancerDetails {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
-    data['_id'] = this.sId;
-    data['user'] = this.user;
-    data['firstName'] = this.firstName;
-    data['lastName'] = this.lastName;
-    data['profileImage'] = this.profileImage;
+    data['_id'] = sId;
+    data['user'] = user;
+    data['firstName'] = firstName;
+    data['lastName'] = lastName;
+    data['profileImage'] = profileImage;
     return data;
   }
 }

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../constants/color.dart';
-import '../screens/login_register/message.dart';
 import 'customize_button.dart';
 
 class BookedMessage extends StatelessWidget {
@@ -19,7 +18,7 @@ class BookedMessage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 250.h,
       width: 326.w,
       child: Column(

@@ -65,13 +65,13 @@ class FilterProvider with ChangeNotifier {
 
       if (response != null && response.statusCode == 200) {
         final data = response.data;
-        debugPrint('response ==========> ${data}');
+        debugPrint('response ==========> $data');
 
         if (data != null) {
           filterModel = FilterModel.fromJson(data);
           _errorMessage = '';
           debugPrint('==== Filters retrieved successfully.=====');
-          debugPrint("Filters======> :${filterModel}");
+          debugPrint("Filters======> :$filterModel");
         } else {
           _errorMessage = 'No data found';
           debugPrint('Error=======> No data found');

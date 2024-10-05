@@ -46,13 +46,13 @@ class _MessageScreenState extends State<MessageScreen>
           title: isSearching
               ? Padding(
                   padding: const EdgeInsets.only(top: 5),
-                  child: Container(
+                  child: SizedBox(
                     height: 50.h,
                     width: 277.w,
                     child: TextFormField(
                       controller: searchController,
                       decoration: InputDecoration(
-                        suffixIcon: Icon(CupertinoIcons.search),
+                        suffixIcon: const Icon(CupertinoIcons.search),
                         hintText: 'Search',
                         hintStyle: TextStyle(
                             fontSize: 15.sp,
@@ -70,7 +70,7 @@ class _MessageScreenState extends State<MessageScreen>
               : Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
+                    const Text(
                       'Messages',
                       style: TextStyle(
                           fontSize: 16.0, fontWeight: FontWeight.w600),
@@ -90,7 +90,7 @@ class _MessageScreenState extends State<MessageScreen>
                   Padding(
                     padding: const EdgeInsets.only(right: 10),
                     child: IconButton(
-                      icon: Icon(Icons.clear),
+                      icon: const Icon(Icons.clear),
                       onPressed: () {
                         setState(() {
                           isSearching = false;

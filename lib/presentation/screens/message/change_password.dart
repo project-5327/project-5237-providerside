@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -13,11 +12,10 @@ import '../../constants/responsive_view.dart';
 import '../../constants/strings.dart';
 import '../../widgets/Customize_textfield.dart';
 import '../../widgets/customize_button.dart';
-import '../login_register/home_screen.dart';
 import '../login_register/login.dart';
 
 class ChangePassword extends StatefulWidget {
-  ChangePassword({super.key});
+  const ChangePassword({super.key});
 
   @override
   State<ChangePassword> createState() => _ChangePasswordState();
@@ -58,7 +56,7 @@ class _ChangePasswordState extends State<ChangePassword> {
               onPressed: () {
                 Get.back();
               },
-              icon: Icon(Icons.arrow_back_ios),
+              icon: const Icon(Icons.arrow_back_ios),
               color: MyColors.black,
             ),
             title: Text(
@@ -100,7 +98,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                     style: TextStyle(
                       fontSize: 13.sp,
                       fontWeight: FontWeight.w500,
-                      color: Color(0xff222222),
+                      color: const Color(0xff222222),
                     ),
                     icon: IconButton(
                         onPressed: () {
@@ -126,7 +124,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                       style: TextStyle(
                           fontSize: 13.sp,
                           fontWeight: FontWeight.w500,
-                          color: Color(0xff222222)),
+                          color: const Color(0xff222222)),
                       icon: IconButton(
                           onPressed: () {
                             loginProvider.toggleRepeatPasswordVisibility();
@@ -205,7 +203,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                     padding: const EdgeInsets.symmetric(horizontal: 120.0),
                     child: Center(
                         child: Container(
-                            padding: EdgeInsets.all(14.0),
+                            padding: const EdgeInsets.all(14.0),
                             height: 575.h,
                             // width: 300.w,
                             decoration: BoxDecoration(
@@ -246,7 +244,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                                         fontSize: 14.0,
                                         fontFamily: Fonts.fontsMontserrat,
                                         fontWeight: FontWeight.w400,
-                                        color: Color(0xff999999),
+                                        color: const Color(0xff999999),
                                       ),
                                     ),
                                     TextFormField(
@@ -293,7 +291,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                                         fontSize: 14.0,
                                         fontFamily: Fonts.fontsMontserrat,
                                         fontWeight: FontWeight.w400,
-                                        color: Color(0xff999999),
+                                        color: const Color(0xff999999),
                                       ),
                                     ),
                                     TextFormField(

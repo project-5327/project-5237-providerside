@@ -9,7 +9,6 @@ import '../constants/assets.dart';
 import '../constants/color.dart';
 import 'login_register/home_screen.dart';
 
-import 'message/discover_projects.dart';
 
 class MainScreen extends StatefulWidget {
   int? selectedIndex;
@@ -24,14 +23,14 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  int _selectedIndex = 0;
+  final int _selectedIndex = 0;
 
   final List<Widget> _screens = [
     const HomeScreen(),
     const RecentProposal(),
     DebitCredit(),
     const MessageScreen(),
-    Editprofile()
+    const Editprofile()
   ];
 
   @override

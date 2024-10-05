@@ -6,7 +6,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-import 'package:sms_autofill/sms_autofill.dart';
 import '../../../provider/auth/login_provider.dart';
 import '../../constants/assets.dart';
 import '../../constants/color.dart';
@@ -54,7 +53,7 @@ class _OtpScreenState extends State<OtpScreen> {
               onPressed: () {
                 Get.back();
               },
-              icon: Icon(Icons.arrow_back_ios),
+              icon: const Icon(Icons.arrow_back_ios),
               color: MyColors.black,
             ),
             title: Text(
@@ -117,14 +116,14 @@ class _OtpScreenState extends State<OtpScreen> {
                             text: AppStrings.emailNotRecived,
                             style: TextStyle(
                               fontSize: 14.sp,
-                              color: Color(0xff808080),
+                              color: const Color(0xff808080),
                             ),
                             children: <TextSpan>[
                               TextSpan(
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () {
                                     Get.defaultDialog(
-                                      titlePadding: EdgeInsets.only(top: 20),
+                                      titlePadding: const EdgeInsets.only(top: 20),
                                       title: AppStrings.resendOtp,
                                       titleStyle: TextStyle(
                                           fontSize: 15.sp,
@@ -207,14 +206,13 @@ class _OtpScreenState extends State<OtpScreen> {
                           color: MyColors.btnColor,
                           textColor: MyColors.white,
                           onTap: () async {
-                            if (loginProvider.otpCode != null &&
-                                loginProvider.otpCode.isNotEmpty) {
+                            if (loginProvider.otpCode.isNotEmpty) {
                               if (!loginProvider.isLoading) {
                                 final password =
-                                    loginProvider.passwordController?.text ??
+                                    loginProvider.passwordController.text ??
                                         '';
                                 final repeatPassword = loginProvider
-                                    .confirmPasswordController?.text ??
+                                    .confirmPasswordController.text ??
                                     '';
 
                                 await loginProvider.changePassword(
@@ -229,7 +227,7 @@ class _OtpScreenState extends State<OtpScreen> {
                                         builder: (context) =>
                                         //StockHubPage()
                                         // AddStockRequest()
-                                        ChangePassword()));
+                                        const ChangePassword()));
                               } else {
                                 // Loading Indicator
                                 ScaffoldMessenger.of(context).showSnackBar(
@@ -279,7 +277,7 @@ class _OtpScreenState extends State<OtpScreen> {
                       padding: const EdgeInsets.symmetric(horizontal: 120.0),
                       child: Center(
                         child: Container(
-                            padding: EdgeInsets.symmetric(horizontal: 50.0),
+                            padding: const EdgeInsets.symmetric(horizontal: 50.0),
                             height: 500.h,
                             // width: 300.w,
                             decoration: BoxDecoration(
@@ -433,14 +431,13 @@ class _OtpScreenState extends State<OtpScreen> {
                                   width: double.infinity,
                                   child: ElevatedButton(
                                     onPressed: () async {
-                                      if (loginProvider.otpCode != null &&
-                                          loginProvider.otpCode.isNotEmpty) {
+                                      if (loginProvider.otpCode.isNotEmpty) {
                                         if (!loginProvider.isLoading) {
                                           final password =
-                                              loginProvider.passwordController?.text ??
+                                              loginProvider.passwordController.text ??
                                                   '';
                                           final repeatPassword = loginProvider
-                                              .confirmPasswordController?.text ??
+                                              .confirmPasswordController.text ??
                                               '';
 
                                           await loginProvider.changePassword(
@@ -455,7 +452,7 @@ class _OtpScreenState extends State<OtpScreen> {
                                                   builder: (context) =>
                                                   //StockHubPage()
                                                   // AddStockRequest()
-                                                  ChangePassword()));
+                                                  const ChangePassword()));
                                         } else {
                                           // Loading Indicator
                                           ScaffoldMessenger.of(context).showSnackBar(
@@ -493,7 +490,7 @@ class _OtpScreenState extends State<OtpScreen> {
                                               fontSize: 16,
                                               fontWeight: FontWeight.w500),
                                         ),
-                                        SizedBox(width: 5),
+                                        const SizedBox(width: 5),
                                         SvgPicture.asset(Assets.check),
                                       ],
                                     ),

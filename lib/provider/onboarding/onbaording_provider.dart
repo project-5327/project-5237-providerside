@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:project_5237_provider/presentation/screens/dashboard/dashboard_view.dart';
 import '../../config/baseclient/base_client.dart';
@@ -56,7 +55,7 @@ class OnbaordingProvider extends ChangeNotifier {
 
   final TextEditingController _proficiancyController = TextEditingController();
 
-  bool _isOngoin = false;
+  final bool _isOngoin = false;
 
   File? _selectedImage;
 
@@ -147,32 +146,32 @@ class OnbaordingProvider extends ChangeNotifier {
 
   set setLanguages(List<String> val) {
     _languages = val;
-    print('======> language ${_languages}');
+    print('======> language $_languages');
     notifyListeners();
   }
 
   set contryName(String val) {
     _cityName = val;
-    debugPrint('======> countryname ${_cityName}');
+    debugPrint('======> countryname $_cityName');
     notifyListeners();
   }
 
   set cityName(String val) {
     _contryName = val;
-    debugPrint('======> cityname ${_contryName}');
+    debugPrint('======> cityname $_contryName');
     notifyListeners();
   }
 
   set setSkill(List<String> val) {
     _skills = val;
-    debugPrint('======> _skills ${_skills}');
+    debugPrint('======> _skills $_skills');
     notifyListeners();
   }
 
   set setTechnologies(List<String> val) {
     _technologies = val;
     /* print('======> _skills ${descriptionController}');*/
-    debugPrint('======> _skills ${_technologies}');
+    debugPrint('======> _skills $_technologies');
     notifyListeners();
   }
 
@@ -232,7 +231,7 @@ class OnbaordingProvider extends ChangeNotifier {
   }
 
   void addYourLangauges(List<String> languages, String proficiency) {
-    List<Map<String, dynamic>> _addLanguages = [];
+    List<Map<String, dynamic>> addLanguages = [];
 
     for (String language in languages) {
       // Create a map for each language
@@ -241,14 +240,14 @@ class OnbaordingProvider extends ChangeNotifier {
         // Only include proficiency level if it's not empty
         if (proficiency.isNotEmpty) "proficiencyLevel": proficiency,
       };
-      _addLanguages.add(languageData); // Add the map to the list
+      addLanguages.add(languageData); // Add the map to the list
     }
 
     // Call notifyListeners or send this data to backend
     notifyListeners();
 
     // You would store _addLanguages and send it as part of the formData later
-    debugPrint('Selected languages and proficiency: $_addLanguages');
+    debugPrint('Selected languages and proficiency: $addLanguages');
   }
 
   // Add skill
@@ -317,9 +316,9 @@ class OnbaordingProvider extends ChangeNotifier {
 
       // DEBUG: Print each field from FormData
       debugPrint('======= Form Data Sent to Backend =======');
-      formData.fields.forEach((field) {
+      for (var field in formData.fields) {
         debugPrint('${field.key}: ${field.value}');
-      });
+      }
 
       if (file != null) {
         debugPrint('Profile Image: ${file!.path}');

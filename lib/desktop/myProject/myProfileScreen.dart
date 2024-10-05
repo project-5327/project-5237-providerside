@@ -30,7 +30,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-  ImagePicker _picker = ImagePicker();
+  final ImagePicker _picker = ImagePicker();
 
   final Rx<XFile?> _selectedImage = Rx<XFile?>(null);
 

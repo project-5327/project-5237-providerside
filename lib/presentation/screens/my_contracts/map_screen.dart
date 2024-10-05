@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
 import 'package:latlong2/latlong.dart';
 
 import '../../constants/color.dart';
@@ -11,7 +10,7 @@ import '../../constants/responsive_view.dart';
 import '../../widgets/customInfoWindow.dart';
 
 class MapScreen extends StatefulWidget {
-  MapScreen({super.key});
+  const MapScreen({super.key});
 
   @override
   State<MapScreen> createState() => _MapScreenState();
@@ -20,8 +19,8 @@ class MapScreen extends StatefulWidget {
 class _MapScreenState extends State<MapScreen> {
   final MapController mapController = MapController();
 
-  LatLng markerPosition = LatLng(51.509364, -0.128928);
-  LatLng markerPosition1 = LatLng(54.509364, -1.128928);
+  LatLng markerPosition = const LatLng(51.509364, -0.128928);
+  LatLng markerPosition1 = const LatLng(54.509364, -1.128928);
 
   LatLng? selectedMarker;
 
@@ -69,14 +68,14 @@ class _MapScreenState extends State<MapScreen> {
                         w: responsive.isMobile || responsive.isTablet
                             ? 165.w
                             : 165,
-                        color: Color(0xff4B164C),
+                        color: const Color(0xff4B164C),
                         image: 'assets/icons/Icon.svg',
                         title: 'Connect with Clara 👋',
                       ),
                     SizedBox(height: 5.h),
                     Icon(
                       Icons.circle,
-                      color: Color(0xff4B164C),
+                      color: const Color(0xff4B164C),
                       size: responsive.isMobile ? 10.sp : 10,
                     ),
                     GestureDetector(
@@ -97,7 +96,7 @@ class _MapScreenState extends State<MapScreen> {
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           border: Border.all(
-                              color: Color(0xff4B164C),
+                              color: const Color(0xff4B164C),
                               width: responsive.isMobile ? 3.w : 3),
                         ),
                         child: ClipRRect(
@@ -200,7 +199,7 @@ class _MapScreenState extends State<MapScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text(
+          title: const Text(
             'Location',
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
           ),
@@ -244,7 +243,7 @@ class _MapScreenState extends State<MapScreen> {
                               ),
                               child: Column(
                                 children: [
-                                  SizedBox(height: 5),
+                                  const SizedBox(height: 5),
                                   Container(
                                     width: 71,
                                     height: 71,
@@ -322,13 +321,13 @@ class _MapScreenState extends State<MapScreen> {
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(6),
-                color: Color(0xffD7DCE0),
+                color: const Color(0xffD7DCE0),
               ),
               height: 47,
               width: 280,
               child: TextFormField(
                 decoration: InputDecoration(
-                  prefixIcon: Icon(CupertinoIcons.search),
+                  prefixIcon: const Icon(CupertinoIcons.search),
                   hintText: 'Search ',
                   hintStyle: TextStyle(
                       fontSize: 15,

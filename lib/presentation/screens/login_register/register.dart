@@ -12,7 +12,7 @@ import '../../widgets/Customize_textfield.dart';
 import '../../widgets/customize_button.dart';
 
 class RegisterScreen extends StatefulWidget {
-  RegisterScreen({super.key});
+  const RegisterScreen({super.key});
 
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
@@ -30,7 +30,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       return SafeArea(
         child: Scaffold(
           body: SingleChildScrollView(
-            physics: AlwaysScrollableScrollPhysics(),
+            physics: const AlwaysScrollableScrollPhysics(),
             child: Column(
               children: [
                 Container(
@@ -40,7 +40,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   child: Stack(
                     children: [
                       Padding(
-                        padding: EdgeInsets.symmetric(
+                        padding: const EdgeInsets.symmetric(
                           horizontal: 25,
                         ),
                         child: Column(
@@ -126,7 +126,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             style: TextStyle(
                                 fontSize: 13.sp,
                                 fontWeight: FontWeight.w500,
-                                color: Color(0xff222222)),
+                                color: const Color(0xff222222)),
                           ),
                         ),
                         SizedBox(
@@ -143,7 +143,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             style: TextStyle(
                                 fontSize: 13.sp,
                                 fontWeight: FontWeight.w500,
-                                color: Color(0xff222222)),
+                                color: const Color(0xff222222)),
                           ),
                         ),
                         SizedBox(
@@ -168,7 +168,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               style: TextStyle(
                                 fontSize: 13.sp,
                                 fontWeight: FontWeight.w500,
-                                color: Color(0xff222222),
+                                color: const Color(0xff222222),
                               )),
                         ),
                         SizedBox(
@@ -319,7 +319,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 registerProvider.checkBox1 = val!;
                                 registerProvider.notifyListeners();
                               },
-                              activeColor: Color(0xffFF4C4A),
+                              activeColor: const Color(0xffFF4C4A),
                             ),
                             const Expanded(
                               child: Text(
@@ -332,7 +332,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ],
                         ),
 
-                        SizedBox(height: 15),
+                        const SizedBox(height: 15),
 
                         Row(
                           children: [
@@ -342,7 +342,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 registerProvider.checkBox2 = val!;
                                 registerProvider.notifyListeners();
                               },
-                              activeColor: Color(0xffFF4C4A),
+                              activeColor: const Color(0xffFF4C4A),
                             ),
                             Expanded(
                               child: RichText(
@@ -359,7 +359,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     TextSpan(
                                       text: 'UPTECHUNT Terms of Service',
                                       style: TextStyle(
-                                        color: Color(0xffFF4C4A),
+                                        color: const Color(0xffFF4C4A),
                                         fontWeight: FontWeight.w500,
                                         fontSize: 12.sp,
                                       ),
@@ -375,7 +375,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       text:
                                           'User Agreement and Privacy Policy.',
                                       style: TextStyle(
-                                        color: Color(0xffFF4C4A),
+                                        color: const Color(0xffFF4C4A),
                                         fontWeight: FontWeight.w500,
                                         fontSize: 12.sp,
                                       ),

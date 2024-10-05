@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:project_5237_provider/desktop/message_chat/dailogs.dart';
 
-import '../../presentation/constants/assets.dart';
 import '../../presentation/constants/color.dart';
 
 import 'catogories.dart';
@@ -47,7 +45,7 @@ class _MessageChatScreen1State extends State<MessageChatScreen1>
                 const SizedBox(height: 20),
                 Row(
                   children: [
-                    SizedBox(width: 20),
+                    const SizedBox(width: 20),
                     Text(
                       'Messages',
                       style: TextStyle(
@@ -83,7 +81,7 @@ class _MessageChatScreen1State extends State<MessageChatScreen1>
               padding: EdgeInsets.only(left: 8.w, right: 8.w, bottom: 8.h),
               child: Container(
                 decoration: BoxDecoration(
-                    border: Border.all(width: 1.w, color: Color(0xff999999))),
+                    border: Border.all(width: 1.w, color: const Color(0xff999999))),
                 child: Padding(
                   padding:
                       EdgeInsets.only(bottom: 20.h, right: 20.w, left: 20.w),
@@ -100,7 +98,7 @@ class _MessageChatScreen1State extends State<MessageChatScreen1>
                             Expanded(
                               child: TabBarView(
                                 controller: _tabController,
-                                children: [
+                                children: const [
                                   Catagory3(),
                                   Catagory3(),
                                   Catagory3(),
@@ -110,7 +108,7 @@ class _MessageChatScreen1State extends State<MessageChatScreen1>
                           ],
                         ),
                       ),
-                      VerticalDivider(
+                      const VerticalDivider(
                         color:
                             Color(0xff999999), // The color of the divider line
                         thickness: 1, // The thickness of the divider line
@@ -223,7 +221,7 @@ class _ChatScreen1State extends State<ChatScreen1> {
                                   child: Text(
                                     choice,
                                     style: TextStyle(
-                                      color: Color(0xff2C62B9),
+                                      color: const Color(0xff2C62B9),
                                       fontSize: 12.sp, // Fixed font size
                                       fontWeight: FontWeight.w400,
                                     ),
@@ -236,7 +234,7 @@ class _ChatScreen1State extends State<ChatScreen1> {
                       ),
                     ],
                   ),
-                  Divider(
+                  const Divider(
                     thickness: 0.5,
                     color: Color(0xff999999),
                   ),
@@ -350,22 +348,22 @@ class _ChatScreen1State extends State<ChatScreen1> {
                       ),
                     ),
                   ),
-                  SizedBox(width: 20),
+                  const SizedBox(width: 20),
                   Container(
                     height: 50.h,
                     width: 71.w,
-                    child: IconButton(
-                      onPressed: () {},
-                      icon: Icon(
-                        Icons.arrow_forward_ios,
-                        size: 15,
-                        color: const Color(0xffB9B9B9),
-                      ),
-                    ),
                     decoration: BoxDecoration(
                       color: const Color(0xffF1F1F1),
                       border: Border.all(color: MyColors.grey),
                       borderRadius: BorderRadius.circular(30),
+                    ),
+                    child: IconButton(
+                      onPressed: () {},
+                      icon: const Icon(
+                        Icons.arrow_forward_ios,
+                        size: 15,
+                        color: Color(0xffB9B9B9),
+                      ),
                     ),
                   )
                 ],

@@ -39,7 +39,7 @@ class _OnBoardingScreen3State extends State<OnBoardingScreen3> {
       return Scaffold(
         body: Row(
           children: [
-            AppNameScreen(),
+            const AppNameScreen(),
             Flexible(
               flex: 2,
               child: Stack(
@@ -67,8 +67,8 @@ class _OnBoardingScreen3State extends State<OnBoardingScreen3> {
                           mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Center(
-                              child: const Text(
+                            const Center(
+                              child: Text(
                                 AppStrings.accountSetup,
                                 style: TextStyle(
                                   fontSize: 18.0,
@@ -123,6 +123,17 @@ class _OnBoardingScreen3State extends State<OnBoardingScreen3> {
                                         alignment: Alignment.center,
                                         height: 18,
                                         width: 18,
+                                        decoration: BoxDecoration(
+                                            color: containerController
+                                                    .selectedcont[0]
+                                                ? const Color(0xffFF4C4A)
+                                                : MyColors.white,
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                            border: Border.all(
+                                                width: 2,
+                                                color: MyColors.black
+                                                    .withOpacity(0.3))),
                                         child:
                                             containerController.selectedcont[0]
                                                 ? Icon(
@@ -131,21 +142,10 @@ class _OnBoardingScreen3State extends State<OnBoardingScreen3> {
                                                     color: MyColors.white,
                                                   )
                                                 : null,
-                                        decoration: BoxDecoration(
-                                            color: containerController
-                                                    .selectedcont[0]
-                                                ? Color(0xffFF4C4A)
-                                                : MyColors.white,
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            border: Border.all(
-                                                width: 2,
-                                                color: MyColors.black
-                                                    .withOpacity(0.3))),
                                       ),
                                     ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 7,
                                   ),
                                   TextWidget(
@@ -158,7 +158,7 @@ class _OnBoardingScreen3State extends State<OnBoardingScreen3> {
                                 ],
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 20,
                             ),
                             Row(
@@ -171,17 +171,10 @@ class _OnBoardingScreen3State extends State<OnBoardingScreen3> {
                                       alignment: Alignment.center,
                                       height: 18,
                                       width: 18,
-                                      child: containerController.selectedcont[1]
-                                          ? Icon(
-                                              size: 12,
-                                              Icons.check,
-                                              color: MyColors.white,
-                                            )
-                                          : null,
                                       decoration: BoxDecoration(
                                           color: containerController
                                                   .selectedcont[1]
-                                              ? Color(0xffFF4C4A)
+                                              ? const Color(0xffFF4C4A)
                                               : MyColors.white,
                                           borderRadius:
                                               BorderRadius.circular(4),
@@ -189,10 +182,17 @@ class _OnBoardingScreen3State extends State<OnBoardingScreen3> {
                                               width: 2,
                                               color: MyColors.black
                                                   .withOpacity(0.3))),
+                                      child: containerController.selectedcont[1]
+                                          ? Icon(
+                                              size: 12,
+                                              Icons.check,
+                                              color: MyColors.white,
+                                            )
+                                          : null,
                                     ),
                                   ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 10,
                                 ),
                                 RichText(
@@ -204,7 +204,7 @@ class _OnBoardingScreen3State extends State<OnBoardingScreen3> {
                                       fontSize: 12,
                                       color: MyColors.black.withOpacity(0.5),
                                     ),
-                                    children: <TextSpan>[
+                                    children: const <TextSpan>[
                                       TextSpan(
                                         text: 'UPTECHUNT \nTerms',
                                         style: TextStyle(
@@ -224,7 +224,7 @@ class _OnBoardingScreen3State extends State<OnBoardingScreen3> {
                                 textAlign: TextAlign.start,
                                 text: TextSpan(
                                   text: 'of Service, ',
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontWeight: FontWeight.w500,
                                     fontSize: 12,
                                     color: Color(0xffFF4C4A),
@@ -238,7 +238,7 @@ class _OnBoardingScreen3State extends State<OnBoardingScreen3> {
                                         color: MyColors.black.withOpacity(0.5),
                                       ),
                                     ),
-                                    TextSpan(
+                                    const TextSpan(
                                         text:
                                             'User Agreement and \n Privacy Policy. ',
                                         style: TextStyle(
@@ -264,8 +264,8 @@ class _OnBoardingScreen3State extends State<OnBoardingScreen3> {
                                 },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: MyColors.blue,
-                                  padding: EdgeInsets.all(10),
-                                  textStyle: TextStyle(
+                                  padding: const EdgeInsets.all(10),
+                                  textStyle: const TextStyle(
                                     fontSize: 16.0,
                                     fontWeight: FontWeight.bold,
                                   ),

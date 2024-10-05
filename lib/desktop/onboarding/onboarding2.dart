@@ -138,7 +138,7 @@ class _Onboarding2ScreenState extends State<Onboarding2Screen> {
                               ),
                             ),
                             const SizedBox(height: 40.0),
-                            Center(
+                            const Center(
                               child: Text(
                                 AppStrings.iAmI,
                                 style: TextStyle(
@@ -244,12 +244,12 @@ class _Onboarding2ScreenState extends State<Onboarding2Screen> {
                               width: double.infinity,
                               child: ElevatedButton(
                                 onPressed: () {
-                                  Get.to(CreateYourProfileScreen());
+                                  Get.to(const CreateYourProfileScreen());
                                 },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: MyColors.blue,
-                                  padding: EdgeInsets.all(10),
-                                  textStyle: TextStyle(
+                                  padding: const EdgeInsets.all(10),
+                                  textStyle: const TextStyle(
                                     fontSize: 16.0,
                                     fontWeight: FontWeight.bold,
                                   ),
@@ -287,7 +287,7 @@ class _Onboarding2ScreenState extends State<Onboarding2Screen> {
                                     //     "password=====>${registerProvider.passwordController}");
                                     // debugPrint(
                                     //     "isClient=====>${registerProvider.isClient}");
-                                    Get.to(OnbarodingScreen1());
+                                    Get.to(const OnbarodingScreen1());
                                   },
                                   child: Text(
                                     AppStrings.signIn,

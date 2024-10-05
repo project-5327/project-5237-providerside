@@ -43,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return ResponsiveView(
       mobile: _mobileView(context),
-      desktop: ProjectsScreen(),
+      desktop: const ProjectsScreen(),
       tablet: _mobileView(context),
     );
   }
@@ -52,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Consumer<ProjectProvider>(
         builder: (context, projectProvider, child) {
       final projects = projectProvider.projectmodel?.data;
-      debugPrint("Projects==========> ${projects}");
+      debugPrint("Projects==========> $projects");
       return SafeArea(
           child: Scaffold(
         appBar: AppBar(
@@ -90,7 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        padding: EdgeInsets.symmetric(horizontal: 10),
                         child: SearchField(),
                       ),
                       // SizedBox(

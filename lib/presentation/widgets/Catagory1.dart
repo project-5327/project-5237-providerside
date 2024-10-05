@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
-import 'package:project_5237_provider/presentation/screens/login_register/notification.dart';
 import 'package:project_5237_provider/presentation/screens/update_Project/chat_screen.dart';
 
 import '../constants/color.dart';
-import '../screens/login_register/EditProfile.dart';
 
 class Catagory1 extends StatelessWidget {
   const Catagory1({super.key});
@@ -21,7 +18,7 @@ class Catagory1 extends StatelessWidget {
               return GestureDetector(
                 onTap: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => ChatScreen()));
+                      MaterialPageRoute(builder: (context) => const ChatScreen()));
                 },
                 child: const Padding(
                   padding: EdgeInsets.only(top: 20),

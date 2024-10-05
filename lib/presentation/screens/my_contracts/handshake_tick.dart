@@ -6,9 +6,7 @@ import 'package:provider/provider.dart';
 import '../../constants/assets.dart';
 import '../../constants/color.dart';
 import '../../widgets/contract_widgets.dart';
-import '../login_register/home_screen.dart';
 
-import '../update_Project/chat_screen.dart';
 
 class HandShakeTick extends StatefulWidget {
   const HandShakeTick({super.key});
@@ -32,7 +30,7 @@ class _HandShakeTickState extends State<HandShakeTick> {
     return Consumer<ProposalProvider>(
         builder: (context, proposalProvider, child) {
       final proposals = proposalProvider.proposalByUser?.data;
-      debugPrint("proposal data ========> ${proposals}");
+      debugPrint("proposal data ========> $proposals");
       if (proposalProvider.loading) {
         return Center(
           child: CircularProgressIndicator(
@@ -45,7 +43,7 @@ class _HandShakeTickState extends State<HandShakeTick> {
           child: Text("No proposals available"),
         );
       }
-      final filteredProposals = proposals?.where((proposal) {
+      final filteredProposals = proposals.where((proposal) {
         final status = proposal.status?.toLowerCase();
         return status == 'reviewed' ||
             status == 'accepted' ||
@@ -63,9 +61,9 @@ class _HandShakeTickState extends State<HandShakeTick> {
             ListView.builder(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
-              itemCount: filteredProposals?.length,
+              itemCount: filteredProposals.length,
               itemBuilder: (context, index) {
-                final proposal = filteredProposals![index];
+                final proposal = filteredProposals[index];
 
                 return ProjectTile1(
                   proposal: proposal,

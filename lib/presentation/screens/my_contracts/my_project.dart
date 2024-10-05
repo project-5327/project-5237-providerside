@@ -56,7 +56,7 @@ class _MyProposalState extends State<MyProposal> {
                 Navigator.pushReplacement(context,
                     MaterialPageRoute(builder: (context) => MainScreen()));
               },
-              icon: Icon(Icons.arrow_back_ios),
+              icon: const Icon(Icons.arrow_back_ios),
               color: MyColors.black,
             ),
             title: Text(
@@ -73,7 +73,7 @@ class _MyProposalState extends State<MyProposal> {
                 children: [
                   SizedBox(height: 14.h),
                   Center(
-                    child: Container(
+                    child: SizedBox(
                       height: 47.h,
                       width: 336.w,
                       child: TextFormField(
@@ -84,7 +84,7 @@ class _MyProposalState extends State<MyProposal> {
                           });
                         },
                         decoration: InputDecoration(
-                          suffixIcon: Icon(CupertinoIcons.search),
+                          suffixIcon: const Icon(CupertinoIcons.search),
                           hintText: 'Search for projects',
                           hintStyle: TextStyle(
                               fontSize: 15.sp,

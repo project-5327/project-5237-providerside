@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 import '../../presentation/constants/assets.dart';
@@ -78,7 +77,7 @@ class _OnbarodingScreen1State extends State<OnbarodingScreen1> {
                             fontSize: 14.0,
                             fontFamily: Fonts.fontsinter,
                             fontWeight: FontWeight.w400,
-                            color: Color(0xff999999),
+                            color: const Color(0xff999999),
                           ),
                         ),
                         TextFormField(
@@ -104,7 +103,7 @@ class _OnbarodingScreen1State extends State<OnbarodingScreen1> {
                             fontSize: 14.0,
                             fontFamily: Fonts.fontsinter,
                             fontWeight: FontWeight.w400,
-                            color: Color(0xff999999),
+                            color: const Color(0xff999999),
                           ),
                         ),
                         TextFormField(
@@ -145,7 +144,7 @@ class _OnbarodingScreen1State extends State<OnbarodingScreen1> {
                                     });
                                   },
                                 ),
-                                Text(AppStrings.remaindMe),
+                                const Text(AppStrings.remaindMe),
                               ],
                             ),
                             TextButton(
@@ -156,7 +155,7 @@ class _OnbarodingScreen1State extends State<OnbarodingScreen1> {
                                         builder: (context) =>
                                         //StockHubPage()
                                         // AddStockRequest()
-                                        ForgetPasswordScreen()));
+                                        const ForgetPasswordScreen()));
                               },
                               child: const Text(
                                 AppStrings.forgetPassword,
@@ -198,7 +197,7 @@ class _OnbarodingScreen1State extends State<OnbarodingScreen1> {
                                         builder: (context) =>
                                         //StockHubPage()
                                         // AddStockRequest()
-                                        DashBoardView()),
+                                        const DashBoardView()),
                                   );
                                   Future.delayed(const Duration(seconds: 5),
                                           () {
@@ -244,7 +243,7 @@ class _OnbarodingScreen1State extends State<OnbarodingScreen1> {
                                       fontWeight: FontWeight.w500,
                                     ),
                                   ),
-                                  SizedBox(width: 5),
+                                  const SizedBox(width: 5),
                                   SvgPicture.asset(Assets.check),
                                 ],
                               ),
@@ -268,7 +267,7 @@ class _OnbarodingScreen1State extends State<OnbarodingScreen1> {
                                         builder: (context) =>
                                         //StockHubPage()
                                         // AddStockRequest()
-                                        RegisterScreen()));
+                                        const RegisterScreen()));
                               },
                               child: Text(
                                 AppStrings.register,

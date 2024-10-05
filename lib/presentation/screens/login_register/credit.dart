@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:project_5237_provider/controller/form_controller.dart';
-import 'package:project_5237_provider/presentation/screens/login_register/EditProfile.dart';
 import 'package:project_5237_provider/presentation/widgets/customize_button.dart';
 import 'package:project_5237_provider/presentation/widgets/customize_textfield.dart';
 
@@ -53,7 +52,7 @@ class DebitCredit extends StatelessWidget {
                     itemBuilder:
                         (BuildContext context, int index, int itemIndex) {
                       return Container(
-                        margin: EdgeInsets.all(8),
+                        margin: const EdgeInsets.all(8),
                         width: 350.w,
                         height: 183.h,
                         decoration: BoxDecoration(

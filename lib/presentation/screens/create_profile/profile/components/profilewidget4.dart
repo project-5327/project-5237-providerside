@@ -1,13 +1,9 @@
-import 'package:flutter/foundation.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:multiselect/multiselect.dart';
 import 'package:project_5237_provider/controller/form_controller.dart';
 import 'package:project_5237_provider/presentation/screens/my_contracts/send_screen.dart';
-import 'package:project_5237_provider/presentation/widgets/Customize_textfield.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../controller/country_controller.dart';
@@ -37,7 +33,7 @@ class _Profilewidget4State extends State<Profilewidget4> {
 
   final TextEditingController _languageController = TextEditingController();
   final List<String> _languages = ['English', 'Hindi', 'Spanish', 'German'];
-  List<String> _selectedLanguages = [];
+  final List<String> _selectedLanguages = [];
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +42,7 @@ class _Profilewidget4State extends State<Profilewidget4> {
       return Column(
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 15),
+            padding: const EdgeInsets.symmetric(horizontal: 15),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -74,11 +70,11 @@ class _Profilewidget4State extends State<Profilewidget4> {
                 TextWidget(
                   align: TextAlign.start,
                   text: "Languages you know",
-                  color: Color(0xff222222),
+                  color: const Color(0xff222222),
                   size: 13.sp,
                   fontweight: FontWeight.w600,
                 ),
-                Container(
+                SizedBox(
                   width: MediaQuery.of(context).size.width / 1,
                   height: 100,
                   child: DropDownMultiSelect(
@@ -86,11 +82,11 @@ class _Profilewidget4State extends State<Profilewidget4> {
                       fillColor: Theme.of(context).colorScheme.onPrimary,
                       focusColor: Theme.of(context).colorScheme.onPrimary,
                       enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(8)),
+                          borderRadius: const BorderRadius.all(Radius.circular(8)),
                           borderSide: BorderSide(
                               color: MyColors.lightGrey, width: 1.5)),
                       focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                          borderRadius: const BorderRadius.all(Radius.circular(8.0)),
                           borderSide: BorderSide(
                             color: MyColors.blue,
                             width: 1.5,
@@ -117,7 +113,7 @@ class _Profilewidget4State extends State<Profilewidget4> {
                       onTap: () {
                         // if (formKey.currentState!.validate()) {
                         profileController.previousPage();
-                        Get.to(() => Profile3());
+                        Get.to(() => const Profile3());
                         // }
                       },
                     ),
@@ -142,7 +138,7 @@ class _Profilewidget4State extends State<Profilewidget4> {
                             onboardingProvider.proficiancyController.text);
 
                         profileController.nextPage();
-                        Get.to(() => Profile5());
+                        Get.to(() => const Profile5());
                       },
                     ),
                   ],

@@ -10,13 +10,13 @@ class PropsalAcceptModel {
   PropsalAcceptModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
-    data = json['data'] != null ? new ProposalData.fromJson(json['data']) : null;
+    data = json['data'] != null ? ProposalData.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['status'] = this.status;
-    data['message'] = this.message;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['status'] = status;
+    data['message'] = message;
     if (this.data != null) {
       data['data'] = this.data!.toJson();
     }
@@ -32,18 +32,18 @@ class ProposalData {
 
   ProposalData.fromJson(Map<String, dynamic> json) {
     proposals = json['proposals'] != null
-        ? new Proposals.fromJson(json['proposals'])
+        ? Proposals.fromJson(json['proposals'])
         : null;
-    user = json['user'] != null ? new User.fromJson(json['user']) : null;
+    user = json['user'] != null ? User.fromJson(json['user']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.proposals != null) {
-      data['proposals'] = this.proposals!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (proposals != null) {
+      data['proposals'] = proposals!.toJson();
     }
-    if (this.user != null) {
-      data['user'] = this.user!.toJson();
+    if (user != null) {
+      data['user'] = user!.toJson();
     }
     return data;
   }
@@ -87,7 +87,7 @@ class Proposals {
     proposalDescription = json['proposalDescription'];
     estimatedTime = json['estimatedTime'];
     proposedBudget = json['proposedBudget'] != null
-        ? new ProposedBudget.fromJson(json['proposedBudget'])
+        ? ProposedBudget.fromJson(json['proposedBudget'])
         : null;
     status = json['status'];
     address = json['address'];
@@ -98,22 +98,22 @@ class Proposals {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['_id'] = this.sId;
-    data['projectId'] = this.projectId;
-    data['userId'] = this.userId;
-    data['proposalTitle'] = this.proposalTitle;
-    data['proposalDescription'] = this.proposalDescription;
-    data['estimatedTime'] = this.estimatedTime;
-    if (this.proposedBudget != null) {
-      data['proposedBudget'] = this.proposedBudget!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['_id'] = sId;
+    data['projectId'] = projectId;
+    data['userId'] = userId;
+    data['proposalTitle'] = proposalTitle;
+    data['proposalDescription'] = proposalDescription;
+    data['estimatedTime'] = estimatedTime;
+    if (proposedBudget != null) {
+      data['proposedBudget'] = proposedBudget!.toJson();
     }
-    data['status'] = this.status;
-    data['address'] = this.address;
-    data['proposalImage'] = this.proposalImage;
-    data['createdAt'] = this.createdAt;
-    data['updatedAt'] = this.updatedAt;
-    data['__v'] = this.iV;
+    data['status'] = status;
+    data['address'] = address;
+    data['proposalImage'] = proposalImage;
+    data['createdAt'] = createdAt;
+    data['updatedAt'] = updatedAt;
+    data['__v'] = iV;
     return data;
   }
 }
@@ -128,8 +128,8 @@ class ProposedBudget {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['$numberDecimal'] = this.numberDecimal;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['$numberDecimal'] = numberDecimal;
     return data;
   }
 }
@@ -175,18 +175,18 @@ class User {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['_id'] = this.sId;
-    data['userName'] = this.userName;
-    data['email'] = this.email;
-    data['password'] = this.password;
-    data['isClient'] = this.isClient;
-    data['isAdmin'] = this.isAdmin;
-    data['createdAt'] = this.createdAt;
-    data['updatedAt'] = this.updatedAt;
-    data['__v'] = this.iV;
-    data['resetPasswordExpires'] = this.resetPasswordExpires;
-    data['resetPasswordOTP'] = this.resetPasswordOTP;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['_id'] = sId;
+    data['userName'] = userName;
+    data['email'] = email;
+    data['password'] = password;
+    data['isClient'] = isClient;
+    data['isAdmin'] = isAdmin;
+    data['createdAt'] = createdAt;
+    data['updatedAt'] = updatedAt;
+    data['__v'] = iV;
+    data['resetPasswordExpires'] = resetPasswordExpires;
+    data['resetPasswordOTP'] = resetPasswordOTP;
     return data;
   }
 }

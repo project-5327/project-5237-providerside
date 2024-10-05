@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -7,7 +6,6 @@ import 'package:intl/intl.dart';
 
 import '../../constants/assets.dart';
 import '../../constants/color.dart';
-import '../my_contracts/my_contacts.dart';
 import '../my_contracts/send_screen.dart';
 
 class ChatScreen extends StatefulWidget {
@@ -62,7 +60,7 @@ class _ChatScreenState extends State<ChatScreen> {
         appBar: AppBar(
             backgroundColor: MyColors.white,
             leading: IconButton(
-              icon: Icon(Icons.arrow_back_ios),
+              icon: const Icon(Icons.arrow_back_ios),
               onPressed: () {
                 Navigator.pop(context);
               },
@@ -220,6 +218,11 @@ class _ChatScreenState extends State<ChatScreen> {
                   Container(
                     height: 50.h,
                     width: 71.w,
+                    decoration: BoxDecoration(
+                      color: const Color(0xffF1F1F1),
+                      border: Border.all(color: MyColors.grey),
+                      borderRadius: BorderRadius.circular(30.r),
+                    ),
                     child: IconButton(
                       onPressed: () {
                         _sendMessage();
@@ -229,11 +232,6 @@ class _ChatScreenState extends State<ChatScreen> {
                         size: 15.sp,
                         color: const Color(0xffB9B9B9),
                       ),
-                    ),
-                    decoration: BoxDecoration(
-                      color: const Color(0xffF1F1F1),
-                      border: Border.all(color: MyColors.grey),
-                      borderRadius: BorderRadius.circular(30.r),
                     ),
                   )
                 ],

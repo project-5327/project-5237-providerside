@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:project_5237_provider/presentation/screens/login_register/proposal_send_new.dart.dart';
 import 'package:project_5237_provider/presentation/screens/message/forget_password.dart';
 import 'package:provider/provider.dart';
 
@@ -13,7 +12,6 @@ import '../../constants/color.dart';
 import '../../widgets/Customize_textfield.dart';
 import '../../widgets/customize_button.dart';
 import '../dashboard/dashboard_view.dart';
-import '../main_screen .dart';
 import 'register.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -72,7 +70,7 @@ class LoginScreen extends StatelessWidget {
                               textColor: MyColors.white,
                               borderColor: MyColors.white,
                               onTap: () {
-                                Get.to(() => RegisterScreen());
+                                Get.to(() => const RegisterScreen());
                               },
                             ),
                             CustomizeButton(
@@ -113,7 +111,7 @@ class LoginScreen extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 13.sp,
                               fontWeight: FontWeight.w500,
-                              color: Color(0xff222222),
+                              color: const Color(0xff222222),
                             ),
                           ),
                         ),
@@ -136,7 +134,7 @@ class LoginScreen extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 13.sp,
                               fontWeight: FontWeight.w500,
-                              color: Color(0xff222222),
+                              color: const Color(0xff222222),
                             ),
                           ),
                         ),
@@ -145,7 +143,7 @@ class LoginScreen extends StatelessWidget {
                           alignment: Alignment.topRight,
                           child: InkWell(
                             onTap: () {
-                              Get.to(ForgetPasswordScreen());
+                              Get.to(const ForgetPasswordScreen());
                             },
                             child: Text(
                               textAlign: TextAlign.right,
@@ -192,7 +190,7 @@ class LoginScreen extends StatelessWidget {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              DashBoardView()),
+                                              const DashBoardView()),
                                     );
                                     Future.delayed(const Duration(seconds: 5),
                                         () {
@@ -232,7 +230,7 @@ class LoginScreen extends StatelessWidget {
                                 TextSpan(
                                   recognizer: TapGestureRecognizer()
                                     ..onTap = () {
-                                      Get.to(RegisterScreen());
+                                      Get.to(const RegisterScreen());
                                     },
                                   text: 'Register',
                                   style: TextStyle(
