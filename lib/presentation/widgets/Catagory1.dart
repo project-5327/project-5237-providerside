@@ -79,7 +79,7 @@ class CustomizeListTile extends StatelessWidget {
                       color: MyColors.black),
                 ),
                 SizedBox(
-                  width: 100.w,
+                  width: 80.w,
                 ),
                 Text(
                   time,

@@ -48,10 +48,7 @@ class NotificationScreen extends StatelessWidget {
                   height: 19.sp,
                 ),
                 InkWell(
-                  onTap: () {
-                    //Payment page
-                    Get.to(() => Editprofile());
-                  },
+                  onTap: () {},
                   child: const CustomizeListTile(
                       image: 'assets/images/girl1.png',
                       title: 'Jason Jones',

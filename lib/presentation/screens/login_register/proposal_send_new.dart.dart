@@ -164,7 +164,7 @@ class _ProposalSendScreenState extends State<ProposalSendScreen> {
                         AppStrings.attachImage,
                         style: TextStyle(
                           fontSize: 13.sp,
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.w500,
                           color: MyColors.black1,
                         ),
                       ),
@@ -218,15 +218,23 @@ class _ProposalSendScreenState extends State<ProposalSendScreen> {
                           if (value == null || value.isEmpty) {
                             return 'Please enter a Description.';
                           }
+                          if (value.length < 10) {
+                            return 'Project description should be at least 10 characters long';
+                          }
+                          if (value.length > 500) {
+                            return 'Project description should not exceed 500 characters';
+                          }
                           return null;
                         },
                         decoration: InputDecoration(
-                          border: InputBorder.none,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8.r),
+                          ),
                           hintText: AppStrings.briefDesc,
                           hintStyle: TextStyle(
-                              fontSize: 10.sp,
+                              fontSize: 13.sp,
                               fontWeight: FontWeight.w600,
-                              color: MyColors.black1),
+                              color: MyColors.lightGrey),
                         ),
                       ),
                       SizedBox(
@@ -241,7 +249,7 @@ class _ProposalSendScreenState extends State<ProposalSendScreen> {
                         radius: 100.r,
                         text: "Send",
                         height: 45.h,
-                        width: 155.w,
+                        // width: 155.w,
                         color: MyColors.btnColor,
                         textColor: MyColors.white,
                         onTap: homeProvider.isLoading
@@ -250,7 +258,7 @@ class _ProposalSendScreenState extends State<ProposalSendScreen> {
                                 if (_proposalKey.currentState!.validate()) {
                                   final proposalData = {
                                     //  'userId': widget.freelancers?.user?.sId,
-                                    'proposalTitle': 'testing proposal get',
+                                    'proposalTitle': widget.projects?.title,
                                     'proposalDescription':
                                         descriptionController.text,
                                     'estimatedTime': 4,
