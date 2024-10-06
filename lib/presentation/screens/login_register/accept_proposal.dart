@@ -1,16 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../controller/form_controller.dart';
-import 'dart:io';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
-import 'package:project_5237_provider/presentation/screens/my_contracts/send_screen.dart';
 import 'package:project_5237_provider/presentation/widgets/customize_button.dart';
 
 import '../../constants/assets.dart';
@@ -31,7 +28,7 @@ class _AcceptProposalState extends State<AcceptProposal> {
   TextEditingController addressController = TextEditingController();
   TextEditingController rateController = TextEditingController();
   final FormController formController = Get.put(FormController());
-  ImagePicker _picker = ImagePicker();
+  final ImagePicker _picker = ImagePicker();
   XFile? _selectedImage;
 
   Future<void> _pickImage() async {

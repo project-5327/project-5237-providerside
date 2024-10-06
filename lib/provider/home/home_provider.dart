@@ -11,7 +11,7 @@ class HomeProvider extends ChangeNotifier {
   List<String>? _proposalDocList;
   int? _lastpage;
   int? _length;
-  bool _isSuccess = false;
+  final bool _isSuccess = false;
 
   bool get isSuccess => _isSuccess;
 

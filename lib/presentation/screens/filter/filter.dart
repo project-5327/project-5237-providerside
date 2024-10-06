@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:project_5237_provider/presentation/screens/main_screen%20.dart';
 import 'package:project_5237_provider/provider/filter_provider.dart';
 
 import '../../constants/color.dart';
@@ -17,9 +16,9 @@ class FilterScreen extends StatefulWidget {
 }
 
 class _FilterScreenState extends State<FilterScreen> {
-  Map<String, List<int>> _selectedChecks =
+  final Map<String, List<int>> _selectedChecks =
       {}; // Separate selection per category
-  Map<String, bool> _isExpanded = {
+  final Map<String, bool> _isExpanded = {
     'Sort': false,
     'Tags': false,
     'Rate': false,
@@ -105,7 +104,7 @@ class _FilterScreenState extends State<FilterScreen> {
                             child: _isExpanded[key]!
                                 ? ListView.builder(
                                     shrinkWrap: true,
-                                    physics: NeverScrollableScrollPhysics(),
+                                    physics: const NeverScrollableScrollPhysics(),
                                     itemCount: _filterOptions[key]!.length,
                                     itemBuilder: (context, index) {
                                       return Align(
@@ -139,7 +138,7 @@ class _FilterScreenState extends State<FilterScreen> {
                                 : Container(),
                           ),
                         );
-                      }).toList(),
+                      }),
                       SizedBox(height: 430.h),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -207,7 +206,7 @@ class FilterContainer extends StatelessWidget {
   final Widget child;
   final VoidCallback onTap;
 
-  FilterContainer(
+  const FilterContainer(
       {super.key,
       required this.text,
       required this.isExpanded,

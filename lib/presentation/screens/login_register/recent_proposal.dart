@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:project_5237_provider/data/models/proposal_data_response.dart';
-import 'package:project_5237_provider/desktop/myProject/myProjectsScreens.dart';
 import 'package:project_5237_provider/desktop/projects/components/project_comp.dart';
 import 'package:project_5237_provider/desktop/projects/project_detail_screen.dart';
 import 'package:project_5237_provider/presentation/constants/color.dart';
 import 'package:project_5237_provider/presentation/constants/responsive_view.dart';
 import 'package:project_5237_provider/presentation/constants/strings.dart';
+import 'package:project_5237_provider/presentation/screens/login_register/notification.dart';
 import 'package:project_5237_provider/presentation/screens/main_screen%20.dart';
 
 import 'package:project_5237_provider/presentation/widgets/discover_project_cont.dart';
@@ -53,15 +54,7 @@ class _RecentProposalState extends State<RecentProposal> {
               return SafeArea(
                 child: Scaffold(
                   appBar: AppBar(
-                    leading: IconButton(
-                      onPressed: () {
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => MainScreen()));
-                      },
-                      icon: Icon(Icons.arrow_back_ios),
-                    ),
+                    automaticallyImplyLeading: false,
                     title: Text(
                       'Recent Proposal',
                       style: TextStyle(
@@ -69,6 +62,23 @@ class _RecentProposalState extends State<RecentProposal> {
                         fontWeight: FontWeight.w600,
                       ),
                     ),
+                    actions: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: 15, right: 15),
+                        child: InkWell(
+                          onTap: () {
+                            Get.to(const NotificationScreen());
+                          },
+                          child: Stack(
+                            alignment: Alignment.topRight,
+                            children: [
+                              SvgPicture.asset(Assets.bell),
+                              SvgPicture.asset(Assets.dot),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                   body: homeprovider.isLoading
                       ? Center(
@@ -105,7 +115,8 @@ class _RecentProposalState extends State<RecentProposal> {
                                       )
                                     : ListView.builder(
                                         shrinkWrap: true,
-                                        physics: NeverScrollableScrollPhysics(),
+                                        physics:
+                                            const NeverScrollableScrollPhysics(),
                                         itemCount: homeprovider
                                             .proposalDataDoc?.projects?.length,
                                         itemBuilder: (context, index) {

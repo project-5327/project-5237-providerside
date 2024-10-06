@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
@@ -111,7 +110,7 @@ class _AddProjectDetailsState extends State<AddProjectDetails> {
           ),
           centerTitle: true,
         ),
-        body: AddProjectComponent(),
+        body: const AddProjectComponent(),
       ),
     );
   }
@@ -139,7 +138,7 @@ class _AddProjectDetailsState extends State<AddProjectDetails> {
                       child:
 //  final TextEditingController categoryController = TextEditingController();
 
-                      Container(
+                      SizedBox(
                         width: 500.w,
                         child: Padding(
                           padding: EdgeInsets.symmetric(horizontal: 10.w),
@@ -311,14 +310,14 @@ class _AddProjectDetailsState extends State<AddProjectDetails> {
                                   Expanded(
                                     child: TextFormField(
                                       controller: projectTimeController,
-                                      decoration: InputDecoration(
+                                      decoration: const InputDecoration(
                                         prefixIcon: Icon(Icons.search),
                                         labelText: 'Search',
                                         border: OutlineInputBorder(),
                                       ),
                                     ),
                                   ),
-                                  SizedBox(width: 10),
+                                  const SizedBox(width: 10),
                                   DropdownButton<String>(
                                     value: _selectedValue,
                                     onChanged: (String? newValue) {

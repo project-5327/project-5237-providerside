@@ -27,7 +27,7 @@ class ProposalSendScreen extends StatefulWidget {
 }
 
 class _ProposalSendScreenState extends State<ProposalSendScreen> {
-  ImagePicker _picker = ImagePicker();
+  final ImagePicker _picker = ImagePicker();
   XFile? _selectedImage;
 
   String? filePath;
@@ -92,7 +92,7 @@ class _ProposalSendScreenState extends State<ProposalSendScreen> {
                               onPressed: () {
                                 Get.back();
                               },
-                              icon: Icon(
+                              icon: const Icon(
                                 Icons.arrow_back_ios,
                                 // size: 16.sp,
                               )),
@@ -283,7 +283,7 @@ class _ProposalSendScreenState extends State<ProposalSendScreen> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              SuccesfullyScreen()),
+                                              const SuccesfullyScreen()),
                                     );
                                   }
                                 }
@@ -311,7 +311,7 @@ class _ProposalSendScreenState extends State<ProposalSendScreen> {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 18),
               child: Center(
-                child: Container(
+                child: SizedBox(
                   width: 500,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -323,11 +323,11 @@ class _ProposalSendScreenState extends State<ProposalSendScreen> {
                               onPressed: () {
                                 Get.back();
                               },
-                              icon: Icon(
+                              icon: const Icon(
                                 Icons.arrow_back,
                                 size: 16,
                               )),
-                          Text(
+                          const Text(
                             'Send Proposal',
                             style: TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.w600),
@@ -434,7 +434,7 @@ class _ProposalSendScreenState extends State<ProposalSendScreen> {
                         height: 114.h,
                         width: double.infinity,
                         child: Padding(
-                          padding: EdgeInsets.only(left: 8),
+                          padding: const EdgeInsets.only(left: 8),
                           child: TextField(
                             controller: descriptionController,
                             decoration: InputDecoration(

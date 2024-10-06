@@ -80,7 +80,7 @@ class _ProjectTile1State extends State<ProjectTile1> {
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Container(
+                        SizedBox(
                             height: 52.h,
                             width: 52.w,
                             child: SvgPicture.asset(widget.image!)),
@@ -123,7 +123,7 @@ class _ProjectTile1State extends State<ProjectTile1> {
                                 ),
                                 IconButton(
                                   onPressed: () {
-                                    Get.to(ChatScreen());
+                                    Get.to(const ChatScreen());
                                   },
                                   icon: Icon(
                                     CupertinoIcons.chat_bubble_text,
@@ -157,6 +157,13 @@ class _ProjectTile1State extends State<ProjectTile1> {
                             Container(
                               height: 26.h,
                               width: 67.w,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(24.r),
+                                color: _getButtonColors(widget
+                                        .proposal.status ??
+                                    "")['buttonColor'], // Set the text color
+                                // widget.btnColor!
+                              ),
                               child: Center(
                                 child: Padding(
                                   padding: const EdgeInsets.all(2.0),
@@ -169,13 +176,6 @@ class _ProjectTile1State extends State<ProjectTile1> {
                                             'textColor'], // Set the text color
                                       )),
                                 ),
-                              ),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(24.r),
-                                color: _getButtonColors(widget
-                                        .proposal.status ??
-                                    "")['buttonColor'], // Set the text color
-                                // widget.btnColor!
                               ),
                             ),
                             SizedBox(
@@ -291,7 +291,7 @@ class _ProjectTile1State extends State<ProjectTile1> {
                         child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Container(
+                              SizedBox(
                                   height: 52,
                                   width: 52,
                                   child: SvgPicture.asset(widget.image!)),
@@ -336,9 +336,9 @@ class _ProjectTile1State extends State<ProjectTile1> {
                                       ),
                                       IconButton(
                                         onPressed: () {
-                                          Get.to(ChatScreen());
+                                          Get.to(const ChatScreen());
                                         },
-                                        icon: Icon(
+                                        icon: const Icon(
                                           CupertinoIcons.chat_bubble_text,
                                           size: 18,
                                         ),
@@ -352,7 +352,7 @@ class _ProjectTile1State extends State<ProjectTile1> {
                                           color: MyColors.lightGrey)),
                                 ],
                               ),
-                              Spacer(),
+                              const Spacer(),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -368,6 +368,13 @@ class _ProjectTile1State extends State<ProjectTile1> {
                                   Container(
                                     height: 26.h,
                                     width: 67.w,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(24.r),
+                                      color: _getButtonColors(
+                                              widget.proposal.status ?? "")[
+                                          'buttonColor'], // Set the text color
+                                      // widget.btnColor!
+                                    ),
                                     child: Center(
                                       child: Padding(
                                         padding: const EdgeInsets.all(2.0),
@@ -381,13 +388,6 @@ class _ProjectTile1State extends State<ProjectTile1> {
                                                   'textColor'], // Set the text color
                                             )),
                                       ),
-                                    ),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(24.r),
-                                      color: _getButtonColors(
-                                              widget.proposal.status ?? "")[
-                                          'buttonColor'], // Set the text color
-                                      // widget.btnColor!
                                     ),
                                   ),
                                   SizedBox(
@@ -481,13 +481,13 @@ class _ProjectTile1State extends State<ProjectTile1> {
   Map<String, Color> _getButtonColors(String status) {
     switch (status.toLowerCase()) {
       case 'rejected':
-        return {'buttonColor': Color(0xffFFB2B2), 'textColor': MyColors.red};
+        return {'buttonColor': const Color(0xffFFB2B2), 'textColor': MyColors.red};
       case 'reviewed':
-        return {'buttonColor': Color(0xffFFF2B2), 'textColor': MyColors.black};
+        return {'buttonColor': const Color(0xffFFF2B2), 'textColor': MyColors.black};
       case 'accepted':
-        return {'buttonColor': Color(0xff447604), 'textColor': MyColors.white};
+        return {'buttonColor': const Color(0xff447604), 'textColor': MyColors.white};
       case 'submitted':
-        return {'buttonColor': Color(0xffB2D6FF), 'textColor': MyColors.black};
+        return {'buttonColor': const Color(0xffB2D6FF), 'textColor': MyColors.black};
       default:
         return {
           'buttonColor': MyColors.btnColor.withOpacity(0.5),
@@ -554,7 +554,7 @@ class _ProjectTile2State extends State<ProjectTile2> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Container(
+                        SizedBox(
                           height: 52.h,
                           width: 52.w,
                           child: SvgPicture.asset(
@@ -609,7 +609,7 @@ class _ProjectTile2State extends State<ProjectTile2> {
                             SizedBox(height: 5.h),
                           ],
                         ),
-                        Spacer(),
+                        const Spacer(),
                         Text(
                           widget.trailingText!,
                           style: TextStyle(
@@ -634,7 +634,7 @@ class _ProjectTile2State extends State<ProjectTile2> {
                         style: TextStyle(
                           fontSize: 13.sp,
                           fontWeight: FontWeight.w500,
-                          color: Color(0xff555555),
+                          color: const Color(0xff555555),
                         ),
                       ),
 
@@ -648,7 +648,7 @@ class _ProjectTile2State extends State<ProjectTile2> {
                       TextWidget(
                         text:
                             '\$${(widget.proposal.proposedBudget?.numberDecimal)}',
-                        color: Color(0xff555555),
+                        color: const Color(0xff555555),
                         size: 13.sp,
                         fontweight: FontWeight.w500,
                       ),
@@ -687,7 +687,7 @@ class _ProjectTile2State extends State<ProjectTile2> {
                       TextWidget(
                         text: widget.proposal.projectId?.description ??
                             "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-                        color: Color(0xff555555),
+                        color: const Color(0xff555555),
                         size: 13.sp,
                         fontweight: FontWeight.w500,
                       ),
@@ -727,7 +727,7 @@ class _ProjectTile2State extends State<ProjectTile2> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Container(
+                            SizedBox(
                               height: 52,
                               width: 52,
                               child: SvgPicture.asset(
@@ -735,7 +735,7 @@ class _ProjectTile2State extends State<ProjectTile2> {
                                 // fit: BoxFit.cover,
                               ),
                             ),
-                            SizedBox(width: 10),
+                            const SizedBox(width: 10),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -747,7 +747,7 @@ class _ProjectTile2State extends State<ProjectTile2> {
                                     color: MyColors.black,
                                   ),
                                 ),
-                                SizedBox(height: 5),
+                                const SizedBox(height: 5),
                                 Row(
                                   children: [
                                     ClipRRect(
@@ -759,7 +759,7 @@ class _ProjectTile2State extends State<ProjectTile2> {
                                         fit: BoxFit.cover,
                                       ),
                                     ),
-                                    SizedBox(width: 5),
+                                    const SizedBox(width: 5),
                                     Text(
                                       widget.title1!,
                                       style: TextStyle(
@@ -770,7 +770,7 @@ class _ProjectTile2State extends State<ProjectTile2> {
                                     ),
                                   ],
                                 ),
-                                SizedBox(height: 5),
+                                const SizedBox(height: 5),
                                 Text(
                                   formatDateTime(widget.subtitle!),
                                   style: TextStyle(
@@ -779,10 +779,10 @@ class _ProjectTile2State extends State<ProjectTile2> {
                                     color: MyColors.lightGrey,
                                   ),
                                 ),
-                                SizedBox(height: 5),
+                                const SizedBox(height: 5),
                               ],
                             ),
-                            Spacer(),
+                            const Spacer(),
                             Text(
                               widget.trailingText!,
                               style: TextStyle(
@@ -794,7 +794,7 @@ class _ProjectTile2State extends State<ProjectTile2> {
                           ],
                         ),
                         if (_isExpanded) ...[
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           TextWidget(
                             text: 'Date & Time',
                             color: MyColors.black1,
@@ -804,14 +804,14 @@ class _ProjectTile2State extends State<ProjectTile2> {
                           Text(
                             formatDateTime(widget.proposal.createdAt ??
                                 '09/07/2024 & 11:30 AM'),
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 13,
                               fontWeight: FontWeight.w500,
                               color: Color(0xff555555),
                             ),
                           ),
 
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           TextWidget(
                             text: '\$Rate',
                             color: MyColors.black1,
@@ -821,11 +821,11 @@ class _ProjectTile2State extends State<ProjectTile2> {
                           TextWidget(
                             text:
                                 '\$${widget.proposal.proposedBudget?.numberDecimal}',
-                            color: Color(0xff555555),
+                            color: const Color(0xff555555),
                             size: 13,
                             fontweight: FontWeight.w500,
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           // TextWidget(
                           //   text: 'Address',
                           //   color: MyColors.black1,
@@ -845,12 +845,12 @@ class _ProjectTile2State extends State<ProjectTile2> {
                             size: 13,
                             fontweight: FontWeight.w700,
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           const Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [PdfContainer(), PdfContainer()],
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           TextWidget(
                             text: 'Description',
                             color: MyColors.black1,
@@ -860,7 +860,7 @@ class _ProjectTile2State extends State<ProjectTile2> {
                           TextWidget(
                             text: widget.proposal.projectId?.description ??
                                 "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-                            color: Color(0xff555555),
+                            color: const Color(0xff555555),
                             size: 13,
                             fontweight: FontWeight.w500,
                           ),

@@ -112,7 +112,7 @@ class LoginProvider extends ChangeNotifier {
       }
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(errorMessage ?? "Field can\'t empty")),
+        SnackBar(content: Text(errorMessage ?? "Field can't empty")),
       );
     }
   }
@@ -177,8 +177,8 @@ class LoginProvider extends ChangeNotifier {
       if (response != null && response.statusCode == 200) {
         debugPrint("message======>${response.data['message']}");
         _isLoading = false;
-        debugPrint("email======>${email}");
-        debugPrint("otp======>${otp}");
+        debugPrint("email======>$email");
+        debugPrint("otp======>$otp");
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(response.data['message'])),
         );

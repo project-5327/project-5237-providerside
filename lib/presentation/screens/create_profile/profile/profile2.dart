@@ -23,7 +23,7 @@ import 'profile3.dart';
 import 'static_profile.dart';
 
 class Profile2 extends StatefulWidget {
-  Profile2({super.key});
+  const Profile2({super.key});
 
   @override
   State<Profile2> createState() => _Profile2State();
@@ -61,7 +61,7 @@ class _Profile2State extends State<Profile2> {
           child: Column(
             children: [
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 15),
+                padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -91,15 +91,9 @@ class _Profile2State extends State<Profile2> {
                           alignment: Alignment.center,
                           height: 18.h,
                           width: 18.w,
-                          child: containerController.selectedcont[2]
-                              ? Icon(
-                                  size: 12.sp,
-                                  Icons.check,
-                                  color: MyColors.white)
-                              : null,
                           decoration: BoxDecoration(
                             color: containerController.selectedcont[2]
-                                ? Color(0xffFF4C4A)
+                                ? const Color(0xffFF4C4A)
                                 : MyColors.white,
                             borderRadius: BorderRadius.circular(4.r),
                             border: Border.all(
@@ -107,6 +101,12 @@ class _Profile2State extends State<Profile2> {
                               color: MyColors.black.withOpacity(0.3),
                             ),
                           ),
+                          child: containerController.selectedcont[2]
+                              ? Icon(
+                                  size: 12.sp,
+                                  Icons.check,
+                                  color: MyColors.white)
+                              : null,
                         ),
                         SizedBox(width: 10.w),
                         TextWidget(
@@ -181,7 +181,7 @@ class _Profile2State extends State<Profile2> {
                                           .descriptionController.text);
                                   // if (_profile2Key.currentState!.validate()) {
                                   profileController.nextPage();
-                                  Get.to(() => Profile3());
+                                  Get.to(() => const Profile3());
                                 }
                               // }
                               : () {},
@@ -213,7 +213,7 @@ class _Profile2State extends State<Profile2> {
           ),
           Flexible(
               child: Center(
-            child: Container(
+            child: SizedBox(
               width: 336.w,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -273,13 +273,9 @@ class _Profile2State extends State<Profile2> {
                         alignment: Alignment.center,
                         height: 18.h,
                         width: 18.w,
-                        child: containerController.selectedcont[2]
-                            ? Icon(
-                                size: 12.sp, Icons.check, color: MyColors.white)
-                            : null,
                         decoration: BoxDecoration(
                           color: containerController.selectedcont[2]
-                              ? Color(0xffFF4C4A)
+                              ? const Color(0xffFF4C4A)
                               : MyColors.white,
                           borderRadius: BorderRadius.circular(4.r),
                           border: Border.all(
@@ -287,6 +283,10 @@ class _Profile2State extends State<Profile2> {
                             color: MyColors.black.withOpacity(0.3),
                           ),
                         ),
+                        child: containerController.selectedcont[2]
+                            ? Icon(
+                                size: 12.sp, Icons.check, color: MyColors.white)
+                            : null,
                       ),
                       SizedBox(width: 10.w),
                       TextWidget(
@@ -333,7 +333,7 @@ class _Profile2State extends State<Profile2> {
                             ? () {
                                 //  if (formKey.currentState!.validate()) {
                                 profileController.nextPage();
-                                Get.to(() => Profile3());
+                                Get.to(() => const Profile3());
                                 // }
                               }
                             : () {},

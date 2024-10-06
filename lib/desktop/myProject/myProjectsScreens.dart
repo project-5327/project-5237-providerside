@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -49,7 +48,7 @@ class _MyProjectsScreenState extends State<MyProjectsScreen> {
               color: MyColors.btnColor,
               textColor: MyColors.white,
               onTap: () {
-                Get.to(AddProjects());
+                Get.to(const AddProjects());
               },
             ),
           ),
@@ -101,7 +100,7 @@ class ProjectComp1 extends StatelessWidget {
                       color: MyColors.black),
                 ),
               ),
-              Spacer(),
+              const Spacer(),
               Text(
                 '5 hours ago',
                 style: TextStyle(

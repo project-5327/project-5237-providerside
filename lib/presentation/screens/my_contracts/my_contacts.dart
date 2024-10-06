@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
 import 'package:project_5237_provider/presentation/constants/responsive_view.dart';
 import 'package:project_5237_provider/presentation/screens/my_contracts/receive.dart';
 
@@ -96,11 +95,11 @@ class _MycontractScreenState extends State<MycontractScreen>
               Expanded(
                 child: TabBarView(
                   controller: _tabController,
-                  children: [
-                    const HandshakeWidget(),
-                    const HandShakeTick(),
+                  children: const [
+                    HandshakeWidget(),
+                    HandShakeTick(),
                     SendScreen(),
-                    const ReceivedProposal(),
+                    ReceivedProposal(),
                   ],
                 ),
               )
@@ -119,7 +118,7 @@ class _MycontractScreenState extends State<MycontractScreen>
               onPressed: () {
                 Navigator.pop(context);
               },
-              icon: Icon(Icons.arrow_back_ios)),
+              icon: const Icon(Icons.arrow_back_ios)),
           title: Text(
             'My Contracts',
             style: TextStyle(
@@ -131,7 +130,7 @@ class _MycontractScreenState extends State<MycontractScreen>
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Center(
-            child: Container(
+            child: SizedBox(
               width: MediaQuery.of(context).size.width * 0.32,
               child: Column(
                 children: [
@@ -164,11 +163,11 @@ class _MycontractScreenState extends State<MycontractScreen>
                   Expanded(
                     child: TabBarView(
                       controller: _tabController,
-                      children: [
-                        const HandshakeWidget(),
-                        const HandShakeTick(),
+                      children: const [
+                        HandshakeWidget(),
+                        HandShakeTick(),
                         SendScreen(),
-                        const ReceivedProposal(),
+                        ReceivedProposal(),
                       ],
                     ),
                   )

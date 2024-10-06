@@ -19,11 +19,10 @@ import '../../../widgets/Customize_textfield.dart';
 import '../../../widgets/create_profile_widget.dart';
 import '../../../widgets/customize_button.dart';
 import '../../my_contracts/send_screen.dart';
-import 'add_experience.dart';
 import 'static_profile.dart';
 
 class Profile3 extends StatefulWidget {
-  Profile3({super.key});
+  const Profile3({super.key});
 
   @override
   State<Profile3> createState() => _Profile3State();
@@ -54,7 +53,7 @@ class _Profile3State extends State<Profile3> {
           child: Column(
             children: [
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 15),
+                padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -91,7 +90,7 @@ class _Profile3State extends State<Profile3> {
                           onTap: () {
                             //  if (formKey.currentState!.validate()) {
                             profileController.previousPage();
-                            Get.to(() => Profile2());
+                            Get.to(() => const Profile2());
                             //  }
                           },
                         ),
@@ -126,7 +125,7 @@ class _Profile3State extends State<Profile3> {
                                       '====>  education : ${onboardingProvider.endDate1Controller}');
                                   // if (_profile3Key.currentState!.validate()) {
                                   profileController.nextPage();
-                                  Get.to(() => Profile4());
+                                  Get.to(() => const Profile4());
                                   //}
                                 }
                               : () {},
@@ -158,7 +157,7 @@ class _Profile3State extends State<Profile3> {
           ),
           Flexible(
               child: Center(
-            child: Container(
+            child: SizedBox(
               //  height: 450.h,
               width: 336.w,
               child: Column(
@@ -227,7 +226,7 @@ class _Profile3State extends State<Profile3> {
                         onTap: () {
                           //  if (formKey.currentState!.validate()) {
                           profileController.previousPage();
-                          Get.to(() => Profile2());
+                          Get.to(() => const Profile2());
                           //  }
                         },
                       ),
@@ -248,7 +247,7 @@ class _Profile3State extends State<Profile3> {
                             ? () {
                                 // if (formKey.currentState!.validate()) {
                                 profileController.nextPage();
-                                Get.to(() => Profile4());
+                                Get.to(() => const Profile4());
                                 //  }
                               }
                             : () {},

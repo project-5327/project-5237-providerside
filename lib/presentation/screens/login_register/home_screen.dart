@@ -43,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return ResponsiveView(
       mobile: _mobileView(context),
-      desktop: ProjectsScreen(),
+      desktop: const ProjectsScreen(),
       tablet: _mobileView(context),
     );
   }
@@ -52,29 +52,32 @@ class _HomeScreenState extends State<HomeScreen> {
     return Consumer<ProjectProvider>(
         builder: (context, projectProvider, child) {
       final projects = projectProvider.projectmodel?.data;
-      debugPrint("Projects==========> ${projects}");
+      debugPrint("Projects==========> $projects");
       return SafeArea(
           child: Scaffold(
         appBar: AppBar(
-          leading: Padding(
-            padding: const EdgeInsets.only(top: 15),
-            child: InkWell(
-              onTap: () {
-                Get.to(const NotificationScreen());
-              },
-              child: Stack(
-                alignment: Alignment.topRight,
-                children: [
-                  SvgPicture.asset(Assets.bell),
-                  SvgPicture.asset(Assets.dot),
-                ],
-              ),
-            ),
-          ),
+          automaticallyImplyLeading: false,
           title: Text(
             'App Name',
             style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600),
           ),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.only(top: 15, right: 15),
+              child: InkWell(
+                onTap: () {
+                  Get.to(const NotificationScreen());
+                },
+                child: Stack(
+                  alignment: Alignment.topRight,
+                  children: [
+                    SvgPicture.asset(Assets.bell),
+                    SvgPicture.asset(Assets.dot),
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
         body: projectProvider.loading
             ? Center(
@@ -90,7 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        padding: EdgeInsets.symmetric(horizontal: 10),
                         child: SearchField(),
                       ),
                       SizedBox(

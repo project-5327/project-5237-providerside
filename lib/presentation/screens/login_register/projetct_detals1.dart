@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:project_5237_provider/presentation/screens/login_register/credit.dart';
 import 'package:project_5237_provider/presentation/screens/login_register/notification.dart';
-import 'package:project_5237_provider/presentation/screens/login_register/proposal.dart';
 import 'package:project_5237_provider/presentation/screens/my_contracts/map_screen.dart';
 import 'package:project_5237_provider/presentation/screens/my_contracts/send_screen.dart';
 
@@ -14,9 +12,6 @@ import '../../constants/color.dart';
 import '../../widgets/customize_button.dart';
 import '../../widgets/discover_project_cont.dart';
 import '../../widgets/project_detail_widget.dart';
-import '../filter/filter.dart';
-import '../main_screen .dart';
-import 'message.dart';
 
 class HomeProjectDetails extends StatefulWidget {
   const HomeProjectDetails({super.key});
@@ -57,7 +52,7 @@ class _HomeProjectDetailsState extends State<HomeProjectDetails> {
                       ),
                       trailing: InkWell(
                         onTap: () {
-                          Get.to(NotificationScreen());
+                          Get.to(const NotificationScreen());
                         },
                         child: Stack(alignment: Alignment.topRight, children: [
                           Icon(
@@ -78,9 +73,9 @@ class _HomeProjectDetailsState extends State<HomeProjectDetails> {
                       child: Container(
                         width: 71.h,
                         height: 71.w,
+                        decoration: const BoxDecoration(shape: BoxShape.circle),
                         child: Image.asset('assets/images/image.jpeg',
                             fit: BoxFit.cover),
-                        decoration: BoxDecoration(shape: BoxShape.circle),
                       ),
                     ),
                     SizedBox(
@@ -170,7 +165,7 @@ class _HomeProjectDetailsState extends State<HomeProjectDetails> {
                               color: MyColors.black),
                         ),
                         trailing: InkWell(
-                          onTap: () => Get.to(MapScreen()),
+                          onTap: () => Get.to(const MapScreen()),
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [

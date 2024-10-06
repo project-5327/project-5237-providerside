@@ -70,7 +70,7 @@ class ProjectProvider with ChangeNotifier {
 
       if (response != null && response.statusCode == 200) {
         final data = response.data;
-        debugPrint('response ==========> ${data}');
+        debugPrint('response ==========> $data');
 
         if (data != null) {
           projectmodel = ProjectModel.fromJson(data);
@@ -95,7 +95,7 @@ class ProjectProvider with ChangeNotifier {
       notifyListeners();
     }
 
-    void _showSnackBar(BuildContext context, String? message) {
+    void showSnackBar(BuildContext context, String? message) {
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(message ?? "Error")),

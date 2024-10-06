@@ -8,7 +8,6 @@ import 'package:project_5237_provider/desktop/projects/project_detail_screen.dar
 import 'package:project_5237_provider/presentation/constants/assets.dart';
 import 'package:project_5237_provider/presentation/constants/color.dart';
 import 'package:project_5237_provider/presentation/constants/strings.dart';
-import 'package:project_5237_provider/provider/home/home_provider.dart';
 import 'package:project_5237_provider/provider/onboarding/project_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -26,7 +25,7 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
     return Consumer<ProjectProvider>(
       builder: (context, projectProvider, child) {
         final projects = projectProvider.projectmodel?.data;
-        debugPrint("Projects==========> ${projects}");
+        debugPrint("Projects==========> $projects");
         return Scaffold(
             body: Padding(
                 padding: EdgeInsets.only(left: 33.w, right: 33.w, top: 35),

@@ -14,14 +14,12 @@ import '../../../constants/assets.dart';
 import '../../../constants/color.dart';
 import '../../../constants/responsive_view.dart';
 import '../../../constants/strings.dart';
-import '../../../widgets/create_profile_widget.dart';
 import '../../../widgets/customize_button.dart';
-import 'profile3.dart';
 import 'profile6.dart';
 import 'static_profile.dart';
 
 class Profile5 extends StatefulWidget {
-  Profile5({super.key});
+  const Profile5({super.key});
 
   @override
   State<Profile5> createState() => _Profile5State();
@@ -30,7 +28,7 @@ class Profile5 extends StatefulWidget {
 class _Profile5State extends State<Profile5> {
   final ProfileController profileController = Get.put(ProfileController());
   final List<String> _skills = ['JavaScript', 'Node.js', 'MongoDB', 'React'];
-  List<String> _selectedSkills = [];
+  final List<String> _selectedSkills = [];
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +47,7 @@ class _Profile5State extends State<Profile5> {
           child: Column(
             children: [
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 15),
+                padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -77,21 +75,21 @@ class _Profile5State extends State<Profile5> {
                       size: 13.sp,
                       fontweight: FontWeight.w600,
                     ),
-                    Container(
+                    SizedBox(
                       width: MediaQuery.of(context).size.width / 1,
                       height: 100,
                       child: DropDownMultiSelect(
                         decoration: InputDecoration(
                           fillColor: Theme.of(context).colorScheme.onPrimary,
                           focusColor: Theme.of(context).colorScheme.onPrimary,
-                          enabledBorder: OutlineInputBorder(
+                          enabledBorder: const OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(8)),
                               borderSide:
                                   BorderSide(color: Colors.grey, width: 1.5)),
                           focusedBorder: OutlineInputBorder(
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(8)),
+                                  const BorderRadius.all(Radius.circular(8)),
                               borderSide: BorderSide(
                                 color: MyColors.blue,
                                 width: 1.5,
@@ -111,7 +109,7 @@ class _Profile5State extends State<Profile5> {
                       alignment: Alignment.topRight,
                       child: TextWidget(
                         text: 'Max 15 skills',
-                        color: Color(0xff2A1E17),
+                        color: const Color(0xff2A1E17),
                         size: 12.sp,
                         fontweight: FontWeight.w500,
                       ),
@@ -131,7 +129,7 @@ class _Profile5State extends State<Profile5> {
                           onTap: () {
                             // if (formKey.currentState!.validate()) {
                             profileController.previousPage();
-                            Get.to(() => Profile4());
+                            Get.to(() => const Profile4());
                             // }
                           },
                         ),
@@ -184,7 +182,7 @@ class _Profile5State extends State<Profile5> {
         ),
         Flexible(
             child: Center(
-          child: Container(
+          child: SizedBox(
             //  height: 450.h,
             width: 336.w,
             child: Column(
@@ -290,7 +288,7 @@ class _Profile5State extends State<Profile5> {
                                       size: 12.sp,
                                       fontweight: FontWeight.w500,
                                     ),
-                                    SizedBox(width: 5),
+                                    const SizedBox(width: 5),
                                     GestureDetector(
                                       onTap: () {
                                         setState(() {
@@ -337,7 +335,7 @@ class _Profile5State extends State<Profile5> {
                   alignment: Alignment.topRight,
                   child: TextWidget(
                     text: 'Max 15 skills',
-                    color: Color(0xff2A1E17),
+                    color: const Color(0xff2A1E17),
                     size: 12.sp,
                     fontweight: FontWeight.w500,
                   ),
@@ -357,7 +355,7 @@ class _Profile5State extends State<Profile5> {
                       onTap: () {
                         // if (formKey.currentState!.validate()) {
                         profileController.previousPage();
-                        Get.to(() => Profile4());
+                        Get.to(() => const Profile4());
                         // }
                       },
                     ),

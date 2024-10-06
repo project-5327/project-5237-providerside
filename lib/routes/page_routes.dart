@@ -1,9 +1,7 @@
 // ignore_for_file: constant_identifier_names
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:project_5237_provider/routes/routes.dart';
-import 'package:provider/provider.dart';
 
 import '../desktop/onboarding/onboarding1.dart';
 import '../presentation/screens/dashboard/dashboard_view.dart';
@@ -21,7 +19,7 @@ class PageRoutes {
   static Map<String, WidgetBuilder> routes = {
     Routes.dashboard: (context) => const DashBoardView(),
     Routes.mainScreen: (context) => MainScreen(),
-    Routes.splashScreen: (context) => SplashScreen(),
+    Routes.splashScreen: (context) => const SplashScreen(),
     Routes.onbarodingScreen1: (context) => const OnbarodingScreen1(),
     Routes.loginPage: (context) => LoginScreen(),
   };

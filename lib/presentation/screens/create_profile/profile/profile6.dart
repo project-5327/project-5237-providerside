@@ -12,7 +12,6 @@ import '../../../constants/assets.dart';
 import '../../../constants/color.dart';
 import '../../../constants/responsive_view.dart';
 import '../../../constants/strings.dart';
-import '../../../widgets/create_profile_widget.dart';
 import '../../../widgets/customize_button.dart';
 import '../../my_contracts/send_screen.dart';
 import 'static_profile.dart';
@@ -85,7 +84,7 @@ class Profile6 extends StatelessWidget {
                           hintStyle: TextStyle(
                               fontSize: 10.sp,
                               fontWeight: FontWeight.w500,
-                              color: Color(0xff2A1E17)),
+                              color: const Color(0xff2A1E17)),
                           contentPadding: const EdgeInsets.symmetric(
                               vertical: 3, horizontal: 7),
                           border: OutlineInputBorder(
@@ -101,7 +100,7 @@ class Profile6 extends StatelessWidget {
                         child: TextWidget(
                           // align: TextAlign.c,
                           text: '500 characters',
-                          color: Color(0xff2A1E17),
+                          color: const Color(0xff2A1E17),
                           size: 12.sp,
                           fontweight: FontWeight.w500,
                         ),
@@ -124,7 +123,7 @@ class Profile6 extends StatelessWidget {
                               /*print('====> decription : ${onboardingProvider.descriptionController}');*/
                               if (formKey.currentState!.validate()) {
                                 profileController.previousPage();
-                                Get.to(() => Profile5());
+                                Get.to(() => const Profile5());
                               }
                             },
                           ),
@@ -175,7 +174,7 @@ class Profile6 extends StatelessWidget {
         ),
         Flexible(
             child: Center(
-                child: Container(
+                child: SizedBox(
                     //  height: 450.h,
                     width: 336.w,
                     child: Column(
@@ -251,7 +250,7 @@ class Profile6 extends StatelessWidget {
                               hintStyle: TextStyle(
                                   fontSize: 13.sp,
                                   fontWeight: FontWeight.w500,
-                                  color: Color(0xff2A1E17)),
+                                  color: const Color(0xff2A1E17)),
                               contentPadding: const EdgeInsets.symmetric(
                                   vertical: 3, horizontal: 7),
                               border: OutlineInputBorder(
@@ -267,7 +266,7 @@ class Profile6 extends StatelessWidget {
                             child: TextWidget(
                               // align: TextAlign.c,
                               text: '500 characters',
-                              color: Color(0xff2A1E17),
+                              color: const Color(0xff2A1E17),
                               size: 13.sp,
                               fontweight: FontWeight.w500,
                             ),
@@ -287,7 +286,7 @@ class Profile6 extends StatelessWidget {
                                 onTap: () {
                                   // if (formKey.currentState!.validate()) {
                                   profileController.previousPage();
-                                  Get.to(() => Profile5());
+                                  Get.to(() => const Profile5());
                                   // }
                                 },
                               ),

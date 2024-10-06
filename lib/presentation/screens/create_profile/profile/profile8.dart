@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,22 +6,16 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:project_5237_provider/controller/form_controller.dart';
 import 'package:project_5237_provider/presentation/screens/create_profile/profile/components/profile8widget.dart';
-import 'package:project_5237_provider/presentation/screens/login_register/login.dart';
-import 'package:project_5237_provider/presentation/widgets/Customize_textfield.dart';
 
 import '../../../../controller/country_controller.dart';
 import '../../../../controller/profile_controller.dart';
 import '../../../constants/assets.dart';
 import '../../../constants/color.dart';
-import '../../../constants/responsive_view.dart';
 import '../../../constants/strings.dart';
-import '../../../widgets/create_profile_widget.dart';
-import '../../../widgets/customize_button.dart';
-import '../../my_contracts/send_screen.dart';
 import 'static_profile.dart';
 
 class Profile8 extends StatefulWidget {
-  Profile8({super.key});
+  const Profile8({super.key});
 
   @override
   State<Profile8> createState() => _Profile8State();
@@ -41,7 +34,7 @@ class _Profile8State extends State<Profile8> {
   final List<String> countries = ['USA', 'India', 'Canada', 'Japan'];
   final List<String> city = ['Delhi', 'Gurugram', 'Noida'];
 
-  ImagePicker _picker = ImagePicker();
+  final ImagePicker _picker = ImagePicker();
 
   XFile? _selectedImage;
 
@@ -58,7 +51,7 @@ class _Profile8State extends State<Profile8> {
   Widget build(BuildContext context) {
     return StaticProfileLayout(
         middleContentBuilder: () =>
-            Profile8widget()); /*ResponsiveView(
+            const Profile8widget()); /*ResponsiveView(
       mobile: _mobileView(context),
       desktop: _deskTopView(context),
       tablet: _mobileView(context),
@@ -66,7 +59,7 @@ class _Profile8State extends State<Profile8> {
   }
 
   _mobileView(BuildContext context) {
-    StaticProfileLayout(middleContentBuilder: () => Profile8widget());
+    StaticProfileLayout(middleContentBuilder: () => const Profile8widget());
   }
 
   _deskTopView(BuildContext context) {
@@ -83,7 +76,7 @@ class _Profile8State extends State<Profile8> {
       Flexible(
           child: SingleChildScrollView(
         child: Center(
-            child: Container(
+            child: SizedBox(
                 //  height: 450.h,
                 width: 336.w,
                 child: Column(

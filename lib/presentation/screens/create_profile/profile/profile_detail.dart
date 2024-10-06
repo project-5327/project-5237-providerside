@@ -54,6 +54,7 @@ class ProfileDetail extends StatelessWidget {
                 labelText: AppStrings.title,
                 color: MyColors.lightGrey,
               ),
+           
               SizedBox(height: 158.h),
               Center(
                   child: CustomizeButton(
@@ -69,11 +70,12 @@ class ProfileDetail extends StatelessWidget {
                           debugPrint(
                               '====>  profile details : ${onboardingProvider.titleController}');
                           profileController.nextPage();
-                          Get.to(() => Profile2());
+                          Get.to(() => const Profile2());
                           //   }
                         }
                       })),
               SizedBox(height: 42.h),
+          
             ],
           ),
         ),
@@ -95,7 +97,7 @@ class ProfileDetail extends StatelessWidget {
           ),
           Flexible(
             child: Center(
-              child: Container(
+              child: SizedBox(
                   //  height: 450.h,
                   width: 336.w,
                   child: Column(
@@ -133,6 +135,7 @@ class ProfileDetail extends StatelessWidget {
                           minHeight: 5.h,
                         ),
                         SizedBox(height: 30.h),
+                       
                         Center(
                           child: DesktopEditCreate(
                             align: TextAlign.start,
@@ -147,6 +150,7 @@ class ProfileDetail extends StatelessWidget {
                             color: MyColors.lightGrey,
                           ),
                         ),
+                       
                         SizedBox(height: 60.h),
                         Center(
                             child: CustomizeButton(
@@ -160,10 +164,12 @@ class ProfileDetail extends StatelessWidget {
                                 onTap: () {
                                   //if (formKey.currentState!.validate()) {
                                   profileController.nextPage();
-                                  Get.to(() => Profile2());
+                                  Get.to(() => const Profile2());
                                   //   }
                                 })),
                         SizedBox(height: 20.h),
+                    
+                    
                       ])),
             ),
           )

@@ -5,8 +5,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:project_5237_provider/controller/form_controller.dart';
-import 'package:project_5237_provider/data/models/freelancer_model.dart';
-import 'package:project_5237_provider/data/models/proposal_by_user.dart';
 import 'package:project_5237_provider/presentation/screens/main_screen%20.dart';
 import 'package:project_5237_provider/presentation/screens/my_contracts/send_screen.dart';
 import 'package:project_5237_provider/provider/freelancer_provider/freelancer_provider.dart';
@@ -15,12 +13,10 @@ import 'package:provider/provider.dart';
 import '../../constants/color.dart';
 import '../../widgets/Customize_textfield.dart';
 import '../../widgets/customize_button.dart';
-import '../message/forget_password.dart';
-import 'Add_projects.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 class Editprofile extends StatefulWidget {
-  Editprofile({super.key});
+  const Editprofile({super.key});
 
   @override
   State<Editprofile> createState() => _EditprofileState();
@@ -106,7 +102,7 @@ class _EditprofileState extends State<Editprofile>
               Expanded(
                 child: TabBarView(
                   controller: _tabController,
-                  children: [
+                  children: const [
                     Category(),
                     Catagory2(),
                   ],
@@ -121,7 +117,7 @@ class _EditprofileState extends State<Editprofile>
 }
 
 class Category extends StatefulWidget {
-  Category({super.key});
+  const Category({super.key});
 
   @override
   State<Category> createState() => _CategoryState();
@@ -240,9 +236,9 @@ class _CategoryState extends State<Category> {
                     style: TextStyle(
                       fontSize: 13.sp,
                       fontWeight: FontWeight.w500,
-                      color: Color(0xff222222),
+                      color: const Color(0xff222222),
                     ),
-                    icon: IconButton(onPressed: () {}, icon: Icon(Icons.edit)),
+                    icon: IconButton(onPressed: () {}, icon: const Icon(Icons.edit)),
                   ),
                 ),
                 SizedBox(height: 12.h),
@@ -257,7 +253,7 @@ class _CategoryState extends State<Category> {
                     style: TextStyle(
                       fontSize: 13.sp,
                       fontWeight: FontWeight.w500,
-                      color: Color(0xff222222),
+                      color: const Color(0xff222222),
                     ),
                   ),
                 ),
@@ -323,7 +319,7 @@ class _CategoryState extends State<Category> {
 }
 
 class Catagory2 extends StatefulWidget {
-  Catagory2({super.key});
+  const Catagory2({super.key});
 
   @override
   State<Catagory2> createState() => _Catagory2State();
@@ -359,7 +355,7 @@ class _Catagory2State extends State<Catagory2> {
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Container(
+              child: SizedBox(
                 height: 800.h,
                 child: ListView.builder(
                   itemCount: 1,

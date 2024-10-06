@@ -5,7 +5,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
-import '../../../../../controller/country_controller.dart';
 import '../../../../../controller/form_controller.dart';
 import '../../../../../controller/profile_controller.dart';
 import '../../../../../provider/onboarding/onbaording_provider.dart';
@@ -14,7 +13,6 @@ import '../../../../constants/color.dart';
 import '../../../../constants/strings.dart';
 import '../../../../widgets/Customize_textfield.dart';
 import '../../../../widgets/customize_button.dart';
-import '../../../dashboard/dashboard_view.dart';
 
 class Profile8widget extends StatefulWidget {
   const Profile8widget({super.key});
@@ -88,7 +86,7 @@ class _Profile8widgetState extends State<Profile8widget> {
                           backgroundImage: _selectedImage != null
                               ? FileImage(File(_selectedImage!.path))
                                   as ImageProvider
-                              : AssetImage('assets/images/uploadImage.png'),
+                              : const AssetImage('assets/images/uploadImage.png'),
                         ),
                         Positioned(
                           bottom: 0,
@@ -167,7 +165,7 @@ class _Profile8widgetState extends State<Profile8widget> {
                                       fontSize: 12.sp,
                                       fontWeight: FontWeight.w600)),
                               SizedBox(height: 5.h),
-                              Container(
+                              SizedBox(
                                 // width: MediaQuery.of(context).size.width*0.1,
                                 height: 80,
                                 child: DropdownButtonFormField<String>(
@@ -178,13 +176,13 @@ class _Profile8widgetState extends State<Profile8widget> {
                                         Theme.of(context).colorScheme.onPrimary,
                                     enabledBorder: OutlineInputBorder(
                                       borderRadius:
-                                          BorderRadius.all(Radius.circular(8)),
+                                          const BorderRadius.all(Radius.circular(8)),
                                       borderSide: BorderSide(
                                         color: MyColors.lightGrey,
                                         width: 1.5,
                                       ),
                                     ),
-                                    focusedBorder: OutlineInputBorder(
+                                    focusedBorder: const OutlineInputBorder(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(8.0)),
                                       borderSide: BorderSide(
@@ -193,8 +191,7 @@ class _Profile8widgetState extends State<Profile8widget> {
                                       ),
                                     ),
                                   ),
-                                  value: onboardingProvider.cityName != null &&
-                                          city.contains(
+                                  value: city.contains(
                                               onboardingProvider.cityName)
                                       ? onboardingProvider.cityName
                                       : null, // Ensure the value is from the city list
@@ -230,7 +227,7 @@ class _Profile8widgetState extends State<Profile8widget> {
                                     fontSize: 12.sp,
                                     fontWeight: FontWeight.w600)),
                             SizedBox(height: 5.h),
-                            Container(
+                            SizedBox(
                               // width: MediaQuery.of(context).size.width,
                               height: 80,
                               child: DropdownButtonFormField<String>(
@@ -241,13 +238,13 @@ class _Profile8widgetState extends State<Profile8widget> {
                                       Theme.of(context).colorScheme.onPrimary,
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius:
-                                        BorderRadius.all(Radius.circular(8)),
+                                        const BorderRadius.all(Radius.circular(8)),
                                     borderSide: BorderSide(
                                       color: MyColors.lightGrey,
                                       width: 1.5,
                                     ),
                                   ),
-                                  focusedBorder: OutlineInputBorder(
+                                  focusedBorder: const OutlineInputBorder(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(8.0)),
                                     borderSide: BorderSide(
@@ -256,8 +253,7 @@ class _Profile8widgetState extends State<Profile8widget> {
                                     ),
                                   ),
                                 ),
-                                value: onboardingProvider.cityName != null &&
-                                        city.contains(
+                                value: city.contains(
                                             onboardingProvider.cityName)
                                     ? onboardingProvider.cityName
                                     : null, //

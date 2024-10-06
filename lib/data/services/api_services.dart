@@ -29,7 +29,7 @@ class ApiService {
       );
 
       return response;
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return e.response ?? Response(requestOptions: RequestOptions(path: ''));
     }
   }
@@ -59,7 +59,7 @@ class ApiService {
       );
 
       return response;
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return e.response ?? Response(requestOptions: RequestOptions(path: ''));
     }
   }

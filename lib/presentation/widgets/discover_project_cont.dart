@@ -19,7 +19,7 @@ class DiscoverContainer extends StatelessWidget {
   final String text3;
   final String timerange;
 
-  DiscoverContainer({
+  const DiscoverContainer({
     super.key,
     required this.text1,
     required this.text2,
@@ -115,7 +115,7 @@ class DiscoverContainer extends StatelessWidget {
                   color: MyColors.black),
             ),
             trailing: InkWell(
-              onTap: () => Get.to(MapScreen()),
+              onTap: () => Get.to(const MapScreen()),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -172,7 +172,7 @@ class DiscoverContainer1 extends StatelessWidget {
   final int tagsLength;
   final String text3;
 
-  DiscoverContainer1({
+  const DiscoverContainer1({
     super.key,
     required this.text1,
     required this.text2,

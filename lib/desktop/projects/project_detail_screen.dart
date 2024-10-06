@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:project_5237_provider/data/models/proposal_data_response.dart';
 import 'package:project_5237_provider/desktop/home/AcceptProposalScreen.dart';
@@ -27,6 +26,7 @@ class ProposalDetailScreen extends StatelessWidget {
       required this.isFromHomeScreen,
       required this.proposalListData});
 
+  @override
   Widget build(BuildContext context) {
     DateTime createdAt = DateTime.parse(proposalListData.createdAt ?? "");
     final responsive = ResponsiveCheck(context);
@@ -65,7 +65,7 @@ class ProposalDetailScreen extends StatelessWidget {
                               ),
                               trailing: InkWell(
                                 onTap: () {
-                                  Get.to(NotificationScreen());
+                                  Get.to(const NotificationScreen());
                                 },
                                 child: Stack(
                                     alignment: Alignment.topRight,
@@ -88,10 +88,10 @@ class ProposalDetailScreen extends StatelessWidget {
                               child: Container(
                                 width: 67.w,
                                 height: 71.h,
+                                decoration:
+                                    const BoxDecoration(shape: BoxShape.circle),
                                 child: Image.asset('assets/images/image.jpeg',
                                     fit: BoxFit.cover),
-                                decoration:
-                                    BoxDecoration(shape: BoxShape.circle),
                               ),
                             ),
                             SizedBox(
@@ -184,9 +184,9 @@ class ProposalDetailScreen extends StatelessWidget {
                                         fontWeight: FontWeight.w500,
                                         color: MyColors.black),
                                   ),
-                                  Spacer(),
+                                  const Spacer(),
                                   InkWell(
-                                    onTap: () => Get.to(MapScreen()),
+                                    onTap: () => Get.to(const MapScreen()),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.min,
                                       children: [

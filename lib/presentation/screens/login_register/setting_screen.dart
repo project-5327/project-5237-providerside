@@ -49,6 +49,12 @@ class SettingsScreen extends StatelessWidget {
                         },
                       ),
                       SettingWidget(
+                          text: 'Update Password',
+                          onTap: () {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text("Comming Soon")));
+                          }),
+                      SettingWidget(
                         text: 'Milestones',
                         onTap: () {
                           Navigator.push(

@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
 import 'package:project_5237_provider/data/models/project_model.dart';
 import 'package:project_5237_provider/presentation/constants/responsive_view.dart';
 import 'package:project_5237_provider/presentation/screens/login_register/notification.dart';
@@ -13,7 +12,6 @@ import '../../constants/color.dart';
 import '../../widgets/customize_button.dart';
 import '../../widgets/discover_project_cont.dart';
 import '../../widgets/project_detail_widget.dart';
-import 'send_proposal.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 class ProjectDetails extends StatefulWidget {
@@ -86,7 +84,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => NotificationScreen()),
+                                builder: (context) => const NotificationScreen()),
                           );
                         },
                         child: Stack(alignment: Alignment.topRight, children: [
@@ -106,17 +104,17 @@ class _ProjectDetailsState extends State<ProjectDetails> {
                       child: Container(
                         width: 68.w,
                         height: 71.h,
+                        decoration: const BoxDecoration(shape: BoxShape.circle),
                         child: Image.network(
                             projects?.clientId?.profileImage ?? "",
                             fit: BoxFit.cover),
-                        decoration: BoxDecoration(shape: BoxShape.circle),
                       ),
                     ),
                     SizedBox(
                       height: 5.h,
                     ),
                     Text(
-                      '${projects?.clientId?.userName ?? "Username"}',
+                      projects?.clientId?.userName ?? "Username",
                       style: TextStyle(
                           fontSize: 17.sp,
                           fontWeight: FontWeight.w500,
@@ -147,7 +145,7 @@ class _ProjectDetailsState extends State<ProjectDetails> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 14),
+                padding: const EdgeInsets.symmetric(horizontal: 14),
                 child: Container(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
