@@ -50,6 +50,7 @@ class Assets {
   static String joseph_profile = 'assets/images/joseph_profile.svg';
   static String splashScreen = 'assets/images/Splash Screen (1).svg';
   static String createProfile = 'assets/images/Frame.svg';
+  static String jd = 'assets/images/Group 3149.svg';
   static String uploadPhoto = 'assets/images/Mask Group.svg';
   static String rectangle = 'assets/images/rectangle.png';
   static String rectangle1 = 'assets/images/Frame1.svg';
@@ -57,4 +58,5 @@ class Assets {
   static String bgirl = 'assets/images/bgirl.svg';
   static String wgirl = 'assets/images/wgirl1.png';
   static String createProfile1 = 'assets/images/Frame 1000005752.svg';
+  static String check = 'assets/icons/check.svg';
 }

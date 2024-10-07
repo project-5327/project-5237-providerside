@@ -4,10 +4,38 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:project_5237_provider/desktop/onboarding/onboarding1.dart';
 import 'package:project_5237_provider/presentation/constants/responsive_view.dart';
+import 'package:project_5237_provider/provider/auth/login_provider.dart';
+import 'package:project_5237_provider/provider/auth/register_provider.dart';
+import 'package:project_5237_provider/provider/auth/verifyOTP_provider.dart';
+import 'package:project_5237_provider/provider/filter_provider.dart';
+import 'package:project_5237_provider/provider/freelancer_provider/freelancer_provider.dart';
+import 'package:project_5237_provider/provider/home/proposal_provider.dart';
+import 'package:project_5237_provider/provider/onboarding/onbaording_provider.dart';
+import 'package:project_5237_provider/provider/onboarding/project_provider.dart';
+import 'package:project_5237_provider/provider/home/home_provider.dart';
+import 'package:provider/provider.dart';
+import 'config/baseclient/base_client.dart';
 import 'presentation/screens/splash screen.dart';
 
+
+
 void main() {
-  runApp(const MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  BaseClient.initialize("https://project5237.zatest.biz");
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (context) => LoginProvider()),
+      ChangeNotifierProvider(create: (context) => VerifyOTPProvider()),
+      ChangeNotifierProvider(create: (context) => RegisterProvider()),
+      ChangeNotifierProvider(create: (context) => HomeProvider()),
+      ChangeNotifierProvider(create: (context) => OnbaordingProvider()),
+      ChangeNotifierProvider(create: (_) => ProposalProvider()),
+      ChangeNotifierProvider(create: (_) => FilterProvider()),
+      ChangeNotifierProvider(create: (_) => ProjectProvider()),
+      ChangeNotifierProvider(create: (_) => FreelancerProvider()),
+    ],
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -20,7 +48,7 @@ class MyApp extends StatelessWidget {
       designSize: responsive.isMobile
           ? const Size(375, 812)
           : responsive.isTablet
-              ? Size(1024, 1768)
+              ? const Size(1024, 1768)
               : const Size(1440, 941),
       minTextAdapt: true,
       splitScreenMode: true,
@@ -38,9 +66,10 @@ class MyApp extends StatelessWidget {
             ),
             useMaterial3: true,
           ),
+          //  home: ProposalSendScreen(),
           home: responsive.isMobile || responsive.isTablet
-              ? SplashScreen()
-              : OnbarodingScreen1(),
+              ? const SplashScreen()
+              : const OnbarodingScreen1(),
         );
 
         //  Profile3());

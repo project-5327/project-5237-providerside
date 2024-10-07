@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -7,7 +6,6 @@ import 'package:intl/intl.dart';
 
 import '../../constants/assets.dart';
 import '../../constants/color.dart';
-import '../my_contracts/my_contacts.dart';
 import '../my_contracts/send_screen.dart';
 
 class ChatScreen extends StatefulWidget {
@@ -50,8 +48,7 @@ class _ChatScreenState extends State<ChatScreen> {
           isSentByMe: true,
           time: formattedTime,
         ));
-        messageController
-            .clear(); // Clear the text field after sending a message
+        messageController.clear();
       });
     }
   }
@@ -61,58 +58,66 @@ class _ChatScreenState extends State<ChatScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          leading: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 5),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(100),
-              child: Image.asset('assets/images/girl2.png',
-                  height: 44.h, width: 44.w, fit: BoxFit.cover),
-            ),
-          ),
-          title: Align(
-            alignment: Alignment.centerRight,
-            child: PopupMenuButton(
-              onSelected: (value) =>
-                  _handlePopUpItem(value.toString(), context),
-              constraints: BoxConstraints(
-                maxWidth: 145.w,
-              ),
-              itemBuilder: (BuildContext context) {
-                return {"Block", 'Report', 'Remove'}.map((String choice) {
-                  return PopupMenuItem(
-                    value:
-                        choice.toLowerCase(), // Correct usage of toLowerCase()
-                    child: Container(
-                      height: 40.h,
-                      width: 125.w,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(4.r),
-                        color: MyColors.btnColor.withOpacity(0.3),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 10, vertical: 5),
-                        child: Text(
-                          choice,
-                          style: TextStyle(
-                            color: MyColors.btnColor,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                      ),
-                    ),
-                  );
-                }).toList();
+            backgroundColor: MyColors.white,
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back_ios),
+              onPressed: () {
+                Navigator.pop(context);
               },
             ),
-          ),
-        ),
+            title: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 5),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(100),
+                child: Image.asset('assets/images/girl2.png',
+                    height: 44.h, width: 40.w, fit: BoxFit.cover),
+              ),
+            ),
+            actions: [
+              Align(
+                alignment: Alignment.centerRight,
+                child: PopupMenuButton(
+                  onSelected: (value) =>
+                      _handlePopUpItem(value.toString(), context),
+                  constraints: BoxConstraints(
+                    maxWidth: 145.w,
+                  ),
+                  itemBuilder: (BuildContext context) {
+                    return {"Block", 'Report', 'Remove'}.map((String choice) {
+                      return PopupMenuItem(
+                        value: choice
+                            .toLowerCase(), // Correct usage of toLowerCase()
+                        child: Container(
+                          height: 40.h,
+                          width: 125.w,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(4.r),
+                            color: MyColors.btnColor.withOpacity(0.3),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 5),
+                            child: Text(
+                              choice,
+                              style: TextStyle(
+                                color: MyColors.btnColor,
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ),
+                        ),
+                      );
+                    }).toList();
+                  },
+                ),
+              ),
+            ]),
         body: Column(
           children: [
             Expanded(
               child: ListView.builder(
-                reverse: true,
+                reverse: false,
                 itemCount: messages.length,
                 itemBuilder: (context, index) {
                   final message = messages[index];
@@ -123,52 +128,47 @@ class _ChatScreenState extends State<ChatScreen> {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 10, vertical: 10),
-                      child: InkWell(
-                        onTap: () {
-                          Get.to(MycontractScreen());
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                          child: Column(
-                            crossAxisAlignment: message.isSentByMe
-                                ? CrossAxisAlignment.end
-                                : CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                constraints: BoxConstraints(maxWidth: 200.w),
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 10, vertical: 10),
-                                decoration: BoxDecoration(
-                                  color: MyColors.btnColor,
-                                  borderRadius: message.isSentByMe
-                                      ? BorderRadius.only(
-                                          topLeft: Radius.circular(15.r),
-                                          topRight: Radius.circular(15.r),
-                                          bottomLeft: Radius.circular(15.r),
-                                        )
-                                      : BorderRadius.only(
-                                          topLeft: Radius.circular(15.r),
-                                          topRight: Radius.circular(15.r),
-                                          bottomRight: Radius.circular(15.r),
-                                        ),
-                                ),
-                                child: TextWidget(
-                                  text: message.text,
-                                  color: MyColors.white,
-                                  size: 12.sp,
-                                  fontweight: FontWeight.w400,
-                                ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: Column(
+                          crossAxisAlignment: message.isSentByMe
+                              ? CrossAxisAlignment.end
+                              : CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              constraints: BoxConstraints(maxWidth: 200.w),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 10),
+                              decoration: BoxDecoration(
+                                color: MyColors.btnColor,
+                                borderRadius: message.isSentByMe
+                                    ? BorderRadius.only(
+                                        topLeft: Radius.circular(15.r),
+                                        topRight: Radius.circular(15.r),
+                                        bottomLeft: Radius.circular(15.r),
+                                      )
+                                    : BorderRadius.only(
+                                        topLeft: Radius.circular(15.r),
+                                        topRight: Radius.circular(15.r),
+                                        bottomRight: Radius.circular(15.r),
+                                      ),
                               ),
-                              SizedBox(
-                                  height: 5
-                                      .h), // Adjusts spacing between message and time
-                              TextWidget(
-                                text: message.time,
-                                color: MyColors.black.withOpacity(0.7),
-                                size: 10.sp,
+                              child: TextWidget(
+                                text: message.text,
+                                color: MyColors.white,
+                                size: 12.sp,
+                                fontweight: FontWeight.w400,
                               ),
-                            ],
-                          ),
+                            ),
+                            SizedBox(
+                                height: 5
+                                    .h), // Adjusts spacing between message and time
+                            TextWidget(
+                              text: message.time,
+                              color: MyColors.black.withOpacity(0.7),
+                              size: 10.sp,
+                            ),
+                          ],
                         ),
                       ),
                     ),
@@ -181,41 +181,36 @@ class _ChatScreenState extends State<ChatScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  InkWell(
-                    onTap: () {
-                      Get.to(MycontractScreen());
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30.r),
-                        color: const Color(0xffF1F1F1),
-                      ),
-                      height: 50.h,
-                      width: 234.w,
-                      child: TextFormField(
-                        controller: messageController,
-                        decoration: InputDecoration(
-                          fillColor: const Color(0xffF1F1F1),
-                          suffixIcon: Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: SvgPicture.asset(
-                              Assets.menu,
-                              height: 18.h,
-                              width: 18.w,
-                              fit: BoxFit.contain,
-                            ),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30.r),
+                      color: const Color(0xffF1F1F1),
+                    ),
+                    height: 50.h,
+                    width: 234.w,
+                    child: TextFormField(
+                      controller: messageController,
+                      decoration: InputDecoration(
+                        fillColor: const Color(0xffF1F1F1),
+                        suffixIcon: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: SvgPicture.asset(
+                            Assets.menu,
+                            height: 18.h,
+                            width: 18.w,
+                            fit: BoxFit.contain,
                           ),
-                          hintText: 'Type Something....',
-                          hintStyle: TextStyle(
-                            fontSize: 13.sp,
-                            fontWeight: FontWeight.w400,
-                            color: MyColors.grey,
-                          ),
-                          contentPadding: const EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 16),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30.r),
-                          ),
+                        ),
+                        hintText: 'Type Something....',
+                        hintStyle: TextStyle(
+                          fontSize: 13.sp,
+                          fontWeight: FontWeight.w400,
+                          color: MyColors.grey,
+                        ),
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 16),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30.r),
                         ),
                       ),
                     ),
@@ -223,6 +218,11 @@ class _ChatScreenState extends State<ChatScreen> {
                   Container(
                     height: 50.h,
                     width: 71.w,
+                    decoration: BoxDecoration(
+                      color: const Color(0xffF1F1F1),
+                      border: Border.all(color: MyColors.grey),
+                      borderRadius: BorderRadius.circular(30.r),
+                    ),
                     child: IconButton(
                       onPressed: () {
                         _sendMessage();
@@ -232,11 +232,6 @@ class _ChatScreenState extends State<ChatScreen> {
                         size: 15.sp,
                         color: const Color(0xffB9B9B9),
                       ),
-                    ),
-                    decoration: BoxDecoration(
-                      color: const Color(0xffF1F1F1),
-                      border: Border.all(color: MyColors.grey),
-                      borderRadius: BorderRadius.circular(30.r),
                     ),
                   )
                 ],

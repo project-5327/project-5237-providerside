@@ -1,15 +1,12 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:project_5237_provider/presentation/constants/responsive_view.dart';
 import 'package:project_5237_provider/presentation/constants/strings.dart';
 import 'package:project_5237_provider/presentation/screens/my_contracts/send_screen.dart';
 
 import '../../constants/color.dart';
 import '../../widgets/customize_button.dart';
-import '../my_contracts/map_screen.dart';
 
 class PaymentsScreen extends StatelessWidget {
   const PaymentsScreen({super.key});
@@ -40,9 +37,7 @@ class PaymentsScreen extends StatelessWidget {
                 textColor: MyColors.white,
                 borderColor: MyColors.btnColor,
                 radius: 100.r,
-                onTap: () {
-                  Get.to(() => MapScreen());
-                },
+                onTap: () {},
               ),
             ],
           )
@@ -98,7 +93,7 @@ class PaymentsScreen extends StatelessWidget {
           fontWeight: FontWeight.w700),
       content: Column(
         children: [
-          Container(
+          SizedBox(
             width: responsive.isMobile || responsive.isTablet
                 ? double.infinity
                 : 240.w,

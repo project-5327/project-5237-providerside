@@ -16,12 +16,12 @@ class SearchField extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Container(
+        SizedBox(
           height: 57.h,
           width: 277.w,
           child: TextFormField(
             decoration: InputDecoration(
-              suffixIcon: Icon(CupertinoIcons.search),
+              suffixIcon: const Icon(CupertinoIcons.search),
               hintText: 'Search for projects',
               hintStyle: TextStyle(
                   fontSize: 15.sp,
@@ -36,8 +36,11 @@ class SearchField extends StatelessWidget {
           ),
         ),
         InkWell(
-            onTap: () {
-              Get.to(FilterScreen());
+            onTap: () async {
+              Get.to(const FilterScreen());
+              // List<String>? selectedFilters = await Get.to(FilterScreen());
+              // if (selectedFilters != null && selectedFilters.isNotEmpty) {
+              //   _applyFilters(selectedFilters);
             },
             child: SvgPicture.asset(Assets.filter)),
       ],

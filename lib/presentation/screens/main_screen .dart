@@ -1,78 +1,45 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:project_5237_provider/presentation/screens/login_register/Add_projects.dart';
-import 'package:project_5237_provider/presentation/screens/login_register/add_project1.dart';
-import 'package:project_5237_provider/presentation/screens/login_register/booked.dart';
-import 'package:project_5237_provider/presentation/screens/login_register/credit.dart';
+import 'package:project_5237_provider/presentation/screens/login_register/freelancer_profile.dart';
+import 'package:project_5237_provider/presentation/screens/login_register/recent_proposal.dart';
 import 'package:project_5237_provider/presentation/screens/login_register/message.dart';
-import 'package:project_5237_provider/presentation/screens/login_register/notification.dart';
-import 'package:project_5237_provider/presentation/screens/login_register/proposal.dart';
-import 'package:project_5237_provider/presentation/screens/login_register/succesfully.dart';
-import 'package:project_5237_provider/presentation/screens/message/change_password.dart';
-import 'package:project_5237_provider/presentation/screens/message/forget_password.dart';
-import 'package:project_5237_provider/presentation/screens/message/otp_screen.dart';
-import 'package:project_5237_provider/presentation/screens/milestones/milestone.dart';
-import 'package:project_5237_provider/presentation/screens/my_contracts/my_contacts.dart';
-import 'package:project_5237_provider/presentation/screens/update_Project/chat_screen.dart';
-
+import 'package:project_5237_provider/presentation/screens/my_contracts/map_screen.dart';
 import '../constants/assets.dart';
 import '../constants/color.dart';
 import 'login_register/home_screen.dart';
-import 'login_register/EditProfile.dart';
 
 class MainScreen extends StatefulWidget {
   int? selectedIndex;
-  MainScreen({super.key, this.selectedIndex});
+
+  MainScreen({
+    super.key,
+    this.selectedIndex,
+  });
   @override
   State<MainScreen> createState() => _MainScreenState();
 }
 
 class _MainScreenState extends State<MainScreen> {
-  int _selectedIndex = 0;
+  final int _selectedIndex = 0;
 
   final List<Widget> _screens = [
     const HomeScreen(),
-    const MilestoneScreen(),
+    const RecentProposal(),
+     MapScreen(),
     const MessageScreen(),
-    const ChatScreen(),
-    const AddProjects(),
+    const FreelancerProfile()
 
-    // //0
-    // const HomeProjectDetails(),
-    // const ProposalScreen(),
-    // const SuccesfullyScreen(),
-    // const NotificationScreen(),
-
-    // const BookedClient(),
-    // const AddProjects(),
-    // const AddProject1(),
-    // const ForgetPasswordScreen(),
-    // const OtpScreen(),
-    // const ChangePassword(),
-    // const MilestoneScreen(),
-    // const MycontractScreen(),
-    // //2
-    // const ChatScreen(),
+   
   ];
 
   @override
   void initState() {
-    // TODO: implement initState
-    setState(() {
-      // _selectedIndex = widget.selectedIndex!;
-    });
+    setState(() {});
     super.initState();
   }
 
   final bottomNavKey = GlobalKey();
-
-  // @override
-  // void _onItemTapped(int index) {
-  //   setState(() {
-  //     _selectedIndex = index;
-  //   });
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -126,7 +93,7 @@ class _MainScreenState extends State<MainScreen> {
                 ),
                 bottomNavItem(
                   title: "",
-                  icon: Assets.message,
+                  icon: Assets.location,
                   isSelected:
                       widget.selectedIndex == 2 || widget.selectedIndex == 17,
                   onTap: () {
@@ -139,7 +106,7 @@ class _MainScreenState extends State<MainScreen> {
                 ),
                 bottomNavItem(
                   title: "",
-                  icon: Assets.wallet,
+                  icon: Assets.message,
                   isSelected: widget.selectedIndex == 3,
                   onTap: () {
                     if (widget.selectedIndex != 3) {

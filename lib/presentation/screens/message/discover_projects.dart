@@ -65,7 +65,7 @@ class _DiscoverProjectsState extends State<DiscoverProjects> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 //  _pages[currentIndex],
-                SearchField(),
+                const SearchField(),
                 SizedBox(
                   height: 27.h,
                 ),
@@ -88,9 +88,9 @@ class _DiscoverProjectsState extends State<DiscoverProjects> {
                 ),
                 InkWell(
                   onTap: () {
-                    Get.to(AddProjects());
+                    Get.to(const AddProjects());
                   },
-                  child: DiscoverContainer(
+                  child: const DiscoverContainer(
                       text1:
                           "Lorem Ipsum has been the industry's standard dummy text ever since the  1500s",
                       text2: '1000 - 2000',
@@ -98,9 +98,11 @@ class _DiscoverProjectsState extends State<DiscoverProjects> {
                       text3: 'Location',
                       username: 'Jason Jones',
                       time: '5 hours agoo',
+                      timerange: "range",
                       rate: 'Rate'),
                 ),
-                DiscoverContainer(
+                const DiscoverContainer(
+                    timerange: "range",
                     text1:
                         "Lorem Ipsum has been the industry's standard dummy text ever since the  1500s",
                     text2: '1000 - 2000',

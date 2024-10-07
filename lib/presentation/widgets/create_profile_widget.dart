@@ -4,12 +4,11 @@ import 'package:get/get.dart';
 import 'package:project_5237_provider/controller/profile_controller.dart';
 import 'package:project_5237_provider/presentation/constants/responsive_view.dart';
 
-import '../constants/assets.dart';
 import '../constants/color.dart';
 import '../screens/my_contracts/send_screen.dart';
 
 class CreateProfileWidget extends StatelessWidget {
-  CreateProfileWidget({super.key});
+  const CreateProfileWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -59,6 +58,7 @@ class EditCreateProfile extends StatelessWidget {
   final String text;
   final String text1;
   final String feildText;
+  final String? labelText;
   final TextAlign? align;
 
   final Color? color;
@@ -70,6 +70,7 @@ class EditCreateProfile extends StatelessWidget {
       required this.text,
       required this.text1,
       required this.feildText,
+      this.labelText,
       this.controller,
       this.validator,
       required this.ontap,
@@ -89,7 +90,7 @@ class EditCreateProfile extends StatelessWidget {
         TextWidget(
           align: TextAlign.start,
           text: text,
-          fontFamily: 'Montserrat',
+          fontfamily: 'Montserrat',
           color: MyColors.black,
           size: 20.sp,
           fontweight: FontWeight.w600,
@@ -100,7 +101,7 @@ class EditCreateProfile extends StatelessWidget {
         TextWidget(
           align: TextAlign.start,
           text: text1,
-          fontFamily: 'Montserrat',
+          fontfamily: 'Montserrat',
           color: MyColors.black,
           size: 10.sp,
           fontweight: FontWeight.w500,
@@ -109,9 +110,9 @@ class EditCreateProfile extends StatelessWidget {
           height: 25.h,
         ),
         TextFormField(
+          showCursor: false,
           onTap: ontap,
           textAlign: align ?? TextAlign.center,
-          readOnly: true,
           validator: validator,
           controller: controller,
           decoration: InputDecoration(
@@ -166,7 +167,7 @@ class DesktopEditCreate extends StatelessWidget {
           height: 25.h,
         ),
         TextWidget(
-          fontFamily: 'Montserrat',
+          fontfamily: 'Montserrat',
           align: TextAlign.start,
           text: text,
           color: MyColors.black,
@@ -177,7 +178,7 @@ class DesktopEditCreate extends StatelessWidget {
           height: 15.h,
         ),
         TextWidget(
-          fontFamily: 'Montserrat',
+          fontfamily: 'Montserrat',
           align: TextAlign.start,
           text: text1,
           color: MyColors.black.withOpacity(0.3),
@@ -188,7 +189,7 @@ class DesktopEditCreate extends StatelessWidget {
           height: 25.h,
         ),
         TextWidget(
-          fontFamily: 'Montserrat',
+          fontfamily: 'Montserrat',
           align: TextAlign.start,
           text: title ?? '',
           color: MyColors.black,

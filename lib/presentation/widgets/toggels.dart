@@ -109,14 +109,17 @@ class _TimeLineToggelState extends State<TimeLineToggel> {
 }
 
 class Toggell1 extends StatefulWidget {
-  const Toggell1({super.key});
+  final ValueChanged<String> onExperienceLevelChanged;
+
+  const Toggell1({super.key, required this.onExperienceLevelChanged});
 
   @override
   State<Toggell1> createState() => _Toggell1State();
 }
 
 class _Toggell1State extends State<Toggell1> {
-  String selectedSize = 'Fresher';
+  String selectedSize = AppStrings.medium;
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -126,6 +129,7 @@ class _Toggell1State extends State<Toggell1> {
           onTap: () {
             setState(() {
               selectedSize = AppStrings.fresher;
+              widget.onExperienceLevelChanged(selectedSize);
             });
           },
           child: Row(
@@ -152,6 +156,7 @@ class _Toggell1State extends State<Toggell1> {
           onTap: () {
             setState(() {
               selectedSize = AppStrings.medium;
+              widget.onExperienceLevelChanged(selectedSize);
             });
           },
           child: Row(
@@ -159,9 +164,7 @@ class _Toggell1State extends State<Toggell1> {
               SvgPicture.asset(selectedSize == AppStrings.medium
                   ? Assets.circle_dotIC
                   : Assets.circleIC),
-              SizedBox(
-                width: 2.w,
-              ),
+              SizedBox(width: 2.w),
               Text(
                 AppStrings.medium,
                 style: TextStyle(
@@ -180,6 +183,7 @@ class _Toggell1State extends State<Toggell1> {
           onTap: () {
             setState(() {
               selectedSize = AppStrings.experinced;
+              widget.onExperienceLevelChanged(selectedSize);
             });
           },
           child: Row(
@@ -187,9 +191,7 @@ class _Toggell1State extends State<Toggell1> {
               SvgPicture.asset(selectedSize == AppStrings.experinced
                   ? Assets.circle_dotIC
                   : Assets.circleIC),
-              SizedBox(
-                width: 2.w,
-              ),
+              SizedBox(width: 2.w),
               Text(
                 AppStrings.experinced,
                 style: TextStyle(

@@ -29,6 +29,11 @@ class MyColors {
   static Color black3 = const Color(0xff2A1E17);
   static Color btnDisable = const Color(0x2C62B999);
   static Color closeBtn = const Color(0xffB3B3B3);
-  static Color grey4 = Color(0xff3D3F33);
-  static Color blue2 = Color(0xff3A75C4);
+  static Color grey4 = const Color(0xff3D3F33);
+  static Color blue2 = const Color(0xff3A75C4);
+
+  static Color textC = const Color(0xff0D1634);
+
+  static Color otpCont = const Color(0xffC6D8EE);
+  static Color grey5 = const Color(0xffE1E4E8);
 }

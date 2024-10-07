@@ -22,7 +22,7 @@ class CreateYourProfile extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              CreateProfileWidget(),
+              const CreateProfileWidget(),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: Column(
