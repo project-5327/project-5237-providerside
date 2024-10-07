@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:project_5237_provider/presentation/screens/login_register/EditProfile.dart';
 
 import '../../constants/color.dart';
 import '../../widgets/Catagory1.dart';

@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,7 +9,6 @@ import 'package:project_5237_provider/data/models/proposal_data_response.dart';
 import 'package:project_5237_provider/presentation/constants/responsive_view.dart';
 import 'package:project_5237_provider/provider/date_time_provider.dart';
 import 'package:provider/provider.dart';
-
 import '../../presentation/constants/assets.dart';
 import '../../presentation/constants/color.dart';
 import '../../presentation/constants/strings.dart';
@@ -19,6 +17,7 @@ import '../../presentation/screens/my_contracts/send_screen.dart';
 import '../../presentation/widgets/Customize_textfield.dart';
 import '../../presentation/widgets/customize_button.dart';
 import '../../provider/home/proposal_provider.dart';
+
 
 class AcceptProposalScreen extends StatefulWidget {
   final ProposalListData proposalListData;
@@ -88,7 +87,7 @@ class _AcceptProposalScreenState extends State<AcceptProposalScreen> {
                               onPressed: () {
                                 Get.back();
                               },
-                              icon: Icon(
+                              icon: const Icon(
                                 Icons.arrow_back_ios,
                               )),
                           Text(

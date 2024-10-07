@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -34,7 +33,7 @@ class SettingsScreen extends StatelessWidget {
             ),
             body: SingleChildScrollView(
                 child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 25.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 25.0),
                     child: Column(children: [
                       SizedBox(
                         height: 30.h,
@@ -45,14 +44,14 @@ class SettingsScreen extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => NotificationScreen()));
+                                  builder: (context) => const NotificationScreen()));
                         },
                       ),
                       SettingWidget(
                           text: 'Update Password',
                           onTap: () {
                             ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text("Comming Soon")));
+                                const SnackBar(content: Text("Comming Soon")));
                           }),
                       SettingWidget(
                         text: 'Milestones',
@@ -60,7 +59,7 @@ class SettingsScreen extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => MilestoneScreen()));
+                                  builder: (context) => const MilestoneScreen()));
                         },
                       ),
                       SettingWidget(
@@ -69,20 +68,20 @@ class SettingsScreen extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => MycontractScreen()));
+                                  builder: (context) => const MycontractScreen()));
                         },
                       ),
                       SettingWidget(
                           text: 'Privacy & Policy',
                           onTap: () {
                             ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text("Comming Soon")));
+                                const SnackBar(content: Text("Comming Soon")));
                           }),
                       SettingWidget(
                           text: 'FAQ',
                           onTap: () {
                             ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text("Comming Soon")));
+                                const SnackBar(content: Text("Comming Soon")));
                           }),
                       SettingWidget(
                           text: 'Logout', onTap: () => dialogBoxCustom(context))
@@ -122,7 +121,7 @@ class SettingsScreen extends StatelessWidget {
                       foregroundColor: Colors.white,
                       backgroundColor: MyColors.btnColor,
                       padding:
-                          EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                          const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                     ),
                     onPressed: () {
                       BaseClient.logout()
@@ -133,7 +132,7 @@ class SettingsScreen extends StatelessWidget {
                                 (Route<dynamic> route) => false,
                               ));
                       ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text("User log out succesfully")));
+                          const SnackBar(content: Text("User log out succesfully")));
                     },
                     child: Text(
                       'Yes',
@@ -150,7 +149,7 @@ class SettingsScreen extends StatelessWidget {
                       foregroundColor: Colors.white,
                       backgroundColor: MyColors.btnColor,
                       padding:
-                          EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                          const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                     ),
                     onPressed: () {
                       Navigator.of(context).pop();

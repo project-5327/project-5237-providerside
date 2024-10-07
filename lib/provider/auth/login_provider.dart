@@ -199,8 +199,8 @@ class LoginProvider extends ChangeNotifier {
     }
   }
 
-  Future<bool> changePassword(String? otp, String? newPassword,
-      {required BuildContext context}) async {
+  Future<bool> changePassword( String? newPassword, 
+      { required BuildContext context}) async {
     print("Login method called");
     _isLoading = true;
     _errorMessage = null;

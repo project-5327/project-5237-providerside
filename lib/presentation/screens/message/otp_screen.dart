@@ -217,7 +217,7 @@ class _OtpScreenState extends State<OtpScreen> {
 
                                 await loginProvider.changePassword(
                                   loginProvider.otpCode,
-                                  password,
+                                //  password,
                                   context: context,
                                 );
 
@@ -422,7 +422,7 @@ class _OtpScreenState extends State<OtpScreen> {
                                       fontFamily: Fonts.fontsinter,
                                       fontSize: 12.0,
                                       fontWeight: FontWeight.w500,
-                                      color: MyColors.black1),
+                                      color: MyColors.black1), 
                                 ),
                                 SizedBox(
                                   height: 20.h,
@@ -442,7 +442,7 @@ class _OtpScreenState extends State<OtpScreen> {
 
                                           await loginProvider.changePassword(
                                             loginProvider.otpCode,
-                                            password,
+                                          //  password,
                                             context: context,
                                           );
 
