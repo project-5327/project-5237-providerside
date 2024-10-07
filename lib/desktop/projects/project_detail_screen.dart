@@ -87,7 +87,7 @@ class ProposalDetailScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(100.r),
                               child: Container(
                                 width: 67.w,
-                                height: 71.h,
+                                height: 67.h,
                                 decoration:
                                     const BoxDecoration(shape: BoxShape.circle),
                                 child: Image.asset('assets/images/image.jpeg',

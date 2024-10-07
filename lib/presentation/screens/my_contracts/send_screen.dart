@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:project_5237_provider/presentation/constants/color.dart';
 import 'package:project_5237_provider/provider/home/proposal_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:path/path.dart' as path;
 
 import '../../constants/assets.dart';
 import '../../widgets/contract_widgets.dart';
@@ -38,7 +39,7 @@ class _SendScreenState extends State<SendScreen> {
   Widget build(BuildContext context) {
     return Consumer<ProposalProvider>(
         builder: (context, proposalProvider, child) {
-      final proposals = proposalProvider.proposalByUser?.data;
+      final proposals = proposalProvider.proposalByUser?.data ?? [];
       debugPrint("proposal data ========> $proposals");
       if (proposalProvider.loading) {
         return Center(
@@ -52,9 +53,13 @@ class _SendScreenState extends State<SendScreen> {
           child: Text("No proposals available"),
         );
       }
+      final filteredProposals = proposals.where((proposal) {
+        final status = proposal.status?.toLowerCase();
+        return status == 'submitted';
+      }).toList();
       return SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12),
+          padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -63,24 +68,21 @@ class _SendScreenState extends State<SendScreen> {
               ListView.builder(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  itemCount: proposals.length,
+                  itemCount: filteredProposals.length,
                   itemBuilder: (context, index) {
-                    final proposal = proposals[index];
+                    final proposal = filteredProposals[index];
 
-                    return InkWell(
-                      //  onTap: () => _handleProjectTileTap(0),
-                      child: ProjectTile2(
-                        proposal: proposal,
-                        image: Assets.bag,
-                        title: proposal.projectId?.title,
-                        title1:
-                            '${proposal.clientDetails?.firstName} ${proposal.clientDetails?.lastName}',
-                        subtitle: proposal.createdAt,
-                        trailingText:
-                            '\$${(proposal.proposedBudget?.numberDecimal)}',
-                        image1: proposal.clientDetails?.profileImage ??
-                            'https://pub-261021c7b68740ffba855a7e8a6f3c1e.r2.dev/undefined/vasily-koloda-8CqDvPuo_kI-unsplash.jpg',
-                      ),
+                    return ProjectTile2(
+                      proposal: proposal,
+                      image: Assets.bag,
+                      title: proposal.projectId?.title ?? "",
+                      title1:
+                          '${proposal.clientDetails?.firstName ?? ""} ${proposal.clientDetails?.lastName ?? ""}',
+                      subtitle: proposal.createdAt ?? "",
+                      trailingText:
+                          '\$${(proposal.proposedBudget?.numberDecimal ?? "")}',
+                      image1: proposal.clientDetails?.profileImage ??
+                          'https://th.bing.com/th/id/R.e5fe7d5b03fa11c16c80a7bddb63dc6c?rik=KPCJr8sgAungvw&riu=http%3a%2f%2fcdn.wallpapersafari.com%2f18%2f4%2ff6SdYa.jpg&ehk=cq1hCv1JtLpCF40gnczGRCHjMcMVlnCCGg7NKrGHhuc%3d&risl=&pid=ImgRaw&r=0',
                     );
                   }),
               SizedBox(height: 20.h),
@@ -93,15 +95,18 @@ class _SendScreenState extends State<SendScreen> {
 }
 
 class PdfContainer extends StatefulWidget {
-  const PdfContainer({super.key});
+  final String fileName;
+  final String fileSize;
+  const PdfContainer(
+      {super.key, required this.fileName, required this.fileSize});
 
   @override
   _PdfContainerState createState() => _PdfContainerState();
 }
 
 class _PdfContainerState extends State<PdfContainer> {
-  String fileName = 'Choose File';
-  String fileSize = '0 KB';
+  String? fileName;
+  String? fileSize;
 
   Future<void> _pickFile() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
@@ -112,9 +117,8 @@ class _PdfContainerState extends State<PdfContainer> {
     if (result != null) {
       // Get the file name and size
       setState(() {
-        fileName = result.files.first.name;
-        fileSize =
-            '${result.files.first.size / 1024} KB'; // Convert bytes to KB
+        fileName = path.basename(result.files.first.path!); // Extract file name
+        fileSize = '${(result.files.first.size / 1024).toStringAsFixed(2)} KB';
       });
     }
   }
@@ -136,17 +140,21 @@ class _PdfContainerState extends State<PdfContainer> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SvgPicture.asset(Assets.pdf),
-            SizedBox(
-              width: 10.w,
-            ),
+            SizedBox(width: 10.w),
             Column(
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(fileName), // Display the selected file name
-                Text(fileSize), // Display the file size
+                Text(
+                  fileName ?? widget.fileName,
+                  style: TextStyle(fontSize: 12.sp),
+                ),
+                Text(
+                  fileSize ?? widget.fileSize,
+                  style: TextStyle(fontSize: 10.sp),
+                ),
               ],
-            )
+            ),
           ],
         ),
       ),
@@ -156,10 +164,10 @@ class _PdfContainerState extends State<PdfContainer> {
 
 class TextWidget extends StatelessWidget {
   final String text;
-  final fontFamily;
   final size;
   final align;
   final Color color;
+  final String? fontfamily;
   final fontweight;
   const TextWidget(
       {super.key,
@@ -168,7 +176,7 @@ class TextWidget extends StatelessWidget {
       this.align,
       required this.color,
       this.fontweight,
-      this.fontFamily});
+      this.fontfamily});
 
   @override
   Widget build(BuildContext context) {
@@ -178,7 +186,7 @@ class TextWidget extends StatelessWidget {
           fontSize: size,
           fontWeight: fontweight,
           color: color,
-          fontFamily: fontFamily),
+          fontFamily: fontfamily ?? "Inter"),
     );
   }
 }

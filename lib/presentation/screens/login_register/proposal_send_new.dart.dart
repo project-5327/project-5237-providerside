@@ -15,6 +15,8 @@ import 'package:project_5237_provider/presentation/screens/login_register/succes
 import 'package:project_5237_provider/presentation/screens/my_contracts/send_screen.dart';
 import 'package:project_5237_provider/presentation/widgets/Customize_textfield.dart';
 import 'package:project_5237_provider/presentation/widgets/customize_button.dart';
+import 'package:project_5237_provider/presentation/widgets/file_picker.dart';
+import 'package:project_5237_provider/provider/date_time_provider.dart';
 import 'package:project_5237_provider/provider/home/home_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -27,24 +29,7 @@ class ProposalSendScreen extends StatefulWidget {
 }
 
 class _ProposalSendScreenState extends State<ProposalSendScreen> {
-  final ImagePicker _picker = ImagePicker();
-  XFile? _selectedImage;
-
-  String? filePath;
-
-  Future<void> pickFile() async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles();
-
-    if (result != null) {
-      PlatformFile file = result.files.first;
-
-      setState(() {
-        filePath = file.path;
-      });
-    } else {
-      print('No file selected');
-    }
-  }
+  XFile? _selectedFile;
 
   final GlobalKey<FormState> _proposalKey = GlobalKey<FormState>();
 
@@ -73,6 +58,8 @@ class _ProposalSendScreenState extends State<ProposalSendScreen> {
   }
 
   _mobileView(BuildContext context) {
+    final dateTimeProvider = Provider.of<DateTimeProvider>(context);
+
     return Consumer<HomeProvider>(builder: (context, homeProvider, child) {
       return SafeArea(
         child: Scaffold(
@@ -107,16 +94,28 @@ class _ProposalSendScreenState extends State<ProposalSendScreen> {
                         height: 35.h,
                       ),
                       CustomTextFormField(
+                        readOnly: true,
                         controller: dateTimeController,
-                        text: 'Select date & Time',
+                        text: dateTimeProvider.selectedDateTime ??
+                            'Select date & Time',
                         title: AppStrings.dateTime,
                         style: TextStyle(
                             fontSize: 13.sp,
                             fontWeight: FontWeight.w500,
                             color: MyColors.black1),
+                        icon: IconButton(
+                            onPressed: () async {
+                              await dateTimeProvider.selectDateTime(context);
+
+                              if (dateTimeProvider.selectedDateTime != null) {
+                                dateTimeController.text =
+                                    dateTimeProvider.selectedDateTime!;
+                              }
+                            },
+                            icon: const Icon(Icons.calendar_month)),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Please enter a date & time';
+                            return 'Please select a date and time';
                           }
                           return null;
                         },
@@ -125,6 +124,7 @@ class _ProposalSendScreenState extends State<ProposalSendScreen> {
                         height: 20.h,
                       ),
                       CustomTextFormField(
+                        keyboardType: TextInputType.number,
                         controller: rateController,
                         text: "Input desired rate",
                         title: AppStrings.rate,
@@ -134,7 +134,11 @@ class _ProposalSendScreenState extends State<ProposalSendScreen> {
                             color: MyColors.black1),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Please enter a rate.';
+                            return 'Please enter a rate';
+                          }
+                          final num? minRate = num.tryParse(value);
+                          if (minRate == null) {
+                            return 'Please enter a valid number';
                           }
                           return null;
                         },
@@ -143,6 +147,7 @@ class _ProposalSendScreenState extends State<ProposalSendScreen> {
                         height: 20.h,
                       ),
                       CustomTextFormField(
+                        keyboardType: TextInputType.streetAddress,
                         controller: addressController,
                         text: AppStrings.inputAddress,
                         title: AppStrings.address,
@@ -153,6 +158,13 @@ class _ProposalSendScreenState extends State<ProposalSendScreen> {
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Please enter a address';
+                          } else if (value.length < 5) {
+                            return 'Address is too short';
+                          } else if (!RegExp(r"^[a-zA-Z0-9\s,.-]+$")
+                              .hasMatch(value)) {
+                            return 'Enter a valid address';
+                          } else if (value.length > 100) {
+                            return 'Address is too long';
                           }
                           return null;
                         },
@@ -169,34 +181,12 @@ class _ProposalSendScreenState extends State<ProposalSendScreen> {
                         ),
                       ),
                       SizedBox(height: 10.h),
-                      InkWell(
-                        onTap: pickFile,
-                        child: Container(
-                          height: 88.h,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            border: Border.all(color: MyColors.grayDark),
-                          ),
-                          child: Center(
-                            child: _selectedImage != null
-                                ? Image.file(File(_selectedImage!.path),
-                                    height: 88.h, fit: BoxFit.cover)
-                                : Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        AppStrings.addAttachImage,
-                                        style: TextStyle(
-                                          fontSize: 13.sp,
-                                          fontWeight: FontWeight.w600,
-                                          color: MyColors.lightGrey,
-                                        ),
-                                      ),
-                                      SvgPicture.asset(Assets.addImage),
-                                    ],
-                                  ),
-                          ),
-                        ),
+                      FilePickerWidget(
+                        onFilePicked: (XFile? file) {
+                          setState(() {
+                            _selectedFile = file;
+                          });
+                        },
                       ),
                       SizedBox(
                         height: 20.h,
@@ -385,34 +375,12 @@ class _ProposalSendScreenState extends State<ProposalSendScreen> {
                         ),
                       ),
                       SizedBox(height: 10.h),
-                      InkWell(
-                        onTap: pickFile,
-                        child: Container(
-                          height: 88.h,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            border: Border.all(color: MyColors.grayDark),
-                          ),
-                          child: Center(
-                            child: _selectedImage != null
-                                ? Image.file(File(_selectedImage!.path),
-                                    height: 88.h, fit: BoxFit.cover)
-                                : Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        AppStrings.addAttachImage,
-                                        style: TextStyle(
-                                          fontSize: 13,
-                                          fontWeight: FontWeight.w600,
-                                          color: MyColors.lightGrey,
-                                        ),
-                                      ),
-                                      SvgPicture.asset(Assets.addImage),
-                                    ],
-                                  ),
-                          ),
-                        ),
+                      FilePickerWidget(
+                        onFilePicked: (XFile? file) {
+                          setState(() {
+                            _selectedFile = file;
+                          });
+                        },
                       ),
                       SizedBox(
                         height: 20.h,

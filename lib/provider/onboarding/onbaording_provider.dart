@@ -293,7 +293,6 @@ class OnbaordingProvider extends ChangeNotifier {
         // Skills as a list of strings
         "skills": _skills,
 
-        // Languages as a list of objects
         "languages":
             _addLanguages, // Assuming this is the list generated earlier
 

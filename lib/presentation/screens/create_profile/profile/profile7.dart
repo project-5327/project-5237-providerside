@@ -74,7 +74,7 @@ class Profile7 extends StatelessWidget {
                         height: 16.h,
                       ),
                       TextWidget(
-                        fontFamily: 'Lexend',
+                        fontfamily: 'Lexend',
                         align: TextAlign.start,
                         text: AppStrings.hourlyRate,
                         color: MyColors.black,
@@ -268,7 +268,7 @@ class Profile7 extends StatelessWidget {
                             height: 16.h,
                           ),
                           TextWidget(
-                            fontFamily: 'Lexend',
+                            fontfamily: 'Lexend',
                             align: TextAlign.start,
                             text: AppStrings.hourlyRate,
                             color: MyColors.black,

@@ -9,19 +9,19 @@ class ProposalByUser {
     status = json['status'];
     message = json['message'];
     if (json['data'] != null) {
-      data = [];
+      data = <Data>[];
       json['data'].forEach((v) {
-        data?.add(Data.fromJson(v));
+        data!.add(Data.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = {};
-    data['status'] = status;
-    data['message'] = message;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['status'] = this.status;
+    data['message'] = this.message;
     if (this.data != null) {
-      data['data'] = this.data?.map((v) => v.toJson()).toList();
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -88,29 +88,29 @@ class Data {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = {};
-    data['_id'] = sId;
-    if (projectId != null) {
-      data['projectId'] = projectId?.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['_id'] = this.sId;
+    if (this.projectId != null) {
+      data['projectId'] = this.projectId!.toJson();
     }
-    data['userId'] = userId;
-    data['proposalTitle'] = proposalTitle;
-    data['proposalDescription'] = proposalDescription;
-    data['estimatedTime'] = estimatedTime;
-    if (proposedBudget != null) {
-      data['proposedBudget'] = proposedBudget?.toJson();
+    data['userId'] = this.userId;
+    data['proposalTitle'] = this.proposalTitle;
+    data['proposalDescription'] = this.proposalDescription;
+    data['estimatedTime'] = this.estimatedTime;
+    if (this.proposedBudget != null) {
+      data['proposedBudget'] = this.proposedBudget!.toJson();
     }
-    data['status'] = status;
-    data['address'] = address;
-    data['proposalImage'] = proposalImage;
-    data['createdAt'] = createdAt;
-    data['updatedAt'] = updatedAt;
-    data['__v'] = iV;
-    if (freelancerDetails != null) {
-      data['freelancerDetails'] = freelancerDetails?.toJson();
+    data['status'] = this.status;
+    data['address'] = this.address;
+    data['proposalImage'] = this.proposalImage;
+    data['createdAt'] = this.createdAt;
+    data['updatedAt'] = this.updatedAt;
+    data['__v'] = this.iV;
+    if (this.freelancerDetails != null) {
+      data['freelancerDetails'] = this.freelancerDetails!.toJson();
     }
-    if (clientDetails != null) {
-      data['clientDetails'] = clientDetails?.toJson();
+    if (this.clientDetails != null) {
+      data['clientDetails'] = this.clientDetails!.toJson();
     }
     return data;
   }
@@ -133,13 +133,13 @@ class ProjectId {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = {};
-    data['_id'] = sId;
-    if (clientId != null) {
-      data['clientId'] = clientId?.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['_id'] = this.sId;
+    if (this.clientId != null) {
+      data['clientId'] = this.clientId!.toJson();
     }
-    data['title'] = title;
-    data['description'] = description;
+    data['title'] = this.title;
+    data['description'] = this.description;
     return data;
   }
 }
@@ -148,51 +148,39 @@ class ClientId {
   String? sId;
   String? userName;
   String? email;
+  String? profileImg;
 
-  ClientId({this.sId, this.userName, this.email});
+  ClientId({this.sId, this.userName, this.email, this.profileImg});
 
   ClientId.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
     userName = json['userName'];
     email = json['email'];
+    profileImg = json['profileImg'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = {};
-    data['_id'] = sId;
-    data['userName'] = userName;
-    data['email'] = email;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['_id'] = this.sId;
+    data['userName'] = this.userName;
+    data['email'] = this.email;
+    data['profileImg'] = this.profileImg;
     return data;
   }
 }
 
-// class ProposedBudget {
-//   String? numberDecimal;
-
-//   ProposedBudget({this.numberDecimal});
-
-//   ProposedBudget.fromJson(Map<String, dynamic> json) {
-//     numberDecimal = json['numberDecimal'];
-//   }
-
-//   Map<String, dynamic> toJson() {
-//     final Map<String, dynamic> data = {};
-//     data['numberDecimal'] = this.numberDecimal;
-//     return data;
-//   }
-// }
 class ProposedBudget {
   String? numberDecimal;
 
   ProposedBudget({this.numberDecimal});
 
   ProposedBudget.fromJson(Map<String, dynamic> json) {
-    numberDecimal = json['\$numberDecimal']; // Escape the '$' symbol
+    numberDecimal = json['\$numberDecimal'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = {};
-    data['\$numberDecimal'] = numberDecimal; // Escape the '$' symbol
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['\$numberDecimal'] = this.numberDecimal;
     return data;
   }
 }
@@ -216,12 +204,12 @@ class FreelancerDetails {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = {};
-    data['_id'] = sId;
-    data['user'] = user;
-    data['firstName'] = firstName;
-    data['lastName'] = lastName;
-    data['profileImage'] = profileImage;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['_id'] = this.sId;
+    data['user'] = this.user;
+    data['firstName'] = this.firstName;
+    data['lastName'] = this.lastName;
+    data['profileImage'] = this.profileImage;
     return data;
   }
 }

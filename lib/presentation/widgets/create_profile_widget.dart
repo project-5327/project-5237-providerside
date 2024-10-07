@@ -70,7 +70,7 @@ class EditCreateProfile extends StatelessWidget {
       required this.text,
       required this.text1,
       required this.feildText,
-        this.labelText,
+      this.labelText,
       this.controller,
       this.validator,
       required this.ontap,
@@ -90,7 +90,7 @@ class EditCreateProfile extends StatelessWidget {
         TextWidget(
           align: TextAlign.start,
           text: text,
-          fontFamily: 'Montserrat',
+          fontfamily: 'Montserrat',
           color: MyColors.black,
           size: 20.sp,
           fontweight: FontWeight.w600,
@@ -101,7 +101,7 @@ class EditCreateProfile extends StatelessWidget {
         TextWidget(
           align: TextAlign.start,
           text: text1,
-          fontFamily: 'Montserrat',
+          fontfamily: 'Montserrat',
           color: MyColors.black,
           size: 10.sp,
           fontweight: FontWeight.w500,
@@ -167,7 +167,7 @@ class DesktopEditCreate extends StatelessWidget {
           height: 25.h,
         ),
         TextWidget(
-          fontFamily: 'Montserrat',
+          fontfamily: 'Montserrat',
           align: TextAlign.start,
           text: text,
           color: MyColors.black,
@@ -178,7 +178,7 @@ class DesktopEditCreate extends StatelessWidget {
           height: 15.h,
         ),
         TextWidget(
-          fontFamily: 'Montserrat',
+          fontfamily: 'Montserrat',
           align: TextAlign.start,
           text: text1,
           color: MyColors.black.withOpacity(0.3),
@@ -189,7 +189,7 @@ class DesktopEditCreate extends StatelessWidget {
           height: 25.h,
         ),
         TextWidget(
-          fontFamily: 'Montserrat',
+          fontfamily: 'Montserrat',
           align: TextAlign.start,
           text: title ?? '',
           color: MyColors.black,

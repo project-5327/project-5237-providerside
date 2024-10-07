@@ -104,8 +104,8 @@ class Projects {
     data['skillsRequired'] = skillsRequired;
     data['deadline'] = deadline;
     data['experienceLevel'] = experienceLevel;
-    data['Attachment'] = attachment; // Consider using lower case if needed
-    data['TimelineType'] = timelineType; // Consider using lower case if needed
+    data['Attachment'] = attachment;
+    data['TimelineType'] = timelineType;
     data['status'] = status;
     data['createdAt'] = createdAt;
     data['updatedAt'] = updatedAt;

@@ -177,6 +177,43 @@ class BaseClient {
     }
   }
 
+  static Future<Response<dynamic>?> putByToken({
+    String? api,
+    String? token,
+    FormData? formData,
+  }) async {
+    try {
+      var response = await dio.put(
+        api ?? "",
+        data: formData ?? {},
+        options: Options(
+          headers: {
+            if (token != null && token.isNotEmpty)
+              "Authorization": "Bearer $token",
+          },
+        ),
+      );
+      return response;
+    } on DioException catch (e) {
+      if (e.type == DioException.connectionTimeout) {
+        throw ApiNotRespondingException("Connection Timeout");
+      } else if (e.type == DioException.receiveTimeout) {
+        throw ApiNotRespondingException("Connection Timeout");
+      } else if (e.type == DioException.connectionError) {
+        throw ApiNotRespondingException("No Internet Connection");
+      } else if (e.response != null) {
+        debugPrint(e.response!.data);
+        debugPrint(e.response!.headers.toString());
+      } else {
+        debugPrint(e.requestOptions.headers.toString());
+        debugPrint(e.toString());
+      }
+    } catch (e) {
+      throw ApiNotRespondingException(e.toString());
+    }
+    return null;
+  }
+
   // DELETE request
   static Future<dynamic> delete({String? api}) async {
     var uri = baseUrl + (api ?? "");
@@ -233,6 +270,45 @@ class BaseClient {
         debugPrint(e.message);
       }
     }
+  }
+
+  static Future<dynamic> putForm({
+    String? api,
+    dynamic formData,
+    Map<String, String>? headers,
+    // required String token,
+  }) async {
+    var uri = baseUrl + (api ?? "");
+
+    try {
+      var response = await dio.put(
+        uri,
+        data: formData,
+        options: Options(
+          headers: {
+            "Content-Type": "multipart/form-data",
+            ...?headers,
+          },
+        ),
+      );
+      return response;
+    } on DioException catch (e) {
+      if (e.type == DioExceptionType.connectionTimeout ||
+          e.type == DioExceptionType.receiveTimeout) {
+        return ApiNotRespondingException("Connection Timeout");
+      } else if (e.type == DioExceptionType.connectionError) {
+        return ApiNotRespondingException("No Internet Connection");
+      } else if (e.response != null) {
+        debugPrint("Error Response: ${e.response!.data}");
+        debugPrint("Error Headers: ${e.response!.headers}");
+        return e.response;
+      } else {
+        debugPrint("Request Details: ${e.requestOptions}");
+        debugPrint("Error Message: ${e.message}");
+        return e.message;
+      }
+    }
+    return null;
   }
 
   static Future<bool> isAuthenticated() async {

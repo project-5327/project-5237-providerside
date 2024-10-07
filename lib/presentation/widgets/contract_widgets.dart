@@ -25,6 +25,8 @@ class ProjectTile1 extends StatefulWidget {
   final String? btnText;
   final Color? btnColor;
   final Color? btntextColor;
+  final VoidCallback? onTap;
+  final IconData? icon;
 
   const ProjectTile1(
       {super.key,
@@ -40,7 +42,9 @@ class ProjectTile1 extends StatefulWidget {
       this.btnText,
       this.btnColor,
       this.btntextColor,
-      required this.proposal});
+      required this.proposal,
+      this.onTap,
+      this.icon});
 
   @override
   _ProjectTile1State createState() => _ProjectTile1State();
@@ -48,16 +52,11 @@ class ProjectTile1 extends StatefulWidget {
 
 class _ProjectTile1State extends State<ProjectTile1> {
   String formatDateTime(String createdAt) {
-    try {
-      DateTime dateTime = DateTime.parse(createdAt); // Parse ISO 8601 string
-      // String day = DateFormat('EEEE').format(dateTime); // Example: Monday
-      String date =
-          DateFormat('d MMMM').format(dateTime); // Example: 5th January
-      String time = DateFormat('h:mm a').format(dateTime); // Example: 11:50 PM
-      return "$date - $time";
-    } catch (e) {
-      return "Invalid Date";
-    }
+    DateTime dateTime = DateTime.parse(createdAt);
+    String day = DateFormat('EEEE').format(dateTime);
+    String date = DateFormat('d MMMM').format(dateTime);
+    String time = DateFormat('h:mm a').format(dateTime);
+    return "$day, $date - $time";
   }
 
   bool _isExpanded = false;
@@ -80,12 +79,12 @@ class _ProjectTile1State extends State<ProjectTile1> {
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        SizedBox(
-                            height: 52.h,
-                            width: 52.w,
+                        Container(
+                            height: 45.h,
+                            width: 45.w,
                             child: SvgPicture.asset(widget.image!)),
                         SizedBox(
-                          width: 2.w,
+                          width: 5.w,
                         ),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -102,13 +101,19 @@ class _ProjectTile1State extends State<ProjectTile1> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 ClipRRect(
-                                  borderRadius: BorderRadius.circular(100.r),
-                                  child: Image.network(
-                                    height: 18.h,
-                                    width: 18.w,
-                                    widget.image1!,
-                                    fit: BoxFit.cover,
-                                  ),
+                                  borderRadius: BorderRadius.circular(100),
+                                  child: Image.network(widget.image1!,
+                                      height: 18.h,
+                                      width: 18.w,
+                                      fit: BoxFit.cover,
+                                      errorBuilder:
+                                          (context, error, stackTrace) =>
+                                              Image.network(
+                                                'https://th.bing.com/th/id/R.e5fe7d5b03fa11c16c80a7bddb63dc6c?rik=KPCJr8sgAungvw&riu=http%3a%2f%2fcdn.wallpapersafari.com%2f18%2f4%2ff6SdYa.jpg&ehk=cq1hCv1JtLpCF40gnczGRCHjMcMVlnCCGg7NKrGHhuc%3d&risl=&pid=ImgRaw&r=0',
+                                                height: 18.h,
+                                                width: 18.w,
+                                                fit: BoxFit.cover,
+                                              )),
                                 ),
                                 SizedBox(
                                   width: 7.w,
@@ -123,65 +128,70 @@ class _ProjectTile1State extends State<ProjectTile1> {
                                 ),
                                 IconButton(
                                   onPressed: () {
-                                    Get.to(const ChatScreen());
+                                    Get.to(ChatScreen());
                                   },
                                   icon: Icon(
                                     CupertinoIcons.chat_bubble_text,
-                                    size: 18.sp,
+                                    size: 18,
                                   ),
                                 )
                               ],
                             ),
                             Text(formatDateTime(widget.subtitle!),
                                 style: TextStyle(
-                                    fontSize: 12.sp,
+                                    fontSize: 10.sp,
                                     fontWeight: FontWeight.w400,
                                     color: MyColors.lightGrey)),
                           ],
                         ),
-                        SizedBox(
-                          width: 4.w,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(widget.tralingtext!,
-                                style: TextStyle(
-                                    fontSize: 13.sp,
-                                    fontWeight: FontWeight.w500,
-                                    color: MyColors.green)),
-                            SizedBox(
-                              height: 4.h,
-                            ),
-                            Container(
-                              height: 26.h,
-                              width: 67.w,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(24.r),
-                                color: _getButtonColors(widget
-                                        .proposal.status ??
-                                    "")['buttonColor'], // Set the text color
-                                // widget.btnColor!
+                        // SizedBox(
+                        //   width: 10.w,
+                        // ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 10,
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(widget.tralingtext!,
+                                  style: TextStyle(
+                                      fontSize: 13.sp,
+                                      fontWeight: FontWeight.w500,
+                                      color: MyColors.green)),
+                              SizedBox(
+                                height: 4.h,
                               ),
-                              child: Center(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(2.0),
-                                  child: Text(widget.btnText!,
-                                      style: TextStyle(
-                                        fontSize: 12.sp,
-                                        fontWeight: FontWeight.w400,
-                                        color: _getButtonColors(
-                                                widget.proposal.status ?? "")[
-                                            'textColor'], // Set the text color
-                                      )),
+                              Container(
+                                height: 28.h,
+                                width: 85.w,
+                                child: Center(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(2.0),
+                                    child: Text(widget.btnText!,
+                                        style: TextStyle(
+                                          fontSize: 12.sp,
+                                          fontWeight: FontWeight.w400,
+                                          color: _getButtonColors(
+                                              widget.proposal.status ??
+                                                  "")['textColor'],
+                                        )),
+                                  ),
+                                ),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(24.r),
+                                  color: _getButtonColors(
+                                      widget.proposal.status ??
+                                          "")['buttonColor'],
+                                  // widget.btnColor!
                                 ),
                               ),
-                            ),
-                            SizedBox(
-                              height: 5.h,
-                            ),
-                          ],
+                              SizedBox(
+                                height: 5.h,
+                              ),
+                            ],
+                          ),
                         )
                       ]),
                 ),
@@ -190,10 +200,10 @@ class _ProjectTile1State extends State<ProjectTile1> {
                     height: 18.h,
                   ),
                   Text(
-                    widget.proposal.projectId?.title ??
-                        "Lorem Ipsum has been the industry's standard \ndummy text ever since the 1500s",
+                    widget.proposal.projectId?.title ?? "",
                     style: TextStyle(
-                        fontSize: 14.sp,
+                        fontFamily: "Inter",
+                        fontSize: 13.sp,
                         fontWeight: FontWeight.w600,
                         color: MyColors.black),
                   ),
@@ -201,16 +211,18 @@ class _ProjectTile1State extends State<ProjectTile1> {
                     height: 18.h,
                   ),
                   Text(
-                    "Heading1",
+                    "Name",
                     style: TextStyle(
-                        fontSize: 13.sp,
-                        fontWeight: FontWeight.w600,
+                        fontFamily: 'Inter',
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.w500,
                         color: MyColors.black),
                   ),
                   Text(
                     '${widget.proposal.clientDetails?.firstName ?? ''} ${widget.proposal.clientDetails?.lastName ?? ''}',
                     style: TextStyle(
-                        fontSize: 14.sp,
+                        fontFamily: "Lexend",
+                        fontSize: 13.sp,
                         fontWeight: FontWeight.w400,
                         color: MyColors.black),
                   ),
@@ -218,17 +230,19 @@ class _ProjectTile1State extends State<ProjectTile1> {
                     height: 18.h,
                   ),
                   Text(
-                    "Heading2",
+                    "Date & Time",
                     style: TextStyle(
-                        fontSize: 13.sp,
-                        fontWeight: FontWeight.w600,
+                        fontFamily: 'Inter',
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.w500,
                         color: MyColors.black),
                   ),
                   Text(
                     formatDateTime(widget.proposal.createdAt ??
                         "Monday, 5th January - 11:50pm"),
                     style: TextStyle(
-                        fontSize: 14.sp,
+                        fontFamily: "Lexend",
+                        fontSize: 13.sp,
                         fontWeight: FontWeight.w400,
                         color: MyColors.black),
                   ),
@@ -243,8 +257,7 @@ class _ProjectTile1State extends State<ProjectTile1> {
                     height: 15.h,
                   ),
                   Text(
-                    widget.proposal.projectId?.description ??
-                        "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages.",
+                    widget.proposal.projectId?.description ?? "",
                     textAlign: TextAlign.justify,
                     style: TextStyle(
                         fontSize: 12,
@@ -317,11 +330,18 @@ class _ProjectTile1State extends State<ProjectTile1> {
                                         borderRadius:
                                             BorderRadius.circular(100.r),
                                         child: Image.network(
-                                          height: 18,
-                                          width: 18,
-                                          widget.image1!,
-                                          fit: BoxFit.cover,
-                                        ),
+                                            height: 18,
+                                            width: 18,
+                                            widget.image1!,
+                                            fit: BoxFit.cover,
+                                            errorBuilder:
+                                                (context, error, stackTrace) =>
+                                                    Image.network(
+                                                      'https://th.bing.com/th/id/R.e5fe7d5b03fa11c16c80a7bddb63dc6c?rik=KPCJr8sgAungvw&riu=http%3a%2f%2fcdn.wallpapersafari.com%2f18%2f4%2ff6SdYa.jpg&ehk=cq1hCv1JtLpCF40gnczGRCHjMcMVlnCCGg7NKrGHhuc%3d&risl=&pid=ImgRaw&r=0',
+                                                      height: 18,
+                                                      width: 18,
+                                                      fit: BoxFit.cover,
+                                                    )),
                                       ),
                                       SizedBox(
                                         width: 7.w,
@@ -383,9 +403,8 @@ class _ProjectTile1State extends State<ProjectTile1> {
                                               fontSize: 12.sp,
                                               fontWeight: FontWeight.w400,
                                               color: _getButtonColors(
-                                                      widget.proposal.status ??
-                                                          "")[
-                                                  'textColor'], // Set the text color
+                                                  widget.proposal.status ??
+                                                      "")['textColor'],
                                             )),
                                       ),
                                     ),
@@ -413,7 +432,7 @@ class _ProjectTile1State extends State<ProjectTile1> {
                           height: 18.h,
                         ),
                         Text(
-                          "Heading1",
+                          "Name",
                           style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w500,
@@ -430,7 +449,7 @@ class _ProjectTile1State extends State<ProjectTile1> {
                           height: 18.h,
                         ),
                         Text(
-                          "Heading2",
+                          "Date & Time",
                           style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w500,
@@ -481,13 +500,25 @@ class _ProjectTile1State extends State<ProjectTile1> {
   Map<String, Color> _getButtonColors(String status) {
     switch (status.toLowerCase()) {
       case 'rejected':
-        return {'buttonColor': const Color(0xffFFB2B2), 'textColor': MyColors.red};
+        return {
+          'buttonColor': const Color(0xffFFB2B2),
+          'textColor': MyColors.red
+        };
       case 'reviewed':
-        return {'buttonColor': const Color(0xffFFF2B2), 'textColor': MyColors.black};
+        return {
+          'buttonColor': const Color(0xffFFF2B2),
+          'textColor': MyColors.black
+        };
       case 'accepted':
-        return {'buttonColor': const Color(0xff447604), 'textColor': MyColors.white};
+        return {
+          'buttonColor': const Color(0xff447604),
+          'textColor': MyColors.white
+        };
       case 'submitted':
-        return {'buttonColor': const Color(0xffB2D6FF), 'textColor': MyColors.black};
+        return {
+          'buttonColor': const Color(0xffB2D6FF),
+          'textColor': MyColors.black
+        };
       default:
         return {
           'buttonColor': MyColors.btnColor.withOpacity(0.5),
@@ -555,8 +586,8 @@ class _ProjectTile2State extends State<ProjectTile2> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         SizedBox(
-                          height: 52.h,
-                          width: 52.w,
+                          height: 47.h,
+                          width: 47.w,
                           child: SvgPicture.asset(
                             widget.image!,
                             // fit: BoxFit.cover,
@@ -570,7 +601,7 @@ class _ProjectTile2State extends State<ProjectTile2> {
                               widget.title!,
                               style: TextStyle(
                                 fontSize: 16.sp,
-                                fontWeight: FontWeight.w500,
+                                fontWeight: FontWeight.w600,
                                 color: MyColors.black,
                               ),
                             ),
@@ -579,12 +610,18 @@ class _ProjectTile2State extends State<ProjectTile2> {
                               children: [
                                 ClipRRect(
                                   borderRadius: BorderRadius.circular(100),
-                                  child: Image.network(
-                                    widget.image1!,
-                                    height: 18.h,
-                                    width: 18.w,
-                                    fit: BoxFit.cover,
-                                  ),
+                                  child: Image.network(widget.image1!,
+                                      height: 18.h,
+                                      width: 18.w,
+                                      fit: BoxFit.cover,
+                                      errorBuilder:
+                                          (context, error, stackTrace) =>
+                                              Image.network(
+                                                'https://th.bing.com/th/id/R.e5fe7d5b03fa11c16c80a7bddb63dc6c?rik=KPCJr8sgAungvw&riu=http%3a%2f%2fcdn.wallpapersafari.com%2f18%2f4%2ff6SdYa.jpg&ehk=cq1hCv1JtLpCF40gnczGRCHjMcMVlnCCGg7NKrGHhuc%3d&risl=&pid=ImgRaw&r=0',
+                                                height: 18,
+                                                width: 18,
+                                                fit: BoxFit.cover,
+                                              )),
                                 ),
                                 SizedBox(width: 5.w),
                                 Text(
@@ -601,7 +638,7 @@ class _ProjectTile2State extends State<ProjectTile2> {
                             Text(
                               formatDateTime(widget.subtitle!),
                               style: TextStyle(
-                                fontSize: 12.sp,
+                                fontSize: 10.sp,
                                 fontWeight: FontWeight.w400,
                                 color: MyColors.lightGrey,
                               ),
@@ -610,14 +647,16 @@ class _ProjectTile2State extends State<ProjectTile2> {
                           ],
                         ),
                         const Spacer(),
-                        Text(
-                          widget.trailingText!,
-                          style: TextStyle(
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w500,
-                            color: MyColors.green,
-                          ),
-                        ),
+                        _isExpanded
+                            ? Text("")
+                            : Text(
+                                widget.trailingText!,
+                                style: TextStyle(
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w500,
+                                  color: MyColors.green,
+                                ),
+                              ),
                       ],
                     ),
                     if (_isExpanded) ...[
@@ -629,8 +668,7 @@ class _ProjectTile2State extends State<ProjectTile2> {
                         fontweight: FontWeight.w700,
                       ),
                       Text(
-                        formatDateTime(widget.proposal.createdAt ??
-                            '09/07/2024 & 11:30 AM'),
+                        formatDateTime(widget.proposal.createdAt ?? ''),
                         style: TextStyle(
                           fontSize: 13.sp,
                           fontWeight: FontWeight.w500,
@@ -640,7 +678,7 @@ class _ProjectTile2State extends State<ProjectTile2> {
 
                       SizedBox(height: 10.h),
                       TextWidget(
-                        text: '\$Rate',
+                        text: 'Rate',
                         color: MyColors.black1,
                         size: 13.sp,
                         fontweight: FontWeight.w700,
@@ -648,6 +686,20 @@ class _ProjectTile2State extends State<ProjectTile2> {
                       TextWidget(
                         text:
                             '\$${(widget.proposal.proposedBudget?.numberDecimal)}',
+                        color: const Color(0xff555555),
+                        size: 13.sp,
+                        fontweight: FontWeight.w500,
+                      ),
+                      SizedBox(height: 10.h),
+
+                      TextWidget(
+                        text: 'Address',
+                        color: MyColors.black1,
+                        size: 13.sp,
+                        fontweight: FontWeight.w700,
+                      ),
+                      TextWidget(
+                        text: '${(widget.proposal.address)}',
                         color: const Color(0xff555555),
                         size: 13.sp,
                         fontweight: FontWeight.w500,
@@ -675,7 +727,16 @@ class _ProjectTile2State extends State<ProjectTile2> {
                       SizedBox(height: 10.h),
                       const Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [PdfContainer(), PdfContainer()],
+                        children: [
+                          PdfContainer(
+                            fileName: 'Image.pdf',
+                            fileSize: '532 kb',
+                          ),
+                          PdfContainer(
+                            fileName: 'Image.pdf',
+                            fileSize: '532 kb',
+                          ),
+                        ],
                       ),
                       SizedBox(height: 10.h),
                       TextWidget(
@@ -810,7 +871,6 @@ class _ProjectTile2State extends State<ProjectTile2> {
                               color: Color(0xff555555),
                             ),
                           ),
-
                           const SizedBox(height: 10),
                           TextWidget(
                             text: '\$Rate',
@@ -826,19 +886,6 @@ class _ProjectTile2State extends State<ProjectTile2> {
                             fontweight: FontWeight.w500,
                           ),
                           const SizedBox(height: 10),
-                          // TextWidget(
-                          //   text: 'Address',
-                          //   color: MyColors.black1,
-                          //   size: 13.sp,
-                          //   fontweight: FontWeight.w700,
-                          // ),
-                          // TextWidget(
-                          //   text: 'Lorem Ipsum is simply dummy text',
-                          //   color: Color(0xff555555),
-                          //   size: 13.sp,
-                          //   fontweight: FontWeight.w500,
-                          // ),
-                          // SizedBox(height: 10.h),
                           TextWidget(
                             text: 'Attached Image',
                             color: MyColors.black1,
@@ -848,7 +895,16 @@ class _ProjectTile2State extends State<ProjectTile2> {
                           const SizedBox(height: 10),
                           const Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [PdfContainer(), PdfContainer()],
+                            children: [
+                              PdfContainer(
+                                fileName: '',
+                                fileSize: '',
+                              ),
+                              PdfContainer(
+                                fileName: '',
+                                fileSize: '',
+                              ),
+                            ],
                           ),
                           const SizedBox(height: 10),
                           TextWidget(
@@ -864,7 +920,6 @@ class _ProjectTile2State extends State<ProjectTile2> {
                             size: 13,
                             fontweight: FontWeight.w500,
                           ),
-
                           SizedBox(
                             height: 5.h,
                           ),

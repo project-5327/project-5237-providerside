@@ -66,19 +66,17 @@ class _MycontractScreenState extends State<MycontractScreen>
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Column(
             children: [
-              //  _pages[currentIndex],
               SizedBox(
                 height: 10.h,
               ),
-
               TabBar(
                 dividerHeight: 0,
                 indicator: BoxDecoration(
                   color: Colors.transparent,
                   border: Border(
                     bottom: BorderSide(
-                      color: MyColors.btnColor, // Underline color
-                      width: 2.w, // Underline thickness
+                      color: MyColors.btnColor,
+                      width: 2.w,
                     ),
                   ),
                 ),
@@ -87,11 +85,10 @@ class _MycontractScreenState extends State<MycontractScreen>
                   Tab(child: SvgPicture.asset(Assets.handshake)),
                   Tab(child: SvgPicture.asset(Assets.handshake_tick)),
                   Tab(child: SvgPicture.asset(Assets.send)),
-                  Tab(child: SvgPicture.asset(Assets.send))
+                  Tab(child: Image.asset("assets/images/receive.png"))
                 ],
                 labelColor: Colors.black,
               ),
-
               Expanded(
                 child: TabBarView(
                   controller: _tabController,

@@ -11,7 +11,6 @@ import 'login_register/home_screen.dart';
 
 class MainScreen extends StatefulWidget {
   int? selectedIndex;
-  // final List<String>? selectedFilters;
 
   MainScreen({
     super.key,
@@ -31,7 +30,7 @@ class _MainScreenState extends State<MainScreen> {
     const MessageScreen(),
     FreelancerProfile()
 
-    //  Editprofile()
+   
   ];
 
   @override

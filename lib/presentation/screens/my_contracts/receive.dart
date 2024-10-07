@@ -29,9 +29,7 @@ class _ReceivedProposalState extends State<ReceivedProposal> {
   Widget build(BuildContext context) {
     return Consumer<ProposalProvider>(
         builder: (context, proposalProvider, child) {
-      final proposals = proposalProvider.proposalByUser?.data;
-
-      debugPrint("proposal data ========> $proposals");
+      final proposals = proposalProvider.proposalByUser?.data ?? [];
 
       if (proposalProvider.loading) {
         return Center(
@@ -68,13 +66,14 @@ class _ReceivedProposalState extends State<ReceivedProposal> {
                 return ProjectTile1(
                   proposal: proposal,
                   image: Assets.bag,
-                  title: proposal.projectId?.title,
+                  title: proposal.projectId?.title ?? "",
                   title1:
-                      '${proposal.clientDetails?.firstName} ${proposal.clientDetails?.lastName}',
-                  subtitle: proposal.createdAt ?? 'Date not available',
+                      '${proposal.clientDetails?.firstName ?? ""} ${proposal.clientDetails?.lastName ?? ""}',
+                  subtitle: proposal.createdAt ?? '',
                   tralingicon: Assets.message,
-                  tralingtext: '\$${proposal.proposedBudget?.numberDecimal}',
-                  btnText: proposal.status ?? 'Unknown',
+                  tralingtext:
+                      '\$${proposal.proposedBudget?.numberDecimal ?? ""}',
+                  btnText: proposal.status ?? '',
                   btnColor: MyColors.btnColor.withOpacity(0.5),
                   btntextColor: MyColors.black1,
                   image1: proposal.clientDetails?.profileImage ??

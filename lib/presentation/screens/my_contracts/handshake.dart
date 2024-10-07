@@ -48,7 +48,7 @@ class _HandshakeWidgetState extends State<HandshakeWidget> {
 
       final filteredProposals = proposals.where((proposal) {
         final status = proposal.status?.toLowerCase();
-        return status == 'submitted' || status == 'accepted';
+        return status == 'submitted';
       }).toList();
 
       return SingleChildScrollView(
@@ -68,14 +68,14 @@ class _HandshakeWidgetState extends State<HandshakeWidget> {
                   return ProjectTile1(
                     proposal: proposal,
                     image: Assets.bag,
-                    title: proposal.projectId?.title ?? "Project Title",
+                    title: proposal.projectId?.title ?? "",
                     title1:
                         '${proposal.clientDetails?.firstName ?? ''} ${proposal.clientDetails?.lastName ?? ''}',
-                    subtitle: proposal.createdAt ?? 'Date not available',
+                    subtitle: proposal.createdAt ?? '',
                     tralingicon: Assets.message,
                     tralingtext:
-                        '\$${proposal.proposedBudget?.numberDecimal ?? '0'}',
-                    btnText: proposal.status ?? 'Unknown',
+                        '\$${proposal.proposedBudget?.numberDecimal ?? ''}',
+                    btnText: proposal.status ?? '',
                     btnColor: MyColors.btnColor.withOpacity(0.5),
                     btntextColor: MyColors.black1,
                     image1: proposal.clientDetails?.profileImage ??

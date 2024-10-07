@@ -7,13 +7,12 @@ class EndPoints {
   static String SENDOTP = "/api/auth/forgot-password/send-otp";
   static String VERIFY_OTP = "/api/auth/forgot-password/verify-otp";
   static String ONBOARDING = "/api/user/onboard";
-/*  static const String LOGIN = "/api/auth/login";*/
   static const String GETPROPOSALS = "/api/projects";
   static const String ACCEPTPROPOSAL = "/api/proposal";
-
   static const String PROJECTS = "/api/projects";
   static const String FREELANCERS = "/api/auth/getAllFreelancers";
   static const String FILTER = "/api/projects/filter";
   static const String USERPROPOSALS = '/api/proposals/sent';
   static const String USERDETAILS = '/api/user/details';
+  static const String FREELANCERDETAILS = "/api/auth/edit-profile-freelance";
 }

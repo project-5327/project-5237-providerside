@@ -7,6 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:project_5237_provider/controller/form_controller.dart';
 import 'package:project_5237_provider/presentation/screens/main_screen%20.dart';
 import 'package:project_5237_provider/presentation/screens/my_contracts/send_screen.dart';
+import 'package:project_5237_provider/presentation/screens/update_Project/edit_project.dart';
 import 'package:project_5237_provider/provider/freelancer_provider/freelancer_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -16,7 +17,8 @@ import '../../widgets/customize_button.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 class Editprofile extends StatefulWidget {
-  const Editprofile({super.key});
+  final freelancer;
+  const Editprofile({super.key, this.freelancer});
 
   @override
   State<Editprofile> createState() => _EditprofileState();
@@ -129,8 +131,6 @@ class _CategoryState extends State<Category> {
   final GlobalKey<FormState> _editKey = GlobalKey<FormState>();
   File? _image;
   final picker = ImagePicker();
-  final FocusNode _focusNode = FocusNode();
-
   @override
   void initState() {
     super.initState();
@@ -164,7 +164,8 @@ class _CategoryState extends State<Category> {
   Widget build(BuildContext context) {
     return Consumer<FreelancerProvider>(
       builder: (context, freelancerProvider, child) {
-        final freelancer = freelancerProvider.freelancerModel;
+        final freelancer =
+            freelancerProvider.freelancerModel?.data?.userDetails;
 
         return SingleChildScrollView(
           child: Form(
@@ -180,22 +181,20 @@ class _CategoryState extends State<Category> {
                       height: 158.h,
                       width: 150.w,
                       child: ClipRRect(
-                        borderRadius: BorderRadius.circular(100.r),
-                        child: _image != null
-                            ? Image.file(
-                                _image!,
-                                height: 148.h,
-                                width: 140.w,
-                                fit: BoxFit.cover,
-                              )
-                            : Image.network(
-                                freelancer?.profileImage ??
-                                    "https://s3-alpha-sig.figma.com/img/3f16/acab/f42dbab07ac7002f3428f90210da277d?Expires=1728259200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=cMZEA~D1zzHDYPI--zVMXN2IGQHuWUD6UAHMEreq6OaraVmJKvwBtpx2JnWdUWSB5BoR6XHuRiYZXdOnFadnSyFiO326DF5pIFZigIZKpCMCOsB-u9m-kdFtPv8Rkv0ku2xfV72wK6BQfxLzrrNvLwFkxS6hewo18cdDf6qjkkoOpYPuADBVEGvI589cEKqlMFa~EryEJTFBq-TO~yuLZKAp9MOuk2VW9c7x6Pnst7FEUggqqO44g0O4BGdUfkQfyWEVtE2ipzcjExcYORNPRvUY8FWW8v1M0bLtiFWKWPzts~Vm5fKdEJTUhPSbVRNKX-AnqZxjd7nTQJcNPrP~qw__",
-                                height: 148.h,
-                                width: 140.w,
-                                fit: BoxFit.cover,
-                              ),
-                      ),
+                          borderRadius: BorderRadius.circular(100.r),
+                          child: _image != null
+                              ? Image.file(
+                                  _image!,
+                                  height: 148.h,
+                                  width: 140.w,
+                                  fit: BoxFit.cover,
+                                )
+                              : Image.network(
+                                  freelancer?.profileImage ?? "",
+                                  height: 148.h,
+                                  width: 140.w,
+                                  fit: BoxFit.cover,
+                                )),
                     ),
                     Positioned(
                       top: 110,
@@ -220,7 +219,6 @@ class _CategoryState extends State<Category> {
                   ],
                 ),
                 SizedBox(height: 16.h),
-
                 Center(
                   child: CustomTextFormField(
                     readOnly: false,
@@ -231,19 +229,18 @@ class _CategoryState extends State<Category> {
                       return null;
                     },
                     controller: userController,
-                    text: freelancer?.user?.userName ?? '',
-                    title: 'User Name',
+                    text: freelancer?.user?.userName,
+                    title: 'Full Name',
                     style: TextStyle(
                       fontSize: 13.sp,
                       fontWeight: FontWeight.w500,
                       color: const Color(0xff222222),
                     ),
-                    icon: IconButton(onPressed: () {}, icon: const Icon(Icons.edit)),
+                    icon: IconButton(
+                        onPressed: () {}, icon: const Icon(Icons.edit)),
                   ),
                 ),
                 SizedBox(height: 12.h),
-
-                // Email Field
                 Center(
                   child: CustomTextFormField(
                     readOnly: true,
@@ -258,7 +255,6 @@ class _CategoryState extends State<Category> {
                   ),
                 ),
                 SizedBox(height: 12.h),
-
                 SizedBox(height: 30.h),
                 if (freelancerProvider.loading)
                   Center(
@@ -276,34 +272,19 @@ class _CategoryState extends State<Category> {
                       color: MyColors.btnColor,
                       textColor: MyColors.white,
                       onTap: () async {
-                        if (_editKey.currentState!.validate() &&
-                            _image != null) {
-                          bool isUpdated =
-                              await freelancerProvider.updateProfile(
-                            imagePath: _image!.path,
-                            context: context,
-                            username: userController.text,
-                          );
+                        bool isUpdated = await freelancerProvider.updateProfile(
+                          imagePath: _image!.path,
+                          context: context,
+                          username: userController.text,
+                        );
 
-                          if (isUpdated) {
-                            setState(() {});
-                          } else {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                backgroundColor: Colors.red,
-                                content: Text(
-                                    'Failed to update profile. Please try again.'),
-                              ),
-                            );
-                          }
-                        } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              backgroundColor: Colors.red,
-                              content: Text(
-                                  'Please enter valid information and select an image'),
-                            ),
-                          );
+                        if (isUpdated) {
+                          final updatedData = {
+                            'userName': userController.text,
+                            'imagePath': _image?.path,
+                          };
+
+                          Navigator.pop(context, updatedData);
                         }
                       },
                     ),
@@ -327,94 +308,78 @@ class Catagory2 extends StatefulWidget {
 
 class _Catagory2State extends State<Catagory2> {
   final TextEditingController userController = TextEditingController();
-
   final FormController formController = FormController();
-
   final TextEditingController emailController = TextEditingController();
-
   final TextEditingController passwordController = TextEditingController();
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      final freelancerProvider =
-          Provider.of<FreelancerProvider>(context, listen: false);
-      freelancerProvider.fetchFreelancerDetail(context);
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     return Consumer<FreelancerProvider>(
         builder: (context, freelancerProvider, child) {
-      // final List<dynamic> personalProjectsList =
-      //     freelancerProvider.freelancerModel?.personalProjects ?? [];
-
+      final freelancer = freelancerProvider.freelancerModel?.data?.userDetails;
       return SingleChildScrollView(
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: SizedBox(
-                height: 800.h,
-                child: ListView.builder(
-                  itemCount: 1,
-                  // personalProjectsList.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    //  final personalProject = personalProjectsList[index];
-                    return Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            TextWidget(
-                              text: "Project Name",
-                              //personalProject?.projectName ?? "",
-                              color: MyColors.black,
-                              size: 17.sp,
-                              fontweight: FontWeight.w500,
+            freelancer != null
+                ? Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 10, vertical: 10),
+                    child: SizedBox(
+                      height: 800.h,
+                      child: ListView.builder(
+                        itemCount: freelancer?.personalProjects?.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          final project = freelancer?.personalProjects?[index];
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => EditProject()));
+                            },
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  children: [
+                                    TextWidget(
+                                      text: project?.projectName ?? "",
+                                      //personalProject?.projectName ?? "",
+                                      color: MyColors.black,
+                                      size: 17.sp,
+                                      fontweight: FontWeight.w500,
+                                    ),
+                                    SizedBox(width: 100.w),
+                                    TextWidget(
+                                      text: timeago.format(
+                                        DateTime.tryParse(
+                                                project?.startDate ?? "") ??
+                                            DateTime.now(),
+                                      ),
+                                      color: MyColors.grey,
+                                      size: 12.sp,
+                                      fontweight: FontWeight.w400,
+                                    ),
+                                  ],
+                                ),
+                                Text(project?.description ?? "",
+                                    softWrap: true,
+                                    style: TextStyle(
+                                      color: MyColors.black,
+                                      fontSize: 12.sp,
+                                      fontWeight: FontWeight.w500,
+                                    )),
+                              ],
                             ),
-                            SizedBox(width: 100.w),
-                            TextWidget(
-                              text: timeago.format(
-                                DateTime.tryParse("2024-10-04T15:56:30.852Z") ??
-                                    DateTime.now(),
-                              ),
-                              color: MyColors.grey,
-                              size: 12.sp,
-                              fontweight: FontWeight.w400,
-                            ),
-                          ],
-                        ),
-                        TextWidget(
-                          text:
-                              //  personalProject?.description ??
-                              "Lorem ipsum dolor sit amet consectetur.",
-                          color: MyColors.black,
-                          size: 12.sp,
-                          fontweight: FontWeight.w500,
-                        ),
-                      ],
-                    );
-                  },
-                ),
-              ),
-            ),
-            Center(
-              child: CustomizeButton(
-                borderColor: MyColors.btnColor,
-                radius: 100.r,
-                text: 'Update',
-                height: 40.h,
-                width: 334.w,
-                color: MyColors.btnColor,
-                textColor: MyColors.white,
-                onTap: () {
-                  Get.to(MainScreen());
-                },
-              ),
-            ),
+                          );
+                        },
+                      ),
+                    ),
+                  )
+                : Center(
+                    child: Text("No Projects found"),
+                  ),
             SizedBox(height: 53.h),
           ],
         ),
@@ -422,63 +387,3 @@ class _Catagory2State extends State<Catagory2> {
     });
   }
 }
-                          
-
-// class Catagory2 extends StatelessWidget {
-//   const Catagory2({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Padding(
-//       padding: EdgeInsets.symmetric(vertical: 16.h),
-//       child: SingleChildScrollView(
-//         child: Column(
-//           crossAxisAlignment: CrossAxisAlignment.start,
-//           children: [
-//             ListTile(
-//               title: TextWidget(
-//                 text: 'Project name',
-//                 color: MyColors.black,
-//                 size: 17,
-//                 fontweight: FontWeight.w500,
-//               ),
-//               subtitle: TextWidget(
-//                 text:
-//                     "Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.",
-//                 color: MyColors.black,
-//                 size: 14,
-//                 fontweight: FontWeight.w500,
-//               ),
-//               trailing: TextWidget(
-//                 text: '17 days ago',
-//                 color: MyColors.grey,
-//                 size: 12,
-//                 fontweight: FontWeight.w400,
-//               ),
-//             ),
-//             SizedBox(
-//               height: 20.h,
-//             ),
-//             Center(
-//               child: CustomizeButton(
-//                 borderColor: MyColors.btnColor,
-//                 radius: 100.r,
-//                 text: 'Update',
-//                 height: 40.h,
-//                 width: 334.w,
-//                 color: MyColors.btnColor,
-//                 textColor: MyColors.white,
-//                 onTap: () {
-//                   Get.to(() => AddProjects());
-//                 },
-//               ),
-//             ),
-//             SizedBox(
-//               height: 53.h,
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }

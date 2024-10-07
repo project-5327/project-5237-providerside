@@ -11,14 +11,11 @@ import 'package:project_5237_provider/presentation/constants/color.dart';
 import 'package:project_5237_provider/presentation/constants/responsive_view.dart';
 import 'package:project_5237_provider/presentation/constants/strings.dart';
 import 'package:project_5237_provider/presentation/screens/login_register/notification.dart';
-import 'package:project_5237_provider/presentation/screens/main_screen%20.dart';
-
 import 'package:project_5237_provider/presentation/widgets/discover_project_cont.dart';
 import 'package:project_5237_provider/presentation/widgets/search_field.dart';
 import 'package:project_5237_provider/provider/home/home_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:timeago/timeago.dart' as timeago;
-
 import '../../constants/assets.dart';
 
 class RecentProposal extends StatefulWidget {
@@ -29,14 +26,6 @@ class RecentProposal extends StatefulWidget {
 }
 
 class _RecentProposalState extends State<RecentProposal> {
-  bool _isSwitched = true;
-
-  void _toggleSwitch(bool value) {
-    setState(() {
-      _isSwitched = value;
-    });
-  }
-
   @override
   void initState() {
     super.initState();
@@ -172,7 +161,7 @@ class _RecentProposalState extends State<RecentProposal> {
                                                       "",
                                                   text2:
                                                       "\$${homeprovider.proposalDataDoc?.projects?[index].budget?.min} - \$${homeprovider.proposalDataDoc?.projects?[index].budget?.max}",
-                                                  text3: 'Location',
+                                                  text3: '',
                                                   rate: 'Rate',
                                                 ),
                                               ),

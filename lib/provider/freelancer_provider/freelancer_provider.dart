@@ -1,19 +1,27 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:project_5237_provider/config/baseclient/CustomInterceptor.dart';
 import 'package:project_5237_provider/config/baseclient/base_client.dart';
 import 'package:project_5237_provider/config/baseclient/endpoints.dart';
 import 'package:project_5237_provider/data/models/freelancer_model.dart';
+import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 
 class FreelancerProvider with ChangeNotifier {
   bool _loading = false;
   String? _errorMessage;
   final bool _isSuccess = false;
-  UserDetails? freelancerModel;
+  FreelancerDetail? freelancerModel;
   PersonalProjects? personalProjects;
 
   bool get loading => _loading;
   String? get errorMessage => _errorMessage;
   bool get isSuccess => _isSuccess;
+
+  String getFileExtension(String filePath) {
+    return filePath.split('.').last.toLowerCase();
+  }
 
   Future<bool> updateProfile({
     required BuildContext context,
@@ -26,13 +34,29 @@ class FreelancerProvider with ChangeNotifier {
     String? token = await CustomInterceptor.getToken();
 
     try {
-      final response = await BaseClient.puttoken(
-          api: EndPoints.USERDETAILS,
-          token: token,
-          payloadObj: {
-            "userName": username,
-            "profileImage": imagePath,
-          });
+      if (imagePath.isEmpty) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Please select a profile image.'),
+            backgroundColor: Colors.red,
+          ),
+        );
+        return false;
+      }
+
+      FormData formData = FormData.fromMap({
+        "userName": username,
+        "profileImg": await MultipartFile.fromFile(
+          imagePath,
+          filename: imagePath.split('/').last,
+        ),
+      });
+
+      final response = await BaseClient.putByToken(
+        formData: formData,
+        api: EndPoints.FREELANCERDETAILS,
+        token: token,
+      );
 
       debugPrint("Response: ${response?.data}");
 
@@ -40,19 +64,24 @@ class FreelancerProvider with ChangeNotifier {
         if (response?.data is Map<String, dynamic> &&
             response?.data['message'] is String) {
           debugPrint('Full Response: ${response?.data}');
+          debugPrint("token======> $token");
 
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(response!.data['message'])),
           );
           return true;
         } else {
-          debugPrint("Unexpected response format");
+          debugPrint("Unexpected response format: ${response?.data}");
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Unexpected response format.')),
+            const SnackBar(
+              content: Text('Unexpected response format.'),
+              backgroundColor: Colors.red,
+            ),
           );
         }
       } else {
-        debugPrint("Invalid credentials or null response");
+        debugPrint(
+            "Invalid credentials or null response. Status Code: ${response?.statusCode}");
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
@@ -81,10 +110,6 @@ class FreelancerProvider with ChangeNotifier {
     return false;
   }
 
-  String getFileExtension(String filePath) {
-    return filePath.split('.').last.toLowerCase();
-  }
-
   Future<void> fetchFreelancerDetail(BuildContext context) async {
     _loading = true;
     notifyListeners();
@@ -100,7 +125,7 @@ class FreelancerProvider with ChangeNotifier {
         debugPrint('response ==========> $data');
 
         if (data != null) {
-          freelancerModel = UserDetails.fromJson(data);
+          freelancerModel = FreelancerDetail.fromJson(data);
           _errorMessage = '';
           debugPrint('==== Freelancers retrieved successfully.=====');
           debugPrint("Freelancer details======> :$freelancerModel");
@@ -136,8 +161,7 @@ class FreelancerProvider with ChangeNotifier {
     String? token = await CustomInterceptor.getToken();
     try {
       final response = await BaseClient.getByToken(
-        api: EndPoints
-            .USERDETAILS, // Assuming USERPROJECTS is the correct API for personal projects.
+        api: EndPoints.USERDETAILS,
         token: token,
       );
 
@@ -146,13 +170,10 @@ class FreelancerProvider with ChangeNotifier {
         debugPrint('response ==========> $data');
 
         if (data != null) {
-          // Parse the projects data properly
-          freelancerModel = UserDetails.fromJson(data);
-          personalProjects =
-              (freelancerModel?.personalProjects ?? []) as PersonalProjects?;
+          freelancerModel = FreelancerDetail.fromJson(data);
+
           _errorMessage = '';
           debugPrint('==== Projects retrieved successfully.=====');
-          debugPrint("Freelancer Projects======> :$personalProjects");
         } else {
           _errorMessage = 'No data found';
           debugPrint('Error=======> No data found');
@@ -168,5 +189,89 @@ class FreelancerProvider with ChangeNotifier {
       _loading = false;
       notifyListeners();
     }
+  }
+
+  Future<bool> updateProject({
+    required BuildContext context,
+    required String projectName,
+    required String description,
+    required String startDate,
+    required String endDate,
+    required List<String> technologies,
+  }) async {
+    // Set loading state to true
+    _loading = true;
+    notifyListeners();
+
+    String? token = await CustomInterceptor.getToken();
+
+    try {
+      // Prepare the form data
+      Map<String, dynamic> data = {
+        "projectName": projectName,
+        "description": description,
+        "startDate": startDate,
+        "endDate": endDate,
+        "technologies": technologies,
+      };
+
+      final response = await BaseClient.putForm(
+        api: EndPoints.USERDETAILS,
+        formData: data,
+        headers: {
+          'Authorization': 'Bearer $token',
+        },
+      );
+
+      debugPrint("Response: ${response?.data}");
+
+      if (response?.statusCode == 200) {
+        if (response?.data is Map<String, dynamic> &&
+            response?.data['message'] is String) {
+          debugPrint('Full Response: ${response?.data}');
+          debugPrint("token======> $token");
+
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(response?.data['message'])),
+          );
+          return true;
+        } else {
+          debugPrint("Unexpected response format: ${response?.data}");
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Unexpected response format.'),
+              backgroundColor: Colors.red,
+            ),
+          );
+        }
+      } else {
+        debugPrint(
+            "Invalid credentials or null response. Status Code: ${response?.statusCode}");
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              response?.data is Map<String, dynamic> &&
+                      response?.data['message'] is String
+                  ? response?.data['message']
+                  : 'Unknown error occurred.',
+            ),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    } catch (e) {
+      debugPrint("Exception caught: $e");
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('An error occurred. Please try again.'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    } finally {
+      _loading = false;
+      notifyListeners();
+    }
+
+    return false;
   }
 }

@@ -63,7 +63,7 @@ class UserDetails {
   String? createdAt;
   String? updatedAt;
   int? iV;
-  List<dynamic>? personalProjects;
+  List<PersonalProjects>? personalProjects;
 
   UserDetails({
     this.sId,

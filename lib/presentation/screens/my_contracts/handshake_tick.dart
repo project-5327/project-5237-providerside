@@ -7,7 +7,6 @@ import '../../constants/assets.dart';
 import '../../constants/color.dart';
 import '../../widgets/contract_widgets.dart';
 
-
 class HandShakeTick extends StatefulWidget {
   const HandShakeTick({super.key});
 
@@ -49,7 +48,11 @@ class _HandShakeTickState extends State<HandShakeTick> {
             status == 'accepted' ||
             status == 'rejected';
       }).toList();
-
+      if (filteredProposals == null || filteredProposals.isEmpty) {
+        return const Center(
+          child: Text("No proposals available"),
+        );
+      }
       return SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

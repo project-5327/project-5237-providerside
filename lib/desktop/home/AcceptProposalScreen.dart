@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:project_5237_provider/data/models/proposal_data_response.dart';
 import 'package:project_5237_provider/presentation/constants/responsive_view.dart';
+import 'package:project_5237_provider/provider/date_time_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../../presentation/constants/assets.dart';
@@ -28,8 +29,6 @@ class AcceptProposalScreen extends StatefulWidget {
 }
 
 class _AcceptProposalScreenState extends State<AcceptProposalScreen> {
-  final ImagePicker _picker = ImagePicker();
-  XFile? _selectedImage;
   String? filePath;
   File? _file;
 
@@ -65,19 +64,13 @@ class _AcceptProposalScreenState extends State<AcceptProposalScreen> {
   TextEditingController dateTimeController = TextEditingController();
   TextEditingController rateController = TextEditingController();
   TextEditingController addressController = TextEditingController();
-
-  // final List<String> _options = [
-  //   'Web Design',
-  //   'Mockup',
-  //   'Web Design',
-  //   'Mockup'
-  // ];
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Consumer<ProposalProvider>(
           builder: (context, proposalProvider, child) {
+        final dateTimeProvider = Provider.of<DateTimeProvider>(context);
+
         return Scaffold(
           body: SingleChildScrollView(
             child: Padding(
@@ -112,6 +105,12 @@ class _AcceptProposalScreenState extends State<AcceptProposalScreen> {
                         controller: proposalProvider.titleController,
                         text: 'title',
                         title: 'Project title',
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter a aproject title';
+                          }
+                          return null;
+                        },
                         style: TextStyle(
                             fontSize: 13.sp,
                             fontWeight: FontWeight.w500,
@@ -128,6 +127,22 @@ class _AcceptProposalScreenState extends State<AcceptProposalScreen> {
                             fontSize: 13.sp,
                             fontWeight: FontWeight.w500,
                             color: MyColors.black1),
+                        icon: IconButton(
+                            onPressed: () async {
+                              await dateTimeProvider.selectDateTime(context);
+
+                              if (dateTimeProvider.selectedDateTime != null) {
+                                dateTimeController.text =
+                                    dateTimeProvider.selectedDateTime!;
+                              }
+                            },
+                            icon: const Icon(Icons.calendar_month)),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please select a date and time';
+                          }
+                          return null;
+                        },
                       ),
                       SizedBox(
                         height: 20.h,
@@ -145,9 +160,21 @@ class _AcceptProposalScreenState extends State<AcceptProposalScreen> {
                         height: 20.h,
                       ),
                       CustomTextFormField(
+                        keyboardType: TextInputType.number,
+                        readOnly: false,
                         controller: proposalProvider.addressController,
                         text: AppStrings.inputAddress,
                         title: AppStrings.address,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter a rate';
+                          }
+                          final num? minRate = num.tryParse(value);
+                          if (minRate == null) {
+                            return 'Please enter a valid number';
+                          }
+                          return null;
+                        },
                         style: TextStyle(
                             fontSize: 13.sp,
                             fontWeight: FontWeight.w500,
@@ -257,7 +284,19 @@ class _AcceptProposalScreenState extends State<AcceptProposalScreen> {
                         width: double.infinity,
                         child: Padding(
                           padding: const EdgeInsets.only(left: 8),
-                          child: TextField(
+                          child: TextFormField(
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter a Description.';
+                              }
+                              if (value.length < 10) {
+                                return 'Project description should be at least 10 characters long';
+                              }
+                              if (value.length > 500) {
+                                return 'Project description should not exceed 500 characters';
+                              }
+                              return null;
+                            },
                             controller: proposalProvider.descriptionController,
                             decoration: InputDecoration(
                               border: InputBorder.none,
