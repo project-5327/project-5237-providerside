@@ -146,31 +146,38 @@ class _ChangePasswordState extends State<ChangePassword> {
                       color: MyColors.btnColor,
                       textColor: MyColors.white,
                       onTap: () async {
-                        if (loginProvider.otpCode.isNotEmpty) {
-                          loginProvider.isLoading
-                              ? Center(
-                                  child: CircularProgressIndicator(
-                                  color: MyColors.blue1,
-                                ))
-                              : await loginProvider.changePassword(
-                                  loginProvider.otpCode,
-                                  loginProvider.passwordController.text,
-                                  context: context,
-                                );
+                                  try {
+                                  //  loginProvider.isLoading = true;
+                                    bool success =
+                                        await loginProvider.changePassword(
+                                       
+                                     repeatPasswordController.text, context:context                                      
+                                    );
 
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      //StockHubPage()
-                                      // AddStockRequest()
-                                      LoginScreen()));
-                          Future.delayed(const Duration(seconds: 5), () {
-                            loginProvider.passwordController.clear();
-                            loginProvider.confirmPasswordController.clear();
-                          });
-                        }
-                      }),
+                                    if (success) {
+                                      Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                LoginScreen()),
+                                      );
+
+                                      // Clear the fields
+                                      Future.delayed(
+                                          const Duration(seconds: 5), () {
+                                        loginProvider.passwordController
+                                            .clear();
+                                        loginProvider
+                                            .confirmPasswordController
+                                            .clear();
+                                      });
+                                    }
+                                  } finally {
+                                    // loginProvider.isLoading =
+                                    //     false; // Ensure loading is set to false
+                                  }
+                                                                }),
+                       
                   SizedBox(
                     height: 53.h,
                   ),
@@ -345,41 +352,37 @@ class _ChangePasswordState extends State<ChangePassword> {
                                         color: MyColors.btnColor,
                                         textColor: MyColors.white,
                                         onTap: () async {
-                                          if (loginProvider
-                                              .otpCode.isNotEmpty) {
-                                            loginProvider.isLoading
-                                                ? Center(
-                                                    child:
-                                                        CircularProgressIndicator(
-                                                    color: MyColors.blue1,
-                                                  ))
-                                                : await loginProvider
-                                                    .changePassword(
-                                                    loginProvider.otpCode,
-                                                    loginProvider
-                                                        .passwordController
-                                                        .text,
-                                                    context: context,
-                                                  );
+                                  try {
+                                  //  loginProvider.isLoading = true;
+                                    bool success =
+                                        await loginProvider.changePassword(
+                                     repeatPasswordController.text, context:context                                      
+                                    );
 
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        //StockHubPage()
-                                                        // AddStockRequest()
-                                                        LoginScreen()));
-                                            Future.delayed(
-                                                const Duration(seconds: 5), () {
-                                              loginProvider.passwordController
-                                                  .clear();
-                                              loginProvider
-                                                  .confirmPasswordController
-                                                  .clear();
-                                            });
-                                          }
-                                        }),
-                                    SizedBox(
+                                    if (success) {
+                                      Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                LoginScreen()),
+                                      );
+
+                                      // Clear the fields
+                                      Future.delayed(
+                                          const Duration(seconds: 5), () {
+                                        loginProvider.passwordController
+                                            .clear();
+                                        loginProvider
+                                            .confirmPasswordController
+                                            .clear();
+                                      });
+                                    }
+                                  } finally {
+                                    // loginProvider.isLoading =
+                                    //     false; // Ensure loading is set to false
+                                  }
+                                                                }),
+                                SizedBox(
                                       height: 10.h,
                                     ),
                                   ]),

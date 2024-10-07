@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -26,7 +25,7 @@ class _FreelancerProfileState extends State<FreelancerProfile> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-  ImagePicker _picker = ImagePicker();
+  final ImagePicker _picker = ImagePicker();
 
   File? _selectedImage;
 
@@ -80,10 +79,10 @@ class _FreelancerProfileState extends State<FreelancerProfile> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
             child: IconButton(
-              icon: Icon(Icons.settings),
+              icon: const Icon(Icons.settings),
               onPressed: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => SettingsScreen()));
+                    MaterialPageRoute(builder: (context) => const SettingsScreen()));
               },
             ),
           )
@@ -158,7 +157,7 @@ class _FreelancerProfileState extends State<FreelancerProfile> {
                 textColor: MyColors.white,
                 onTap: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Editprofile()));
+                      MaterialPageRoute(builder: (context) => const Editprofile()));
                 },
               ),
             ),

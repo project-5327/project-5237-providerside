@@ -7,7 +7,6 @@ import 'package:project_5237_provider/presentation/screens/my_contracts/send_scr
 
 import '../../constants/color.dart';
 import '../../widgets/customize_button.dart';
-import '../my_contracts/map_screen.dart';
 
 class PaymentsScreen extends StatelessWidget {
   const PaymentsScreen({super.key});

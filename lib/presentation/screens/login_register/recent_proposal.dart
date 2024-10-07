@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:project_5237_provider/data/models/proposal_data_response.dart';
 import 'package:project_5237_provider/desktop/projects/components/project_comp.dart';
@@ -11,7 +10,6 @@ import 'package:project_5237_provider/presentation/constants/color.dart';
 import 'package:project_5237_provider/presentation/constants/responsive_view.dart';
 import 'package:project_5237_provider/presentation/constants/strings.dart';
 import 'package:project_5237_provider/presentation/screens/login_register/notification.dart';
-import 'package:project_5237_provider/presentation/screens/main_screen%20.dart';
 
 import 'package:project_5237_provider/presentation/widgets/discover_project_cont.dart';
 import 'package:project_5237_provider/presentation/widgets/search_field.dart';

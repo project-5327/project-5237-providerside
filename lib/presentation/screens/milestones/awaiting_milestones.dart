@@ -207,7 +207,7 @@ class AwaitingMilestones extends StatelessWidget {
     final responsive = ResponsiveCheck(context);
     Get.defaultDialog(
       titlePadding: EdgeInsets.only(top: 20.h, bottom: 10.h),
-      contentPadding: EdgeInsets.symmetric(horizontal: 20),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 20),
       title: AppStrings.areYouSure,
       titleStyle: TextStyle(
           fontSize: 20.sp,
