@@ -11,20 +11,52 @@ class HomeProvider extends ChangeNotifier {
   List<String>? _proposalDocList;
   int? _lastpage;
   int? _length;
-  final bool _isSuccess = false;
-
-  bool get isSuccess => _isSuccess;
+  List<ProposalListData>? _filteredProposals;
+  List<String> _selectedFilters = [];
 
   bool get isLoading => _isLoading;
   String? get errorMessage => _errorMessage;
   ProposalData? get proposalDataDoc => _proposalDataDoc;
+  List<ProposalListData>? get filteredProposals => _filteredProposals;
   int? get lastpage => _lastpage;
   int? get length => _length;
 
-  List<String>? get proposalDocList => _proposalDocList;
+  void applySelectedFilters(List<String> selectedFilters) {
+    _selectedFilters = selectedFilters;
+    _applyFilters();
+    notifyListeners();
+  }
 
-  void setErrorMessage(String? message) {
-    _errorMessage = message;
+  void _applyFilters() {
+    if (_proposalDataDoc != null) {
+      _filteredProposals = _proposalDataDoc!.projects?.where((project) {
+        return _selectedFilters.every((filter) {
+          return project.skillsRequired?.contains(filter) ?? false;
+        });
+      }).toList();
+    } else {
+      _filteredProposals = _proposalDataDoc?.projects;
+    }
+  }
+
+  void filterProposals(String query) {
+    if (query.isEmpty) {
+      _filteredProposals = _proposalDataDoc?.projects;
+    } else {
+      _filteredProposals = _proposalDataDoc?.projects?.where((project) {
+        final clientMatch = project.clientId?.userName
+                ?.toLowerCase()
+                .contains(query.toLowerCase()) ??
+            false;
+        final projectNameMatch =
+            project.title?.toLowerCase().contains(query.toLowerCase()) ?? false;
+        final budgetMatch = project.budget != null &&
+            ('\$${project.budget?.min} - \$${project.budget?.max}'
+                .contains(query));
+
+        return clientMatch || projectNameMatch || budgetMatch;
+      }).toList();
+    }
     notifyListeners();
   }
 
@@ -36,9 +68,9 @@ class HomeProvider extends ChangeNotifier {
       await ApiService().getproposallistData().then((response) {
         if (response.status == 200) {
           _proposalDataDoc = response.data;
+          _filteredProposals = response.data?.projects;
           _lastpage = response.data?.totalPages ?? 0;
           _length = response.data?.projects?.length ?? 0;
-          for (int i = 0; i < _length!; i++) {}
 
           _isLoading = false;
           notifyListeners();
@@ -80,18 +112,13 @@ class HomeProvider extends ChangeNotifier {
     try {
       Response response = await apiService.createProposal(proposalData);
 
-      debugPrint("Response data: ${response.data}");
-      debugPrint("Response status code: ${response.statusCode}");
-
       if (response.data != null && response.statusCode == 201) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(response.data['message'])),
         );
-        debugPrint("Response message: ${response.data['message']}");
         return true;
       } else {
         _errorMessage = response.data['message'] ?? 'Failed to create project.';
-        debugPrint("Error message: ${response.data['message']}");
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(_errorMessage!)),
         );
@@ -99,7 +126,6 @@ class HomeProvider extends ChangeNotifier {
       }
     } catch (e) {
       _errorMessage = 'An error occurred. Please try again.';
-      debugPrint("Exception occurred: ${e.toString()}");
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(_errorMessage!)),
       );

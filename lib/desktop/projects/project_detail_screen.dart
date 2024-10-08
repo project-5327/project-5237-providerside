@@ -186,8 +186,9 @@ class ProposalDetailScreen extends StatelessWidget {
                                   ),
                                   const Spacer(),
                                   InkWell(
-                                    onTap: () {},
-                                    //Get.to(const MapScreen()),
+                                    onTap: () {
+                                      Get.to(MapScreen());
+                                    },
                                     child: Row(
                                       mainAxisSize: MainAxisSize.min,
                                       children: [

@@ -98,20 +98,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         SizedBox(
                           height: 23.h,
                         ),
-                        /* Center(
-                            child: CustomTextFormField(
-                              obscureText: formController.obscureText.value,
-                              validator: (value) =>
-                                  registerProvider.validateUserName(value ?? ''),
-                              controller: registerProvider.nameController,
-                              text: 'Enter your name',
-                              title: 'Name',
-                              style: TextStyle(
-                                  fontSize: 13.sp,
-                                  fontWeight: FontWeight.w500,
-                                  color: Color(0xff222222)),
-                            ),
-                          ),*/
                         SizedBox(
                           height: 22.h,
                         ),
@@ -202,115 +188,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     : Icons.visibility)),
                           ),
                         ),
-                        // SizedBox(
-                        //   height: 34.h,
-                        // ),
-                        // Center(
-                        //   child: Text(
-                        //     'I am a :',
-                        //     style: TextStyle(
-                        //       fontWeight: FontWeight.w700,
-                        //       fontSize: 12.sp,
-                        //       color: MyColors.black,
-                        //     ),
-                        //   ),
-                        // ),
-                        // SizedBox(
-                        //   height: 16.h,
-                        // ),
-                        // Center(
-                        //   child: Container(
-                        //       decoration: BoxDecoration(
-                        //         borderRadius: BorderRadius.circular(4.r),
-                        //         border: Border.all(
-                        //             color: MyColors.black.withOpacity(0.5)),
-                        //       ),
-                        //       height: 30.h,
-                        //       width: 252.w,
-                        //       child: Row(
-                        //         mainAxisAlignment: MainAxisAlignment.start,
-                        //         children: [
-                        //           Container(
-                        //             // height: 28.h,
-                        //             // width: 130.w,
-                        //             decoration: BoxDecoration(
-                        //               color: _selectedValue == 'Freelancer'
-                        //                   ? MyColors.btnColor
-                        //                   : Colors.white,
-                        //               borderRadius: BorderRadius.circular(4.r),
-                        //             ),
-                        //             child: Row(
-                        //               // crossAxisAlignment: CrossAxisAlignment.center,
-                        //               children: [
-                        //                 Radio<String>(
-                        //                   activeColor: Colors.white,
-                        //                   value: 'Freelancer',
-                        //                   groupValue: _selectedValue,
-                        //                   onChanged: (value) {
-                        //                     setState(() {
-                        //                       _selectedValue = value!;
-                        //                     });
-                        //                   },
-                        //                 ),
-                        //                 Text(
-                        //                   'Freelancer',
-                        //                   style: TextStyle(
-                        //                     fontSize: 12.sp,
-                        //                     fontWeight: FontWeight.w500,
-                        //                     color:
-                        //                         _selectedValue == 'Freelancer'
-                        //                             ? Colors.white
-                        //                             : Colors.black,
-                        //                   ),
-                        //                 ),
-                        //               ],
-                        //             ),
-                        //           ),
-                        //
-                        //           // Provider Option
-                        //           Container(
-                        //             // height: 28.h,
-                        //             // width: 120.w,
-                        //             decoration: BoxDecoration(
-                        //               color: _selectedValue == 'Client'
-                        //                   ? MyColors.btnColor
-                        //                   : Colors.white,
-                        //               borderRadius: BorderRadius.circular(4.r),
-                        //             ),
-                        //             child: Row(
-                        //               //    mainAxisAlignment: MainAxisAlignment.center,
-                        //               //  crossAxisAlignment: CrossAxisAlignment.center,
-                        //               children: [
-                        //                 Radio<String>(
-                        //                   activeColor: Colors.white,
-                        //                   value: 'Client',
-                        //                   groupValue: _selectedValue,
-                        //                   onChanged: (value) {
-                        //                     setState(() {
-                        //                       _selectedValue = value!;
-                        //                     });
-                        //                   },
-                        //                 ),
-                        //                 Text(
-                        //                   'Client',
-                        //                   style: TextStyle(
-                        //                     fontSize: 12.sp,
-                        //                     fontWeight: FontWeight.w500,
-                        //                     color: _selectedValue == 'Client'
-                        //                         ? Colors.white
-                        //                         : Colors.black,
-                        //                   ),
-                        //                 ),
-                        //               ],
-                        //             ),
-                        //           ),
-                        //         ],
-                        //       )),
-                        // ),
                         SizedBox(
                           height: 23.h,
                         ),
-
                         Row(
                           children: [
                             Checkbox(
@@ -321,19 +201,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               },
                               activeColor: const Color(0xffFF4C4A),
                             ),
-                            const Expanded(
+                            Expanded(
                               child: Text(
                                 'Yes! Send me genuinely useful emails every now and then to help me get the most out of Upwork.',
                                 softWrap: true,
                                 maxLines: 4,
                                 overflow: TextOverflow.clip,
+                                style: TextStyle(fontSize: 10.sp),
                               ),
                             )
                           ],
                         ),
-
                         const SizedBox(height: 15),
-
                         Row(
                           children: [
                             Checkbox(

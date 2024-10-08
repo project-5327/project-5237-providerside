@@ -24,7 +24,7 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
   Widget build(BuildContext context) {
     return Consumer<ProjectProvider>(
       builder: (context, projectProvider, child) {
-        final projects = projectProvider.projectmodel?.data;
+        final projects = projectProvider.projectModel?.data;
         debugPrint("Projects==========> $projects");
         return Scaffold(
             body: Padding(

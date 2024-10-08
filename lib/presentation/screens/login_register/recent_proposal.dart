@@ -9,6 +9,7 @@ import 'package:project_5237_provider/desktop/projects/project_detail_screen.dar
 import 'package:project_5237_provider/presentation/constants/color.dart';
 import 'package:project_5237_provider/presentation/constants/responsive_view.dart';
 import 'package:project_5237_provider/presentation/constants/strings.dart';
+import 'package:project_5237_provider/presentation/screens/filter/filter.dart';
 import 'package:project_5237_provider/presentation/screens/login_register/notification.dart';
 
 import 'package:project_5237_provider/presentation/widgets/discover_project_cont.dart';
@@ -26,162 +27,174 @@ class RecentProposal extends StatefulWidget {
 }
 
 class _RecentProposalState extends State<RecentProposal> {
+  final TextEditingController searchController = TextEditingController();
+  final FocusNode _focusNode = FocusNode();
+  bool _isFocused = false;
+
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       Provider.of<HomeProvider>(context, listen: false).proposalGetApi();
+      _focusNode.addListener(() {
+        setState(() {
+          _isFocused = _focusNode.hasFocus;
+        });
+      });
     });
+  }
+
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     final responsive = ResponsiveCheck(context);
     return responsive.isMobile || responsive.isTablet
-        ? Consumer<HomeProvider>(
-            builder: (context, homeprovider, child) {
-              return SafeArea(
-                child: Scaffold(
-                  appBar: AppBar(
-                    automaticallyImplyLeading: false,
-                    title: Text(
-                      'Recent Proposal',
-                      style: TextStyle(
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w600,
+        ? Consumer<HomeProvider>(builder: (context, homeProvider, child) {
+            return SafeArea(
+              child: Scaffold(
+                appBar: AppBar(
+                  automaticallyImplyLeading: false,
+                  title: Text(
+                    'Recent Proposal',
+                    style: TextStyle(
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  actions: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 15, right: 15),
+                      child: InkWell(
+                        onTap: () {
+                          Get.to(const NotificationScreen());
+                        },
+                        child: Stack(
+                          alignment: Alignment.topRight,
+                          children: [
+                            SvgPicture.asset(Assets.bell),
+                            SvgPicture.asset(Assets.dot),
+                          ],
+                        ),
                       ),
                     ),
-                    actions: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 15, right: 15),
-                        child: InkWell(
-                          onTap: () {
-                            Get.to(const NotificationScreen());
-                          },
-                          child: Stack(
-                            alignment: Alignment.topRight,
+                  ],
+                ),
+                body: homeProvider.isLoading
+                    ? Center(
+                        child: CircularProgressIndicator(
+                          color: MyColors.blue,
+                        ),
+                      )
+                    : SingleChildScrollView(
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 10.sp),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              SvgPicture.asset(Assets.bell),
-                              SvgPicture.asset(Assets.dot),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 10),
+                                child: SearchField(
+                                  onTap: () async {
+                                    List<String>? selectedFilters =
+                                        await Get.to(const FilterScreen());
+
+                                    if (selectedFilters != null &&
+                                        selectedFilters.isNotEmpty) {
+                                      homeProvider.applySelectedFilters(
+                                          selectedFilters);
+                                    }
+                                  },
+                                  controller: searchController,
+                                  onChanged: (value) {
+                                    homeProvider.filterProposals(value);
+                                  },
+                                ),
+                              ),
+                              SizedBox(height: 20.h),
+                              homeProvider.filteredProposals?.isEmpty ?? true
+                                  ? Container(
+                                      alignment: Alignment.center,
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.14,
+                                      child: Text(
+                                        "No Proposals Found",
+                                        style: GoogleFonts.inter(
+                                          textStyle: TextStyle(
+                                            fontSize: 16.sp,
+                                            fontWeight: FontWeight.w500,
+                                            color: MyColors.black,
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                  : ListView.builder(
+                                      shrinkWrap: true,
+                                      physics:
+                                          const NeverScrollableScrollPhysics(),
+                                      itemCount: homeProvider
+                                          .filteredProposals?.length,
+                                      itemBuilder: (context, index) {
+                                        final project = homeProvider
+                                            .filteredProposals?[index];
+                                        DateTime createdAt = DateTime.parse(
+                                          project?.createdAt ?? "",
+                                        );
+                                        return Column(
+                                          children: [
+                                            InkWell(
+                                              onTap: () {
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        ProposalDetailScreen(
+                                                      isFromHomeScreen: true,
+                                                      proposalListData:
+                                                          project ??
+                                                              ProposalListData(),
+                                                    ),
+                                                  ),
+                                                );
+                                              },
+                                              child: DiscoverContainer(
+                                                timerange:
+                                                    project?.deadline ?? "",
+                                                time: timeago.format(createdAt),
+                                                image:
+                                                    project?.attachment ?? "",
+                                                username: project
+                                                        ?.clientId?.userName ??
+                                                    "",
+                                                text1: project?.title ?? "",
+                                                text2:
+                                                    "\$${project?.budget?.min} - \$${project?.budget?.max}",
+                                                text3: '',
+                                                rate: 'Rate',
+                                              ),
+                                            ),
+                                            Divider(
+                                              color: MyColors.grey
+                                                  .withOpacity(0.4),
+                                              thickness: 1,
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    ),
                             ],
                           ),
                         ),
                       ),
-                    ],
-                  ),
-                  body: homeprovider.isLoading
-                      ? Center(
-                          child: CircularProgressIndicator(
-                            color: MyColors.blue,
-                          ),
-                        )
-                      : SingleChildScrollView(
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 10.sp),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const SearchField(),
-                                SizedBox(height: 20.h),
-                                homeprovider.proposalDataDoc?.projects
-                                            ?.isEmpty ??
-                                        true
-                                    ? Container(
-                                        alignment: Alignment.center,
-                                        height:
-                                            MediaQuery.of(context).size.height *
-                                                0.14,
-                                        child: Text(
-                                          "No Proposals Found",
-                                          style: GoogleFonts.inter(
-                                            textStyle: TextStyle(
-                                              fontSize: 20.sp,
-                                              fontWeight: FontWeight.w600,
-                                              color: MyColors.black,
-                                            ),
-                                          ),
-                                        ),
-                                      )
-                                    : ListView.builder(
-                                        shrinkWrap: true,
-                                        physics:
-                                            const NeverScrollableScrollPhysics(),
-                                        itemCount: homeprovider
-                                            .proposalDataDoc?.projects?.length,
-                                        itemBuilder: (context, index) {
-                                          DateTime createdAt = DateTime.parse(
-                                            homeprovider
-                                                    .proposalDataDoc
-                                                    ?.projects?[index]
-                                                    .createdAt ??
-                                                "",
-                                          );
-                                          return Column(
-                                            children: [
-                                              InkWell(
-                                                onTap: () {
-                                                  Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          ProposalDetailScreen(
-                                                        isFromHomeScreen: true,
-                                                        proposalListData: homeprovider
-                                                                    .proposalDataDoc
-                                                                    ?.projects?[
-                                                                index] ??
-                                                            ProposalListData(),
-                                                      ),
-                                                    ),
-                                                  );
-                                                },
-                                                child: DiscoverContainer(
-                                                  timerange: homeprovider
-                                                          .proposalDataDoc
-                                                          ?.projects?[index]
-                                                          .deadline ??
-                                                      "",
-                                                  time:
-                                                      timeago.format(createdAt),
-                                                  image: homeprovider
-                                                          .proposalDataDoc
-                                                          ?.projects?[index]
-                                                          .attachment ??
-                                                      "",
-                                                  username: homeprovider
-                                                          .proposalDataDoc
-                                                          ?.projects?[index]
-                                                          .clientId
-                                                          ?.userName ??
-                                                      "",
-                                                  text1: homeprovider
-                                                          .proposalDataDoc
-                                                          ?.projects?[index]
-                                                          .title ??
-                                                      "",
-                                                  text2:
-                                                      "\$${homeprovider.proposalDataDoc?.projects?[index].budget?.min} - \$${homeprovider.proposalDataDoc?.projects?[index].budget?.max}",
-                                                  text3: '',
-                                                  rate: 'Rate',
-                                                ),
-                                              ),
-                                              Divider(
-                                                color: MyColors.grey
-                                                    .withOpacity(0.4),
-                                                thickness: 1,
-                                              ),
-                                            ],
-                                          );
-                                        },
-                                      ),
-                              ],
-                            ),
-                          ),
-                        ),
-                ),
-              );
-            },
-          )
+              ),
+            );
+          })
         : Consumer<HomeProvider>(builder: (context, homeprovider, child) {
             return SafeArea(
               child: Scaffold(

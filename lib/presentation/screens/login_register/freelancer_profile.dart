@@ -41,7 +41,8 @@ class _FreelancerProfileState extends State<FreelancerProfile> {
     return Consumer<FreelancerProvider>(
         builder: (context, freelancerProvider, child) {
       final freelancer = freelancerProvider.freelancerModel?.data?.userDetails;
-      debugPrint("Freelancer name =======> ${freelancer?.firstName}");
+      debugPrint(
+          "Freelancer image=======> ${freelancer?.profileImage.toString()}");
       return SafeArea(
           child: Scaffold(
         appBar: AppBar(

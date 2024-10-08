@@ -127,7 +127,6 @@ class Category extends StatefulWidget {
 
 class _CategoryState extends State<Category> {
   final TextEditingController userController = TextEditingController();
-  final TextEditingController emailController = TextEditingController();
   final GlobalKey<FormState> _editKey = GlobalKey<FormState>();
   File? _image;
   final picker = ImagePicker();
@@ -244,7 +243,6 @@ class _CategoryState extends State<Category> {
                 Center(
                   child: CustomTextFormField(
                     readOnly: true,
-                    controller: emailController,
                     text: freelancer?.user?.email ?? '',
                     title: 'Email',
                     style: TextStyle(
@@ -378,7 +376,13 @@ class _Catagory2State extends State<Catagory2> {
                     ),
                   )
                 : Center(
-                    child: Text("No Projects found"),
+                    child: Text(
+                      "No Projects found",
+                      style: TextStyle(
+                          fontSize: 16,
+                          color: MyColors.black,
+                          fontWeight: FontWeight.w500),
+                    ),
                   ),
             SizedBox(height: 53.h),
           ],

@@ -61,7 +61,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
             ),
           ),
           body:
-          Consumer<LoginProvider>(builder: (context, loginProvider, child) {
+              Consumer<LoginProvider>(builder: (context, loginProvider, child) {
             return SingleChildScrollView(
               child: Padding(
                 padding: responsive.isTablet
@@ -72,7 +72,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     SizedBox(
-                      height: 100.h,
+                      height: 20.h,
                     ),
                     Center(
                       child: Text(
@@ -85,7 +85,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                       ),
                     ),
                     SizedBox(
-                      height: 30.h,
+                      height: 64.h,
                     ),
                     Center(
                       child: CustomTextFormField(
@@ -179,162 +179,163 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
               ),
               Flexible(
                   child: SizedBox(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 120.0),
-                      child: Center(
-                        child: Container(
-                            padding: const EdgeInsets.all(16.0),
-                            height: 300.0,
-                            // width: 200.w,
-                            decoration: BoxDecoration(
-                                color: MyColors.blueContainer,
-                                borderRadius: BorderRadius.circular(12.r)),
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Center(
-                                    child: Text(
-                                      AppStrings.forgetPassword,
-                                      style: TextStyle(
-                                          fontFamily: Fonts.fontsinter,
-                                          fontSize: 32,
-                                          fontWeight: FontWeight.w500,
-                                          color: MyColors.textC),
-                                    ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 120.0),
+                  child: Center(
+                    child: Container(
+                        padding: const EdgeInsets.all(16.0),
+                        height: 300.0,
+                        // width: 200.w,
+                        decoration: BoxDecoration(
+                            color: MyColors.blueContainer,
+                            borderRadius: BorderRadius.circular(12.r)),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Center(
+                                child: Text(
+                                  AppStrings.forgetPassword,
+                                  style: TextStyle(
+                                      fontFamily: Fonts.fontsinter,
+                                      fontSize: 32,
+                                      fontWeight: FontWeight.w500,
+                                      color: MyColors.textC),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 16.h,
+                              ),
+                              Text(
+                                AppStrings.noWorriessEnter,
+                                style: TextStyle(
+                                    fontFamily: Fonts.fontsMontserrat,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w500,
+                                    color: MyColors.black1),
+                              ),
+                              SizedBox(
+                                height: 17.h,
+                              ),
+                              // CustomTextFormField(
+                              //   color: MyColors.black,
+                              //   readOnly: false,
+                              //   title: 'EMAIL',
+                              //   text: AppStrings.enterHere,
+                              //   controller: loginProvider.emailController,
+                              Text(
+                                textAlign: TextAlign.left,
+                                "EMAIL",
+                                style: TextStyle(
+                                  fontSize: 14.0,
+                                  fontFamily: Fonts.fontsMontserrat,
+                                  fontWeight: FontWeight.w400,
+                                  color: const Color(0xff999999),
+                                ),
+                              ),
+                              TextFormField(
+                                validator: (value) =>
+                                    loginProvider.validateEmail(value ?? ""),
+                                controller: loginProvider.emailController,
+                                decoration: InputDecoration(
+                                  hintText: AppStrings.enterUrEmail,
+                                  hintStyle: TextStyle(
+                                    fontSize: 14.0,
+                                    fontFamily: Fonts.fontsinter,
+                                    fontWeight: FontWeight.w500,
+                                    color: MyColors.black1,
                                   ),
-                                  SizedBox(
-                                    height: 16.h,
+                                  enabledBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: MyColors.grey.withOpacity(0.7)),
                                   ),
-                                  Text(
-                                    AppStrings.noWorriessEnter,
-                                    style: TextStyle(
-                                        fontFamily: Fonts.fontsMontserrat,
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w500,
-                                        color: MyColors.black1),
+                                  focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: MyColors.grey.withOpacity(0.7)),
                                   ),
-                                  SizedBox(
-                                    height: 17.h,
-                                  ),
-                                  // CustomTextFormField(
-                                  //   color: MyColors.black,
-                                  //   readOnly: false,
-                                  //   title: 'EMAIL',
-                                  //   text: AppStrings.enterHere,
-                                  //   controller: loginProvider.emailController,
-                                  Text(
-                                    textAlign: TextAlign.left,
-                                    "EMAIL",
-                                    style: TextStyle(
-                                      fontSize: 14.0,
-                                      fontFamily: Fonts.fontsMontserrat,
-                                      fontWeight: FontWeight.w400,
-                                      color: const Color(0xff999999),
-                                    ),
-                                  ),
-                                  TextFormField(
-                                    validator: (value) =>
-                                        loginProvider.validateEmail(value ?? ""),
-                                    controller: loginProvider.emailController,
-                                    decoration: InputDecoration(
-                                      hintText: AppStrings.enterUrEmail,
-                                      hintStyle: TextStyle(
-                                        fontSize: 14.0,
-                                        fontFamily: Fonts.fontsinter,
-                                        fontWeight: FontWeight.w500,
-                                        color: MyColors.black1,
-                                      ),
-                                      enabledBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: MyColors.grey.withOpacity(0.7)),
-                                      ),
-                                      focusedBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color: MyColors.grey.withOpacity(0.7)),
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 35.h,
-                                  ),
-                                  CustomizeButton(
-                                    borderColor: MyColors.btnColor,
-                                    radius: 8.r,
-                                    text: 'Send Code',
-                                    height: 46.0,
-                                    width: 327.0,
-                                    color: MyColors.btnColor,
-                                    textColor: MyColors.white,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 35.h,
+                              ),
+                              CustomizeButton(
+                                borderColor: MyColors.btnColor,
+                                radius: 8.r,
+                                text: 'Send Code',
+                                height: 46.0,
+                                width: 327.0,
+                                color: MyColors.btnColor,
+                                textColor: MyColors.white,
 
-                                    onTap: () async {
-                                      bool loginSuccess =
+                                onTap: () async {
+                                  bool loginSuccess =
                                       await loginProvider.sendOtpPostApi(
                                           context: context,
                                           loginProvider.emailController.text);
-                                      if (loginSuccess) {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) => const OtpScreen()),
-                                        );
-                                        Future.delayed(const Duration(seconds: 5),
-                                                () {
-                                              loginProvider.emailController.clear();
-                                              // loginProvider.passwordController.clear();
-                                            });
-                                      } else {
-                                        ScaffoldMessenger.of(context).showSnackBar(
-                                          SnackBar(
-                                            content: Text(
-                                              'Otp  does not get. ',
-                                              style: TextStyle(
-                                                fontSize: 15.sp,
-                                                fontWeight: FontWeight.w500,
-                                                color: MyColors.black1,
-                                              ),
-                                            ),
-                                            backgroundColor: Colors.red,
+                                  if (loginSuccess) {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const OtpScreen()),
+                                    );
+                                    Future.delayed(const Duration(seconds: 5),
+                                        () {
+                                      loginProvider.emailController.clear();
+                                      // loginProvider.passwordController.clear();
+                                    });
+                                  } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                          'Otp  does not get. ',
+                                          style: TextStyle(
+                                            fontSize: 15.sp,
+                                            fontWeight: FontWeight.w500,
+                                            color: MyColors.black1,
                                           ),
-                                        );
-                                      }
+                                        ),
+                                        backgroundColor: Colors.red,
+                                      ),
+                                    );
+                                  }
 
-                                      debugPrint(
-                                          "email =========> ${loginProvider.emailController.text} ");
-                                    },
+                                  debugPrint(
+                                      "email =========> ${loginProvider.emailController.text} ");
+                                },
 
-                                    //  }
-                                    // else {
-                                    //   ScaffoldMessenger.of(context).showSnackBar(
-                                    //     SnackBar(
-                                    //       content: Text(
-                                    //         'Otp  does not get. ',
-                                    //         style: TextStyle(
-                                    //           fontSize: 15.sp,
-                                    //           fontWeight: FontWeight.w500,
-                                    //           color: MyColors.black1,
-                                    //         ),
-                                    //       ),
-                                    //       backgroundColor: Colors.red,
-                                    //     ),
-                                    //   );
-                                    // }
+                                //  }
+                                // else {
+                                //   ScaffoldMessenger.of(context).showSnackBar(
+                                //     SnackBar(
+                                //       content: Text(
+                                //         'Otp  does not get. ',
+                                //         style: TextStyle(
+                                //           fontSize: 15.sp,
+                                //           fontWeight: FontWeight.w500,
+                                //           color: MyColors.black1,
+                                //         ),
+                                //       ),
+                                //       backgroundColor: Colors.red,
+                                //     ),
+                                //   );
+                                // }
 
-                                    //   debugPrint(
-                                    //       "email =========> ${loginProvider.emailController} ");
-                                    // },
-                                  ),
-                                  SizedBox(
-                                    height: 10.h,
-                                  ),
-                                ],
+                                //   debugPrint(
+                                //       "email =========> ${loginProvider.emailController} ");
+                                // },
                               ),
-                            )),
-                      ),
-                    ),
-                  )),
+                              SizedBox(
+                                height: 10.h,
+                              ),
+                            ],
+                          ),
+                        )),
+                  ),
+                ),
+              )),
             ],
           );
         },

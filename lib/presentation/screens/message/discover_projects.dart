@@ -65,7 +65,9 @@ class _DiscoverProjectsState extends State<DiscoverProjects> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 //  _pages[currentIndex],
-                const SearchField(),
+                SearchField(
+                  onTap: () {},
+                ),
                 SizedBox(
                   height: 27.h,
                 ),

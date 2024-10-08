@@ -27,7 +27,6 @@ class _OtpScreenState extends State<OtpScreen> {
   late String otp;
   @override
   void dispose() {
-    // Access the provider and dispose controllers
     final provider = Provider.of<LoginProvider>(context, listen: false);
     provider.passwordController.dispose();
     provider.confirmPasswordController.dispose();
@@ -49,13 +48,13 @@ class _OtpScreenState extends State<OtpScreen> {
       return SafeArea(
         child: Scaffold(
           appBar: AppBar(
-            leading: IconButton(
-              onPressed: () {
-                Get.back();
-              },
-              icon: const Icon(Icons.arrow_back_ios),
-              color: MyColors.black,
-            ),
+            // leading: IconButton(
+            //   onPressed: () {
+            //     Get.back();
+            //   },
+            //   icon: const Icon(Icons.arrow_back_ios),
+            //   color: MyColors.black,
+            // ),
             title: Text(
               AppStrings.enter4Digit,
               style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600),
@@ -123,7 +122,8 @@ class _OtpScreenState extends State<OtpScreen> {
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () {
                                     Get.defaultDialog(
-                                      titlePadding: const EdgeInsets.only(top: 20),
+                                      titlePadding:
+                                          const EdgeInsets.only(top: 20),
                                       title: AppStrings.resendOtp,
                                       titleStyle: TextStyle(
                                           fontSize: 15.sp,
@@ -209,15 +209,14 @@ class _OtpScreenState extends State<OtpScreen> {
                             if (loginProvider.otpCode.isNotEmpty) {
                               if (!loginProvider.isLoading) {
                                 final password =
-                                    loginProvider.passwordController.text ??
-                                        '';
+                                    loginProvider.passwordController.text ?? '';
                                 final repeatPassword = loginProvider
-                                    .confirmPasswordController.text ??
+                                        .confirmPasswordController.text ??
                                     '';
 
                                 await loginProvider.changePassword(
                                   loginProvider.otpCode,
-                                //  password,
+                                  //  password,
                                   context: context,
                                 );
 
@@ -225,15 +224,15 @@ class _OtpScreenState extends State<OtpScreen> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                        //StockHubPage()
-                                        // AddStockRequest()
-                                        const ChangePassword()));
+                                            //StockHubPage()
+                                            // AddStockRequest()
+                                            const ChangePassword()));
                               } else {
                                 // Loading Indicator
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(
                                       content:
-                                      Text('Processing, please wait...')),
+                                          Text('Processing, please wait...')),
                                 );
                               }
                             } else {
@@ -262,250 +261,250 @@ class _OtpScreenState extends State<OtpScreen> {
     return Consumer<LoginProvider>(builder: (context, loginProvider, child) {
       return Scaffold(
           body: Row(
-            children: [
-              Flexible(
-                child: Container(
-                  child: SvgPicture.asset(
-                    Assets.createProfile1,
-                    fit: BoxFit.cover,
-                  ),
-                ),
+        children: [
+          Flexible(
+            child: Container(
+              child: SvgPicture.asset(
+                Assets.createProfile1,
+                fit: BoxFit.cover,
               ),
-              Flexible(
-                  child: SizedBox(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 120.0),
-                      child: Center(
-                        child: Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 50.0),
-                            height: 500.h,
-                            // width: 300.w,
-                            decoration: BoxDecoration(
-                                color: MyColors.blueContainer,
-                                borderRadius: BorderRadius.circular(14.r)),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
+            ),
+          ),
+          Flexible(
+              child: SizedBox(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 120.0),
+              child: Center(
+                child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 50.0),
+                    height: 500.h,
+                    // width: 300.w,
+                    decoration: BoxDecoration(
+                        color: MyColors.blueContainer,
+                        borderRadius: BorderRadius.circular(14.r)),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: 15.h,
+                        ),
+                        Center(
+                          child: Text(
+                            AppStrings.verifyAccount,
+                            style: TextStyle(
+                                fontFamily: Fonts.fontsinter,
+                                fontSize: 32.0,
+                                fontWeight: FontWeight.w500,
+                                color: MyColors.textC),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 16.h,
+                        ),
+                        // Text(
+                        //   AppStrings.codeHasBeenSend,
+                        //   style: TextStyle(
+                        //       fontFamily: Fonts.fontsinter,
+                        //       fontSize: 12.0,
+                        //       fontWeight: FontWeight.w500,
+                        //       color: MyColors.black1),
+                        // ),
+                        RichText(
+                          text: TextSpan(
+                            text: 'Code has been sent to ',
+                            style: TextStyle(
+                                fontFamily: Fonts.fontsinter,
+                                fontSize: 13.0,
+                                fontWeight: FontWeight.w500,
+                                color: MyColors.black1),
+                            children: <TextSpan>[
+                              TextSpan(
+                                text: 'josphamdes@gmail.com',
+                                style: TextStyle(
+                                    fontFamily: Fonts.fontsinter,
+                                    fontSize: 13.0,
+                                    fontWeight: FontWeight.bold,
+                                    color: MyColors.black1),
+                              ),
+                            ],
+                          ),
+                        ),
+
+                        SizedBox(
+                          height: 8.h,
+                        ),
+                        Text(
+                          AppStrings.enetrCode,
+                          style: TextStyle(
+                              fontFamily: Fonts.fontsinter,
+                              fontSize: 12.0,
+                              fontWeight: FontWeight.w500,
+                              color: MyColors.black1),
+                        ),
+                        SizedBox(
+                          height: 53.h,
+                        ),
+                        Text(
+                          textAlign: TextAlign.left,
+                          AppStrings.enterCODE,
+                          style: TextStyle(
+                              fontFamily: Fonts.fontsinter,
+                              fontSize: 14.0,
+                              fontWeight: FontWeight.w400,
+                              color: MyColors.grey),
+                        ),
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 5),
+                          child: OtpTextField(
+                            //alignment: Alignment.centerLeft,
+                            showFieldAsBox: true,
+                            fieldWidth: 50,
+                            borderColor:
+                                MyColors.otpCont, // Border color for each field
+
+                            keyboardType: TextInputType.number,
+                            inputFormatters: <TextInputFormatter>[
+                              FilteringTextInputFormatter.digitsOnly
+                            ],
+                            focusedBorderColor: MyColors.otpCont,
+                            borderRadius: BorderRadius.circular(10),
+                            numberOfFields: 4,
+
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: MyColors
+                                  .otpCont, // Set the background color here
+                            ),
+                            onCodeChanged: (String code) {},
+                            onSubmit: (String verificationCode) {
+                              loginProvider.setOtpCode(verificationCode);
+                              debugPrint(
+                                  "Entered OTP: ${loginProvider.otpCode}");
+                            },
+                          ),
+                        ),
+                        SizedBox(
+                          height: 23.h,
+                        ),
+                        RichText(
+                          text: TextSpan(
+                            text: 'Didn’t Receive Code? ',
+                            style: TextStyle(
+                                fontFamily: Fonts.fontsinter,
+                                fontSize: 13.0,
+                                fontWeight: FontWeight.w500,
+                                color: MyColors.black1),
+                            children: <TextSpan>[
+                              TextSpan(
+                                text: 'Resend Code ',
+                                style: TextStyle(
+                                    decoration: TextDecoration.underline,
+                                    fontFamily: Fonts.fontsinter,
+                                    fontSize: 13.0,
+                                    fontWeight: FontWeight.w500,
+                                    color: MyColors.black1),
+                              ),
+                            ],
+                          ),
+                        ),
+
+                        SizedBox(
+                          height: 6.h,
+                        ),
+                        Text(
+                          AppStrings.resendCodeTime,
+                          style: TextStyle(
+                              fontFamily: Fonts.fontsinter,
+                              fontSize: 12.0,
+                              fontWeight: FontWeight.w500,
+                              color: MyColors.black1),
+                        ),
+                        SizedBox(
+                          height: 20.h,
+                        ),
+                        SizedBox(
+                          width: double.infinity,
+                          child: ElevatedButton(
+                            onPressed: () async {
+                              if (loginProvider.otpCode.isNotEmpty) {
+                                if (!loginProvider.isLoading) {
+                                  final password =
+                                      loginProvider.passwordController.text ??
+                                          '';
+                                  final repeatPassword = loginProvider
+                                          .confirmPasswordController.text ??
+                                      '';
+
+                                  await loginProvider.changePassword(
+                                    loginProvider.otpCode,
+                                    //  password,
+                                    context: context,
+                                  );
+
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              //StockHubPage()
+                                              // AddStockRequest()
+                                              const ChangePassword()));
+                                } else {
+                                  // Loading Indicator
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                        content:
+                                            Text('Processing, please wait...')),
+                                  );
+                                }
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                      content: Text('Please enter the OTP')),
+                                );
+                              }
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: MyColors.blue,
+                              padding: const EdgeInsets.all(10),
+                              textStyle: const TextStyle(
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                SizedBox(
-                                  height: 15.h,
-                                ),
-                                Center(
-                                  child: Text(
-                                    AppStrings.verifyAccount,
-                                    style: TextStyle(
-                                        fontFamily: Fonts.fontsinter,
-                                        fontSize: 32.0,
-                                        fontWeight: FontWeight.w500,
-                                        color: MyColors.textC),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 16.h,
-                                ),
-                                // Text(
-                                //   AppStrings.codeHasBeenSend,
-                                //   style: TextStyle(
-                                //       fontFamily: Fonts.fontsinter,
-                                //       fontSize: 12.0,
-                                //       fontWeight: FontWeight.w500,
-                                //       color: MyColors.black1),
-                                // ),
-                                RichText(
-                                  text: TextSpan(
-                                    text: 'Code has been sent to ',
-                                    style: TextStyle(
-                                        fontFamily: Fonts.fontsinter,
-                                        fontSize: 13.0,
-                                        fontWeight: FontWeight.w500,
-                                        color: MyColors.black1),
-                                    children: <TextSpan>[
-                                      TextSpan(
-                                        text: 'josphamdes@gmail.com',
-                                        style: TextStyle(
-                                            fontFamily: Fonts.fontsinter,
-                                            fontSize: 13.0,
-                                            fontWeight: FontWeight.bold,
-                                            color: MyColors.black1),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-
-                                SizedBox(
-                                  height: 8.h,
-                                ),
                                 Text(
-                                  AppStrings.enetrCode,
+                                  AppStrings.verifyAccount,
                                   style: TextStyle(
                                       fontFamily: Fonts.fontsinter,
-                                      fontSize: 12.0,
-                                      fontWeight: FontWeight.w500,
-                                      color: MyColors.black1),
+                                      color: Colors.white,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500),
                                 ),
-                                SizedBox(
-                                  height: 53.h,
-                                ),
-                                Text(
-                                  textAlign: TextAlign.left,
-                                  AppStrings.enterCODE,
-                                  style: TextStyle(
-                                      fontFamily: Fonts.fontsinter,
-                                      fontSize: 14.0,
-                                      fontWeight: FontWeight.w400,
-                                      color: MyColors.grey),
-                                ),
-                                SizedBox(
-                                  height: 10.h,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 5),
-                                  child: OtpTextField(
-                                    //alignment: Alignment.centerLeft,
-                                    showFieldAsBox: true,
-                                    fieldWidth: 50,
-                                    borderColor:
-                                    MyColors.otpCont, // Border color for each field
-
-                                    keyboardType: TextInputType.number,
-                                    inputFormatters: <TextInputFormatter>[
-                                      FilteringTextInputFormatter.digitsOnly
-                                    ],
-                                    focusedBorderColor: MyColors.otpCont,
-                                    borderRadius: BorderRadius.circular(10),
-                                    numberOfFields: 4,
-
-                                    decoration: InputDecoration(
-                                      filled: true,
-                                      fillColor: MyColors
-                                          .otpCont, // Set the background color here
-                                    ),
-                                    onCodeChanged: (String code) {},
-                                    onSubmit: (String verificationCode) {
-                                      loginProvider.setOtpCode(verificationCode);
-                                      debugPrint(
-                                          "Entered OTP: ${loginProvider.otpCode}");
-                                    },
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 23.h,
-                                ),
-                                RichText(
-                                  text: TextSpan(
-                                    text: 'Didn’t Receive Code? ',
-                                    style: TextStyle(
-                                        fontFamily: Fonts.fontsinter,
-                                        fontSize: 13.0,
-                                        fontWeight: FontWeight.w500,
-                                        color: MyColors.black1),
-                                    children: <TextSpan>[
-                                      TextSpan(
-                                        text: 'Resend Code ',
-                                        style: TextStyle(
-                                            decoration: TextDecoration.underline,
-                                            fontFamily: Fonts.fontsinter,
-                                            fontSize: 13.0,
-                                            fontWeight: FontWeight.w500,
-                                            color: MyColors.black1),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-
-                                SizedBox(
-                                  height: 6.h,
-                                ),
-                                Text(
-                                  AppStrings.resendCodeTime,
-                                  style: TextStyle(
-                                      fontFamily: Fonts.fontsinter,
-                                      fontSize: 12.0,
-                                      fontWeight: FontWeight.w500,
-                                      color: MyColors.black1), 
-                                ),
-                                SizedBox(
-                                  height: 20.h,
-                                ),
-                                SizedBox(
-                                  width: double.infinity,
-                                  child: ElevatedButton(
-                                    onPressed: () async {
-                                      if (loginProvider.otpCode.isNotEmpty) {
-                                        if (!loginProvider.isLoading) {
-                                          final password =
-                                              loginProvider.passwordController.text ??
-                                                  '';
-                                          final repeatPassword = loginProvider
-                                              .confirmPasswordController.text ??
-                                              '';
-
-                                          await loginProvider.changePassword(
-                                            loginProvider.otpCode,
-                                          //  password,
-                                            context: context,
-                                          );
-
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                  //StockHubPage()
-                                                  // AddStockRequest()
-                                                  const ChangePassword()));
-                                        } else {
-                                          // Loading Indicator
-                                          ScaffoldMessenger.of(context).showSnackBar(
-                                            const SnackBar(
-                                                content:
-                                                Text('Processing, please wait...')),
-                                          );
-                                        }
-                                      } else {
-                                        ScaffoldMessenger.of(context).showSnackBar(
-                                          const SnackBar(
-                                              content: Text('Please enter the OTP')),
-                                        );
-                                      }
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: MyColors.blue,
-                                      padding: const EdgeInsets.all(10),
-                                      textStyle: const TextStyle(
-                                        fontSize: 16.0,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(8.0),
-                                      ),
-                                    ),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          AppStrings.verifyAccount,
-                                          style: TextStyle(
-                                              fontFamily: Fonts.fontsinter,
-                                              color: Colors.white,
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w500),
-                                        ),
-                                        const SizedBox(width: 5),
-                                        SvgPicture.asset(Assets.check),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 10.h,
-                                ),
+                                const SizedBox(width: 5),
+                                SvgPicture.asset(Assets.check),
                               ],
-                            )),
-                      ),
-                    ),
-                  )),
-            ],
-          ));
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10.h,
+                        ),
+                      ],
+                    )),
+              ),
+            ),
+          )),
+        ],
+      ));
     });
   }
 }

@@ -88,9 +88,9 @@ class FilterProvider with ChangeNotifier {
       _loading = false;
       notifyListeners();
 
-      if (_errorMessage != null) {
-        _showSnackBar(context, _errorMessage);
-      }
+      // if (_errorMessage != null) {
+      //   _showSnackBar(context, _errorMessage);
+      // }
     }
   }
 

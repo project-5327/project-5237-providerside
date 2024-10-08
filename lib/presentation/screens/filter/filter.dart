@@ -16,8 +16,7 @@ class FilterScreen extends StatefulWidget {
 }
 
 class _FilterScreenState extends State<FilterScreen> {
-  final Map<String, List<int>> _selectedChecks =
-      {}; // Separate selection per category
+  final Map<String, List<int>> _selectedChecks = {};
   final Map<String, bool> _isExpanded = {
     'Sort': false,
     'Tags': false,
@@ -59,140 +58,141 @@ class _FilterScreenState extends State<FilterScreen> {
                   child: CircularProgressIndicator(color: MyColors.blue),
                 )
               : SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      Container(
-                        height: 36.h,
-                        width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(color: MyColors.btnColor),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 15),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              TextWidget(
-                                text: 'Filter',
-                                color: MyColors.white,
-                                size: 18.sp,
-                                fontweight: FontWeight.w600,
-                              ),
-                              IconButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                icon: Icon(
-                                  Icons.close,
-                                  color: MyColors.white,
-                                  size: 14.sp,
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                      ..._filterOptions.keys.map((key) {
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 1),
-                          child: FilterContainer(
-                            text: key,
-                            isExpanded: _isExpanded[key]!,
-                            onTap: () {
-                              setState(() {
-                                _isExpanded[key] = !_isExpanded[key]!;
-                              });
-                            },
-                            child: _isExpanded[key]!
-                                ? ListView.builder(
-                                    shrinkWrap: true,
-                                    physics: const NeverScrollableScrollPhysics(),
-                                    itemCount: _filterOptions[key]!.length,
-                                    itemBuilder: (context, index) {
-                                      return Align(
-                                        alignment: Alignment.topLeft,
-                                        child: Row(
-                                          children: [
-                                            Checkbox(
-                                              value: _selectedChecks[key]!
-                                                  .contains(index),
-                                              onChanged: (bool? value) {
-                                                setState(() {
-                                                  if (value == true) {
-                                                    _selectedChecks[key]!
-                                                        .add(index);
-                                                  } else {
-                                                    _selectedChecks[key]!
-                                                        .remove(index);
-                                                  }
-                                                });
-                                              },
-                                            ),
-                                            RichTextWidget(
-                                              text: _filterOptions[key]![index],
-                                              text1: '( ${index + 1} )',
-                                            ),
-                                          ],
-                                        ),
-                                      );
-                                    },
-                                  )
-                                : Container(),
-                          ),
-                        );
-                      }),
-                      SizedBox(height: 430.h),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 25),
+                  child: Column(children: [
+                    Container(
+                      height: 36.h,
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(color: MyColors.btnColor),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Center(
-                              child: CustomizeButton(
-                                borderColor: MyColors.btnColor,
-                                radius: 0.r,
-                                text: 'Apply Filter',
-                                height: 35.h,
-                                width: 143.w,
-                                color: MyColors.btnColor,
-                                textColor: MyColors.white,
-                                onTap: () {
-                                  List<String> selectedFilters = [];
-                                  for (var key in _filterOptions.keys) {
-                                    for (var index in _selectedChecks[key]!) {
-                                      selectedFilters
-                                          .add(_filterOptions[key]![index]);
-                                    }
-                                  }
-                                  Navigator.pop(context, selectedFilters);
-
-                                  debugPrint(
-                                      'Selected Filters======> $selectedFilters');
-                                },
-                              ),
+                            TextWidget(
+                              text: 'Filter',
+                              color: MyColors.white,
+                              size: 18.sp,
+                              fontweight: FontWeight.w600,
                             ),
-                            Center(
-                              child: CustomizeButton(
-                                borderColor: MyColors.btnColor,
-                                radius: 0.r,
-                                text: 'Reset Filter',
-                                height: 35.h,
-                                width: 143.w,
-                                color: MyColors.btnColor,
-                                textColor: MyColors.white,
-                                onTap: () {
-                                  setState(() {
-                                    _selectedChecks.clear();
-                                    _isExpanded
-                                        .updateAll((key, value) => false);
-                                  });
-                                },
+                            IconButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              icon: Icon(
+                                Icons.close,
+                                color: MyColors.white,
+                                size: 14.sp,
                               ),
-                            ),
-                            SizedBox(height: 3.h),
+                            )
                           ],
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                    ..._filterOptions.keys.map((key) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 1),
+                        child: FilterContainer(
+                          text: key,
+                          isExpanded: _isExpanded[key]!,
+                          onTap: () {
+                            setState(() {
+                              _isExpanded[key] = !_isExpanded[key]!;
+                            });
+                          },
+                          child: _isExpanded[key]!
+                              ? ListView.builder(
+                                  shrinkWrap: true,
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  itemCount: _filterOptions[key]!.length,
+                                  itemBuilder: (context, index) {
+                                    return Align(
+                                      alignment: Alignment.topLeft,
+                                      child: Row(
+                                        children: [
+                                          Checkbox(
+                                            value: _selectedChecks[key]!
+                                                .contains(index),
+                                            onChanged: (bool? value) {
+                                              setState(() {
+                                                if (value == true) {
+                                                  _selectedChecks[key]!
+                                                      .add(index);
+                                                } else {
+                                                  _selectedChecks[key]!
+                                                      .remove(index);
+                                                }
+                                              });
+                                            },
+                                          ),
+                                          RichTextWidget(
+                                            text: _filterOptions[key]![index],
+                                            text1: '( ${index + 1} )',
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                )
+                              : Container(),
+                        ),
+                      );
+                    }),
+                    SizedBox(height: 430.h),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 25),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Center(
+                            child: CustomizeButton(
+                              borderColor: MyColors.btnColor,
+                              radius: 0.r,
+                              text: 'Apply Filter',
+                              height: 35.h,
+                              width: 143.w,
+                              color: MyColors.btnColor,
+                              textColor: MyColors.white,
+                              onTap: () {
+                                List<String> selectedFilters = [];
+                                for (var key in _filterOptions.keys) {
+                                  for (var index in _selectedChecks[key]!) {
+                                    selectedFilters
+                                        .add(_filterOptions[key]![index]);
+                                  }
+                                }
+
+                                Navigator.pop(context, selectedFilters);
+
+                                debugPrint(
+                                    'Selected Filters======> $selectedFilters');
+                              },
+                            ),
+                          ),
+                          Center(
+                            child: CustomizeButton(
+                              borderColor: MyColors.btnColor,
+                              radius: 0.r,
+                              text: 'Reset Filter',
+                              height: 35.h,
+                              width: 143.w,
+                              color: MyColors.btnColor,
+                              textColor: MyColors.white,
+                              onTap: () {
+                                // _selectedChecks.clear();
+                                // Navigator.pop(context);
+                                // setState(() {
+                                //   _selectedChecks.clear();
+
+                                //   _isExpanded.updateAll((key, value) => false);
+                                // });
+                              },
+                            ),
+                          ),
+                          SizedBox(height: 10.h),
+                        ],
+                      ),
+                    )
+                  ]),
                 ),
         ));
       },
