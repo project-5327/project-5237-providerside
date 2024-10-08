@@ -165,7 +165,8 @@ class _HomeProjectDetailsState extends State<HomeProjectDetails> {
                               color: MyColors.black),
                         ),
                         trailing: InkWell(
-                          onTap: () => Get.to(const MapScreen()),
+                          onTap: () {},
+                          // Get.to(const MapScreen()),
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [

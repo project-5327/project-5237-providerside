@@ -26,11 +26,10 @@ class _MainScreenState extends State<MainScreen> {
   final List<Widget> _screens = [
     const HomeScreen(),
     const RecentProposal(),
-     MapScreen(),
+    const RecentProposal(),
+    // MapScreen(),
     const MessageScreen(),
     const FreelancerProfile()
-
-   
   ];
 
   @override
