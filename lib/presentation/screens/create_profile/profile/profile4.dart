@@ -12,7 +12,6 @@ import '../../../constants/color.dart';
 import '../../../constants/responsive_view.dart';
 
 import '../../../constants/strings.dart';
-import '../../../widgets/create_profile_widget.dart';
 import '../../../widgets/customize_button.dart';
 import '../../my_contracts/send_screen.dart';
 import 'components/profilewidget4.dart';
@@ -22,7 +21,7 @@ import 'profile5.dart';
 import 'static_profile.dart';
 
 class Profile4 extends StatefulWidget {
-  Profile4({super.key});
+  const Profile4({super.key});
 
   @override
   State<Profile4> createState() => _Profile4State();
@@ -31,7 +30,7 @@ class Profile4 extends StatefulWidget {
 class _Profile4State extends State<Profile4> {
   final ProfileController profileController = Get.put(ProfileController());
 
-  final formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _profile4Key = GlobalKey<FormState>();
 
   final FormController formController = Get.put(FormController());
 
@@ -41,7 +40,7 @@ class _Profile4State extends State<Profile4> {
 
   final TextEditingController _languageController = TextEditingController();
   final List<String> _languages = ['English', 'Hindi', 'Spanish', 'German'];
-  List<String> _selectedLanguages = [];
+  final List<String> _selectedLanguages = [];
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +53,8 @@ class _Profile4State extends State<Profile4> {
 
   _mobileView(BuildContext context) {
     return StaticProfileLayout(
-      middleContentBuilder: () => Form(key: formKey, child: Profilewidget4()),
+      middleContentBuilder: () =>
+          Form(key: _profile4Key, child: const Profilewidget4()),
     );
   }
 
@@ -72,7 +72,7 @@ class _Profile4State extends State<Profile4> {
           ),
           Flexible(
               child: Center(
-            child: Container(
+            child: SizedBox(
               //  height: 450.h,
               width: 336.w,
               child: Column(
@@ -131,6 +131,13 @@ class _Profile4State extends State<Profile4> {
                   SizedBox(
                     height: 25.h,
                   ),
+                  TextWidget(
+                    align: TextAlign.start,
+                    text: "Languages you know",
+                    color: const Color(0xff222222),
+                    size: 13.sp,
+                    fontweight: FontWeight.w500,
+                  ),
                   Container(
                     width: 307.w,
                     decoration: BoxDecoration(
@@ -187,7 +194,7 @@ class _Profile4State extends State<Profile4> {
                             )
                           else
                             DropdownButton<String>(
-                              borderRadius: BorderRadius.circular(6.0),
+                              borderRadius: BorderRadius.circular(8.0),
                               isDense: true,
                               value: null,
                               hint: const Text(AppStrings.chooseyourLanguages),
@@ -199,8 +206,8 @@ class _Profile4State extends State<Profile4> {
                               isExpanded: true,
                               icon: Icon(
                                 Icons.arrow_drop_down,
-                                color: MyColors.grey,
-                                size: 30.sp,
+                                color: MyColors.lightGrey,
+                                size: 32.sp,
                               ),
                               items: _languages.map((String language) {
                                 return DropdownMenuItem<String>(
@@ -236,7 +243,7 @@ class _Profile4State extends State<Profile4> {
                         onTap: () {
                           // if (formKey.currentState!.validate()) {
                           profileController.previousPage();
-                          Get.to(() => Profile3());
+                          Get.to(() => const Profile3());
                           // }
                         },
                       ),
@@ -254,7 +261,7 @@ class _Profile4State extends State<Profile4> {
                           onTap: () {
                             // if (formKey.currentState!.validate()) {
                             profileController.nextPage();
-                            Get.to(() => Profile5());
+                            Get.to(() => const Profile5());
                           }
                           //  },
                           ),

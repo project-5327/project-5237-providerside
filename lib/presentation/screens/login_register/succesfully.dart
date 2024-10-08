@@ -62,7 +62,7 @@ class _SuccesfullyScreenState extends State<SuccesfullyScreen> {
                     color: MyColors.btnColor,
                     textColor: MyColors.white,
                     onTap: () {
-                      Get.to(() => const MyProjectScreen());
+                      Get.to(() => const MyProposal());
                     }
                     //)
 

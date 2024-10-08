@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:project_5237_provider/presentation/constants/responsive_view.dart';
@@ -62,6 +61,7 @@ class _MilestoneScreenState extends State<MilestoneScreen>
                       height: 10.h,
                     ),
                     TabBar(
+                      dividerHeight: 0,
                       indicator: BoxDecoration(
                         color: Colors.transparent,
                         border: Border(

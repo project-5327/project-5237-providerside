@@ -23,7 +23,7 @@ class StaticProfileLayout extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CreateProfileWidget(),
+              const CreateProfileWidget(),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Column(

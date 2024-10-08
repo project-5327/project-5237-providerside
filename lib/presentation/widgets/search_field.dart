@@ -9,19 +9,25 @@ import '../constants/assets.dart';
 import '../constants/color.dart';
 
 class SearchField extends StatelessWidget {
-  const SearchField({super.key});
+  final controller;
+  final onChanged;
+  final VoidCallback onTap;
+  const SearchField(
+      {super.key, this.controller, this.onChanged, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Container(
+        SizedBox(
           height: 57.h,
           width: 277.w,
           child: TextFormField(
+            onChanged: onChanged,
+            controller: controller,
             decoration: InputDecoration(
-              suffixIcon: Icon(CupertinoIcons.search),
+              suffixIcon: const Icon(CupertinoIcons.search),
               hintText: 'Search for projects',
               hintStyle: TextStyle(
                   fontSize: 15.sp,
@@ -36,10 +42,10 @@ class SearchField extends StatelessWidget {
           ),
         ),
         InkWell(
-            onTap: () {
-              Get.to(FilterScreen());
-            },
-            child: SvgPicture.asset(Assets.filter)),
+          onTap: onTap,
+          // onTap:
+          child: SvgPicture.asset(Assets.filter),
+        ),
       ],
     );
   }

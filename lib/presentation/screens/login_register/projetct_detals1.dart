@@ -3,19 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:project_5237_provider/presentation/screens/login_register/credit.dart';
 import 'package:project_5237_provider/presentation/screens/login_register/notification.dart';
-import 'package:project_5237_provider/presentation/screens/login_register/proposal.dart';
 import 'package:project_5237_provider/presentation/screens/my_contracts/map_screen.dart';
+import 'package:project_5237_provider/presentation/screens/my_contracts/send_screen.dart';
 
 import '../../constants/assets.dart';
 import '../../constants/color.dart';
 import '../../widgets/customize_button.dart';
 import '../../widgets/discover_project_cont.dart';
 import '../../widgets/project_detail_widget.dart';
-import '../filter/filter.dart';
-import '../main_screen .dart';
-import 'message.dart';
 
 class HomeProjectDetails extends StatefulWidget {
   const HomeProjectDetails({super.key});
@@ -56,7 +52,7 @@ class _HomeProjectDetailsState extends State<HomeProjectDetails> {
                       ),
                       trailing: InkWell(
                         onTap: () {
-                          Get.to(NotificationScreen());
+                          Get.to(const NotificationScreen());
                         },
                         child: Stack(alignment: Alignment.topRight, children: [
                           Icon(
@@ -77,9 +73,9 @@ class _HomeProjectDetailsState extends State<HomeProjectDetails> {
                       child: Container(
                         width: 71.h,
                         height: 71.w,
+                        decoration: const BoxDecoration(shape: BoxShape.circle),
                         child: Image.asset('assets/images/image.jpeg',
                             fit: BoxFit.cover),
-                        decoration: BoxDecoration(shape: BoxShape.circle),
                       ),
                     ),
                     SizedBox(
@@ -169,7 +165,9 @@ class _HomeProjectDetailsState extends State<HomeProjectDetails> {
                               color: MyColors.black),
                         ),
                         trailing: InkWell(
-                          onTap: () => Get.to(MapScreen()),
+                          onTap: () {
+                            Get.to(MapScreen());
+                          },
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
@@ -231,19 +229,20 @@ class _HomeProjectDetailsState extends State<HomeProjectDetails> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   CustomizeButton(
-                    text: 'Accept',
-                    height: 40.h,
-                    width: 154.w,
-                    color: MyColors.btnColor,
-                    textColor: MyColors.white,
-                    borderColor: MyColors.btnColor,
-                    radius: 100.r,
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(builder: (_) => MainScreen()),
-                      );
-                    },
-                  ),
+                      text: 'Accept',
+                      height: 40.h,
+                      width: 154.w,
+                      color: MyColors.btnColor,
+                      textColor: MyColors.white,
+                      borderColor: MyColors.btnColor,
+                      radius: 100.r,
+                      onTap: () {
+                        _showDialogBox(
+                            context,
+                            "Do you want to Accept this proposal?",
+                            "Yes",
+                            "No");
+                      }),
                   SizedBox(
                     width: 14.w,
                   ),
@@ -256,7 +255,8 @@ class _HomeProjectDetailsState extends State<HomeProjectDetails> {
                     textColor: MyColors.white,
                     borderColor: MyColors.btnColor,
                     onTap: () {
-                      Get.to(() => ProposalScreen());
+                      _showDialogBox(context,
+                          "Do you want to Reject this proposal?", "Yes", "No");
                     },
                   ),
                 ],
@@ -269,5 +269,81 @@ class _HomeProjectDetailsState extends State<HomeProjectDetails> {
         ),
       ),
     );
+  }
+
+  void _showDialogBox(
+    BuildContext context,
+    String text,
+    //String text1,
+    String btntext1,
+    String btntext2,
+  ) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+              title: Center(
+                child: TextWidget(
+                  text: 'Are you Sure?',
+                  color: MyColors.btnColor,
+                  size: 20.sp,
+                  fontweight: FontWeight.w700,
+                ),
+              ),
+              content: TextWidget(
+                text: text,
+                color: MyColors.black,
+                size: 12,
+                fontweight: FontWeight.w500,
+              ),
+              actions: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    TextButton(
+                      style: TextButton.styleFrom(
+                          backgroundColor: MyColors.btnColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(100),
+                            side: BorderSide(color: MyColors.btnColor),
+                          )),
+                      onPressed: () {
+                        Get.back();
+                      },
+                      child: TextWidget(
+                        text: btntext1,
+                        color: MyColors.white,
+                        size: 12.sp,
+                        fontweight: FontWeight.w500,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 10.w,
+                    ),
+                    TextButton(
+                      style: TextButton.styleFrom(
+                          backgroundColor: MyColors.white,
+                          shape: RoundedRectangleBorder(
+                            side: BorderSide(color: MyColors.btnColor),
+                            borderRadius: BorderRadius.circular(100),
+                          )),
+                      onPressed: () {
+                        Get.back();
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: TextWidget(
+                          text: btntext2,
+                          color: MyColors.black,
+                          size: 12.sp,
+                          fontweight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ],
+                )
+              ]);
+        });
   }
 }

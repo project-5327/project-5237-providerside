@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -83,7 +82,7 @@ class AwaitingMilestones extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 14.w),
             child: Column(
               children: [
-                Container(
+                SizedBox(
                   height: 300.h,
                   child: ListView.builder(
                       itemCount: 4,
@@ -110,7 +109,7 @@ class AwaitingMilestones extends StatelessWidget {
                                   children: [
                                     Container(
                                       padding:
-                                          EdgeInsets.fromLTRB(65, 0, 65, 10),
+                                          const EdgeInsets.fromLTRB(65, 0, 65, 10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                           border: Border(
@@ -207,8 +206,8 @@ class AwaitingMilestones extends StatelessWidget {
   void _showDialogeBox(context) {
     final responsive = ResponsiveCheck(context);
     Get.defaultDialog(
-      titlePadding: EdgeInsets.only(top: 86.h, bottom: 25.h),
-      contentPadding: EdgeInsets.symmetric(horizontal: 55.w),
+      titlePadding: EdgeInsets.only(top: 20.h, bottom: 10.h),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 20),
       title: AppStrings.areYouSure,
       titleStyle: TextStyle(
           fontSize: 20.sp,
@@ -216,7 +215,7 @@ class AwaitingMilestones extends StatelessWidget {
           fontWeight: FontWeight.w700),
       content: Column(
         children: [
-          Container(
+          SizedBox(
             width: responsive.isMobile || responsive.isTablet
                 ? double.infinity
                 : 240.w,
@@ -230,10 +229,10 @@ class AwaitingMilestones extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 36.h,
+            height: 20.h,
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            //  mainAxisAlignment: MainAxisAlignment.center,
             children: [
               CustomizeButton(
                 borderColor: MyColors.btnColor,
@@ -248,7 +247,7 @@ class AwaitingMilestones extends StatelessWidget {
                 },
               ),
               SizedBox(
-                width: 10.w,
+                width: 5.w,
               ),
               CustomizeButton(
                 borderColor: MyColors.btnColor,
@@ -265,7 +264,7 @@ class AwaitingMilestones extends StatelessWidget {
             ],
           ),
           SizedBox(
-            height: 89.h,
+            height: 20.h,
           )
         ],
       ),

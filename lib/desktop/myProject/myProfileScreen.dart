@@ -30,15 +30,14 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-  ImagePicker _picker = ImagePicker();
+  final ImagePicker _picker = ImagePicker();
 
-  // Using GetX for state management of _selectedImage
   final Rx<XFile?> _selectedImage = Rx<XFile?>(null);
 
   Future<void> _pickImage() async {
     final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
-      _selectedImage.value = pickedFile; // Update state using GetX
+      _selectedImage.value = pickedFile;
     }
   }
 
@@ -46,7 +45,6 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
   Widget build(BuildContext context) {
     final ResponsiveCheck responsiveCheck = ResponsiveCheck(context);
 
-    // Responsive layout using ResponsiveView with specific widgets
     return ResponsiveView(
       mobile: buildMobileProfile(context),
       tablet: buildMobileProfile(context),
@@ -55,7 +53,6 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
   }
 
   Widget buildDesktopProfile(BuildContext context) {
-    // Implement desktop-specific profile UI here
     return Scaffold(
       body: Center(
         child: SizedBox(
@@ -178,9 +175,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                     width: 151.w,
                     color: MyColors.btnColor,
                     textColor: MyColors.white,
-                    onTap: () {
-                      //  Get.to(() => AddProjects());
-                    },
+                    onTap: () {},
                   ),
                 ),
               ],

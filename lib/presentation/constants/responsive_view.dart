@@ -12,6 +12,7 @@ class ResponsiveCheck {
       MediaQuery.of(context).size.width < 1200;
 
   bool get isDesktop => MediaQuery.of(context).size.width >= 1200;
+  bool get isDesktopHeight => MediaQuery.of(context).size.height <= 677;
 }
 
 class ResponsiveView extends StatelessWidget {
