@@ -128,8 +128,9 @@ class Category extends StatefulWidget {
 class _CategoryState extends State<Category> {
   final TextEditingController userController = TextEditingController();
   final GlobalKey<FormState> _editKey = GlobalKey<FormState>();
-  File? _image;
-  final picker = ImagePicker();
+  final ImagePicker _picker = ImagePicker();
+  File? _selectedImage;
+
   @override
   void initState() {
     super.initState();
@@ -142,14 +143,14 @@ class _CategoryState extends State<Category> {
   }
 
   Future<void> _pickImage() async {
-    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
 
     setState(() {
       if (pickedFile != null) {
-        _image = File(pickedFile.path);
+        _selectedImage = File(pickedFile.path);
       } else {
         debugPrint('No image selected.');
-        _image = null;
+        _selectedImage = null;
       }
     });
   }
@@ -181,19 +182,24 @@ class _CategoryState extends State<Category> {
                       width: 150.w,
                       child: ClipRRect(
                           borderRadius: BorderRadius.circular(100.r),
-                          child: _image != null
+                          child: _selectedImage != null
                               ? Image.file(
-                                  _image!,
+                                  _selectedImage!,
                                   height: 148.h,
                                   width: 140.w,
                                   fit: BoxFit.cover,
                                 )
-                              : Image.network(
-                                  freelancer?.profileImage ?? "",
+                              : Image.network(freelancer?.profileImage ?? "",
                                   height: 148.h,
                                   width: 140.w,
                                   fit: BoxFit.cover,
-                                )),
+                                  errorBuilder: (context, error, stackTrace) {
+                                  print("Error=======> ${error}");
+                                  return Image.network(
+                                    "https://wallpaperaccess.com/full/7205205.jpg",
+                                    fit: BoxFit.cover,
+                                  );
+                                })),
                     ),
                     Positioned(
                       top: 110,
@@ -227,8 +233,9 @@ class _CategoryState extends State<Category> {
                       }
                       return null;
                     },
-                    controller: userController,
-                    text: freelancer?.user?.userName,
+                    controller: userController
+                      ..text = freelancer?.user?.userName ?? '',
+                    //text: freelancer?.user?.userName,
                     title: 'Full Name',
                     style: TextStyle(
                       fontSize: 13.sp,
@@ -271,7 +278,7 @@ class _CategoryState extends State<Category> {
                       textColor: MyColors.white,
                       onTap: () async {
                         bool isUpdated = await freelancerProvider.updateProfile(
-                          imagePath: _image!.path,
+                          imagePath: _selectedImage!.path,
                           context: context,
                           username: userController.text,
                         );
@@ -279,7 +286,7 @@ class _CategoryState extends State<Category> {
                         if (isUpdated) {
                           final updatedData = {
                             'userName': userController.text,
-                            'imagePath': _image?.path,
+                            'imagePath': _selectedImage!.path,
                           };
 
                           Navigator.pop(context, updatedData);

@@ -2,14 +2,11 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:project_5237_provider/data/models/proposal_data_response.dart';
 import 'package:project_5237_provider/presentation/constants/responsive_view.dart';
 import 'package:project_5237_provider/provider/date_time_provider.dart';
 import 'package:provider/provider.dart';
-import '../../presentation/constants/assets.dart';
 import '../../presentation/constants/color.dart';
 import '../../presentation/constants/strings.dart';
 import '../../presentation/screens/login_register/message.dart';
@@ -17,7 +14,6 @@ import '../../presentation/screens/my_contracts/send_screen.dart';
 import '../../presentation/widgets/Customize_textfield.dart';
 import '../../presentation/widgets/customize_button.dart';
 import '../../provider/home/proposal_provider.dart';
-
 
 class AcceptProposalScreen extends StatefulWidget {
   final ProposalListData proposalListData;
@@ -101,7 +97,9 @@ class _AcceptProposalScreenState extends State<AcceptProposalScreen> {
                         height: 35.h,
                       ),
                       CustomTextFormField(
-                        controller: proposalProvider.titleController,
+                        readOnly: true,
+                        controller: proposalProvider.titleController
+                          ..text = widget.proposalListData.title ?? "",
                         text: 'title',
                         title: 'Project title',
                         validator: (value) {
@@ -118,37 +116,48 @@ class _AcceptProposalScreenState extends State<AcceptProposalScreen> {
                       SizedBox(
                         height: 20.h,
                       ),
-                      CustomTextFormField(
-                        controller: proposalProvider.datetimeController,
-                        text: AppStrings.dummyDate,
-                        title: AppStrings.dateTime,
-                        style: TextStyle(
+                      Center(
+                        child: CustomTextFormField(
+                          readOnly: true,
+                          controller: proposalProvider.datetimeController
+                            ..text = widget.proposalListData.createdAt ?? "",
+                          text: dateTimeController.text.isEmpty
+                              ? AppStrings.selectDateTime
+                              : dateTimeController.text,
+                          title: AppStrings.dateTime,
+                          style: TextStyle(
                             fontSize: 13.sp,
-                            fontWeight: FontWeight.w500,
-                            color: MyColors.black1),
-                        icon: IconButton(
-                            onPressed: () async {
-                              await dateTimeProvider.selectDateTime(context);
-
-                              if (dateTimeProvider.selectedDateTime != null) {
-                                dateTimeController.text =
-                                    dateTimeProvider.selectedDateTime!;
-                              }
-                            },
-                            icon: const Icon(Icons.calendar_month)),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please select a date and time';
-                          }
-                          return null;
-                        },
+                            fontWeight: FontWeight.w600,
+                            color: MyColors.black1,
+                          ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please select a date and time';
+                            }
+                            return null;
+                          },
+                        ),
                       ),
                       SizedBox(
                         height: 20.h,
                       ),
                       CustomTextFormField(
-                        controller: proposalProvider.rateController,
+                        readOnly: true,
+                        keyboardType: TextInputType.number,
+                        controller: proposalProvider.rateController
+                          ..text = (widget.proposalListData.budget?.max ?? 0)
+                              .toString(),
                         text: AppStrings.$100,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter a rate';
+                          }
+                          final num? minRate = num.tryParse(value);
+                          if (minRate == null) {
+                            return 'Please enter a valid number';
+                          }
+                          return null;
+                        },
                         title: AppStrings.rate,
                         style: TextStyle(
                             fontSize: 13.sp,
@@ -159,19 +168,17 @@ class _AcceptProposalScreenState extends State<AcceptProposalScreen> {
                         height: 20.h,
                       ),
                       CustomTextFormField(
-                        keyboardType: TextInputType.number,
                         readOnly: false,
-                        controller: proposalProvider.addressController,
+                        controller: proposalProvider.addressController
+                          ..text = "Location",
+                        // widget.proposalListData.budget?.max as String,
                         text: AppStrings.inputAddress,
                         title: AppStrings.address,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Please enter a rate';
+                            return 'Please enter address';
                           }
-                          final num? minRate = num.tryParse(value);
-                          if (minRate == null) {
-                            return 'Please enter a valid number';
-                          }
+
                           return null;
                         },
                         style: TextStyle(
@@ -192,76 +199,28 @@ class _AcceptProposalScreenState extends State<AcceptProposalScreen> {
                       SizedBox(
                         height: 10.h,
                       ),
-                      filePath != null
-                          ? Column(
-                              children: [
-                                // Display the file (image or PDF)
-                                Container(
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(8),
-                                      border:
-                                          Border.all(color: MyColors.grayDark)),
-                                  height: 88.h,
-                                  width: double.infinity,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      if (filePath!.endsWith('.pdf'))
-                                        SvgPicture.asset(
-                                          Assets.pdf,
-                                          width: 27,
-                                          height: 32,
-                                        )
-                                      else if (_file != null)
-                                        Image.file(
-                                          _file!,
-                                          height: 88.h,
-                                          width: 355.w,
-                                          fit: BoxFit.cover,
-                                        ),
-                                    ],
-                                  ),
-                                ),
-                                SizedBox(height: 10.h),
-                                // Button to remove file
-                                TextButton(
-                                  onPressed: removeFile,
-                                  child: Text(
-                                    'Remove File',
-                                    style: TextStyle(
-                                        color: MyColors.red,
-                                        fontSize: 12.sp,
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                )
-                              ],
-                            )
-                          : InkWell(
-                              onTap: pickFile,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(8),
-                                    border:
-                                        Border.all(color: MyColors.lightred)),
-                                height: 88.h,
-                                width: MediaQuery.of(context).size.height,
-                                child: Center(
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        AppStrings.addAttachImage,
-                                        style: TextStyle(
-                                            fontSize: 10.sp,
-                                            fontWeight: FontWeight.w600,
-                                            color: MyColors.lightGrey),
-                                      ),
-                                      SvgPicture.asset(Assets.addImage),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
+                      Image.network(
+                        widget.proposalListData.attachment ??
+                            "", // Display the attachment URL
+                        height: 88.h,
+                        width: 355.w,
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) {
+                          return Text('No file uploaded');
+                        },
+                      ),
+                      // Button to remove file
+                      // TextButton(
+                      //   onPressed: removeFile,
+                      //   child: Text(
+                      //     'Remove File',
+                      //     style: TextStyle(
+                      //         color: MyColors.red,
+                      //         fontSize: 12.sp,
+                      //         fontWeight: FontWeight.w500),
+                      //   ),
+                      // ),
+
                       SizedBox(
                         height: 20.h,
                       ),
@@ -284,6 +243,7 @@ class _AcceptProposalScreenState extends State<AcceptProposalScreen> {
                         child: Padding(
                           padding: const EdgeInsets.only(left: 8),
                           child: TextFormField(
+                            readOnly: true,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return 'Please enter a Description.';
@@ -296,7 +256,9 @@ class _AcceptProposalScreenState extends State<AcceptProposalScreen> {
                               }
                               return null;
                             },
-                            controller: proposalProvider.descriptionController,
+                            controller: proposalProvider.descriptionController
+                              ..text =
+                                  widget.proposalListData.description ?? "",
                             decoration: InputDecoration(
                               border: InputBorder.none,
                               hintText: AppStrings.briefDesc,
@@ -325,16 +287,16 @@ class _AcceptProposalScreenState extends State<AcceptProposalScreen> {
                             color: MyColors.btnColor,
                             textColor: MyColors.white,
                             onTap: () {
-                              proposalProvider.setFIle = _file;
-                              WidgetsBinding.instance
-                                  .addPostFrameCallback((timeStamp) {
-                                Provider.of<ProposalProvider>(context,
-                                        listen: false)
-                                    .createProposals(
-                                  context,
-                                  widget.proposalListData.sId ?? "",
-                                );
-                              });
+                              // proposalProvider.setFIle = _file;
+                              // WidgetsBinding.instance
+                              //     .addPostFrameCallback((timeStamp) {
+                              //   Provider.of<ProposalProvider>(context,
+                              //           listen: false)
+                              //       .createProposals(
+                              //     context,
+                              //     widget.proposalListData.projectId ?? "",
+                              //   );
+                              // });
                               _showDialogeBox(context);
                             }),
                       ),

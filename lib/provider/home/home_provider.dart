@@ -99,7 +99,7 @@ class HomeProvider extends ChangeNotifier {
     }
   }
 
-  Future<bool> createProposal({
+  Future<bool> createProposalN({
     required BuildContext context,
     required Map<String, dynamic> proposalData,
   }) async {
@@ -112,13 +112,24 @@ class HomeProvider extends ChangeNotifier {
     try {
       Response response = await apiService.createProposal(proposalData);
 
+      debugPrint("Response status code: ${response.statusCode}");
+      debugPrint("Response data: ${response.data}");
+
       if (response.data != null && response.statusCode == 201) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(response.data['message'])),
-        );
+        if (response.data['message'] != null) {
+          debugPrint("Message======> ${response.data['message']}");
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(response.data['message'])),
+          );
+        } else {
+          debugPrint("Message not found in response");
+        }
         return true;
       } else {
-        _errorMessage = response.data['message'] ?? 'Failed to create project.';
+        debugPrint("Error: Non-201 response or null data");
+        _errorMessage =
+            response.data?['message'] ?? 'Failed to create project.';
+        debugPrint("Error======> ${_errorMessage}");
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(_errorMessage!)),
         );
@@ -126,8 +137,12 @@ class HomeProvider extends ChangeNotifier {
       }
     } catch (e) {
       _errorMessage = 'An error occurred. Please try again.';
+      debugPrint("Error======> ${e.toString()}");
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(_errorMessage!)),
+        SnackBar(
+          content: Text(_errorMessage!),
+          backgroundColor: Colors.red,
+        ),
       );
       return false;
     } finally {

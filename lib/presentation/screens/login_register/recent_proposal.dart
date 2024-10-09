@@ -175,7 +175,7 @@ class _RecentProposalState extends State<RecentProposal> {
                                                 text1: project?.title ?? "",
                                                 text2:
                                                     "\$${project?.budget?.min} - \$${project?.budget?.max}",
-                                                text3: '',
+                                                text3: "Location",
                                                 rate: 'Rate',
                                               ),
                                             ),

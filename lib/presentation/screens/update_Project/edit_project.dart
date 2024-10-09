@@ -13,6 +13,11 @@ import 'package:project_5237_provider/presentation/widgets/customize_button.dart
 import 'package:project_5237_provider/provider/freelancer_provider/freelancer_provider.dart';
 import 'package:provider/provider.dart';
 
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:get/get.dart';
+import 'package:provider/provider.dart';
+
 class EditProject extends StatefulWidget {
   const EditProject({super.key});
 
@@ -22,12 +27,38 @@ class EditProject extends StatefulWidget {
 
 class _EditProjectState extends State<EditProject> {
   TextEditingController nameController = TextEditingController();
-  TextEditingController dscriptionController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
   TextEditingController startController = TextEditingController();
   TextEditingController endController = TextEditingController();
   TextEditingController skillsController = TextEditingController();
   final List<String> _skills = ['JavaScript', 'Node.js', 'MongoDB', 'React'];
-  final List<String> _selectedSkills = [];
+  List<String> _selectedSkills = [];
+  bool _isLoading = false;
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    descriptionController.dispose();
+    startController.dispose();
+    endController.dispose();
+    skillsController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _pickDate(
+      BuildContext context, TextEditingController controller) async {
+    DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2101),
+    );
+    if (picked != null) {
+      setState(() {
+        controller.text = DateFormat('MMMM yyyy').format(picked);
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,9 +86,7 @@ class _EditProjectState extends State<EditProject> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(
-                      height: 35.h,
-                    ),
+                    SizedBox(height: 35.h),
                     Center(
                       child: CustomTextFormField(
                         controller: nameController,
@@ -69,9 +98,7 @@ class _EditProjectState extends State<EditProject> {
                             color: MyColors.black),
                       ),
                     ),
-                    SizedBox(
-                      height: 20.h,
-                    ),
+                    SizedBox(height: 20.h),
                     TextWidget(
                       align: TextAlign.start,
                       text: "Description",
@@ -79,13 +106,11 @@ class _EditProjectState extends State<EditProject> {
                       size: 13.sp,
                       fontweight: FontWeight.w600,
                     ),
-                    SizedBox(
-                      height: 5.h,
-                    ),
+                    SizedBox(height: 5.h),
                     Center(
                       child: TextFormField(
                         maxLines: 3,
-                        controller: dscriptionController,
+                        controller: descriptionController,
                         decoration: InputDecoration(
                           hintText: AppStrings.desc,
                           hintStyle: TextStyle(
@@ -100,46 +125,46 @@ class _EditProjectState extends State<EditProject> {
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: 10.h,
-                    ),
+                    SizedBox(height: 10.h),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Flexible(
-                          child: CustomTextFormField(
-                            text: AppStrings.date,
-                            style: TextStyle(
-                                fontSize: 13.sp,
-                                fontWeight: FontWeight.w600,
-                                color: MyColors.black),
-                            title: AppStrings.startDate,
-                            // validator: (value) =>
-                            //     onboardingProvider.validateDate(value ?? ''),
-                            controller: startController,
+                          child: GestureDetector(
+                            onTap: () => _pickDate(context, startController),
+                            child: AbsorbPointer(
+                              child: CustomTextFormField(
+                                text: AppStrings.date,
+                                style: TextStyle(
+                                    fontSize: 13.sp,
+                                    fontWeight: FontWeight.w600,
+                                    color: MyColors.black),
+                                title: AppStrings.startDate,
+                                controller: startController,
+                              ),
+                            ),
                           ),
                         ),
-                        SizedBox(
-                          width: 5.w,
-                        ),
+                        SizedBox(width: 5.w),
                         Flexible(
-                          child: CustomTextFormField(
-                            text: AppStrings.date,
-                            style: TextStyle(
-                                fontSize: 13.sp,
-                                fontWeight: FontWeight.w600,
-                                color: MyColors.black),
-                            title: AppStrings.endDate,
-                            // validator: (value) =>
-                            //     onboardingProvider.validateDate(value ?? ''),
-                            controller: endController,
+                          child: GestureDetector(
+                            onTap: () => _pickDate(context, endController),
+                            child: AbsorbPointer(
+                              child: CustomTextFormField(
+                                text: AppStrings.date,
+                                style: TextStyle(
+                                    fontSize: 13.sp,
+                                    fontWeight: FontWeight.w600,
+                                    color: MyColors.black),
+                                title: AppStrings.endDate,
+                                controller: endController,
+                              ),
+                            ),
                           ),
                         ),
                       ],
                     ),
-                    SizedBox(
-                      height: 10.h,
-                    ),
+                    SizedBox(height: 10.h),
                     TextWidget(
                       align: TextAlign.start,
                       text: AppStrings.yourSkills,
@@ -148,81 +173,82 @@ class _EditProjectState extends State<EditProject> {
                       fontweight: FontWeight.w600,
                     ),
                     SizedBox(
-                      width: MediaQuery.of(context).size.width / 1,
                       height: 100,
-                      //   padding: const EdgeInsets.all(8.0),
                       child: DropDownMultiSelect(
-                        decoration: InputDecoration(
-                          fillColor: Theme.of(context).colorScheme.onPrimary,
-                          focusColor: Theme.of(context).colorScheme.onPrimary,
-                          enabledBorder: OutlineInputBorder(
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(8)),
-                              borderSide: BorderSide(
-                                  color: MyColors.black, width: 1.5)),
-                          focusedBorder: const OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(8)),
-                              borderSide: BorderSide(
-                                // color: Color(0xff2A1E17),
-                                width: 2.0,
-                              )),
-                        ),
                         options: _skills,
                         selectedValues: _selectedSkills,
                         onChanged: (List<String> value) {
-                          //   value = selectedCheckBoxValue;
-                          /* print("====> _selected languagelist ${_selectedLanguages.length}");*/
+                          setState(() {
+                            _selectedSkills = value;
+                          });
                         },
-                        whenEmpty: 'selct your technologies',
+                        whenEmpty: 'Select your technologies',
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
                       ),
                     ),
-                    SizedBox(
-                      height: 100.h,
-                    ),
-                    CustomizeButton(
-                      borderColor: MyColors.btnColor,
-                      radius: 100.r,
-                      text: "update",
-                      height: 45.h,
-                      color: MyColors.btnColor,
-                      textColor: MyColors.white,
-                      onTap: () async {
-                        String projectName = nameController.text;
-                        String description = dscriptionController.text;
-                        String startDate = startController.text;
-                        String endDate = endController.text;
-                        List<String> technologies = _selectedSkills;
-
-                        if (projectName.isNotEmpty &&
-                            description.isNotEmpty &&
-                            startDate.isNotEmpty &&
-                            endDate.isNotEmpty) {
-                          bool success = await freelancerProvider.updateProject(
-                            context: context,
-                            projectName: projectName,
-                            description: description,
-                            startDate: startDate,
-                            endDate: endDate,
-                            technologies: technologies,
-                          );
-
-                          if (success) {
-                            debugPrint("Project updated successfully");
-                          }
-                        } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Please fill in all fields.'),
-                              backgroundColor: Colors.red,
+                    // SizedBox(height: 20),
+                    // Text("Selected Skills: ${_selectedSkills.join(", ")}"),
+                    SizedBox(height: 100.h),
+                    freelancerProvider.loading
+                        ? Center(
+                            child: CircularProgressIndicator(
+                              color: MyColors.blue,
                             ),
-                          );
-                        }
-                      },
-                    ),
-                    SizedBox(
-                      height: 20.h,
-                    ),
+                          )
+                        : CustomizeButton(
+                            borderColor: MyColors.btnColor,
+                            radius: 100.r,
+                            text: "Update",
+                            height: 45.h,
+                            color: MyColors.btnColor,
+                            textColor: MyColors.white,
+                            onTap: () async {
+                              String projectName = nameController.text;
+                              String description = descriptionController.text;
+                              String startDate = startController.text;
+                              String endDate = endController.text;
+                              List<String> technologies = _selectedSkills;
+
+                              if (projectName.isNotEmpty &&
+                                  description.isNotEmpty &&
+                                  startDate.isNotEmpty &&
+                                  endDate.isNotEmpty) {
+                                setState(() {
+                                  _isLoading = true;
+                                });
+
+                                bool success =
+                                    await freelancerProvider.updateProject(
+                                  context: context,
+                                  projectName: projectName,
+                                  description: description,
+                                  startDate: startDate,
+                                  endDate: endDate,
+                                  technologies: technologies,
+                                );
+
+                                setState(() {
+                                  _isLoading = false;
+                                });
+
+                                if (success) {
+                                  debugPrint("Project updated successfully");
+                                }
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text('Please fill in all fields.'),
+                                    backgroundColor: Colors.red,
+                                  ),
+                                );
+                              }
+                            },
+                          ),
+                    SizedBox(height: 20.h),
                   ],
                 ))),
       ));

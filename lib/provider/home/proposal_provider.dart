@@ -47,7 +47,7 @@ class ProposalProvider with ChangeNotifier {
   String? get errorMessage => _errorMessage;
   bool get isSuccess => _isSuccess;
 
-  Future<void> createProposals(BuildContext context, String proposalId) async {
+  Future<void> createProposals(BuildContext context, String projectId) async {
     _loading = true;
     _errorMessage = null;
     notifyListeners();
@@ -60,7 +60,7 @@ class ProposalProvider with ChangeNotifier {
           await MultipartFile.fromFile(file!.path,
               filename: file!.path, contentType: MediaType('image', 'jpg')),
         ],
-      'projectId': proposalId,
+      'projectId': projectId,
       'proposalTitle': titleController.text,
       'proposalDescription': descriptionController.text,
       'estimatedTime': datetimeController.text,
@@ -74,14 +74,19 @@ class ProposalProvider with ChangeNotifier {
       debugPrint("Response status code: ${response.statusCode}");
 
       if (response.data != null && response.statusCode == 201) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(response.data['message'])),
-        );
-        debugPrint("Response message: ${response.data['message']}");
+        if (response.data['message'] != null) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(response.data['message'])),
+          );
+          debugPrint("Response message: ${response.data['message']}");
+        } else {
+          debugPrint("Message key not found in the response data");
+        }
         _isSuccess = true;
       } else {
-        _errorMessage = response.data['message'] ?? 'Failed to create project.';
-        debugPrint("Error message: ${response.data['message']}");
+        _errorMessage =
+            response.data?['message'] ?? 'Failed to create proposal.';
+        debugPrint("Error message: $_errorMessage");
 
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(_errorMessage!)),

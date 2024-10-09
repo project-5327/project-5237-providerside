@@ -120,11 +120,12 @@ class RegisterProvider extends ChangeNotifier {
       emailController.clear();
       passwordController.clear();
       repeatPasswordController.clear();
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(errorMessage ?? 'Registration failed')),
-      );
     }
+    // else {
+    //   ScaffoldMessenger.of(context).showSnackBar(
+    //     SnackBar(content: Text(errorMessage ?? 'Registration failed')),
+    //   );
+    // }
   } /* else {
 
       ScaffoldMessenger.of(context).showSnackBar(

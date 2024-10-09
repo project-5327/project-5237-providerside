@@ -34,7 +34,7 @@ class DiscoverContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 200.h,
+      //  height: 200.h,
       //width: 352.w,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -61,8 +61,8 @@ class DiscoverContainer extends StatelessWidget {
                 width: 10.h,
               ),
               Container(
-                margin: EdgeInsets.only(right: 8.w),
-                width: 200.w,
+                //  margin: EdgeInsets.only(right: 8.w),
+                width: 180.w,
                 child: Text(
                   username,
                   style: GoogleFonts.inter(
@@ -74,7 +74,9 @@ class DiscoverContainer extends StatelessWidget {
                   ),
                 ),
               ),
-              const Spacer(),
+              // SizedBox(
+              //   width: MediaQuery.of(context).size.width * 0.0001,
+              // ),
               Text(
                 time,
                 style: GoogleFonts.inter(
@@ -115,8 +117,9 @@ class DiscoverContainer extends StatelessWidget {
                   color: MyColors.black),
             ),
             trailing: InkWell(
-              onTap: () {},
-              // Get.to(const MapScreen()),
+              onTap: () {
+                Get.to(const MapScreen());
+              },
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -189,7 +192,7 @@ class DiscoverContainer1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 220.h,
+      //   height: 220.h,
       width: 352.w,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -213,7 +216,7 @@ class DiscoverContainer1 extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                width: 5.h,
+                width: 10.h,
               ),
               Container(
                 margin: EdgeInsets.only(right: 8.w),
@@ -230,7 +233,7 @@ class DiscoverContainer1 extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                width: MediaQuery.of(context).size.width * 0.05,
+                width: MediaQuery.of(context).size.width * 0.013,
               ),
               Text(
                 timeago.format(DateTime.parse(time)),
@@ -248,6 +251,7 @@ class DiscoverContainer1 extends StatelessWidget {
           ),
           Text(
             text1,
+            softWrap: true,
             style: TextStyle(
                 fontSize: 13.sp,
                 fontWeight: FontWeight.w500,

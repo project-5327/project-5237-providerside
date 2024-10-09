@@ -94,10 +94,8 @@ class _FreelancerProfileState extends State<FreelancerProfile> {
                         fit: BoxFit.cover,
                         errorBuilder: (context, error, stackTrace) {
                           print("Error=======> ${error}");
-                          return Image.asset(
-                            "assets/images/Ellipse 53.png",
-                            // height: 148.h,
-                            // width: 140.w,
+                          return Image.network(
+                            "https://wallpaperaccess.com/full/7205205.jpg",
                             fit: BoxFit.cover,
                           );
                         },
@@ -105,7 +103,7 @@ class _FreelancerProfileState extends State<FreelancerProfile> {
               Center(
                 child: CustomTextFormField(
                   controller: userController,
-                  //   ..text = client?.user?.userName ?? '',
+                  //..text = freelancer?.user?.userName ?? '',
                   text: freelancer?.user?.userName,
                   //  '${freelancer?.firstName ?? ""} ${freelancer?.lastName ?? ""}',
                   title: "Full Name",

@@ -17,7 +17,8 @@ import '../my_contracts/send_screen.dart';
 import 'change_password.dart';
 
 class OtpScreen extends StatefulWidget {
-  const OtpScreen({super.key});
+  final String email;
+  const OtpScreen({super.key, required this.email});
 
   @override
   State<OtpScreen> createState() => _OtpScreenState();
@@ -31,6 +32,11 @@ class _OtpScreenState extends State<OtpScreen> {
     provider.passwordController.dispose();
     provider.confirmPasswordController.dispose();
     super.dispose();
+  }
+
+  final GlobalKey<FormState> _otpFieldKey = GlobalKey<FormState>();
+  bool validateOtp(String otp) {
+    return otp.length == 4 && RegExp(r'^\d{4}$').hasMatch(otp);
   }
 
   @override
@@ -48,6 +54,7 @@ class _OtpScreenState extends State<OtpScreen> {
       return SafeArea(
         child: Scaffold(
           appBar: AppBar(
+            automaticallyImplyLeading: false,
             // leading: IconButton(
             //   onPressed: () {
             //     Get.back();
@@ -74,12 +81,42 @@ class _OtpScreenState extends State<OtpScreen> {
                       SizedBox(
                         height: 20.h,
                       ),
-                      Text(
-                        AppStrings.enter4DigitCodeYour,
-                        style: TextStyle(
-                            fontSize: 12.sp,
+                      RichText(
+                        text: TextSpan(
+                          text:
+                              "Enter 4 digit code that your receive on your email ",
+                          style: TextStyle(
                             fontWeight: FontWeight.w400,
-                            color: MyColors.textColor),
+                            fontSize: 16.sp,
+                            color: MyColors.lightGrey,
+                          ),
+                          children: <TextSpan>[
+                            TextSpan(
+                              text: "(",
+                              style: TextStyle(
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.w400,
+                                color: MyColors.lightGrey,
+                              ),
+                            ),
+                            TextSpan(
+                              text: "cody.fisher45@example.com",
+                              style: TextStyle(
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.w400,
+                                color: MyColors.black1,
+                              ),
+                            ),
+                            TextSpan(
+                              text: ")",
+                              style: TextStyle(
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.w400,
+                                color: MyColors.lightGrey,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                       SizedBox(
                         height: 78.h,
@@ -99,9 +136,21 @@ class _OtpScreenState extends State<OtpScreen> {
                             showFieldAsBox: true,
                             onCodeChanged: (String code) {},
                             onSubmit: (String verificationCode) {
-                              loginProvider.setOtpCode(verificationCode);
-                              debugPrint(
-                                  "Entered OTP: ${loginProvider.otpCode}");
+                              if (validateOtp(verificationCode)) {
+                                loginProvider.setOtpCode(verificationCode);
+                                debugPrint(
+                                    "Entered OTP: ${loginProvider.otpCode}");
+                              } else {
+                                debugPrint(
+                                    "Invalid OTP. Please enter a valid 4-digit code.");
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                        "Invalid OTP. Please enter a valid 4-digit code."),
+                                    backgroundColor: Colors.red,
+                                  ),
+                                );
+                              }
                             },
                           ),
                         ),
@@ -120,41 +169,32 @@ class _OtpScreenState extends State<OtpScreen> {
                             children: <TextSpan>[
                               TextSpan(
                                 recognizer: TapGestureRecognizer()
-                                  ..onTap = () {
-                                    Get.defaultDialog(
-                                      titlePadding:
-                                          const EdgeInsets.only(top: 20),
-                                      title: AppStrings.resendOtp,
-                                      titleStyle: TextStyle(
-                                          fontSize: 15.sp,
-                                          color: MyColors.btnColor,
-                                          fontWeight: FontWeight.w400),
-                                      content: Column(
-                                        children: [
-                                          TextWidget(
-                                            text: AppStrings.otpCodeSent,
-                                            color: MyColors.black1,
-                                            size: 12.sp,
-                                            fontweight: FontWeight.w600,
-                                          ),
-                                          SizedBox(
-                                            height: 30.h,
-                                          ),
-                                          CustomizeButton(
-                                            borderColor: MyColors.btnColor,
-                                            radius: 100.r,
-                                            text: AppStrings.ok,
-                                            height: 40.h,
-                                            width: 134.w,
-                                            color: MyColors.btnColor,
-                                            textColor: MyColors.white,
-                                            onTap: () {
-                                              Get.back();
-                                            },
-                                          ),
-                                        ],
-                                      ),
+                                  ..onTap = () async {
+                                    bool resendSuccess =
+                                        await loginProvider.sendOtpPostApi(
+                                      context: context,
+                                      widget.email,
                                     );
+
+                                    if (resendSuccess) {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        const SnackBar(
+                                          content: Text(
+                                            "OTP has been resent to your email.",
+                                          ),
+                                          backgroundColor: Colors.black,
+                                        ),
+                                      );
+                                    } else {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(const SnackBar(
+                                        content: Text(
+                                          "Failed to resend OTP. Please try again.",
+                                        ),
+                                        backgroundColor: Colors.black,
+                                      ));
+                                    }
                                   },
                                 text: AppStrings.resendCode,
                                 style: TextStyle(
@@ -171,78 +211,55 @@ class _OtpScreenState extends State<OtpScreen> {
                       SizedBox(
                         height: 344.h,
                       ),
-                      // CustomizeButton(
-                      //     borderColor: MyColors.btnColor,
-                      //     radius: 100.r,
-                      //     text: AppStrings.continueText,
-                      //     height: 40.h,
-                      //     width: 334.w,
-                      //     color: MyColors.btnColor,
-                      //     textColor: MyColors.white,
-                      //     onTap: () async {
-                      //       if (loginProvider.otpCode.isNotEmpty) {
-                      //         loginProvider.isLoading
-                      //             ? Center(
-                      //                 child: CircularProgressIndicator(
-                      //                 color: MyColors.blue1,
-                      //               ))
-                      //             : await loginProvider.verifyOTP(
-                      //                 loginProvider.otpCode,
-                      //                 context: context);
+                      loginProvider.isLoading
+                          ? Center(
+                              child: CircularProgressIndicator(
+                                color: MyColors.btnColor,
+                              ),
+                            )
+                          : CustomizeButton(
+                              borderColor: MyColors.btnColor,
+                              radius: 100.r,
+                              text: 'Continue',
+                              height: 40.h,
+                              width: 334.w,
+                              color: MyColors.btnColor,
+                              textColor: MyColors.white,
+                              onTap: () async {
+                                if (loginProvider.otpCode.isNotEmpty) {
+                                  if (!loginProvider.isLoading) {
+                                    final password =
+                                        loginProvider.passwordController.text ??
+                                            '';
+                                    final repeatPassword = loginProvider
+                                            .confirmPasswordController.text ??
+                                        '';
 
-                      //         Get.to(() => ChangePassword());
-                      //       } else {
-                      //         ScaffoldMessenger.of(context).showSnackBar(
-                      //           SnackBar(content: Text('Please enter the OTP')),
-                      //         );
-                      //       }
-                      //     }),
-                      CustomizeButton(
-                          borderColor: MyColors.btnColor,
-                          radius: 100.r,
-                          text: 'Continue',
-                          height: 40.h,
-                          width: 334.w,
-                          color: MyColors.btnColor,
-                          textColor: MyColors.white,
-                          onTap: () async {
-                            if (loginProvider.otpCode.isNotEmpty) {
-                              if (!loginProvider.isLoading) {
-                                final password =
-                                    loginProvider.passwordController.text ?? '';
-                                final repeatPassword = loginProvider
-                                        .confirmPasswordController.text ??
-                                    '';
+                                    bool otpVerified =
+                                        await loginProvider.verifyOTP(
+                                      loginProvider.otpCode,
+                                      context: context,
+                                    );
 
-                                await loginProvider.changePassword(
-                                  loginProvider.otpCode,
-                                  //  password,
-                                  context: context,
-                                );
-
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            //StockHubPage()
-                                            // AddStockRequest()
-                                            const ChangePassword()));
-                              } else {
-                                // Loading Indicator
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                      content:
-                                          Text('Processing, please wait...')),
-                                );
-                              }
-                            } else {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                    content: Text('Please enter the OTP')),
-                              );
-                            }
-                          }),
-
+                                    if (otpVerified) {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                ChangePassword()),
+                                      );
+                                    }
+                                  }
+                                } else {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text('Please enter the OTP'),
+                                      backgroundColor: Colors.red,
+                                    ),
+                                  );
+                                }
+                              },
+                            ),
                       SizedBox(
                         height: 53.h,
                       ),

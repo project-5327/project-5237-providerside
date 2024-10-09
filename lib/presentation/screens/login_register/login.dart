@@ -197,21 +197,22 @@ class LoginScreen extends StatelessWidget {
                                       loginProvider.emailController.clear();
                                       loginProvider.passwordController.clear();
                                     });
-                                  } else {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        content: Text(
-                                          'Login failed. Please check your credentials and try again.',
-                                          style: TextStyle(
-                                            fontSize: 15.sp,
-                                            fontWeight: FontWeight.w500,
-                                            color: MyColors.black1,
-                                          ),
-                                        ),
-                                        backgroundColor: Colors.red,
-                                      ),
-                                    );
                                   }
+                                  // else {
+                                  //   ScaffoldMessenger.of(context).showSnackBar(
+                                  //     SnackBar(
+                                  //       content: Text(
+                                  //         'Login failed. Please check your credentials and try again.',
+                                  //         style: TextStyle(
+                                  //           fontSize: 15.sp,
+                                  //           fontWeight: FontWeight.w500,
+                                  //           color: MyColors.black1,
+                                  //         ),
+                                  //       ),
+                                  //       backgroundColor: Colors.red,
+                                  //     ),
+                                  //   );
+                                  // }
                                 }
                               },
                             ),

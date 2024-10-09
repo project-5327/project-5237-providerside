@@ -24,7 +24,7 @@ class ChangePassword extends StatefulWidget {
 class _ChangePasswordState extends State<ChangePassword> {
   final formKey = GlobalKey<FormState>();
 
-  //final FormController formController = Get.put(FormController());
+  final GlobalKey<FormState> _changePasswordKey = GlobalKey<FormState>();
   final TextEditingController repeatPasswordController =
       TextEditingController();
 
@@ -52,13 +52,14 @@ class _ChangePasswordState extends State<ChangePassword> {
       return SafeArea(
         child: Scaffold(
           appBar: AppBar(
-            leading: IconButton(
-              onPressed: () {
-                Get.back();
-              },
-              icon: const Icon(Icons.arrow_back_ios),
-              color: MyColors.black,
-            ),
+            automaticallyImplyLeading: false,
+            // leading: IconButton(
+            //   onPressed: () {
+            //     Get.back();
+            //   },
+            //   icon: const Icon(Icons.arrow_back_ios),
+            //   color: MyColors.black,
+            // ),
             title: Text(
               'Forgot Password',
               style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600),
@@ -69,119 +70,125 @@ class _ChangePasswordState extends State<ChangePassword> {
               padding: responsive.isTablet
                   ? EdgeInsets.symmetric(horizontal: 100.sp)
                   : EdgeInsets.symmetric(horizontal: 20.sp),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  //  _pages[currentIndex],
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                  Text(
-                    'Enter your email for the verification process.\nWe will send 4 digits code to your email.',
-                    style: TextStyle(
-                        fontSize: 12.sp,
-                        fontWeight: FontWeight.w400,
-                        color: MyColors.textColor),
-                  ),
-                  SizedBox(
-                    height: 64.h,
-                  ),
-                  CustomTextFormField(
-                    readOnly: false,
-                    obscureText: loginProvider.obscureText,
-                    validator: (value) =>
-                        loginProvider.validatePassword(value ?? ''),
-                    controller: passwordController,
-                    text: '****************',
-                    title: 'Add Password',
-                    style: TextStyle(
-                      fontSize: 13.sp,
-                      fontWeight: FontWeight.w500,
-                      color: const Color(0xff222222),
+              child: Form(
+                key: _changePasswordKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: 20.h,
                     ),
-                    icon: IconButton(
-                        onPressed: () {
-                          loginProvider.togglePasswordVisibility();
-                        },
-                        icon: Icon(loginProvider.obscureText
-                            ? Icons.visibility_off
-                            : Icons.visibility)),
-                  ),
-
-                  SizedBox(
-                    height: 18.sp,
-                  ),
-                  Center(
-                    child: CustomTextFormField(
+                    Text(
+                      'Enter your email for the verification process.\nWe will send 4 digits code to your email.',
+                      style: TextStyle(
+                          fontSize: 12.sp,
+                          fontWeight: FontWeight.w400,
+                          color: MyColors.textColor),
+                    ),
+                    SizedBox(
+                      height: 64.h,
+                    ),
+                    CustomTextFormField(
                       readOnly: false,
-                      obscureText: loginProvider.obscureRepeatText,
+                      obscureText: loginProvider.obscureText,
                       validator: (value) =>
                           loginProvider.validatePassword(value ?? ''),
-                      controller: repeatPasswordController,
+                      controller: passwordController,
                       text: '****************',
-                      title: 'Repeat Password',
+                      title: 'Add Password',
                       style: TextStyle(
-                          fontSize: 13.sp,
-                          fontWeight: FontWeight.w500,
-                          color: const Color(0xff222222)),
+                        fontSize: 13.sp,
+                        fontWeight: FontWeight.w500,
+                        color: const Color(0xff222222),
+                      ),
                       icon: IconButton(
                           onPressed: () {
-                            loginProvider.toggleRepeatPasswordVisibility();
+                            loginProvider.togglePasswordVisibility();
                           },
-                          icon: Icon(loginProvider.obscureRepeatText
+                          icon: Icon(loginProvider.obscureText
                               ? Icons.visibility_off
                               : Icons.visibility)),
                     ),
-                  ),
-                  SizedBox(
-                    height: 276.h,
-                  ),
-                  CustomizeButton(
-                      borderColor: MyColors.btnColor,
-                      radius: 100.r,
-                      text: 'Continue',
-                      height: 40.h,
-                      width: 334.w,
-                      color: MyColors.btnColor,
-                      textColor: MyColors.white,
-                      onTap: () async {
-                                  try {
-                                  //  loginProvider.isLoading = true;
-                                    bool success =
-                                        await loginProvider.changePassword(
-                                       
-                                     repeatPasswordController.text, context:context                                      
+                    SizedBox(
+                      height: 18.sp,
+                    ),
+                    Center(
+                      child: CustomTextFormField(
+                        readOnly: false,
+                        obscureText: loginProvider.obscureRepeatText,
+                        validator: (value) =>
+                            loginProvider.validatePassword(value ?? ''),
+                        controller: repeatPasswordController,
+                        text: '****************',
+                        title: 'Repeat Password',
+                        style: TextStyle(
+                            fontSize: 13.sp,
+                            fontWeight: FontWeight.w500,
+                            color: const Color(0xff222222)),
+                        icon: IconButton(
+                            onPressed: () {
+                              loginProvider.toggleRepeatPasswordVisibility();
+                            },
+                            icon: Icon(loginProvider.obscureRepeatText
+                                ? Icons.visibility_off
+                                : Icons.visibility)),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 276.h,
+                    ),
+                    loginProvider.isLoading
+                        ? Center(
+                            child: CircularProgressIndicator(
+                              color: MyColors.btnColor,
+                            ),
+                          )
+                        : CustomizeButton(
+                            borderColor: MyColors.btnColor,
+                            radius: 100.r,
+                            text: 'Continue',
+                            height: 40.h,
+                            width: 334.w,
+                            color: MyColors.btnColor,
+                            textColor: MyColors.white,
+                            onTap: () async {
+                              try {
+                                loginProvider.isLoading = true;
+                                if (_changePasswordKey.currentState!
+                                    .validate()) {
+                                  bool success =
+                                      await loginProvider.changePassword(
+                                    repeatPasswordController.text,
+                                    context: context,
+                                  );
+
+                                  if (success) {
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => LoginScreen()),
                                     );
 
-                                    if (success) {
-                                      Navigator.pushReplacement(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                LoginScreen()),
-                                      );
-
-                                      // Clear the fields
-                                      Future.delayed(
-                                          const Duration(seconds: 5), () {
-                                        loginProvider.passwordController
-                                            .clear();
-                                        loginProvider
-                                            .confirmPasswordController
-                                            .clear();
-                                      });
-                                    }
-                                  } finally {
-                                    // loginProvider.isLoading =
-                                    //     false; // Ensure loading is set to false
+                                    // Clear the fields
+                                    Future.delayed(const Duration(seconds: 5),
+                                        () {
+                                      loginProvider.passwordController.clear();
+                                      loginProvider.confirmPasswordController
+                                          .clear();
+                                    });
                                   }
-                                                                }),
-                       
-                  SizedBox(
-                    height: 53.h,
-                  ),
-                ],
+                                }
+                              } finally {
+                                loginProvider.isLoading =
+                                    false; // Ensure loading is set to false
+                              }
+                            }),
+                    SizedBox(
+                      height: 53.h,
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -352,37 +359,39 @@ class _ChangePasswordState extends State<ChangePassword> {
                                         color: MyColors.btnColor,
                                         textColor: MyColors.white,
                                         onTap: () async {
-                                  try {
-                                  //  loginProvider.isLoading = true;
-                                    bool success =
-                                        await loginProvider.changePassword(
-                                     repeatPasswordController.text, context:context                                      
-                                    );
+                                          try {
+                                            //  loginProvider.isLoading = true;
+                                            bool success = await loginProvider
+                                                .changePassword(
+                                                    repeatPasswordController
+                                                        .text,
+                                                    context: context);
 
-                                    if (success) {
-                                      Navigator.pushReplacement(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                LoginScreen()),
-                                      );
+                                            if (success) {
+                                              Navigator.pushReplacement(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        LoginScreen()),
+                                              );
 
-                                      // Clear the fields
-                                      Future.delayed(
-                                          const Duration(seconds: 5), () {
-                                        loginProvider.passwordController
-                                            .clear();
-                                        loginProvider
-                                            .confirmPasswordController
-                                            .clear();
-                                      });
-                                    }
-                                  } finally {
-                                    // loginProvider.isLoading =
-                                    //     false; // Ensure loading is set to false
-                                  }
-                                                                }),
-                                SizedBox(
+                                              // Clear the fields
+                                              Future.delayed(
+                                                  const Duration(seconds: 5),
+                                                  () {
+                                                loginProvider.passwordController
+                                                    .clear();
+                                                loginProvider
+                                                    .confirmPasswordController
+                                                    .clear();
+                                              });
+                                            }
+                                          } finally {
+                                            // loginProvider.isLoading =
+                                            //     false; // Ensure loading is set to false
+                                          }
+                                        }),
+                                    SizedBox(
                                       height: 10.h,
                                     ),
                                   ]),

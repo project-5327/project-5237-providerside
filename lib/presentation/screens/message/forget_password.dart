@@ -22,7 +22,7 @@ class ForgetPasswordScreen extends StatefulWidget {
 }
 
 class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
-  // final FormController formController = Get.put(FormController());
+  final forgetKey = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
 
   @override
@@ -67,91 +67,91 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                 padding: responsive.isTablet
                     ? const EdgeInsets.symmetric(horizontal: 100)
                     : const EdgeInsets.symmetric(horizontal: 20),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      height: 20.h,
-                    ),
-                    Center(
-                      child: Text(
-                        'Enter your email for the verification process. \nWe will send 4 digits code to your email.',
-                        style: TextStyle(
-                            fontFamily: Fonts.fontsinter,
-                            fontSize: 12.sp,
-                            fontWeight: FontWeight.w400,
-                            color: MyColors.textColor),
+                child: Form(
+                  key: forgetKey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        height: 20.h,
                       ),
-                    ),
-                    SizedBox(
-                      height: 64.h,
-                    ),
-                    Center(
-                      child: CustomTextFormField(
-                        readOnly: false,
-                        validator: (value) =>
-                            loginProvider.validateEmail(value ?? ''),
-                        controller: loginProvider.emailController,
-                        text: 'Vishal@gmail.com',
-                        title: 'Email',
-                        style: TextStyle(
-                            fontSize: 13.sp,
-                            fontWeight: FontWeight.w500,
-                            color: const Color(0xff222222)),
+                      Center(
+                        child: Text(
+                          'Enter your email for the verification process. \nWe will send 4 digits code to your email.',
+                          style: TextStyle(
+                              fontFamily: Fonts.fontsinter,
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.w400,
+                              color: MyColors.textColor),
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 200.h,
-                    ),
-                    CustomizeButton(
-                      borderColor: MyColors.btnColor,
-                      radius: 100.r,
-                      text: 'Send Code',
-                      height: 40.h,
-                      width: 334.w,
-                      color: MyColors.btnColor,
-                      textColor: MyColors.white,
-                      onTap: () async {
-                        // //  formKey.currentState!.validate();
-                        bool loginSuccess = await loginProvider.sendOtpPostApi(
-                            context: context,
-                            loginProvider.emailController.text);
-
-                        if (loginSuccess) {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const OtpScreen()),
-                          );
-                          Future.delayed(const Duration(seconds: 5), () {
-                            loginProvider.emailController.clear();
-                            // loginProvider.passwordController.clear();
-                          });
-                        } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(
-                                'Otp  does not get. ',
-                                style: TextStyle(
-                                  fontSize: 15.sp,
-                                  fontWeight: FontWeight.w500,
-                                  color: MyColors.black1,
-                                ),
+                      SizedBox(
+                        height: 64.h,
+                      ),
+                      Center(
+                        child: CustomTextFormField(
+                          readOnly: false,
+                          validator: (value) =>
+                              loginProvider.validateEmail(value ?? ''),
+                          controller: loginProvider.emailController,
+                          text: 'Vishal@gmail.com',
+                          title: 'Email',
+                          style: TextStyle(
+                              fontSize: 13.sp,
+                              fontWeight: FontWeight.w500,
+                              color: const Color(0xff222222)),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 200.h,
+                      ),
+                      loginProvider.isLoading
+                          ? Center(
+                              child: CircularProgressIndicator(
+                                color: MyColors.btnColor,
                               ),
-                              backgroundColor: Colors.red,
-                            ),
-                          );
-                        }
+                            )
+                          : CustomizeButton(
+                              borderColor: MyColors.btnColor,
+                              radius: 100.r,
+                              text: 'Send Code',
+                              height: 40.h,
+                              width: 334.w,
+                              color: MyColors.btnColor,
+                              textColor: MyColors.white,
+                              onTap: () async {
+                                if (forgetKey.currentState!.validate()) {
+                                  bool loginSuccess =
+                                      await loginProvider.sendOtpPostApi(
+                                          context: context,
+                                          loginProvider.emailController.text);
 
-                        debugPrint(
-                            "email =========> ${loginProvider.emailController.text} ");
-                      },
-                    ),
-                    SizedBox(
-                      height: 53.h,
-                    ),
-                  ],
+                                  if (loginSuccess) {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => OtpScreen(
+                                                email: loginProvider
+                                                    .emailController.text,
+                                              )),
+                                    );
+                                    Future.delayed(const Duration(seconds: 5),
+                                        () {
+                                      loginProvider.emailController.clear();
+                                      // loginProvider.passwordController.clear();
+                                    });
+                                  }
+
+                                  debugPrint(
+                                      "email =========> ${loginProvider.emailController.text} ");
+                                }
+                              }),
+                      SizedBox(
+                        height: 53.h,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             );
@@ -275,12 +275,12 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                                           context: context,
                                           loginProvider.emailController.text);
                                   if (loginSuccess) {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const OtpScreen()),
-                                    );
+                                    // Navigator.push(
+                                    //   context,
+                                    //   MaterialPageRoute(
+                                    //       builder: (context) =>
+                                    //           const OtpScreen()),
+                                    // );
                                     Future.delayed(const Duration(seconds: 5),
                                         () {
                                       loginProvider.emailController.clear();

@@ -71,7 +71,7 @@ class _HandShakeTickState extends State<HandShakeTick> {
                 return ProjectTile1(
                   proposal: proposal,
                   image: Assets.bag,
-                  title: proposal.projectId?.title ?? "Project Title",
+                  title: proposal.projectId?.title ?? "",
                   title1:
                       '${proposal.clientDetails?.firstName} ${proposal.clientDetails?.lastName}',
                   subtitle: proposal.createdAt ?? '',

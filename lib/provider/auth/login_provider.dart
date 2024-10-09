@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_5237_provider/presentation/screens/login_register/login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../config/baseclient/CustomInterceptor.dart';
 import '../../config/baseclient/base_client.dart';
@@ -27,6 +28,11 @@ class LoginProvider extends ChangeNotifier {
   TextEditingController get confirmPasswordController =>
       _confirmPasswordController;
   String get otpCode => _otpCode;
+
+  set isLoading(bool value) {
+    _isLoading = value;
+    notifyListeners();
+  }
 
   void setOtpCode(String code) {
     _otpCode = code;
@@ -71,15 +77,26 @@ class LoginProvider extends ChangeNotifier {
         notifyListeners();
         return true;
       } else {
+        debugPrint("Error=======> ${response.data['message']}");
         debugPrint("Invalid credentials or null response");
         _errorMessage = 'Invalid credentials';
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+              backgroundColor: Colors.red,
+              content: Text(response.data['message'] ?? "Invalid credentials")),
+        );
         _isLoading = false;
         notifyListeners();
         return false;
       }
     } catch (e) {
-      debugPrint("Exception caught: $e");
+      debugPrint("Exception caught========> $e");
       _errorMessage = 'An error occurred. Please try again.';
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+            backgroundColor: Colors.red,
+            content: Text("An error occurred. Please try again.")),
+      );
       _isLoading = false;
       notifyListeners();
       return false;
@@ -126,33 +143,37 @@ class LoginProvider extends ChangeNotifier {
     try {
       final response = await BaseClient.post(
         api: EndPoints.SENDOTP,
-        payloadObj: {
-          'email': email,
-        },
+        payloadObj: {'email': email},
       );
-      print(response.data);
+
       if (response != null && response.statusCode == 200) {
-        print("message======>${response.data['message']}");
+        final message = response.data['message'];
         emailController.text = "";
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(response.data['message'])),
-        );
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(message)));
+
         SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setString('email', email!);
-        print("object");
-        _isLoading = false;
 
+        _isLoading = false;
         notifyListeners();
         return true;
       } else {
         _errorMessage = 'Invalid credentials';
         _isLoading = false;
         notifyListeners();
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text(
+              response.data['message'],
+            ),
+            backgroundColor: Colors.red));
         return false;
       }
     } catch (e) {
       _errorMessage = 'An error occurred. Please try again.';
       _isLoading = false;
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(_errorMessage!), backgroundColor: Colors.red));
       notifyListeners();
       return false;
     }
@@ -187,61 +208,90 @@ class LoginProvider extends ChangeNotifier {
         return true;
       } else {
         _errorMessage = response.data['message'] ?? 'Invalid or expired OTP';
+        debugPrint("error======>${response.data['message']}");
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(_errorMessage!),
+            backgroundColor: Colors.red,
+          ),
+        );
         _isLoading = false;
         notifyListeners();
         return false;
       }
     } catch (e) {
       _errorMessage = 'An error occurred. Please try again.';
+      debugPrint("error======>$_errorMessage");
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(_errorMessage!),
+          backgroundColor: Colors.red,
+        ),
+      );
       _isLoading = false;
       notifyListeners();
       return false;
     }
   }
 
-  Future<bool> changePassword(String? newPassword,
+  Future<bool> changePassword(String newPassword,
       {required BuildContext context}) async {
     print("Login method called");
     _isLoading = true;
     _errorMessage = null;
-    notifyListeners();
+
     try {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? email = prefs.getString('email');
+
+      if (email == null) {
+        _errorMessage = 'No email found. Please log in again.';
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(_errorMessage!)),
+        );
+        _isLoading = false;
+        return false;
+      }
+      print("loginProvider======>${email}");
+      print("loginProvider======>${newPassword}");
       final response = await BaseClient.post(
         api: EndPoints.RESETPASSWORD,
         payloadObj: {
           'email': email,
-          // 'otp': otp,
           'newPassword': newPassword,
         },
       );
+
       if (response != null && response.statusCode == 200) {
+        print("status code======>${response.data['status']}");
         print("message======>${response.data['message']}");
-        passwordController.text = "";
-        confirmPasswordController.text = "";
+        print("message======>${response.data['data']}");
+
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(response.data['message'])),
         );
-        _isLoading = false;
-
-        /* Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => LoginScreen()),
-          (Route<dynamic> route) => false,
-        );*/
-        notifyListeners();
         return true;
       } else {
         _errorMessage = 'Invalid credentials';
-        _isLoading = false;
-        notifyListeners();
+        debugPrint('Error status code=======> ${response.data['status']}');
+        debugPrint('Error=======> ${response.data['message']}');
+        debugPrint('Error status code=======> ${response.data['status']}');
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(response.data['message']),
+            backgroundColor: Colors.red,
+          ),
+        );
         return false;
       }
     } catch (e) {
       _errorMessage = 'An error occurred. Please try again.';
-      _isLoading = false;
-      notifyListeners();
+      debugPrint('Error=======>$e');
       return false;
+    } finally {
+      _isLoading = false;
     }
   }
 
@@ -271,20 +321,32 @@ class LoginProvider extends ChangeNotifier {
         );
         _isLoading = false;
 
-        /* Navigator.of(context).pushAndRemoveUntil(
+        Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(builder: (context) => LoginScreen()),
           (Route<dynamic> route) => false,
-        );*/
+        );
         notifyListeners();
         return true;
       } else {
         _errorMessage = 'Invalid credentials';
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text("Invalid credentials"),
+            backgroundColor: Colors.red,
+          ),
+        );
         _isLoading = false;
         notifyListeners();
         return false;
       }
     } catch (e) {
       _errorMessage = 'An error occurred. Please try again.';
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("An error occurred. Please try again."),
+          backgroundColor: Colors.red,
+        ),
+      );
       _isLoading = false;
       notifyListeners();
       return false;

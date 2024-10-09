@@ -10,8 +10,7 @@ class ProposalDataResponse {
   ProposalDataResponse.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
-    data =
-        json['data'] != null ? ProposalData.fromJson(json['data']) : null;
+    data = json['data'] != null ? ProposalData.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -61,6 +60,7 @@ class ProposalData {
 class ProposalListData {
   Budget? budget;
   String? sId;
+  String? projectId; // Add projectId here
   ClientId? clientId;
   String? title;
   String? description;
@@ -77,32 +77,33 @@ class ProposalListData {
   String? updatedAt;
   int? iV;
 
-  ProposalListData(
-      {this.budget,
-      this.sId,
-      this.clientId,
-      this.title,
-      this.description,
-      this.category,
-      this.subCategory,
-      this.skillsRequired,
-      this.deadline,
-      this.experienceLevel,
-      this.attachment,
-      this.timelineType,
-      this.projectTime,
-      this.status,
-      this.createdAt,
-      this.updatedAt,
-      this.iV});
+  ProposalListData({
+    this.budget,
+    this.sId,
+    this.projectId, // Initialize projectId
+    this.clientId,
+    this.title,
+    this.description,
+    this.category,
+    this.subCategory,
+    this.skillsRequired,
+    this.deadline,
+    this.experienceLevel,
+    this.attachment,
+    this.timelineType,
+    this.projectTime,
+    this.status,
+    this.createdAt,
+    this.updatedAt,
+    this.iV,
+  });
 
   ProposalListData.fromJson(Map<String, dynamic> json) {
-    budget =
-        json['budget'] != null ? Budget.fromJson(json['budget']) : null;
+    budget = json['budget'] != null ? Budget.fromJson(json['budget']) : null;
     sId = json['_id'];
-    clientId = json['clientId'] != null
-        ? ClientId.fromJson(json['clientId'])
-        : null;
+    projectId = json['projectId']; // Parse projectId from JSON
+    clientId =
+        json['clientId'] != null ? ClientId.fromJson(json['clientId']) : null;
     title = json['title'];
     description = json['description'];
     category = json['category'].cast<String>();
@@ -125,6 +126,7 @@ class ProposalListData {
       data['budget'] = budget!.toJson();
     }
     data['_id'] = sId;
+    data['projectId'] = projectId; // Include projectId in toJson
     if (clientId != null) {
       data['clientId'] = clientId!.toJson();
     }

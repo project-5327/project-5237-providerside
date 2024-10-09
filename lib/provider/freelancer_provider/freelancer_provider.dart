@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:project_5237_provider/config/baseclient/CustomInterceptor.dart';
@@ -199,14 +200,12 @@ class FreelancerProvider with ChangeNotifier {
     required String endDate,
     required List<String> technologies,
   }) async {
-    // Set loading state to true
     _loading = true;
     notifyListeners();
 
     String? token = await CustomInterceptor.getToken();
 
     try {
-      // Prepare the form data
       Map<String, dynamic> data = {
         "projectName": projectName,
         "description": description,
@@ -226,17 +225,26 @@ class FreelancerProvider with ChangeNotifier {
       debugPrint("Response: ${response?.data}");
 
       if (response?.statusCode == 200) {
-        if (response?.data is Map<String, dynamic> &&
-            response?.data['message'] is String) {
-          debugPrint('Full Response: ${response?.data}');
-          debugPrint("token======> $token");
+        if (response?.data is Map<String, dynamic>) {
+          final responseData = response?.data;
+
+          final status = responseData?['status'] ?? 0;
+          final message = responseData?['message'] ?? 'Unknown message';
+          final userData = responseData?['data'] ?? {};
+
+          debugPrint('Full Response=======> $responseData');
+          debugPrint("Token=======> $token");
+          debugPrint("Response Status=======> $status");
+          debugPrint("Response Message=======> $message");
+          debugPrint("User Data =======> $userData");
 
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(response?.data['message'])),
+            SnackBar(content: Text(message)),
           );
+
           return true;
         } else {
-          debugPrint("Unexpected response format: ${response?.data}");
+          debugPrint("Unexpected response format=======> ${response?.data}");
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               content: Text('Unexpected response format.'),
@@ -245,16 +253,14 @@ class FreelancerProvider with ChangeNotifier {
           );
         }
       } else {
-        debugPrint(
-            "Invalid credentials or null response. Status Code: ${response?.statusCode}");
+        debugPrint("Invalid response. Status Code: ${response?.statusCode}");
+        debugPrint("Unexpected response format=======> ${response?.data}");
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(
-              response?.data is Map<String, dynamic> &&
-                      response?.data['message'] is String
-                  ? response?.data['message']
-                  : 'Unknown error occurred.',
-            ),
+            content: Text(response?.data is Map<String, dynamic> &&
+                    response?.data['message'] is String
+                ? response?.data['message']
+                : 'Unknown error occurred.'),
             backgroundColor: Colors.red,
           ),
         );

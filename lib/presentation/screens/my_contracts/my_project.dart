@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:project_5237_provider/presentation/screens/main_screen%20.dart';
 import 'package:project_5237_provider/presentation/screens/my_contracts/send_screen.dart';
 import 'package:project_5237_provider/provider/home/proposal_provider.dart';
@@ -29,6 +31,14 @@ class _MyProposalState extends State<MyProposal> {
       Provider.of<ProposalProvider>(context, listen: false)
           .fetchAllProposal(context);
     });
+  }
+
+  String formatDateTime(String createdAt) {
+    DateTime dateTime = DateTime.parse(createdAt);
+    String day = DateFormat('EEEE').format(dateTime);
+    String date = DateFormat('d MMMM').format(dateTime);
+    String time = DateFormat('h:mm a').format(dateTime);
+    return "$day, $date - $time";
   }
 
   @override
@@ -75,25 +85,28 @@ class _MyProposalState extends State<MyProposal> {
                   Center(
                     child: SizedBox(
                       height: 47.h,
-                      width: 336.w,
-                      child: TextFormField(
-                        controller: searchController,
-                        onChanged: (value) {
-                          setState(() {
-                            searchText = value;
-                          });
-                        },
-                        decoration: InputDecoration(
-                          suffixIcon: const Icon(CupertinoIcons.search),
-                          hintText: 'Search for projects',
-                          hintStyle: TextStyle(
-                              fontSize: 15.sp,
-                              fontWeight: FontWeight.w400,
-                              color: MyColors.lightGrey),
-                          contentPadding: const EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 16),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20.r),
+                      //  width: 336.w,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: TextFormField(
+                          controller: searchController,
+                          onChanged: (value) {
+                            setState(() {
+                              searchText = value;
+                            });
+                          },
+                          decoration: InputDecoration(
+                            suffixIcon: const Icon(CupertinoIcons.search),
+                            hintText: 'Search for projects',
+                            hintStyle: TextStyle(
+                                fontSize: 15.sp,
+                                fontWeight: FontWeight.w400,
+                                color: MyColors.lightGrey),
+                            contentPadding: const EdgeInsets.symmetric(
+                                vertical: 10, horizontal: 16),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20.r),
+                            ),
                           ),
                         ),
                       ),
@@ -109,23 +122,112 @@ class _MyProposalState extends State<MyProposal> {
                       itemBuilder: (context, index) {
                         final proposal = filteredProposals[index];
 
-                        return InkWell(
-                          child: ProjectTile1(
-                            proposal: proposal,
-                            image: Assets.bag,
-                            title: proposal.projectId?.title ?? "Project Title",
-                            title1:
-                                '${proposal.clientDetails?.firstName ?? ''} ${proposal.clientDetails?.lastName ?? ''}',
-                            subtitle: proposal.createdAt ?? '',
-                            tralingicon: Assets.message,
-                            tralingtext:
-                                '\$${proposal.proposedBudget?.numberDecimal ?? '0'}',
-                            btnText: proposal.status ?? 'Status',
-                            btnColor: MyColors.btnColor.withOpacity(0.5),
-                            btntextColor: MyColors.black1,
-                            image1: proposal.clientDetails?.profileImage ??
-                                'https://pub-261021c7b68740ffba855a7e8a6f3c1e.r2.dev/undefined/vasily-koloda-8CqDvPuo_kI-unsplash.jpg',
-                          ),
+                        return Padding(
+                          padding: const EdgeInsets.only(top: 10),
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                    width: 360.w,
+                                    child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Container(
+                                              height: 45.h,
+                                              width: 45.w,
+                                              child:
+                                                  SvgPicture.asset(Assets.bag)),
+                                          SizedBox(
+                                            width: 5.w,
+                                          ),
+                                          Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                proposal.projectId?.title ?? "",
+                                                style: TextStyle(
+                                                    fontSize: 16.sp,
+                                                    fontWeight: FontWeight.w600,
+                                                    color: MyColors.black),
+                                              ),
+                                              Text(
+                                                  formatDateTime(
+                                                      proposal.createdAt ?? ""),
+                                                  style: TextStyle(
+                                                      fontSize: 10.sp,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      color:
+                                                          MyColors.lightGrey)),
+                                            ],
+                                          ),
+                                          Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                horizontal: 10,
+                                              ),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Text(
+                                                      '\$${proposal.proposedBudget!.numberDecimal.toString()}',
+                                                      style: TextStyle(
+                                                          fontSize: 13.sp,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          color:
+                                                              MyColors.green)),
+                                                  SizedBox(
+                                                    height: 4.h,
+                                                  ),
+                                                  Container(
+                                                    height: 28.h,
+                                                    width: 85.w,
+                                                    child: Center(
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(2.0),
+                                                        child: Text(
+                                                            proposal.status ??
+                                                                "",
+                                                            style: TextStyle(
+                                                              fontSize: 12.sp,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400,
+                                                              color: _getButtonColors(
+                                                                      proposal.status ??
+                                                                          "")[
+                                                                  'textColor'],
+                                                            )),
+                                                      ),
+                                                    ),
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              24.r),
+                                                      color: _getButtonColors(
+                                                              proposal.status ??
+                                                                  "")[
+                                                          'buttonColor'],
+                                                      // widget.btnColor!
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    height: 5.h,
+                                                  ),
+                                                ],
+                                              ))
+                                        ]))
+                              ]),
                         );
                       })
                 ],
@@ -137,93 +239,33 @@ class _MyProposalState extends State<MyProposal> {
     });
   }
 
-  void _showDialogBox(
-    BuildContext context,
-    String text,
-    String text1,
-    String btntext1,
-    String btntext2,
-  ) {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-              title: Center(
-                child: TextWidget(
-                  text: 'Are you Sure?',
-                  color: MyColors.btnColor,
-                  size: 20.sp,
-                  fontweight: FontWeight.w700,
-                ),
-              ),
-              content: RichText(
-                text: TextSpan(
-                  text: text,
-                  style: TextStyle(
-                    fontWeight: FontWeight.w500,
-                    fontSize: 15.sp,
-                    color: MyColors.black,
-                  ),
-                  children: <TextSpan>[
-                    TextSpan(
-                      text: text1,
-                      style: TextStyle(
-                        fontSize: 15.sp,
-                        fontWeight: FontWeight.w700,
-                        color: MyColors.black,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              actions: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    TextButton(
-                      style: TextButton.styleFrom(
-                          backgroundColor: MyColors.btnColor,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(100),
-                            side: BorderSide(color: MyColors.btnColor),
-                          )),
-                      onPressed: () {
-                        Get.back();
-                      },
-                      child: TextWidget(
-                        text: btntext1,
-                        color: MyColors.white,
-                        size: 12.sp,
-                        fontweight: FontWeight.w500,
-                      ),
-                    ),
-                    SizedBox(
-                      width: 10.w,
-                    ),
-                    TextButton(
-                      style: TextButton.styleFrom(
-                          backgroundColor: MyColors.white,
-                          shape: RoundedRectangleBorder(
-                            side: BorderSide(color: MyColors.btnColor),
-                            borderRadius: BorderRadius.circular(100),
-                          )),
-                      onPressed: () {
-                        Get.back();
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: TextWidget(
-                          text: btntext2,
-                          color: MyColors.black,
-                          size: 12.sp,
-                          fontweight: FontWeight.w500,
-                        ),
-                      ),
-                    ),
-                  ],
-                )
-              ]);
-        });
+  Map<String, Color> _getButtonColors(String status) {
+    switch (status.toLowerCase()) {
+      case 'rejected':
+        return {
+          'buttonColor': const Color(0xffFFB2B2),
+          'textColor': MyColors.red
+        };
+      case 'reviewed':
+        return {
+          'buttonColor': const Color(0xffFFF2B2),
+          'textColor': MyColors.black
+        };
+      case 'accepted':
+        return {
+          'buttonColor': const Color(0xff447604),
+          'textColor': MyColors.white
+        };
+      case 'submitted':
+        return {
+          'buttonColor': const Color(0xffB2D6FF),
+          'textColor': MyColors.black
+        };
+      default:
+        return {
+          'buttonColor': MyColors.btnColor.withOpacity(0.5),
+          'textColor': MyColors.black // Default black text
+        };
+    }
   }
 }

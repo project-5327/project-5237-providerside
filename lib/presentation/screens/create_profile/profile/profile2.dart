@@ -69,8 +69,7 @@ class _Profile2State extends State<Profile2> {
                     SizedBox(height: 25.h),
                     EditCreateProfile(
                       ontap: () async {
-                        final result =
-                            await Get.to(() => const AddExperience());
+                        final result = await Get.to(() => AddExperience());
                         if (result != null && result == true) {
                           setState(() {
                             _isNextButtonEnabled = true;

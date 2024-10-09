@@ -73,22 +73,10 @@ class _ProposalSendScreenState extends State<ProposalSendScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
-                        children: [
-                          IconButton(
-                              onPressed: () {
-                                Get.back();
-                              },
-                              icon: const Icon(
-                                Icons.arrow_back_ios,
-                                // size: 16.sp,
-                              )),
-                          Text(
-                            'Send Proposal',
-                            style: TextStyle(
-                                fontSize: 16.sp, fontWeight: FontWeight.w600),
-                          ),
-                        ],
+                      Text(
+                        'Send Proposal',
+                        style: TextStyle(
+                            fontSize: 16.sp, fontWeight: FontWeight.w600),
                       ),
                       SizedBox(
                         height: 35.h,
@@ -248,6 +236,7 @@ class _ProposalSendScreenState extends State<ProposalSendScreen> {
                                 if (_proposalKey.currentState!.validate()) {
                                   final proposalData = {
                                     //  'userId': widget.freelancers?.user?.sId,
+                                    'projectId': widget.projects?.sId,
                                     'proposalTitle': widget.projects?.title,
                                     'proposalDescription':
                                         descriptionController.text,
@@ -256,7 +245,8 @@ class _ProposalSendScreenState extends State<ProposalSendScreen> {
                                         rateController.text.toString(),
                                     'address': addressController.text,
                                     'proposalImage': [
-                                      'https://pub-261021c7b68740ffba855a7e8a6f3c1e.r2.dev//proposals/Screenshot 2024-08-16 160914.png'
+                                      _selectedFile?.path,
+                                      //  'https://pub-261021c7b68740ffba855a7e8a6f3c1e.r2.dev//proposals/Screenshot 2024-08-16 160914.png'
                                     ],
                                     'createdAt': dateTimeController.text,
                                   };
@@ -264,7 +254,7 @@ class _ProposalSendScreenState extends State<ProposalSendScreen> {
                                   bool isSuccessful =
                                       await Provider.of<HomeProvider>(context,
                                               listen: false)
-                                          .createProposal(
+                                          .createProposalN(
                                               context: context,
                                               proposalData: proposalData);
 

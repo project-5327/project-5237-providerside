@@ -238,6 +238,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     TextSpan(
                                       text: 'UPTECHUNT Terms of Service',
                                       style: TextStyle(
+                                        fontFamily: "Montserrat",
+                                        fontStyle: FontStyle.italic,
                                         color: const Color(0xffFF4C4A),
                                         fontWeight: FontWeight.w500,
                                         fontSize: 12.sp,
@@ -254,6 +256,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       text:
                                           'User Agreement and Privacy Policy.',
                                       style: TextStyle(
+                                        fontFamily: "Montserrat",
+                                        fontStyle: FontStyle.italic,
                                         color: const Color(0xffFF4C4A),
                                         fontWeight: FontWeight.w500,
                                         fontSize: 12.sp,
@@ -284,19 +288,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               color: MyColors.btnColor,
                               textColor: MyColors.white,
                               onTap: () {
-                                if (registerProvider.checkBox1 &&
-                                    registerProvider.checkBox2) {
-                                  if (regisKey.currentState!.validate()) {
+                                if (regisKey.currentState!.validate()) {
+                                  if (registerProvider.checkBox1 &&
+                                      registerProvider.checkBox2) {
                                     registerProvider.signUpBtn(
                                         context: context);
+                                  } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        backgroundColor: Colors.red,
+                                        content:
+                                            Text('Accept Terms And Conditions'),
+                                      ),
+                                    );
                                   }
-                                } else {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                      content:
-                                          Text('Accept Terms And Conditions'),
-                                    ),
-                                  );
                                 }
                               },
                             ),

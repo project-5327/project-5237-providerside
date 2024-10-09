@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:project_5237_provider/presentation/constants/responsive_view.dart';
+import 'package:project_5237_provider/presentation/screens/main_screen%20.dart';
 import 'package:project_5237_provider/presentation/screens/my_contracts/receive.dart';
 
 import '../../constants/assets.dart';
@@ -52,7 +53,13 @@ class _MycontractScreenState extends State<MycontractScreen>
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          automaticallyImplyLeading: false,
+          leading: IconButton(
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => MainScreen()));
+              },
+              icon: Icon(Icons.arrow_back_ios)),
+          //automaticallyImplyLeading: false,
           title: Text(
             'My Contracts',
             style: TextStyle(
