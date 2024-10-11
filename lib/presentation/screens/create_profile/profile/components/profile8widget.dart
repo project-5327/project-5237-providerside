@@ -86,7 +86,8 @@ class _Profile8widgetState extends State<Profile8widget> {
                           backgroundImage: _selectedImage != null
                               ? FileImage(File(_selectedImage!.path))
                                   as ImageProvider
-                              : const AssetImage('assets/images/uploadImage.png'),
+                              : const AssetImage(
+                                  'assets/images/uploadImage.png'),
                         ),
                         Positioned(
                           bottom: 0,
@@ -121,7 +122,7 @@ class _Profile8widgetState extends State<Profile8widget> {
                     controller: onboardingProvider.addressController,
                     validator: (value) =>
                         onboardingProvider.validateAddress(value ?? ''),
-                    title: '${AppStrings.address}*',
+                    title: '${AppStrings.address}',
                     text: AppStrings.address,
                   ),
                   SizedBox(height: 13.h),
@@ -175,8 +176,8 @@ class _Profile8widgetState extends State<Profile8widget> {
                                     focusColor:
                                         Theme.of(context).colorScheme.onPrimary,
                                     enabledBorder: OutlineInputBorder(
-                                      borderRadius:
-                                          const BorderRadius.all(Radius.circular(8)),
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(8)),
                                       borderSide: BorderSide(
                                         color: MyColors.lightGrey,
                                         width: 1.5,
@@ -191,8 +192,8 @@ class _Profile8widgetState extends State<Profile8widget> {
                                       ),
                                     ),
                                   ),
-                                  value: city.contains(
-                                              onboardingProvider.cityName)
+                                  value: city
+                                          .contains(onboardingProvider.cityName)
                                       ? onboardingProvider.cityName
                                       : null, // Ensure the value is from the city list
                                   onChanged: (String? newValue) {
@@ -237,8 +238,8 @@ class _Profile8widgetState extends State<Profile8widget> {
                                   focusColor:
                                       Theme.of(context).colorScheme.onPrimary,
                                   enabledBorder: OutlineInputBorder(
-                                    borderRadius:
-                                        const BorderRadius.all(Radius.circular(8)),
+                                    borderRadius: const BorderRadius.all(
+                                        Radius.circular(8)),
                                     borderSide: BorderSide(
                                       color: MyColors.lightGrey,
                                       width: 1.5,
@@ -253,10 +254,10 @@ class _Profile8widgetState extends State<Profile8widget> {
                                     ),
                                   ),
                                 ),
-                                value: city.contains(
-                                            onboardingProvider.cityName)
-                                    ? onboardingProvider.cityName
-                                    : null, //
+                                value:
+                                    city.contains(onboardingProvider.cityName)
+                                        ? onboardingProvider.cityName
+                                        : null, //
 
                                 onChanged: (String? newValue) {
                                   setState(() {

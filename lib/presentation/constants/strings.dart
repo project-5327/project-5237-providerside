@@ -18,7 +18,7 @@ class AppStrings {
   static const String passWord1 = 'Password';
   static const String title = 'Title';
   static const String createProfile = 'Create Profile';
-  static const String accountSetup ='Complete your free \n   account setup';
+  static const String accountSetup = 'Complete your free \n   account setup';
 
   static const String userName = 'User Name';
   static const String accept = 'Accept';
@@ -50,8 +50,8 @@ class AppStrings {
   static const fieldOfStudy = 'Field of Study';
   static const emailText = 'Email';
   static const address = 'Address';
-  static const countryName = 'Country Name*';
-  static const fullName = 'Full Name*';
+  static const countryName = 'Country Name';
+  static const fullName = 'Full Name';
   static const small = 'Small';
   static const medium = 'Medium';
   static const large = 'Large';
@@ -66,7 +66,7 @@ class AppStrings {
   static const finish = 'Finish';
   static const pincode = 'Zip code/ Pincode';
   static const phone = 'Phone number';
-  static const city = 'City Name*';
+  static const city = 'City Name';
   static const tellUsAbout = 'Tell us about your budget?';
   static const from = 'From';
   static const to = 'To';

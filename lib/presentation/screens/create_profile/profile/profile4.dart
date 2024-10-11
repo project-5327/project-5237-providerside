@@ -256,15 +256,24 @@ class _Profile4State extends State<Profile4> {
                           text: AppStrings.next,
                           height: 45.h,
                           width: 160.w,
-                          color: MyColors.btnColor,
+                          color: _selectedLanguages.isNotEmpty
+                              ? MyColors.btnColor
+                              : MyColors.btnDisable,
                           textColor: MyColors.white,
                           onTap: () {
-                            // if (formKey.currentState!.validate()) {
-                            profileController.nextPage();
-                            Get.to(() => const Profile5());
-                          }
-                          //  },
-                          ),
+                            if (_selectedLanguages.isNotEmpty) {
+                              profileController.nextPage();
+                              Get.to(() => const Profile5());
+                            } else {
+                              Get.snackbar(
+                                'Error',
+                                'Please select at least one language to proceed.',
+                                snackPosition: SnackPosition.BOTTOM,
+                                backgroundColor: Colors.red,
+                                colorText: Colors.white,
+                              );
+                            }
+                          }),
                     ],
                   ),
                 ],
