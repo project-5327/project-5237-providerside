@@ -73,6 +73,8 @@ class FreelancerProvider with ChangeNotifier {
           return true;
         } else {
           debugPrint("Unexpected response format: ${response?.data}");
+          debugPrint('Full Response: ${response?.data}');
+          debugPrint("token======> $token");
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               content: Text('Unexpected response format.'),
@@ -83,6 +85,8 @@ class FreelancerProvider with ChangeNotifier {
       } else {
         debugPrint(
             "Invalid credentials or null response. Status Code: ${response?.statusCode}");
+        debugPrint('Full Response: ${response?.data}');
+        debugPrint("token======> $token");
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(

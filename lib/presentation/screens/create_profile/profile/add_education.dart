@@ -235,7 +235,7 @@ class _AddEducationState extends State<AddEducation> {
                     child: CustomizeButton(
                         borderColor: MyColors.btnColor,
                         radius: 100.r,
-                        text: AppStrings.save,
+                        text: "Save",
                         height: 40.h,
                         width: 334.w,
                         color: MyColors.btnColor,

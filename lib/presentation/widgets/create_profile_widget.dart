@@ -57,10 +57,11 @@ class CreateProfileWidget extends StatelessWidget {
 class EditCreateProfile extends StatelessWidget {
   final String text;
   final String text1;
+  final String? title;
   final String feildText;
   final String? labelText;
   final TextAlign? align;
-
+  final bool? showCurser;
   final Color? color;
   final controller;
   final validator;
@@ -75,7 +76,9 @@ class EditCreateProfile extends StatelessWidget {
       this.validator,
       required this.ontap,
       this.color,
-      this.align});
+      this.align,
+      this.title,
+      this.showCurser});
   final ProfileController profileController = Get.put(ProfileController());
 
   @override
@@ -109,8 +112,19 @@ class EditCreateProfile extends StatelessWidget {
         SizedBox(
           height: 25.h,
         ),
+        TextWidget(
+          align: TextAlign.start,
+          text: title ?? "",
+          fontfamily: 'Montserrat',
+          color: MyColors.black,
+          size: 10.sp,
+          fontweight: FontWeight.w500,
+        ),
+        SizedBox(
+          height: 10.h,
+        ),
         TextFormField(
-          showCursor: false,
+          showCursor: showCurser ?? false,
           onTap: ontap,
           textAlign: align ?? TextAlign.center,
           validator: validator,

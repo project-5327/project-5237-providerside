@@ -251,7 +251,7 @@ class _AddExperienceState extends State<AddExperience> {
                       child: CustomizeButton(
                           borderColor: MyColors.btnColor,
                           radius: 100.r,
-                          text: AppStrings.next,
+                          text: "Save",
                           height: 40.h,
                           width: 334.w,
                           color: MyColors.btnColor,

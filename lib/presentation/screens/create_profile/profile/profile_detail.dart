@@ -43,6 +43,7 @@ class ProfileDetail extends StatelessWidget {
             children: [
               SizedBox(height: 30.h),
               EditCreateProfile(
+                showCurser: true,
                 align: TextAlign.start,
                 ontap: () {},
                 validator: (value) =>
@@ -53,8 +54,8 @@ class ProfileDetail extends StatelessWidget {
                 feildText: AppStrings.titletext,
                 labelText: AppStrings.title,
                 color: MyColors.lightGrey,
+                title: 'Tittle',
               ),
-           
               SizedBox(height: 158.h),
               Center(
                   child: CustomizeButton(
@@ -68,14 +69,13 @@ class ProfileDetail extends StatelessWidget {
                       onTap: () {
                         if (_profileDetailKey.currentState!.validate()) {
                           debugPrint(
-                              '====>  profile details : ${onboardingProvider.titleController}');
+                              'profile details=====> ${onboardingProvider.titleController}');
                           profileController.nextPage();
                           Get.to(() => const Profile2());
                           //   }
                         }
                       })),
               SizedBox(height: 42.h),
-          
             ],
           ),
         ),
@@ -135,7 +135,6 @@ class ProfileDetail extends StatelessWidget {
                           minHeight: 5.h,
                         ),
                         SizedBox(height: 30.h),
-                       
                         Center(
                           child: DesktopEditCreate(
                             align: TextAlign.start,
@@ -150,7 +149,6 @@ class ProfileDetail extends StatelessWidget {
                             color: MyColors.lightGrey,
                           ),
                         ),
-                       
                         SizedBox(height: 60.h),
                         Center(
                             child: CustomizeButton(
@@ -168,8 +166,6 @@ class ProfileDetail extends StatelessWidget {
                                   //   }
                                 })),
                         SizedBox(height: 20.h),
-                    
-                    
                       ])),
             ),
           )

@@ -43,7 +43,14 @@ class CreateYourProfile extends StatelessWidget {
                     ),
                     TextWidget(
                       align: TextAlign.center,
-                      text: 'Hey Adam. Ready for your \nnext big opportunity?',
+                      text: 'Hey Adam. Ready for your',
+                      color: MyColors.black,
+                      size: 16.sp,
+                      fontweight: FontWeight.w600,
+                    ),
+                    TextWidget(
+                      align: TextAlign.center,
+                      text: 'next big opportunity?',
                       color: MyColors.black,
                       size: 16.sp,
                       fontweight: FontWeight.w600,
@@ -54,7 +61,7 @@ class CreateYourProfile extends StatelessWidget {
                     TextWidget(
                       text: 'Build a profile to show the world what you can do',
                       color: MyColors.black,
-                      size: 9.sp,
+                      size: 11.sp,
                       fontweight: FontWeight.w500,
                     ),
                     SizedBox(
@@ -68,20 +75,20 @@ class CreateYourProfile extends StatelessWidget {
                       text:
                           'Apply on jobs posted from clients, around the world',
                       color: MyColors.black,
-                      size: 9.sp,
+                      size: 11.sp,
                       fontweight: FontWeight.w500,
                     ),
                     SizedBox(
-                      height: 14.h,
+                      height: 12.h,
                     ),
                     const CustomizeDivider(),
                     SizedBox(
-                      height: 9.h,
+                      height: 12.h,
                     ),
                     TextWidget(
                       text: 'Get paid safely and know we’re here to help',
                       color: MyColors.black,
-                      size: 9.sp,
+                      size: 11.sp,
                       fontweight: FontWeight.w500,
                     ),
                     SizedBox(

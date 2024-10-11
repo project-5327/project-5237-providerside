@@ -150,11 +150,23 @@ class RegisterProvider extends ChangeNotifier {
     return null;
   }
 
-// validate username
   String? validateUserName(String value) {
     if (value.isEmpty) {
       return "Full Name can't be empty";
     }
+
+    // if (RegExp(r'[0-9]').hasMatch(value)) {
+    //   return "Full Name can't contain numbers";
+    // }
+
+    // if (RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%0-9]').hasMatch(value)) {
+    //   return "Full Name can't contain special characters";
+    // }
+
+    if (value.length < 3) {
+      return "Full Name must be at least 3 characters long";
+    }
+
     return null;
   }
 
@@ -163,7 +175,7 @@ class RegisterProvider extends ChangeNotifier {
     if (value.isEmpty) {
       return "Password can't be empty";
     } else if (value.length < 6) {
-      return 'Password must be at least 4characters.';
+      return 'Password must be at least 6 characters.';
     }
     return null;
   }

@@ -105,8 +105,8 @@ class _EditprofileState extends State<Editprofile>
                 child: TabBarView(
                   controller: _tabController,
                   children: const [
-                    Category(),
-                    Catagory2(),
+                    EditFDetails(),
+                    EditProject(),
                   ],
                 ),
               )
@@ -118,14 +118,14 @@ class _EditprofileState extends State<Editprofile>
   }
 }
 
-class Category extends StatefulWidget {
-  const Category({super.key});
+class EditFDetails extends StatefulWidget {
+  const EditFDetails({super.key});
 
   @override
-  State<Category> createState() => _CategoryState();
+  State<EditFDetails> createState() => _EditFDetailsState();
 }
 
-class _CategoryState extends State<Category> {
+class _EditFDetailsState extends State<EditFDetails> {
   final TextEditingController userController = TextEditingController();
   final GlobalKey<FormState> _editKey = GlobalKey<FormState>();
   final ImagePicker _picker = ImagePicker();
@@ -288,7 +288,9 @@ class _CategoryState extends State<Category> {
                             'userName': userController.text,
                             'imagePath': _selectedImage!.path,
                           };
-
+                          debugPrint("User data =======> ${updatedData}");
+                          debugPrint(
+                              " image path=======> ${_selectedImage!.path}");
                           Navigator.pop(context, updatedData);
                         }
                       },
@@ -304,14 +306,23 @@ class _CategoryState extends State<Category> {
   }
 }
 
-class Catagory2 extends StatefulWidget {
-  const Catagory2({super.key});
+// class Catagory2 extends StatefulWidget {
+//   const Catagory2({super.key});
+
+//   @override
+//   State<Catagory2> createState() => _Catagory2State();
+// }
+
+// class _Catagory2State extends State<Catagory2> {
+
+class EditProject extends StatefulWidget {
+  const EditProject({super.key});
 
   @override
-  State<Catagory2> createState() => _Catagory2State();
+  State<EditProject> createState() => _EditProjectState();
 }
 
-class _Catagory2State extends State<Catagory2> {
+class _EditProjectState extends State<EditProject> {
   final TextEditingController userController = TextEditingController();
   final FormController formController = FormController();
   final TextEditingController emailController = TextEditingController();
