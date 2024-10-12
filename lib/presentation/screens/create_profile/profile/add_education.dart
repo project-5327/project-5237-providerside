@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -163,10 +164,20 @@ class _AddEducationState extends State<AddEducation> {
                                 child: GestureDetector(
                                   onTap: () => _pickDate(
                                     context,
-                                    onboardingProvider.startDateController,
+                                    onboardingProvider.startDate1Controller,
                                   ),
                                   child: AbsorbPointer(
                                     child: CustomTextFormField(
+                                      errorMessage: 3,
+                                      icon: IconButton(
+                                        icon: Icon(CupertinoIcons.calendar),
+                                        onPressed: () {},
+                                      ),
+                                      validator: (value) =>
+                                          onboardingProvider.validateStartDate(
+                                              value ?? '',
+                                              onboardingProvider
+                                                  .endDate1Controller.text),
                                       text: AppStrings.date,
                                       style: TextStyle(
                                           fontSize: 13.sp,
@@ -174,7 +185,7 @@ class _AddEducationState extends State<AddEducation> {
                                           color: MyColors.black),
                                       title: AppStrings.startDate,
                                       controller: onboardingProvider
-                                          .startDateController,
+                                          .startDate1Controller,
                                     ),
                                   ),
                                 ),
@@ -183,9 +194,19 @@ class _AddEducationState extends State<AddEducation> {
                               Flexible(
                                 child: GestureDetector(
                                   onTap: () => _pickDate(context,
-                                      onboardingProvider.endDateController),
+                                      onboardingProvider.endDate1Controller),
                                   child: AbsorbPointer(
                                     child: CustomTextFormField(
+                                      icon: IconButton(
+                                        icon: Icon(CupertinoIcons.calendar),
+                                        onPressed: () {},
+                                      ),
+                                      errorMessage: 3,
+                                      validator: (value) =>
+                                          onboardingProvider.validateEndDate(
+                                              value ?? '',
+                                              onboardingProvider
+                                                  .startDate1Controller.text),
                                       text: AppStrings.date,
                                       style: TextStyle(
                                           fontSize: 13.sp,
@@ -193,7 +214,7 @@ class _AddEducationState extends State<AddEducation> {
                                           color: MyColors.black),
                                       title: AppStrings.endDate,
                                       controller:
-                                          onboardingProvider.endDateController,
+                                          onboardingProvider.endDate1Controller,
                                     ),
                                   ),
                                 ),

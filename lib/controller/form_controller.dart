@@ -132,7 +132,7 @@ class FormController extends GetxController {
     if (value.isEmpty) {
       return "Phone number can't be empty";
     } else if (!RegExp(r"^[0-9]{10}$").hasMatch(value)) {
-      return "Enter a valid 10\ndigit phone number";
+      return "Enter a valid 10 digit phone number";
     }
 
     return null;
@@ -156,6 +156,7 @@ class FormController extends GetxController {
     if (value.isEmpty) {
       return "City can't be empty";
     }
+
     return null;
   }
 

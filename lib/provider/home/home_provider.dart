@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:project_5237_provider/config/baseclient/CustomInterceptor.dart';
 import 'package:project_5237_provider/data/models/proposal_data_response.dart';
 import 'package:project_5237_provider/data/services/api_services.dart';
 import 'package:project_5237_provider/presentation/widgets/toast_comp.dart';
@@ -151,3 +154,9 @@ class HomeProvider extends ChangeNotifier {
     }
   }
 }
+
+
+// Future<void> updateProposal() async {
+//   // Authorization header
+//  
+

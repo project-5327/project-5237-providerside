@@ -272,8 +272,12 @@ class RegisterProvider extends ChangeNotifier {
   ) {
     if (value.isEmpty) {
       return "Address can't be empty";
-    } else if (value.length < 3) {
-      return 'Address must be at least 10 characters.';
+    } else if (value.length < 5) {
+      return 'Address is too short';
+    } else if (!RegExp(r"^[a-zA-Z0-9\s,.-]+$").hasMatch(value)) {
+      return 'Enter a valid address';
+    } else if (value.length > 100) {
+      return 'Address is too long';
     }
     return null;
   }

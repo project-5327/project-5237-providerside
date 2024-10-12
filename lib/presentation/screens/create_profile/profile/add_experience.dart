@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -141,6 +142,16 @@ class _AddExperienceState extends State<AddExperience> {
                                   ),
                                   child: AbsorbPointer(
                                     child: CustomTextFormField(
+                                      icon: IconButton(
+                                        icon: Icon(CupertinoIcons.calendar),
+                                        onPressed: () {},
+                                      ),
+                                      validator: (value) =>
+                                          onboardingProvider.validateStartDate(
+                                              value ?? '',
+                                              onboardingProvider
+                                                  .endDateController.text),
+                                      errorMessage: 3,
                                       text: AppStrings.date,
                                       style: TextStyle(
                                           fontSize: 13.sp,
@@ -160,6 +171,16 @@ class _AddExperienceState extends State<AddExperience> {
                                       onboardingProvider.endDateController),
                                   child: AbsorbPointer(
                                     child: CustomTextFormField(
+                                      icon: IconButton(
+                                        icon: Icon(CupertinoIcons.calendar),
+                                        onPressed: () {},
+                                      ),
+                                      validator: (value) =>
+                                          onboardingProvider.validateEndDate(
+                                              value ?? '',
+                                              onboardingProvider
+                                                  .startDateController.text),
+                                      errorMessage: 3,
                                       text: AppStrings.date,
                                       style: TextStyle(
                                           fontSize: 13.sp,

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:project_5237_provider/presentation/screens/dashboard/dashboard_view.dart';
 import '../../config/baseclient/base_client.dart';
 import '../../config/baseclient/endpoints.dart';
@@ -336,11 +337,7 @@ class OnbaordingProvider extends ChangeNotifier {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(response.data['message'])),
         );
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (context) => const DashBoardView()),
-          (Route<dynamic> route) => false,
-        );
+
         _isLoading = false;
         notifyListeners();
         return true;
@@ -382,6 +379,16 @@ class OnbaordingProvider extends ChangeNotifier {
     if (value.isEmpty) {
       return "This field can't be empty";
     }
+
+    final num? rate = num.tryParse(value);
+    if (rate == null) {
+      return 'Please enter a valid number';
+    }
+
+    if (rate < 0) {
+      return 'Rate cannot be negative';
+    }
+
     return null;
   }
 
@@ -420,10 +427,43 @@ class OnbaordingProvider extends ChangeNotifier {
     return null;
   }
 
-  String? validateDate(String value) {
+  String? validateStartDate(String value, String endDate) {
     if (value.isEmpty) {
       return "This field can't be empty";
     }
+
+    DateFormat format = DateFormat('MMMM yyyy');
+
+    try {
+      DateTime startDate = format.parse(value);
+      DateTime endDateTime = format.parse(endDate);
+    } catch (e) {
+      return "Invalid date format";
+    }
+
+    return null;
+  }
+
+  String? validateEndDate(String value, String startDate) {
+    if (value.isEmpty) {
+      return "This field can't be empty";
+    }
+
+    DateFormat format = DateFormat('MMMM yyyy');
+
+    try {
+      DateTime endDateTime = format.parse(value);
+      DateTime startDateTime = format.parse(startDate);
+      if (endDateTime == startDateTime) {
+        return "End date and start date can't be the same";
+      }
+      if (endDateTime.isBefore(startDateTime)) {
+        return "End date should be later than start date";
+      }
+    } catch (e) {
+      return "";
+    }
+
     return null;
   }
 
@@ -466,12 +506,50 @@ class OnbaordingProvider extends ChangeNotifier {
     if (value.isEmpty) {
       return "This field can't be empty";
     }
+    if (RegExp(r'[0-9]').hasMatch(value)) {
+      return "First Name can't contain numbers";
+    }
+
+    if (RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%0-9]').hasMatch(value)) {
+      return "First Name can't contain special characters";
+    }
+    if (value.length < 3) {
+      return "First Name must be at least 3 characters long";
+    }
+    return null;
+  }
+
+  String? validatefullname(String value) {
+    if (value.isEmpty) {
+      return "Full name field can't be empty";
+    }
+    if (RegExp(r'[0-9]').hasMatch(value)) {
+      return "Full Name can't contain numbers";
+    }
+
+    if (RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%0-9]').hasMatch(value)) {
+      return "Full Name can't contain special characters";
+    }
+    if (value.length < 3) {
+      return "Full Name must be at least 3 characters long";
+    }
     return null;
   }
 
   String? validatelname(String value) {
     if (value.isEmpty) {
       return "This field can't be empty";
+    }
+
+    if (RegExp(r'[0-9]').hasMatch(value)) {
+      return "Last Name can't contain numbers";
+    }
+
+    if (RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%0-9]').hasMatch(value)) {
+      return "Last Name can't contain special characters";
+    }
+    if (value.length < 3) {
+      return "Last Name must be at least 3 characters long";
     }
     return null;
   }

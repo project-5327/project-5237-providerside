@@ -22,7 +22,7 @@ class Profile7 extends StatelessWidget {
   Profile7({super.key});
   final ProfileController profileController = Get.put(ProfileController());
   final FormController formController = Get.put(FormController());
-  final formKey = GlobalKey<FormState>();
+  final _hoursformKey = GlobalKey<FormState>();
   final TextEditingController controller = TextEditingController();
 
   @override
@@ -45,7 +45,7 @@ class Profile7 extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15),
               child: Form(
-                key: formKey,
+                key: _hoursformKey,
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -89,17 +89,15 @@ class Profile7 extends StatelessWidget {
                           Flexible(
                             child: TextFormField(
                               keyboardType: TextInputType.number,
-                              textAlign: TextAlign.right,
                               controller:
                                   onboardingProvider.hourlyRateController,
-                              //onChanged: onChanged,
-                              //obscureText: obscureText,
                               validator: (value) => onboardingProvider
                                   .validateHourlyRate(value ?? ''),
                               decoration: InputDecoration(
+                                errorMaxLines: 2,
                                 prefixIcon: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 10, vertical: 8),
+                                  padding: const EdgeInsets.only(
+                                      left: 10, top: 8, bottom: 8),
                                   child: Text(
                                     textAlign: TextAlign.left,
                                     '\$',
@@ -152,10 +150,9 @@ class Profile7 extends StatelessWidget {
                             onTap: () {
                               print(
                                   '====> decription : ${onboardingProvider.hourlyRateController}');
-                              if (formKey.currentState!.validate()) {
-                                profileController.previousPage();
-                                Get.to(() => Profile6());
-                              }
+
+                              profileController.previousPage();
+                              Get.to(() => Profile6());
                             },
                           ),
                           SizedBox(
@@ -173,7 +170,7 @@ class Profile7 extends StatelessWidget {
                               debugPrint(
                                   '====> decription : ${onboardingProvider.hourlyRateController}');
 
-                              if (formKey.currentState!.validate()) {
+                              if (_hoursformKey.currentState!.validate()) {
                                 profileController.nextPage();
                                 Get.to(() => const AddYourPersonalProject());
                               }

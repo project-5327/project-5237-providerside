@@ -2,6 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:project_5237_provider/presentation/screens/main_screen%20.dart';
 
 import '../../constants/assets.dart';
 import '../../constants/color.dart';
@@ -42,7 +45,16 @@ class _MessageScreenState extends State<MessageScreen>
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          automaticallyImplyLeading: false,
+          leading: IconButton(
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => MainScreen()));
+            },
+            icon: Icon(
+              Icons.arrow_back_ios,
+              color: MyColors.black,
+            ),
+          ),
           title: isSearching
               ? Padding(
                   padding: const EdgeInsets.only(top: 5),

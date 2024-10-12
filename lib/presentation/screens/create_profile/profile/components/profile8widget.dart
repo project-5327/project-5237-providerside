@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:project_5237_provider/presentation/screens/dashboard/dashboard_view.dart';
 import 'package:provider/provider.dart';
 import '../../../../../controller/form_controller.dart';
 import '../../../../../controller/profile_controller.dart';
@@ -22,7 +23,7 @@ class Profile8widget extends StatefulWidget {
 }
 
 class _Profile8widgetState extends State<Profile8widget> {
-  final formKey = GlobalKey<FormState>();
+  final _contactInfoKey = GlobalKey<FormState>();
   final ProfileController profileController = Get.put(ProfileController());
   final FormController formController = Get.put(FormController());
   final ImagePicker _picker = ImagePicker();
@@ -57,7 +58,7 @@ class _Profile8widgetState extends State<Profile8widget> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Form(
-              key: formKey,
+              key: _contactInfoKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -103,22 +104,24 @@ class _Profile8widgetState extends State<Profile8widget> {
                   ),
                   SizedBox(height: 19.h),
                   CustomTextFormField(
+                    errorMessage: 3,
                     controller: onboardingProvider.fnameController,
                     validator: (value) =>
-                        onboardingProvider.validatefname(value ?? ''),
+                        onboardingProvider.validatefullname(value ?? ''),
                     title: AppStrings.firstName,
                     text: AppStrings.enterHere,
                   ),
+                  // SizedBox(height: 13.h),
+                  // CustomTextFormField(
+                  //   controller: onboardingProvider.lnameController,
+                  //   validator: (value) =>
+                  //       onboardingProvider.validatelname(value ?? ''),
+                  //   title: AppStrings.lastName,
+                  //   text: AppStrings.enterHere,
+                  // ),
                   SizedBox(height: 13.h),
                   CustomTextFormField(
-                    controller: onboardingProvider.lnameController,
-                    validator: (value) =>
-                        onboardingProvider.validatelname(value ?? ''),
-                    title: AppStrings.lastName,
-                    text: AppStrings.enterHere,
-                  ),
-                  SizedBox(height: 13.h),
-                  CustomTextFormField(
+                    errorMessage: 3,
                     controller: onboardingProvider.addressController,
                     validator: (value) =>
                         onboardingProvider.validateAddress(value ?? ''),
@@ -131,6 +134,7 @@ class _Profile8widgetState extends State<Profile8widget> {
                     children: [
                       Flexible(
                         child: CustomTextFormField(
+                          errorMessage: 3,
                           controller: onboardingProvider.pincodeController,
                           validator: (value) =>
                               onboardingProvider.validateZipcode(value ?? ''),
@@ -167,7 +171,6 @@ class _Profile8widgetState extends State<Profile8widget> {
                                       fontWeight: FontWeight.w600)),
                               SizedBox(height: 5.h),
                               SizedBox(
-                                // width: MediaQuery.of(context).size.width*0.1,
                                 height: 80,
                                 child: DropdownButtonFormField<String>(
                                   decoration: InputDecoration(
@@ -187,15 +190,14 @@ class _Profile8widgetState extends State<Profile8widget> {
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(8.0)),
                                       borderSide: BorderSide(
-                                        //  color: MyColors.blue,
                                         width: 1.5,
                                       ),
                                     ),
                                   ),
-                                  value: city
-                                          .contains(onboardingProvider.cityName)
-                                      ? onboardingProvider.cityName
-                                      : null, // Ensure the value is from the city list
+                                  value:
+                                      city.contains(onboardingProvider.cityName)
+                                          ? onboardingProvider.cityName
+                                          : null,
                                   onChanged: (String? newValue) {
                                     setState(() {
                                       onboardingProvider.cityName = newValue!;
@@ -213,6 +215,12 @@ class _Profile8widgetState extends State<Profile8widget> {
                                           color: MyColors.black,
                                           fontSize: 12.sp,
                                           fontWeight: FontWeight.w500)),
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return "please select a city ";
+                                    }
+                                    return null;
+                                  },
                                 ),
                               ),
                             ]),
@@ -229,7 +237,6 @@ class _Profile8widgetState extends State<Profile8widget> {
                                     fontWeight: FontWeight.w600)),
                             SizedBox(height: 5.h),
                             SizedBox(
-                              // width: MediaQuery.of(context).size.width,
                               height: 80,
                               child: DropdownButtonFormField<String>(
                                 decoration: InputDecoration(
@@ -276,6 +283,12 @@ class _Profile8widgetState extends State<Profile8widget> {
                                         color: MyColors.black,
                                         fontSize: 12.sp,
                                         fontWeight: FontWeight.w500)),
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return "please select a country ";
+                                  }
+                                  return null;
+                                },
                               ),
                             ),
                           ],
@@ -308,9 +321,17 @@ class _Profile8widgetState extends State<Profile8widget> {
                             '====>  profile details : ${onboardingProvider.cityController}');
                         debugPrint(
                             '====>  profile details : ${onboardingProvider.countryController}');
-                        onboardingProvider.submitUserDetails(context: context);
-                        if (formKey.currentState!.validate()) {
-                          profileController.nextPage();
+                        if (_contactInfoKey.currentState!.validate()) {
+                          onboardingProvider.submitUserDetails(
+                              context: context);
+
+                          // profileController.nextPage();
+                          Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const DashBoardView()),
+                            (Route<dynamic> route) => false,
+                          );
                         }
                       },
                     ),

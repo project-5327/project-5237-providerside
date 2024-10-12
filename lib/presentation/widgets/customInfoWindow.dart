@@ -37,13 +37,6 @@ class CustomInfoWindow extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // SvgPicture.asset(
-            //   Assets.bluedot,
-            //   height: 10.h,
-            //   width: 10.w,
-            //   fit: BoxFit.cover,
-            // ),
-
             Text(
               title!,
               style: TextStyle(
@@ -52,7 +45,6 @@ class CustomInfoWindow extends StatelessWidget {
                 fontWeight: FontWeight.w800,
               ),
             ),
-
             Text(
               subtitle!,
               style: TextStyle(

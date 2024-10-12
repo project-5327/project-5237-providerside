@@ -82,11 +82,13 @@ class _Profilewidget4State extends State<Profilewidget4> {
                       fillColor: Theme.of(context).colorScheme.onPrimary,
                       focusColor: Theme.of(context).colorScheme.onPrimary,
                       enabledBorder: OutlineInputBorder(
-                          borderRadius: const BorderRadius.all(Radius.circular(8)),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(8)),
                           borderSide: BorderSide(
                               color: MyColors.lightGrey, width: 1.5)),
                       focusedBorder: OutlineInputBorder(
-                          borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(8.0)),
                           borderSide: BorderSide(
                             color: MyColors.blue,
                             width: 1.5,
@@ -121,26 +123,52 @@ class _Profilewidget4State extends State<Profilewidget4> {
                       width: 5.w,
                     ),
                     CustomizeButton(
-                      borderColor: MyColors.btnColor,
-                      radius: 100.r,
-                      text: AppStrings.next,
-                      height: 40.h,
-                      width: 150.w,
-                      color: MyColors.btnColor,
-                      textColor: MyColors.white,
-                      onTap: () {
-                        debugPrint(
-                            "Selected languages: ${_selectedLanguages.length}");
-                        // if (formKey.currentState!.validate()) {
-                        onboardingProvider.setLanguages = _selectedLanguages;
-                        onboardingProvider.addYourLangauges(
-                            onboardingProvider.languages,
-                            onboardingProvider.proficiancyController.text);
+                        borderColor: MyColors.btnColor,
+                        radius: 100.r,
+                        text: AppStrings.next,
+                        height: 40.h,
+                        width: 150.w,
+                        color: MyColors.btnColor,
+                        textColor: MyColors.white,
+                        onTap: () {
+                          if (_selectedLanguages.isEmpty ||
+                              _selectedLanguages == []) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content:
+                                    Text('Please select at least one language'),
+                                backgroundColor: Colors.red,
+                              ),
+                            );
+                          } else {
+                            debugPrint(
+                                "Selected languages: ${_selectedLanguages.length}");
 
-                        profileController.nextPage();
-                        Get.to(() => const Profile5());
-                      },
-                    ),
+                            onboardingProvider.setLanguages =
+                                _selectedLanguages;
+                            onboardingProvider.addYourLangauges(
+                              onboardingProvider.languages,
+                              onboardingProvider.proficiancyController.text,
+                            );
+
+                            profileController.nextPage();
+                            Get.to(() => const Profile5());
+                          }
+                        }
+
+                        // onTap: () {
+                        //   debugPrint(
+                        //       "Selected languages: ${_selectedLanguages.length}");
+                        //   // if (formKey.currentState!.validate()) {
+                        //   onboardingProvider.setLanguages = _selectedLanguages;
+                        //   onboardingProvider.addYourLangauges(
+                        //       onboardingProvider.languages,
+                        //       onboardingProvider.proficiancyController.text);
+
+                        //   profileController.nextPage();
+                        //   Get.to(() => const Profile5());
+                        // },
+                        ),
                   ],
                 ),
                 SizedBox(height: 42.h),

@@ -106,7 +106,7 @@ class _EditprofileState extends State<Editprofile>
                   controller: _tabController,
                   children: const [
                     EditFDetails(),
-                    EditProject(),
+                    ProjectListView(),
                   ],
                 ),
               )
@@ -306,23 +306,14 @@ class _EditFDetailsState extends State<EditFDetails> {
   }
 }
 
-// class Catagory2 extends StatefulWidget {
-//   const Catagory2({super.key});
-
-//   @override
-//   State<Catagory2> createState() => _Catagory2State();
-// }
-
-// class _Catagory2State extends State<Catagory2> {
-
-class EditProject extends StatefulWidget {
-  const EditProject({super.key});
+class ProjectListView extends StatefulWidget {
+  const ProjectListView({super.key});
 
   @override
-  State<EditProject> createState() => _EditProjectState();
+  State<ProjectListView> createState() => _ProjectListViewState();
 }
 
-class _EditProjectState extends State<EditProject> {
+class _ProjectListViewState extends State<ProjectListView> {
   final TextEditingController userController = TextEditingController();
   final FormController formController = FormController();
   final TextEditingController emailController = TextEditingController();

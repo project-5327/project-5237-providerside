@@ -145,15 +145,25 @@ class _Profile5State extends State<Profile5> {
                             color: MyColors.btnColor,
                             textColor: MyColors.white,
                             onTap: () {
-                              debugPrint(
-                                  "====> _selected skills ${_selectedSkills.length}");
-                              onboardingProvider.setSkill = _selectedSkills;
-                              // if (formKey.currentState!.validate()) {
-                              profileController.nextPage();
-                              Get.to(() => Profile6());
-                            }
-                            //  },
-                            ),
+                              if (_selectedSkills.isEmpty ||
+                                  _selectedSkills == []) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                        'Please select at least one language'),
+                                    backgroundColor: Colors.red,
+                                  ),
+                                );
+                              } else {
+                                debugPrint(
+                                    "====> _selected skills ${_selectedSkills.length}");
+                                onboardingProvider.setSkill = _selectedSkills;
+                                // if (formKey.currentState!.validate()) {
+                                profileController.nextPage();
+                                Get.to(() => Profile6());
+                              }
+                              //  },
+                            }),
                       ],
                     ),
                     SizedBox(height: 42.h),

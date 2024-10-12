@@ -120,6 +120,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                         Center(
                           child: CustomTextFormField(
+                            keyboardType: TextInputType.emailAddress,
                             readOnly: false,
                             validator: (value) =>
                                 registerProvider.validateEmail(value ?? ''),

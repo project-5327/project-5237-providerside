@@ -1,3 +1,6 @@
+import 'dart:ffi';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -89,6 +92,7 @@ class _EditProjectState extends State<EditProject> {
                     SizedBox(height: 35.h),
                     Center(
                       child: CustomTextFormField(
+                        errorMessage: 2,
                         controller: nameController,
                         text: AppStrings.enterprojectTitle,
                         title: AppStrings.projectTitle,
@@ -112,6 +116,7 @@ class _EditProjectState extends State<EditProject> {
                         maxLines: 3,
                         controller: descriptionController,
                         decoration: InputDecoration(
+                          errorMaxLines: 2,
                           hintText: AppStrings.desc,
                           hintStyle: TextStyle(
                               fontSize: 12.sp,
@@ -134,6 +139,28 @@ class _EditProjectState extends State<EditProject> {
                             onTap: () => _pickDate(context, startController),
                             child: AbsorbPointer(
                               child: CustomTextFormField(
+                                errorMessage: 3,
+                                icon: IconButton(
+                                  icon: Icon(CupertinoIcons.calendar),
+                                  onPressed: () {},
+                                ),
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return "This field can't be empty";
+                                  }
+
+                                  DateFormat format = DateFormat('MMMM yyyy');
+
+                                  try {
+                                    DateTime startDate = format.parse(value);
+                                    DateTime endDateTime =
+                                        format.parse(endController.text);
+                                  } catch (e) {
+                                    return "";
+                                  }
+
+                                  return null;
+                                },
                                 text: AppStrings.date,
                                 style: TextStyle(
                                     fontSize: 13.sp,
@@ -151,6 +178,34 @@ class _EditProjectState extends State<EditProject> {
                             onTap: () => _pickDate(context, endController),
                             child: AbsorbPointer(
                               child: CustomTextFormField(
+                                errorMessage: 3,
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return "This field can't be empty";
+                                  }
+
+                                  DateFormat format = DateFormat('MMMM yyyy');
+
+                                  try {
+                                    DateTime endDateTime = format.parse(value);
+                                    DateTime startDateTime =
+                                        format.parse(startController.text);
+                                    if (endDateTime == startDateTime) {
+                                      return "End date and start date can't be the same";
+                                    }
+                                    if (endDateTime.isBefore(startDateTime)) {
+                                      return "End date should be later than start date";
+                                    }
+                                  } catch (e) {
+                                    return "";
+                                  }
+
+                                  return null;
+                                },
+                                icon: IconButton(
+                                  icon: Icon(CupertinoIcons.calendar),
+                                  onPressed: () {},
+                                ),
                                 text: AppStrings.date,
                                 style: TextStyle(
                                     fontSize: 13.sp,
@@ -237,6 +292,7 @@ class _EditProjectState extends State<EditProject> {
 
                                 if (success) {
                                   debugPrint("Project updated successfully");
+                                  Get.back();
                                 }
                               } else {
                                 ScaffoldMessenger.of(context).showSnackBar(

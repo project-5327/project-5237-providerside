@@ -72,8 +72,7 @@ class _HandShakeTickState extends State<HandShakeTick> {
                   proposal: proposal,
                   image: Assets.bag,
                   title: proposal.projectId?.title ?? "",
-                  title1:
-                      '${proposal.clientDetails?.firstName} ${proposal.clientDetails?.lastName}',
+                  title1: '${proposal.projectId?.clientId?.userName ?? ''}',
                   subtitle: proposal.createdAt ?? '',
                   tralingicon: Assets.message,
                   tralingtext: '\$${proposal.proposedBudget?.numberDecimal}',

@@ -209,18 +209,6 @@ class _AcceptProposalScreenState extends State<AcceptProposalScreen> {
                           return Text('No file uploaded');
                         },
                       ),
-                      // Button to remove file
-                      // TextButton(
-                      //   onPressed: removeFile,
-                      //   child: Text(
-                      //     'Remove File',
-                      //     style: TextStyle(
-                      //         color: MyColors.red,
-                      //         fontSize: 12.sp,
-                      //         fontWeight: FontWeight.w500),
-                      //   ),
-                      // ),
-
                       SizedBox(
                         height: 20.h,
                       ),
@@ -279,26 +267,28 @@ class _AcceptProposalScreenState extends State<AcceptProposalScreen> {
                       Align(
                         alignment: Alignment.center,
                         child: CustomizeButton(
-                            borderColor: MyColors.btnColor,
-                            radius: 100.r,
-                            text: AppStrings.accept,
-                            height: 45.h,
-                            width: 155.w,
-                            color: MyColors.btnColor,
-                            textColor: MyColors.white,
-                            onTap: () {
-                              // proposalProvider.setFIle = _file;
-                              // WidgetsBinding.instance
-                              //     .addPostFrameCallback((timeStamp) {
-                              //   Provider.of<ProposalProvider>(context,
-                              //           listen: false)
-                              //       .createProposals(
-                              //     context,
-                              //     widget.proposalListData.projectId ?? "",
-                              //   );
-                              // });
-                              _showDialogeBox(context);
-                            }),
+                          borderColor: MyColors.btnColor,
+                          radius: 100.r,
+                          text: AppStrings.accept,
+                          height: 45.h,
+                          width: 155.w,
+                          color: MyColors.btnColor,
+                          textColor: MyColors.white,
+                          // onTap: () {
+                          //   _showDialogeBox(context);
+                          // }
+                          onTap: () async {
+                            // Call the updateProposalN function
+                            await proposalProvider.updateProposalN(
+                              context: context,
+                            );
+
+                            // if (!proposalProvider.loading) {
+                            _showDialogeBox(context);
+                            // Get.back();
+                            //  }
+                          },
+                        ),
                       ),
                       SizedBox(
                         height: 20.h,

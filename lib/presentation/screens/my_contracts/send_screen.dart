@@ -76,8 +76,7 @@ class _SendScreenState extends State<SendScreen> {
                       proposal: proposal,
                       image: Assets.bag,
                       title: proposal.projectId?.title ?? "",
-                      title1:
-                          '${proposal.clientDetails?.firstName ?? ""} ${proposal.clientDetails?.lastName ?? ""}',
+                      title1: '${proposal.projectId?.clientId?.userName ?? ''}',
                       subtitle: proposal.createdAt ?? "",
                       trailingText:
                           '\$${(proposal.proposedBudget?.numberDecimal ?? "")}',

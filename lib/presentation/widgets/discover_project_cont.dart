@@ -347,12 +347,12 @@ class CustomizeTagContainer extends StatelessWidget {
 
 String formatDateTime(String createdAt) {
   try {
-    DateTime dateTime = DateTime.parse(createdAt); // Parse ISO 8601 string
-    String day = DateFormat('EEEE').format(dateTime); // Example: Monday
-    String date = DateFormat('d MMMM').format(dateTime); // Example: 5th January
-    String time = DateFormat('h:mm a').format(dateTime); // Example: 11:50 PM
+    DateTime dateTime = DateTime.parse(createdAt);
+    String day = DateFormat('EEEE').format(dateTime);
+    String date = DateFormat('d MMMM').format(dateTime);
+    String time = DateFormat('h:mm a').format(dateTime);
     return "$day, $date - $time";
   } catch (e) {
-    return "Invalid Date";
+    return "";
   }
 }

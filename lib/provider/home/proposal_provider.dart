@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -114,6 +115,36 @@ class ProposalProvider with ChangeNotifier {
   void setErrorMessage(String? message) {
     _errorMessage = message;
     notifyListeners();
+  }
+
+  Future<void> updateProposalN({
+    required BuildContext context,
+  }) async {
+    _loading = true;
+    _errorMessage = null;
+    notifyListeners();
+    String? token = await CustomInterceptor.getToken();
+
+    var headers = {'Authorization': 'Bearer $token'};
+    try {
+      var data = FormData.fromMap({'status': 'Accepted'});
+
+      var dio = Dio();
+
+      var response = await dio.put(
+        'https://project5237.zatest.biz/api/updateProposal/66f6c79e1b36ac0df37e6d26',
+        options: Options(headers: headers),
+        data: data,
+      );
+
+      if (response.statusCode == 200) {
+        print('Response data: ${json.encode(response.data)}');
+      } else {
+        print('Error: ${response.statusMessage}');
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
   }
 
   // Future<void> createProposal({

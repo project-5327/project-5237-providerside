@@ -19,7 +19,7 @@ import 'static_profile.dart';
 class Profile6 extends StatelessWidget {
   Profile6({super.key});
   final ProfileController profileController = Get.put(ProfileController());
-  final formKey = GlobalKey<FormState>();
+  final _profile5Key = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,7 @@ class Profile6 extends StatelessWidget {
         builder: (context, onboardingProvider, child) {
       return StaticProfileLayout(
           middleContentBuilder: () => Form(
-                key: formKey,
+                key: _profile5Key,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: Column(
@@ -76,10 +76,19 @@ class Profile6 extends StatelessWidget {
                         height: 5.h,
                       ),
                       TextFormField(
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "Description can't be empty";
+                          } else if (value.length < 3) {
+                            return 'Description must be more than 10 characters and less than 500 characters.';
+                          }
+                          return null;
+                        },
                         maxLines: 4,
                         controller:
                             onboardingProvider.profileDescriptionController,
                         decoration: InputDecoration(
+                          errorMaxLines: 3,
                           hintText: AppStrings.desc,
                           hintStyle: TextStyle(
                               fontSize: 10.sp,
@@ -121,10 +130,9 @@ class Profile6 extends StatelessWidget {
                             textColor: MyColors.btnColor,
                             onTap: () {
                               /*print('====> decription : ${onboardingProvider.descriptionController}');*/
-                              if (formKey.currentState!.validate()) {
-                                profileController.previousPage();
-                                Get.to(() => const Profile5());
-                              }
+
+                              profileController.previousPage();
+                              Get.to(() => const Profile5());
                             },
                           ),
                           SizedBox(
@@ -141,7 +149,7 @@ class Profile6 extends StatelessWidget {
                             onTap: () {
                               debugPrint(
                                   '====> decription : ${onboardingProvider.profileDescriptionController}');
-                              if (formKey.currentState!.validate()) {
+                              if (_profile5Key.currentState!.validate()) {
                                 profileController.nextPage();
                                 Get.to(() => Profile7());
                               }

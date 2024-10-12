@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:project_5237_provider/provider/home/proposal_provider.dart';
@@ -66,11 +67,12 @@ class _HandshakeWidgetState extends State<HandshakeWidget> {
                   final proposal = filteredProposals[index];
 
                   return ProjectTile1(
+                    icon: CupertinoIcons.chat_bubble_text,
                     proposal: proposal,
                     image: Assets.bag,
                     title: proposal.projectId?.title ?? "",
-                    title1:
-                        '${proposal.clientDetails?.firstName ?? ''} ${proposal.clientDetails?.lastName ?? ''}',
+                    title1: '${proposal.projectId?.clientId?.userName ?? ''}',
+                    //${proposal.clientDetails?.lastName ?? ''}',
                     subtitle: proposal.createdAt ?? '',
                     tralingicon: Assets.message,
                     tralingtext:

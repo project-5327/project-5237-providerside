@@ -24,6 +24,7 @@ class ProjectTile1 extends StatefulWidget {
   final String? tralingtext;
   final String? btnText;
   final Color? btnColor;
+
   final Color? btntextColor;
   final VoidCallback? onTap;
   final IconData? icon;
@@ -92,6 +93,7 @@ class _ProjectTile1State extends State<ProjectTile1> {
                           children: [
                             Text(
                               widget.title!,
+                              softWrap: true,
                               style: TextStyle(
                                   fontSize: 16.sp,
                                   fontWeight: FontWeight.w600,
@@ -130,8 +132,11 @@ class _ProjectTile1State extends State<ProjectTile1> {
                                   onPressed: () {
                                     Get.to(ChatScreen());
                                   },
-                                  icon: Icon(
-                                    CupertinoIcons.chat_bubble_text,
+                                  icon:
+                                      //widget.icon
+                                      Icon(
+                                    widget.icon,
+                                    // CupertinoIcons.chat_bubble_text,
                                     size: 18,
                                   ),
                                 )

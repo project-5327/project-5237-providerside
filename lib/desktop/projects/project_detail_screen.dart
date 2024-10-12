@@ -16,6 +16,8 @@ import 'package:project_5237_provider/presentation/screens/my_contracts/map_scre
 import 'package:project_5237_provider/presentation/screens/my_contracts/send_screen.dart';
 import 'package:project_5237_provider/presentation/widgets/customize_button.dart';
 import 'package:project_5237_provider/presentation/widgets/discover_project_cont.dart';
+import 'package:project_5237_provider/provider/home/proposal_provider.dart';
+import 'package:provider/provider.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 class ProposalDetailScreen extends StatelessWidget {
@@ -28,6 +30,8 @@ class ProposalDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final prosalProvider = Provider.of<ProposalProvider>(context);
+
     DateTime createdAt = DateTime.parse(proposalListData.createdAt ?? "");
     final responsive = ResponsiveCheck(context);
     return responsive.isMobile || responsive.isTablet
@@ -277,12 +281,20 @@ class ProposalDetailScreen extends StatelessWidget {
                             color: MyColors.btnColor,
                             textColor: MyColors.white,
                             borderColor: MyColors.btnColor,
-                            onTap: () {
+                            onTap: () async {
                               _showDialogBox(
                                   context,
                                   "Do you want to reject this proposal?",
                                   "Yes",
                                   "No");
+
+                              // await prosalProvider.updateProposalN(
+                              //     context: context, status: "Rejected");
+
+                              // if (!proposalProvider.loading) {
+                              //  _showDialogeBox(context);
+                              Get.back();
+                              //  }
                             },
                           ),
                         ],

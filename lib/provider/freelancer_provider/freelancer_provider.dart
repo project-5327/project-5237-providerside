@@ -210,20 +210,22 @@ class FreelancerProvider with ChangeNotifier {
     String? token = await CustomInterceptor.getToken();
 
     try {
-      Map<String, dynamic> data = {
-        "projectName": projectName,
-        "description": description,
-        "startDate": startDate,
-        "endDate": endDate,
-        "technologies": technologies,
+      var data = {
+        'personalProjects': [
+          {
+            'projectName': projectName,
+            'description': description,
+            'startDate': startDate,
+            'endDate': endDate,
+            'technologies': technologies,
+          }
+        ]
       };
 
-      final response = await BaseClient.putForm(
+      final response = await BaseClient.puttoken(
+        token: token,
         api: EndPoints.USERDETAILS,
-        formData: data,
-        headers: {
-          'Authorization': 'Bearer $token',
-        },
+        payloadObj: data,
       );
 
       debugPrint("Response: ${response?.data}");
@@ -233,17 +235,18 @@ class FreelancerProvider with ChangeNotifier {
           final responseData = response?.data;
 
           final status = responseData?['status'] ?? 0;
-          final message = responseData?['message'] ?? 'Unknown message';
+          final message = responseData?['message'] ?? '';
           final userData = responseData?['data'] ?? {};
 
           debugPrint('Full Response=======> $responseData');
           debugPrint("Token=======> $token");
           debugPrint("Response Status=======> $status");
           debugPrint("Response Message=======> $message");
+          debugPrint("================");
           debugPrint("User Data =======> $userData");
 
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(message)),
+            SnackBar(content: Text("Personal project updated successfully")),
           );
 
           return true;

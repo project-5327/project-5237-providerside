@@ -63,6 +63,19 @@ class _ProposalSendScreenState extends State<ProposalSendScreen> {
     return Consumer<HomeProvider>(builder: (context, homeProvider, child) {
       return SafeArea(
         child: Scaffold(
+          appBar: AppBar(
+            leading: IconButton(
+              onPressed: () => Get.back(),
+              icon: Icon(
+                Icons.arrow_back_ios,
+                color: MyColors.black,
+              ),
+            ),
+            title: Text(
+              'Send Proposal',
+              style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600),
+            ),
+          ),
           body: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 18),
@@ -73,13 +86,8 @@ class _ProposalSendScreenState extends State<ProposalSendScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        'Send Proposal',
-                        style: TextStyle(
-                            fontSize: 16.sp, fontWeight: FontWeight.w600),
-                      ),
                       SizedBox(
-                        height: 35.h,
+                        height: 15.h,
                       ),
                       CustomTextFormField(
                         readOnly: true,
@@ -205,6 +213,7 @@ class _ProposalSendScreenState extends State<ProposalSendScreen> {
                           return null;
                         },
                         decoration: InputDecoration(
+                          errorMaxLines: 2,
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8.r),
                           ),
@@ -251,20 +260,26 @@ class _ProposalSendScreenState extends State<ProposalSendScreen> {
                                     'createdAt': dateTimeController.text,
                                   };
 
-                                  bool isSuccessful =
-                                      await Provider.of<HomeProvider>(context,
-                                              listen: false)
-                                          .createProposalN(
-                                              context: context,
-                                              proposalData: proposalData);
+                                  try {
+                                    bool isSuccessful =
+                                        await Provider.of<HomeProvider>(context,
+                                                listen: false)
+                                            .createProposalN(
+                                                context: context,
+                                                proposalData: proposalData);
 
-                                  if (isSuccessful) {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const SuccesfullyScreen()),
-                                    );
+                                    if (isSuccessful) {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                const SuccesfullyScreen()),
+                                      );
+                                    } else {
+                                      print("Proposal creation failed");
+                                    }
+                                  } catch (e) {
+                                    print("Error occurred: $e");
                                   }
                                 }
                               },
