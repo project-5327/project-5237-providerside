@@ -8,7 +8,9 @@ import 'package:project_5237_provider/controller/profile_controller.dart';
 import 'package:project_5237_provider/controller/form_controller.dart';
 import 'package:project_5237_provider/presentation/constants/responsive_view.dart';
 import 'package:project_5237_provider/presentation/screens/create_profile/profile/static_profile.dart';
+import 'package:provider/provider.dart';
 
+import '../../../../provider/onboarding/onbaording_provider.dart';
 import '../../../constants/assets.dart';
 import '../../../constants/color.dart';
 import '../../../constants/strings.dart';
@@ -17,7 +19,7 @@ import '../../../widgets/customize_button.dart';
 import 'profile2.dart';
 
 class ProfileDetail extends StatelessWidget {
-  final formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _profileDetailKey = GlobalKey<FormState>();
   final FormController formController = Get.put(FormController());
   final TextEditingController skillsController = TextEditingController();
   final ProfileController profileController = Get.put(ProfileController());
@@ -31,44 +33,54 @@ class ProfileDetail extends StatelessWidget {
   }
 
   _mobileView(BuildContext context) {
-    return StaticProfileLayout(
-      middleContentBuilder: () => Form(
-        key: formKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: 30.h),
-            EditCreateProfile(
-              align: TextAlign.start,
-              ontap: () {},
-              validator: (value) => formController.validateSkills(value),
-              controller: skillsController,
-              text: AppStrings.createProfileText1,
-              text1: AppStrings.createProfileLorem,
-              feildText: AppStrings.titletext,
-              color: MyColors.lightGrey,
-            ),
-            SizedBox(height: 158.h),
-            Center(
-                child: CustomizeButton(
-                    borderColor: MyColors.btnColor,
-                    radius: 100.r,
-                    text: AppStrings.next,
-                    height: 40.h,
-                    width: 334.w,
-                    color: MyColors.btnColor,
-                    textColor: MyColors.white,
-                    onTap: () {
-                      //if (formKey.currentState!.validate()) {
-                      profileController.nextPage();
-                      Get.to(() => Profile2());
-                      //   }
-                    })),
-            SizedBox(height: 42.h),
-          ],
+    return Consumer<OnbaordingProvider>(
+        builder: (context, onboardingProvider, child) {
+      return StaticProfileLayout(
+        middleContentBuilder: () => Form(
+          key: _profileDetailKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: 30.h),
+              EditCreateProfile(
+                showCurser: true,
+                align: TextAlign.start,
+                ontap: () {},
+                validator: (value) =>
+                    onboardingProvider.validateTitle(value ?? ""),
+                controller: onboardingProvider.titleController,
+                text: AppStrings.createProfileText1,
+                text1: AppStrings.createProfileLorem,
+                feildText: AppStrings.titletext,
+                labelText: AppStrings.title,
+                color: MyColors.lightGrey,
+                title: 'Tittle',
+              ),
+              SizedBox(height: 158.h),
+              Center(
+                  child: CustomizeButton(
+                      borderColor: MyColors.btnColor,
+                      radius: 100.r,
+                      text: AppStrings.next,
+                      height: 40.h,
+                      width: 334.w,
+                      color: MyColors.btnColor,
+                      textColor: MyColors.white,
+                      onTap: () {
+                        if (_profileDetailKey.currentState!.validate()) {
+                          debugPrint(
+                              'profile details=====> ${onboardingProvider.titleController}');
+                          profileController.nextPage();
+                          Get.to(() => const Profile2());
+                          //   }
+                        }
+                      })),
+              SizedBox(height: 42.h),
+            ],
+          ),
         ),
-      ),
-    );
+      );
+    });
   }
 
   _deskTopview(BuildContext context) {
@@ -85,7 +97,7 @@ class ProfileDetail extends StatelessWidget {
           ),
           Flexible(
             child: Center(
-              child: Container(
+              child: SizedBox(
                   //  height: 450.h,
                   width: 336.w,
                   child: Column(
@@ -150,7 +162,7 @@ class ProfileDetail extends StatelessWidget {
                                 onTap: () {
                                   //if (formKey.currentState!.validate()) {
                                   profileController.nextPage();
-                                  Get.to(() => Profile2());
+                                  Get.to(() => const Profile2());
                                   //   }
                                 })),
                         SizedBox(height: 20.h),

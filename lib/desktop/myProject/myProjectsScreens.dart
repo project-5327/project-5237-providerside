@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -31,7 +30,7 @@ class _MyProjectsScreenState extends State<MyProjectsScreen> {
             children: List.generate(
               12,
               (index) {
-                return const ProjectComp();
+                return const ProjectComp1();
               },
             ),
           ),
@@ -49,7 +48,7 @@ class _MyProjectsScreenState extends State<MyProjectsScreen> {
               color: MyColors.btnColor,
               textColor: MyColors.white,
               onTap: () {
-                Get.to(AddProjects());
+                Get.to(const AddProjects());
               },
             ),
           ),
@@ -62,8 +61,8 @@ class _MyProjectsScreenState extends State<MyProjectsScreen> {
   }
 }
 
-class ProjectComp extends StatelessWidget {
-  const ProjectComp({super.key});
+class ProjectComp1 extends StatelessWidget {
+  const ProjectComp1({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -101,7 +100,7 @@ class ProjectComp extends StatelessWidget {
                       color: MyColors.black),
                 ),
               ),
-              Spacer(),
+              const Spacer(),
               Text(
                 '5 hours ago',
                 style: TextStyle(

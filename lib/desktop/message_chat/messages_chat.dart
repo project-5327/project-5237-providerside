@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:project_5237_provider/desktop/message_chat/dailogs.dart';
 
-import '../../presentation/constants/assets.dart';
 import '../../presentation/constants/color.dart';
 
 import 'catogories.dart';
@@ -37,18 +38,18 @@ class _MessageChatScreen1State extends State<MessageChatScreen1>
         children: [
           // Custom AppBar-like widget
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            padding: EdgeInsets.symmetric(horizontal: 16.w),
             color: Colors.white,
             child: Column(
               children: [
                 const SizedBox(height: 20),
                 Row(
-                  children: const [
-                    SizedBox(width: 20),
+                  children: [
+                    const SizedBox(width: 20),
                     Text(
                       'Messages',
                       style: TextStyle(
-                        fontSize: 18,
+                        fontSize: 18.sp,
                         fontWeight: FontWeight.w600,
                         color: Colors.black,
                       ),
@@ -62,14 +63,14 @@ class _MessageChatScreen1State extends State<MessageChatScreen1>
                   indicatorColor: Colors.black,
                   labelColor: Colors.black,
                   unselectedLabelColor: Colors.grey,
-                  labelStyle: const TextStyle(
-                    fontSize: 16,
+                  labelStyle: TextStyle(
+                    fontSize: 16.sp,
                     fontWeight: FontWeight.w600,
                   ),
                   tabs: const [
-                    Tab(text: 'Catogory1'),
-                    Tab(text: 'Catogory2'),
-                    Tab(text: 'Catogory3')
+                    Tab(text: 'Client'),
+                    Tab(text: 'Send Proposal'),
+                    Tab(text: 'Miscellaneous')
                   ],
                 ),
               ],
@@ -77,27 +78,27 @@ class _MessageChatScreen1State extends State<MessageChatScreen1>
           ),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.only(left: 8.0,right: 8.0,bottom: 8.0),
+              padding: EdgeInsets.only(left: 8.w, right: 8.w, bottom: 8.h),
               child: Container(
                 decoration: BoxDecoration(
-                  border: Border.all(width: 1,color: Color(0xff999999))
-                ),
+                    border: Border.all(width: 1.w, color: const Color(0xff999999))),
                 child: Padding(
-                  padding: const EdgeInsets.only(bottom: 20, right: 20, left: 20),
+                  padding:
+                      EdgeInsets.only(bottom: 20.h, right: 20.w, left: 20.w),
                   child: Row(
                     children: [
                       Expanded(
                         flex: 3,
                         child: Column(
                           children: [
-                            const Padding(
-                              padding: EdgeInsets.only(top: 20, left: 50),
+                            Padding(
+                              padding: EdgeInsets.only(top: 20.h, left: 50.w),
                             ),
                             // Message list
                             Expanded(
                               child: TabBarView(
                                 controller: _tabController,
-                                children:  [
+                                children: const [
                                   Catagory3(),
                                   Catagory3(),
                                   Catagory3(),
@@ -107,9 +108,10 @@ class _MessageChatScreen1State extends State<MessageChatScreen1>
                           ],
                         ),
                       ),
-                      VerticalDivider(
-                        color: Color(0xff999999), // The color of the divider line
-                        thickness: 1,      // The thickness of the divider line
+                      const VerticalDivider(
+                        color:
+                            Color(0xff999999), // The color of the divider line
+                        thickness: 1, // The thickness of the divider line
                       ),
                       Expanded(
                         flex: 5,
@@ -160,7 +162,7 @@ class _ChatScreen1State extends State<ChatScreen1> {
 
   TextEditingController messageController = TextEditingController();
 
-  void _handlePopUpItem(String value, BuildContext context) {}
+  /*void _handlePopUpItem(String value, BuildContext context) {}*/
 
   @override
   Widget build(BuildContext context) {
@@ -182,24 +184,25 @@ class _ChatScreen1State extends State<ChatScreen1> {
                           borderRadius: BorderRadius.circular(100),
                           child: Image.asset(
                             'assets/images/wgirl1.png',
-                            height: 40, // Fixed height
-                            width: 40, // Fixed width
+                            height: 40.h, // Fixed height
+                            width: 40.w, // Fixed width
                             fit: BoxFit.cover,
                           ),
                         ),
                       ),
                       const SizedBox(width: 10),
-                      const Text(
+                      Text(
                         'Jason Jones',
                         style: TextStyle(
-                          fontSize: 20, // Fixed font size
+                          fontSize: 20.sp, // Fixed font size
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
                         ),
                       ),
                       const Spacer(),
                       PopupMenuButton<String>(
-                        onSelected: (value) => _handlePopUpItem(value, context),
+                        onSelected: (value) =>
+                            CustomDailogs().handlePopUpItem(value, context),
                         constraints: const BoxConstraints(
                           maxWidth: 120, // Fixed width
                         ),
@@ -209,17 +212,17 @@ class _ChatScreen1State extends State<ChatScreen1> {
                             return PopupMenuItem<String>(
                               value: choice.toLowerCase(),
                               child: Container(
-                                height: 30, // Fixed height
-                                width: 100, // Fixed width
+                                height: 30.h, // Fixed height
+                                width: 100.w, // Fixed width
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(4),
                                 ),
                                 child: Center(
                                   child: Text(
                                     choice,
-                                    style: const TextStyle(
-                                      color: Color(0xff2C62B9),
-                                      fontSize: 12, // Fixed font size
+                                    style: TextStyle(
+                                      color: const Color(0xff2C62B9),
+                                      fontSize: 12.sp, // Fixed font size
                                       fontWeight: FontWeight.w400,
                                     ),
                                   ),
@@ -231,7 +234,10 @@ class _ChatScreen1State extends State<ChatScreen1> {
                       ),
                     ],
                   ),
-               Divider(thickness: 0.5,color: Color(0xff999999),),
+                  const Divider(
+                    thickness: 0.5,
+                    color: Color(0xff999999),
+                  ),
                 ],
               ),
             ),
@@ -246,9 +252,9 @@ class _ChatScreen1State extends State<ChatScreen1> {
                         ? Alignment.centerRight
                         : Alignment.centerLeft,
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 8, // Fixed padding
-                        vertical: 4, // Fixed padding
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 8.w, // Fixed padding
+                        vertical: 4.h, // Fixed padding
                       ),
                       child: Column(
                         crossAxisAlignment: message.isSentByMe
@@ -256,7 +262,7 @@ class _ChatScreen1State extends State<ChatScreen1> {
                             : CrossAxisAlignment.start,
                         children: [
                           Container(
-                            constraints: const BoxConstraints(maxWidth: 250),
+                            constraints: BoxConstraints(maxWidth: 250.w),
                             padding: const EdgeInsets.all(8),
                             decoration: BoxDecoration(
                               color: message.isSentByMe
@@ -276,21 +282,22 @@ class _ChatScreen1State extends State<ChatScreen1> {
                             ),
                             child: Text(
                               message.text,
-                              style: const TextStyle(
-                                color: Colors
-                                    .white,
-                                fontSize: 14, // Fixed font size
+                              style: GoogleFonts.inter(
+                                textStyle: TextStyle(
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.w400,
+                                    color: MyColors.white),
                               ),
                             ),
                           ),
-                          const SizedBox(
-                              height:
-                                  2),
+                          const SizedBox(height: 2),
                           Text(
                             message.time,
-                            style: const TextStyle(
-                              fontSize: 10, // Fixed font size
-                              color: Colors.grey,
+                            style: GoogleFonts.inter(
+                              textStyle: TextStyle(
+                                  fontSize: 10.sp,
+                                  fontWeight: FontWeight.w400,
+                                  color: MyColors.black),
                             ),
                           ),
                         ],
@@ -301,9 +308,9 @@ class _ChatScreen1State extends State<ChatScreen1> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 8, // Fixed padding
-                vertical: 8, // Fixed padding
+              padding: EdgeInsets.symmetric(
+                horizontal: 8.w, // Fixed padding
+                vertical: 8.h, // Fixed padding
               ),
               child: Row(
                 children: [
@@ -312,9 +319,9 @@ class _ChatScreen1State extends State<ChatScreen1> {
                       controller: messageController,
                       decoration: InputDecoration(
                         hintText: 'Type Something...',
-                        contentPadding: const EdgeInsets.symmetric(
-                          vertical: 8, // Fixed padding
-                          horizontal: 12, // Fixed padding
+                        contentPadding: EdgeInsets.symmetric(
+                          vertical: 8.h, // Fixed padding
+                          horizontal: 12.w, // Fixed padding
                         ),
                         fillColor: const Color(0xffF1F1F1),
                         filled: true,
@@ -341,22 +348,22 @@ class _ChatScreen1State extends State<ChatScreen1> {
                       ),
                     ),
                   ),
-                  SizedBox(width: 20),
+                  const SizedBox(width: 20),
                   Container(
-                    height: 50,
-                    width: 71,
-                    child: IconButton(
-                      onPressed: () {},
-                      icon: Icon(
-                        Icons.arrow_forward_ios,
-                        size: 15,
-                        color: const Color(0xffB9B9B9),
-                      ),
-                    ),
+                    height: 50.h,
+                    width: 71.w,
                     decoration: BoxDecoration(
                       color: const Color(0xffF1F1F1),
                       border: Border.all(color: MyColors.grey),
                       borderRadius: BorderRadius.circular(30),
+                    ),
+                    child: IconButton(
+                      onPressed: () {},
+                      icon: const Icon(
+                        Icons.arrow_forward_ios,
+                        size: 15,
+                        color: Color(0xffB9B9B9),
+                      ),
                     ),
                   )
                 ],

@@ -9,7 +9,8 @@ class AppStrings {
   static const String email = 'Email';
   static const String enterUrEmail = 'Enter your email';
   static const String passWord = 'PASSWORD';
-
+  static const String didnotReceiveCode = 'Didn’t Receive Code? Resend Code';
+  static const String resendCodeTime = 'Resend code in 00:59';
   static const String enterUrPassWord = 'Enter your Password';
   static const String repeatPassword = 'Repeat Password';
   static const String iAmI = 'I am a:';
@@ -17,6 +18,7 @@ class AppStrings {
   static const String passWord1 = 'Password';
   static const String title = 'Title';
   static const String createProfile = 'Create Profile';
+  static const String accountSetup = 'Complete your free \n   account setup';
 
   static const String userName = 'User Name';
   static const String accept = 'Accept';
@@ -48,8 +50,8 @@ class AppStrings {
   static const fieldOfStudy = 'Field of Study';
   static const emailText = 'Email';
   static const address = 'Address';
-  static const countryName = 'Country Name*';
-  static const fullName = 'Full Name*';
+  static const countryName = 'Country Name';
+  static const fullName = 'Full Name';
   static const small = 'Small';
   static const medium = 'Medium';
   static const large = 'Large';
@@ -64,7 +66,7 @@ class AppStrings {
   static const finish = 'Finish';
   static const pincode = 'Zip code/ Pincode';
   static const phone = 'Phone number';
-  static const city = 'City Name*';
+  static const city = 'City Name';
   static const tellUsAbout = 'Tell us about your budget?';
   static const from = 'From';
   static const to = 'To';
@@ -141,4 +143,25 @@ class AppStrings {
   static const myProjects = 'My Projects';
   static const addProject = 'Add Project';
   static const updatedSuccessfully = 'Updated Successfully!';
+
+  static const String enterCODE = 'ENTER CODE';
+  static const String createNewPassword = 'Create New Password';
+  static const String pleaseEnterAndConfirm =
+      'Please enter and confirm your password. You will need to login after you rest.';
+  static const String noWorriessEnter =
+      'No worries! Enter your email address below and we will send you a code to reset code.';
+  static const String codeHasBeenSend =
+      "Code has been send to josphamdes@gmail.com";
+  static const String enetrCode = 'Enter the code to verify your account.';
+  static const String verifyAccount = 'Verify Account';
+
+  static const enter4Digit = 'Enter 4 Digit Code';
+  static const emailNotRecived = 'Email Not Recived? ';
+  static const resendOtp = 'Resend OTP';
+  static const ok = 'Ok';
+  static const resendCode = 'Resend code';
+
+  static const otpCodeSent = 'OTP code sent on your email.';
+  static const enter4DigitCodeYour =
+      'Enter 4 digit code that your receive on your \nemail (cody.fisher45@example.com).';
 }

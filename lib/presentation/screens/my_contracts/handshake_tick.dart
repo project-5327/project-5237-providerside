@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:project_5237_provider/provider/home/proposal_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../../constants/assets.dart';
 import '../../constants/color.dart';
 import '../../widgets/contract_widgets.dart';
-import '../login_register/home_screen.dart';
-
-import '../update_Project/chat_screen.dart';
 
 class HandShakeTick extends StatefulWidget {
   const HandShakeTick({super.key});
@@ -17,59 +16,78 @@ class HandShakeTick extends StatefulWidget {
 
 class _HandShakeTickState extends State<HandShakeTick> {
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<ProposalProvider>(context, listen: false)
+          .fetchAllProposal(context);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          SizedBox(
-            height: 15.h,
+    return Consumer<ProposalProvider>(
+        builder: (context, proposalProvider, child) {
+      final proposals = proposalProvider.proposalByUser?.data;
+      debugPrint("proposal data ========> $proposals");
+      if (proposalProvider.loading) {
+        return Center(
+          child: CircularProgressIndicator(
+            color: MyColors.blue,
           ),
-          ProjectTile1(
-            image: Assets.bag,
-            title: 'Project 3',
-            title1: 'Abiodun Taiwo',
-            subtitle: 'Monday, 5th January - 11:50pm',
-            tralingicon: Assets.message,
-            tralingtext: '\$Rate',
-            btnText: 'Booked',
-            btnColor: MyColors.grey2,
-            btntextColor: MyColors.black1,
-            image1: 'assets/images/girl2.png',
-          ),
-          SizedBox(
-            height: 20.h,
-          ),
-          ProjectTile1(
-              image: Assets.bag,
-              title: 'Project 4',
-              title1: 'Abiodun Taiwo',
-              subtitle: 'Monday, 5th January - 11:50pm',
-              tralingicon: Assets.message,
-              //$
-              tralingtext: '\$Rate',
-              btnText: 'Done',
-              btnColor: MyColors.green,
-              btntextColor: MyColors.white,
-              image1: 'assets/images/girl2.png'),
-          SizedBox(
-            height: 20.h,
-          ),
-          ProjectTile1(
-              image: Assets.bag,
-              title: 'Project 5',
-              title1: 'Ismail Ojo',
-              subtitle: 'Monday, 5th January - 11:50pm',
-              tralingicon: Assets.message,
-              //$
-              tralingtext: '\$Rate',
-              btnText: 'Canceled',
-              btntextColor: MyColors.red,
-              btnColor: MyColors.lightred,
-              image1: 'assets/images/girl2.png'),
-        ],
-      ),
-    );
+        );
+      }
+      if (proposals == null || proposals.isEmpty) {
+        return const Center(
+          child: Text("No proposals available"),
+        );
+      }
+      final filteredProposals = proposals.where((proposal) {
+        final status = proposal.status?.toLowerCase();
+        return status == 'reviewed' ||
+            status == 'accepted' ||
+            status == 'rejected';
+      }).toList();
+      if (filteredProposals == null || filteredProposals.isEmpty) {
+        return const Center(
+          child: Text("No proposals available"),
+        );
+      }
+      return SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: 15.h,
+            ),
+            ListView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: filteredProposals.length,
+              itemBuilder: (context, index) {
+                final proposal = filteredProposals[index];
+
+                return ProjectTile1(
+                  proposal: proposal,
+                  image: Assets.bag,
+                  title: proposal.projectId?.title ?? "",
+                  title1: '${proposal.projectId?.clientId?.userName ?? ''}',
+                  subtitle: proposal.createdAt ?? '',
+                  tralingicon: Assets.message,
+                  tralingtext: '\$${proposal.proposedBudget?.numberDecimal}',
+                  btnText: proposal.status,
+                  btnColor: MyColors.btnColor.withOpacity(0.5),
+                  btntextColor: MyColors.black1,
+                  image1: proposal.clientDetails?.profileImage ??
+                      'https://pub-261021c7b68740ffba855a7e8a6f3c1e.r2.dev/undefined/vasily-koloda-8CqDvPuo_kI-unsplash.jpg',
+                );
+              },
+            ),
+            SizedBox(height: 16.h),
+          ],
+        ),
+      );
+    });
   }
 }

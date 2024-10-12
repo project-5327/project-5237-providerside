@@ -7,8 +7,6 @@ import 'package:get/get.dart';
 import 'package:project_5237_provider/presentation/constants/assets.dart';
 import 'package:project_5237_provider/presentation/constants/responsive_view.dart';
 import 'package:project_5237_provider/presentation/screens/login_register/succesfully.dart';
-import 'package:project_5237_provider/presentation/screens/my_contracts/my_project.dart';
-import 'package:project_5237_provider/presentation/screens/my_contracts/send_screen.dart';
 import 'package:project_5237_provider/presentation/widgets/customize_button.dart';
 import '../../constants/color.dart';
 import '../../constants/strings.dart';
@@ -67,7 +65,7 @@ class AddProjects extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Center(
-          child: Container(
+          child: SizedBox(
             width: 400,
             child: SingleChildScrollView(child: DetailsTextfield(
               onTap: () {

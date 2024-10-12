@@ -1,24 +1,31 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:project_5237_provider/presentation/screens/my_contracts/send_screen.dart';
+
+import 'package:project_5237_provider/presentation/constants/fonts.dart';
+import 'package:project_5237_provider/presentation/constants/responsive_view.dart';
 
 import '../constants/color.dart';
-import '../constants/responsive_view.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final String? title;
   final String? text;
-  final double? width;
-  final double? height;
   final IconButton? icon;
   final TextStyle? style;
-  final int? maxLines;
-  final bool? readOnly;
-
-  final Color? fillcolor;
+  final errorMessage;
+  final int? size;
   final TextEditingController? controller;
   final void Function(String)? onChanged;
+  final Color? color;
   final bool obscureText;
+  final Color? fillcolor;
+  final double? width;
+  final double? height;
+  final keyboardType;
+  final int? maxlines;
+  final bool? readOnly;
+  final FocusNode? focusNode;
   final String? Function(String?)? validator;
   const CustomTextFormField(
       {super.key,
@@ -30,11 +37,16 @@ class CustomTextFormField extends StatelessWidget {
       this.validator,
       this.text,
       this.icon,
+      this.keyboardType,
+      this.readOnly,
+      this.size,
+      this.color,
+      this.maxlines,
       this.fillcolor,
       this.width,
       this.height,
-      this.maxLines,
-      this.readOnly});
+      this.focusNode,
+      this.errorMessage});
 
   @override
   Widget build(BuildContext context) {
@@ -42,44 +54,46 @@ class CustomTextFormField extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8),
-          child: Text(title ?? "",
-              style: TextStyle(
-                  color: MyColors.black,
-                  fontSize: responsive.isMobile ? 12.sp : 14.sp,
-                  fontWeight: FontWeight.w600)),
+        Text(
+          title ?? "",
+          style: style ??
+              TextStyle(
+                fontSize: 13.sp,
+                color: MyColors.black,
+                fontWeight: FontWeight.w600,
+                fontFamily: Fonts.fontsinter,
+              ),
         ),
         SizedBox(height: 5.h),
-        Container(
+        SizedBox(
           height: height,
           width: width,
           child: TextFormField(
+            focusNode: focusNode,
+            maxLines: obscureText ? 1 : null, // Restrict to 1 line if obscured
             readOnly: readOnly ?? false,
-            maxLines: maxLines ?? 1,
+            keyboardType: keyboardType,
             controller: controller,
             onChanged: onChanged,
             obscureText: obscureText,
             validator: validator,
             decoration: InputDecoration(
-              focusColor: MyColors.black,
+              errorMaxLines: errorMessage ?? 1,
               fillColor: fillcolor,
               suffixIcon: icon,
               hintText: text,
               hintStyle: TextStyle(
-                  fontSize: responsive.isMobile ? 12.sp : 13.sp,
-                  fontWeight: FontWeight.w600,
-                  color: MyColors.lightGrey),
-              contentPadding: responsive.isMobile
-                  ? const EdgeInsets.symmetric(vertical: 10, horizontal: 16)
-                  : const EdgeInsets.symmetric(horizontal: 16),
+                  fontSize: 13,
+                  color: color ?? MyColors.lightGrey,
+                  fontFamily: 'Lexend'),
+              contentPadding:
+                  const EdgeInsets.symmetric(vertical: 7, horizontal: 16),
               border: OutlineInputBorder(
-                // borderSide: BorderSide(color: MyColors.black),
                 borderRadius: BorderRadius.circular(8.r),
               ),
             ),
           ),
-        ),
+        )
       ],
     );
   }

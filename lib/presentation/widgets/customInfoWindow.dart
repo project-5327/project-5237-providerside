@@ -1,6 +1,5 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../constants/color.dart';
 
@@ -38,13 +37,6 @@ class CustomInfoWindow extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // SvgPicture.asset(
-            //   Assets.bluedot,
-            //   height: 10.h,
-            //   width: 10.w,
-            //   fit: BoxFit.cover,
-            // ),
-
             Text(
               title!,
               style: TextStyle(
@@ -53,7 +45,6 @@ class CustomInfoWindow extends StatelessWidget {
                 fontWeight: FontWeight.w800,
               ),
             ),
-
             Text(
               subtitle!,
               style: TextStyle(

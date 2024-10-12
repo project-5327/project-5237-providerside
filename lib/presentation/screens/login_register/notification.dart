@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:project_5237_provider/presentation/screens/login_register/EditProfile.dart';
 
 import '../../constants/color.dart';
 import '../../widgets/Catagory1.dart';
-import '../message/discover_projects.dart';
 
 class NotificationScreen extends StatelessWidget {
   const NotificationScreen({super.key});
@@ -48,10 +46,7 @@ class NotificationScreen extends StatelessWidget {
                   height: 19.sp,
                 ),
                 InkWell(
-                  onTap: () {
-                    //Payment page
-                    Get.to(() => Editprofile());
-                  },
+                  onTap: () {},
                   child: const CustomizeListTile(
                       image: 'assets/images/girl1.png',
                       title: 'Jason Jones',

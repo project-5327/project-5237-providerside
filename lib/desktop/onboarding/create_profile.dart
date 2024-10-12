@@ -5,7 +5,6 @@ import 'package:project_5237_provider/presentation/screens/create_profile/profil
 
 import '../../presentation/constants/assets.dart';
 import '../../presentation/constants/color.dart';
-import '../../presentation/constants/strings.dart';
 import 'appname.dart';
 
 class CreateYourProfileScreen extends StatefulWidget {
@@ -22,7 +21,7 @@ class _CreateYourProfileScreenState extends State<CreateYourProfileScreen> {
     return Scaffold(
       body: Row(
         children: [
-          AppNameScreen(),
+          const AppNameScreen(),
           Flexible(
             flex: 2,
             child: Center(
@@ -119,10 +118,10 @@ class _CreateYourProfileScreenState extends State<CreateYourProfileScreen> {
 }
 
 Widget _buildDivider() {
-  return Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 80.0),
+  return const Padding(
+    padding: EdgeInsets.symmetric(horizontal: 80.0),
     child: Divider(
-      color: const Color(0xff2A1E17),
+      color: Color(0xff2A1E17),
       thickness: 1,
     ),
   );

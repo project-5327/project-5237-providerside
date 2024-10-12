@@ -1,194 +1,321 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:project_5237_provider/presentation/constants/strings.dart';
-import 'package:project_5237_provider/presentation/screens/create_profile/profile/profile3.dart';
-import 'package:project_5237_provider/presentation/screens/create_profile/profile/profile4.dart';
 import 'package:project_5237_provider/presentation/screens/my_contracts/send_screen.dart';
 import 'package:project_5237_provider/presentation/widgets/Customize_textfield.dart';
+import 'package:provider/provider.dart';
 
+import '../../../../provider/onboarding/onbaording_provider.dart';
 import '../../../constants/assets.dart';
 import '../../../constants/color.dart';
 import '../../../widgets/customize_button.dart';
-import 'profile2.dart';
 
-class AddExperience extends StatelessWidget {
-  const AddExperience({super.key});
+class AddExperience extends StatefulWidget {
+  AddExperience({super.key});
+
+  @override
+  State<AddExperience> createState() => _AddExperienceState();
+}
+
+class _AddExperienceState extends State<AddExperience> {
+  final experienceKey = GlobalKey<FormState>();
+  Future<void> _pickDate(
+      BuildContext context, TextEditingController controller) async {
+    DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2101),
+    );
+    if (picked != null) {
+      setState(() {
+        controller.text = DateFormat('MMMM yyyy').format(picked);
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: () => Get.back(),
-          icon: Icon(
-            Icons.arrow_back_ios,
-            color: MyColors.black,
+    return Consumer<OnbaordingProvider>(
+        builder: (context, onboardingProvider, child) {
+      return SafeArea(
+          child: Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
+            onPressed: () => Get.back(),
+            icon: Icon(
+              Icons.arrow_back_ios,
+              color: MyColors.black,
+            ),
+          ),
+          title: Text(
+            AppStrings.addExperience1,
+            style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600),
           ),
         ),
-        title: Text(
-          AppStrings.addExperience1,
-          style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600),
-        ),
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(
-                height: 37.h,
-              ),
-              Center(
-                child: Container(
-                  padding: EdgeInsets.all(14.0),
-                  height: 440.h,
-                  width: 335.w,
-                  decoration: BoxDecoration(
-                      color: MyColors.blueContainer,
-                      borderRadius: BorderRadius.circular(12.r)),
-                  child: Column(
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+            child: Form(
+              key: experienceKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: 37.h,
+                  ),
+                  Center(
+                    child: Container(
+                      padding: const EdgeInsets.all(14.0),
+                      // height: 440.h,
+                      width: 335.w,
+                      decoration: BoxDecoration(
+                          color: MyColors.blueContainer,
+                          borderRadius: BorderRadius.circular(12.r)),
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              TextWidget(
+                                text: AppStrings.experience1,
+                                color: MyColors.black,
+                                fontweight: FontWeight.w500,
+                                size: 14.sp,
+                              ),
+                              IconButton(
+                                icon: SvgPicture.asset(Assets.closeIC),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                              )
+                            ],
+                          ),
+                          SizedBox(
+                            height: 14.h,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Flexible(
+                                child: CustomTextFormField(
+                                  errorMessage: 2,
+                                  text: AppStrings.enterHere,
+                                  title: AppStrings.companyName,
+                                  validator: (value) => onboardingProvider
+                                      .validateCompany(value ?? ''),
+                                  controller:
+                                      onboardingProvider.companyNameController,
+                                ),
+                              ),
+                              SizedBox(
+                                width: 5.w,
+                              ),
+                              Flexible(
+                                child: CustomTextFormField(
+                                  errorMessage: 2,
+                                  text: AppStrings.enterHere,
+                                  title: AppStrings.role,
+                                  validator: (value) => onboardingProvider
+                                      .validateRole(value ?? ''),
+                                  controller: onboardingProvider.roleController,
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 14.h,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Flexible(
+                                child: GestureDetector(
+                                  onTap: () => _pickDate(
+                                    context,
+                                    onboardingProvider.startDateController,
+                                  ),
+                                  child: AbsorbPointer(
+                                    child: CustomTextFormField(
+                                      icon: IconButton(
+                                        icon: Icon(CupertinoIcons.calendar),
+                                        onPressed: () {},
+                                      ),
+                                      validator: (value) =>
+                                          onboardingProvider.validateStartDate(
+                                              value ?? '',
+                                              onboardingProvider
+                                                  .endDateController.text),
+                                      errorMessage: 3,
+                                      text: AppStrings.date,
+                                      style: TextStyle(
+                                          fontSize: 13.sp,
+                                          fontWeight: FontWeight.w600,
+                                          color: MyColors.black),
+                                      title: AppStrings.startDate,
+                                      controller: onboardingProvider
+                                          .startDateController,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(width: 5.w),
+                              Flexible(
+                                child: GestureDetector(
+                                  onTap: () => _pickDate(context,
+                                      onboardingProvider.endDateController),
+                                  child: AbsorbPointer(
+                                    child: CustomTextFormField(
+                                      icon: IconButton(
+                                        icon: Icon(CupertinoIcons.calendar),
+                                        onPressed: () {},
+                                      ),
+                                      validator: (value) =>
+                                          onboardingProvider.validateEndDate(
+                                              value ?? '',
+                                              onboardingProvider
+                                                  .startDateController.text),
+                                      errorMessage: 3,
+                                      text: AppStrings.date,
+                                      style: TextStyle(
+                                          fontSize: 13.sp,
+                                          fontWeight: FontWeight.w600,
+                                          color: MyColors.black),
+                                      title: AppStrings.endDate,
+                                      controller:
+                                          onboardingProvider.endDateController,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 14.h,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Flexible(
+                                child: CustomTextFormField(
+                                  errorMessage: 2,
+                                  text: AppStrings.enterHere,
+                                  title: AppStrings.location,
+                                  validator: (value) => onboardingProvider
+                                      .validateLocation(value ?? ''),
+                                  controller:
+                                      onboardingProvider.locationController,
+                                ),
+                              ),
+                              SizedBox(
+                                width: 5.w,
+                              ),
+                              Flexible(
+                                child: CustomTextFormField(
+                                  errorMessage: 2,
+                                  text: AppStrings.enterHere,
+                                  title: AppStrings.employmentType,
+                                  validator: (value) => onboardingProvider
+                                      .validateEmployementType(value ?? ''),
+                                  controller: onboardingProvider
+                                      .employementTypeController,
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 14.h,
+                          ),
+                          CustomTextFormField(
+                            errorMessage: 2,
+                            maxlines: 2,
+                            text: AppStrings.enterHere,
+                            title: AppStrings.description,
+                            validator: (value) => onboardingProvider
+                                .validateDescription(value ?? ''),
+                            controller:
+                                onboardingProvider.descriptionController,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 14.h,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          TextWidget(
-                            text: AppStrings.experience1,
-                            color: MyColors.black,
-                            fontweight: FontWeight.w500,
-                            size: 14.sp,
-                          ),
-                          SvgPicture.asset(Assets.closeIC)
-                        ],
+                      Icon(
+                        Icons.add_circle_outline,
+                        color: MyColors.blue,
+                        size: 20.sp,
                       ),
-                      SizedBox(
-                        height: 14.h,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Flexible(
-                            child: CustomTextFormField(
-                              text: AppStrings.enterHere,
-                              title: AppStrings.companyName,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 5.w,
-                          ),
-                          const Flexible(
-                            child: CustomTextFormField(
-                              text: AppStrings.enterHere,
-                              title: AppStrings.role,
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 14.h,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Flexible(
-                            child: CustomTextFormField(
-                              text: AppStrings.date,
-                              title: AppStrings.startDate,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 5.w,
-                          ),
-                          const Flexible(
-                            child: CustomTextFormField(
-                              text: AppStrings.date,
-                              title: AppStrings.endDate,
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 14.h,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Flexible(
-                            child: CustomTextFormField(
-                              text: AppStrings.enterHere,
-                              title: AppStrings.location,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 5.w,
-                          ),
-                          const Flexible(
-                            child: CustomTextFormField(
-                              text: AppStrings.enterHere,
-                              title: AppStrings.employmentType,
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 14.h,
-                      ),
-                      const CustomTextFormField(
-                        maxLines: 2,
-                        text: AppStrings.enterHere,
-                        title: AppStrings.description,
+                      TextWidget(
+                        align: TextAlign.right,
+                        text: AppStrings.addMore,
+                        color: MyColors.blue,
+                        fontweight: FontWeight.w500,
+                        size: 14.sp,
                       ),
                     ],
                   ),
-                ),
-              ),
-              SizedBox(
-                height: 14.h,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Icon(
-                    Icons.add_circle_outline,
-                    color: MyColors.blue,
-                    size: 20.sp,
+                  SizedBox(
+                    height: 150.h,
                   ),
-                  TextWidget(
-                    align: TextAlign.right,
-                    text: AppStrings.addMore,
-                    color: MyColors.blue,
-                    fontweight: FontWeight.w500,
-                    size: 14.sp,
-                  ),
+                  Center(
+                      child: CustomizeButton(
+                          borderColor: MyColors.btnColor,
+                          radius: 100.r,
+                          text: "Save",
+                          height: 40.h,
+                          width: 334.w,
+                          color: MyColors.btnColor,
+                          textColor: MyColors.white,
+                          onTap: () {
+                            debugPrint(
+                                '====>  Experiance : ${onboardingProvider.companyNameController}');
+                            debugPrint(
+                                '====>  Experiance : ${onboardingProvider.roleController}');
+                            debugPrint(
+                                '====>  Experiance : ${onboardingProvider.startDateController}');
+                            debugPrint(
+                                '====>  Experiance : ${onboardingProvider.endDateController}');
+                            debugPrint(
+                                '====>  Experiance : ${onboardingProvider.locationController}');
+                            debugPrint(
+                                '====>  Experiance : ${onboardingProvider.employementTypeController}');
+                            debugPrint(
+                                '====>  Experiance : ${onboardingProvider.descriptionController}');
+                            if (experienceKey.currentState!.validate()) {
+                              onboardingProvider.addExperience(
+                                  onboardingProvider.companyNameController.text,
+                                  onboardingProvider.roleController.text,
+                                  onboardingProvider
+                                      .employementTypeController.text,
+                                  onboardingProvider.locationController.text,
+                                  onboardingProvider.startDateController.text,
+                                  onboardingProvider.endDateController.text,
+                                  onboardingProvider
+                                      .descriptionController.text);
+                              //if (formKey.currentState!.validate()) {
+                              //  profileController.nextPage();
+                              Get.back(result: true);
+                              //   }
+                            }
+                          })),
+                  SizedBox(height: 42.h),
                 ],
               ),
-              SizedBox(
-                height: 150.h,
-              ),
-              Center(
-                  child: CustomizeButton(
-                      borderColor: MyColors.btnColor,
-                      radius: 100.r,
-                      text: AppStrings.next,
-                      height: 40.h,
-                      width: 334.w,
-                      color: MyColors.btnColor,
-                      textColor: MyColors.white,
-                      onTap: () {
-                        //if (formKey.currentState!.validate()) {
-                        //  profileController.nextPage();
-                        Get.back(result: true);
-                        //   }
-                      })),
-              SizedBox(height: 42.h),
-            ],
+            ),
           ),
         ),
-      ),
-    ));
+      ));
+    });
   }
 }

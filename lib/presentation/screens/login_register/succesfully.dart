@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:project_5237_provider/presentation/screens/my_contracts/my_contacts.dart';
 import 'package:project_5237_provider/presentation/screens/my_contracts/my_project.dart';
 
 import '../../constants/assets.dart';
@@ -62,7 +63,7 @@ class _SuccesfullyScreenState extends State<SuccesfullyScreen> {
                     color: MyColors.btnColor,
                     textColor: MyColors.white,
                     onTap: () {
-                      Get.to(() => const MyProjectScreen());
+                      Get.to(() => const MycontractScreen());
                     }
                     //)
 
