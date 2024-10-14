@@ -26,7 +26,7 @@ class ActiveMilestones extends StatelessWidget {
                   SizedBox(
                     height: 13.h,
                   ),
-                  const RichTextMile(text: 'Heading1: ', text1: '\$200'),
+                  const RichTextMile(text: 'Heading2: ', text1: '\$200'),
                   SizedBox(
                     height: 13.h,
                   ),

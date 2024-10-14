@@ -282,19 +282,98 @@ class ProposalDetailScreen extends StatelessWidget {
                             textColor: MyColors.white,
                             borderColor: MyColors.btnColor,
                             onTap: () async {
-                              _showDialogBox(
-                                  context,
-                                  "Do you want to reject this proposal?",
-                                  "Yes",
-                                  "No");
-
-                              // await prosalProvider.updateProposalN(
-                              //     context: context, status: "Rejected");
-
-                              // if (!proposalProvider.loading) {
-                              //  _showDialogeBox(context);
-                              Get.back();
-                              //  }
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                        title: Center(
+                                          child: TextWidget(
+                                            text: 'Are you Sure?',
+                                            color: MyColors.btnColor,
+                                            size: 20.sp,
+                                            fontweight: FontWeight.w700,
+                                          ),
+                                        ),
+                                        content: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 20.0),
+                                          child: TextWidget(
+                                            text:
+                                                "Do you want to reject this proposal?",
+                                            color: MyColors.black,
+                                            size: 12.sp,
+                                            fontweight: FontWeight.w500,
+                                          ),
+                                        ),
+                                        actions: [
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              TextButton(
+                                                style: TextButton.styleFrom(
+                                                    backgroundColor:
+                                                        MyColors.btnColor,
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              100),
+                                                      side: BorderSide(
+                                                          color: MyColors
+                                                              .btnColor),
+                                                    )),
+                                                onPressed: () async {
+                                                  await prosalProvider
+                                                      .updateProposalN(
+                                                    context: context,
+                                                    status: 'Rejected',
+                                                  );
+                                                  Get.back();
+                                                },
+                                                child: TextWidget(
+                                                  text: "Yes",
+                                                  color: MyColors.white,
+                                                  size: 12.sp,
+                                                  fontweight: FontWeight.w500,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 10.w,
+                                              ),
+                                              TextButton(
+                                                style: TextButton.styleFrom(
+                                                    backgroundColor:
+                                                        MyColors.white,
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                      side: BorderSide(
+                                                          color: MyColors
+                                                              .btnColor),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              100),
+                                                    )),
+                                                onPressed: () {
+                                                  Get.back();
+                                                },
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(4.0),
+                                                  child: TextWidget(
+                                                    text: "No",
+                                                    color: MyColors.black,
+                                                    size: 12.sp,
+                                                    fontweight: FontWeight.w500,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          )
+                                        ]);
+                                  });
                             },
                           ),
                         ],
@@ -580,79 +659,7 @@ class ProposalDetailScreen extends StatelessWidget {
     String btntext1,
     String btntext2,
   ) {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-              title: Center(
-                child: TextWidget(
-                  text: 'Are you Sure?',
-                  color: MyColors.btnColor,
-                  size: 20.sp,
-                  fontweight: FontWeight.w700,
-                ),
-              ),
-              content: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: TextWidget(
-                  text: text,
-                  color: MyColors.black,
-                  size: 12.sp,
-                  fontweight: FontWeight.w500,
-                ),
-              ),
-              actions: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    TextButton(
-                      style: TextButton.styleFrom(
-                          backgroundColor: MyColors.btnColor,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(100),
-                            side: BorderSide(color: MyColors.btnColor),
-                          )),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => MainScreen()));
-                      },
-                      child: TextWidget(
-                        text: btntext1,
-                        color: MyColors.white,
-                        size: 12.sp,
-                        fontweight: FontWeight.w500,
-                      ),
-                    ),
-                    SizedBox(
-                      width: 10.w,
-                    ),
-                    TextButton(
-                      style: TextButton.styleFrom(
-                          backgroundColor: MyColors.white,
-                          shape: RoundedRectangleBorder(
-                            side: BorderSide(color: MyColors.btnColor),
-                            borderRadius: BorderRadius.circular(100),
-                          )),
-                      onPressed: () {
-                        Get.back();
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: TextWidget(
-                          text: btntext2,
-                          color: MyColors.black,
-                          size: 12.sp,
-                          fontweight: FontWeight.w500,
-                        ),
-                      ),
-                    ),
-                  ],
-                )
-              ]);
-        });
+    ;
   }
 }
 

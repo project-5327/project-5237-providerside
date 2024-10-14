@@ -3,6 +3,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:project_5237_provider/data/models/proposal_data_response.dart';
 import 'package:project_5237_provider/presentation/constants/responsive_view.dart';
 import 'package:project_5237_provider/provider/date_time_provider.dart';
@@ -120,7 +121,13 @@ class _AcceptProposalScreenState extends State<AcceptProposalScreen> {
                         child: CustomTextFormField(
                           readOnly: true,
                           controller: proposalProvider.datetimeController
-                            ..text = widget.proposalListData.createdAt ?? "",
+                            // Convert the DateTime to a formatted string
+                            ..text = widget.proposalListData.createdAt != null
+                                ? DateFormat('yyyy-MM-dd HH:mm').format(
+                                    DateTime.parse(
+                                        widget.proposalListData.createdAt ??
+                                            ""))
+                                : "",
                           text: dateTimeController.text.isEmpty
                               ? AppStrings.selectDateTime
                               : dateTimeController.text,
@@ -168,7 +175,7 @@ class _AcceptProposalScreenState extends State<AcceptProposalScreen> {
                         height: 20.h,
                       ),
                       CustomTextFormField(
-                        readOnly: false,
+                        readOnly: true,
                         controller: proposalProvider.addressController
                           ..text = "Location",
                         // widget.proposalListData.budget?.max as String,
@@ -278,15 +285,10 @@ class _AcceptProposalScreenState extends State<AcceptProposalScreen> {
                           //   _showDialogeBox(context);
                           // }
                           onTap: () async {
-                            // Call the updateProposalN function
                             await proposalProvider.updateProposalN(
-                              context: context,
-                            );
+                                context: context, status: "Accepted");
 
-                            // if (!proposalProvider.loading) {
                             _showDialogeBox(context);
-                            // Get.back();
-                            //  }
                           },
                         ),
                       ),

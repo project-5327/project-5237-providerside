@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:project_5237_provider/presentation/screens/create_profile/create_your_profile.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../config/baseclient/CustomInterceptor.dart';
 import '../../config/baseclient/base_client.dart';
@@ -68,6 +69,13 @@ class RegisterProvider extends ChangeNotifier {
         debugPrint("Data======>${response.data}");
         debugPrint("Token======tokennnnnnnnnnn>$token");
         debugPrint("message======>${response.data['message']}");
+        CustomInterceptor.setToken(token);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(response.data['message'])),
+        );
+        final SharedPreferences prefs = await SharedPreferences.getInstance();
+        await prefs.setString('auth_token', token);
+
         CustomInterceptor.setToken(token);
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(

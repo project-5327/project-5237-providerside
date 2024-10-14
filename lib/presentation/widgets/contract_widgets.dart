@@ -224,7 +224,7 @@ class _ProjectTile1State extends State<ProjectTile1> {
                         color: MyColors.black),
                   ),
                   Text(
-                    '${widget.proposal.clientDetails?.firstName ?? ''} ${widget.proposal.clientDetails?.lastName ?? ''}',
+                    '${widget.proposal.projectId?.clientId?.userName ?? ''}',
                     style: TextStyle(
                         fontFamily: "Lexend",
                         fontSize: 13.sp,
@@ -730,19 +730,21 @@ class _ProjectTile2State extends State<ProjectTile2> {
                         fontweight: FontWeight.w700,
                       ),
                       SizedBox(height: 10.h),
-                      const Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          PdfContainer(
-                            fileName: 'Image.pdf',
-                            fileSize: '532 kb',
-                          ),
-                          PdfContainer(
-                            fileName: 'Image.pdf',
-                            fileSize: '532 kb',
-                          ),
-                        ],
-                      ),
+                      widget.proposal.proposalImage?.isNotEmpty == true
+                          ? PdfContainer(
+                              fileName: widget.proposal.proposalImage!.first,
+                              fileSize: "",
+                            )
+                          : TextWidget(
+                              text: 'No Image Attached',
+                              color: const Color(0xff555555),
+                              size: 13.sp,
+                              fontweight: FontWeight.w500,
+                            ),
+                      //  PdfContainer(
+                      //    fileName: 'Image.pdf',
+                      //    fileSize: '532 kb',
+                      //  ),
                       SizedBox(height: 10.h),
                       TextWidget(
                         text: 'Description',

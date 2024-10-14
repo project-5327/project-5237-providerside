@@ -18,6 +18,8 @@ class AwaitingMilestones extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 14),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
                     height: 35.h,
@@ -108,8 +110,8 @@ class AwaitingMilestones extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Container(
-                                      padding:
-                                          const EdgeInsets.fromLTRB(65, 0, 65, 10),
+                                      padding: const EdgeInsets.fromLTRB(
+                                          65, 0, 65, 10),
                                       alignment: Alignment.center,
                                       decoration: BoxDecoration(
                                           border: Border(

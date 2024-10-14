@@ -118,6 +118,7 @@ class ProposalProvider with ChangeNotifier {
   }
 
   Future<void> updateProposalN({
+    required String status,
     required BuildContext context,
   }) async {
     _loading = true;
@@ -127,7 +128,7 @@ class ProposalProvider with ChangeNotifier {
 
     var headers = {'Authorization': 'Bearer $token'};
     try {
-      var data = FormData.fromMap({'status': 'Accepted'});
+      var data = FormData.fromMap({'status': status});
 
       var dio = Dio();
 
@@ -139,6 +140,9 @@ class ProposalProvider with ChangeNotifier {
 
       if (response.statusCode == 200) {
         print('Response data: ${json.encode(response.data)}');
+
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(response.data['message'])));
       } else {
         print('Error: ${response.statusMessage}');
       }

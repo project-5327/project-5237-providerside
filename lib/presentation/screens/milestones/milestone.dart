@@ -77,7 +77,7 @@ class _MilestoneScreenState extends State<MilestoneScreen>
                           scrollDirection: Axis.horizontal,
                           child: Tab(
                             child: TextWidget(
-                              text: AppStrings.activeMilestones,
+                              text: "Active Milestone(2)",
                               color: MyColors.black,
                               size: 12.sp,
                               fontweight: FontWeight.w600,
@@ -88,7 +88,7 @@ class _MilestoneScreenState extends State<MilestoneScreen>
                           scrollDirection: Axis.horizontal,
                           child: Tab(
                             child: TextWidget(
-                              text: AppStrings.awaitingMilestones,
+                              text: "Awaiting Milestone(7)",
                               color: MyColors.black,
                               size: 12.sp,
                               fontweight: FontWeight.w600,
@@ -97,7 +97,7 @@ class _MilestoneScreenState extends State<MilestoneScreen>
                         ),
                         Tab(
                           child: TextWidget(
-                            text: AppStrings.payments,
+                            text: "Payments(7)",
                             color: MyColors.black,
                             size: 12.sp,
                             fontweight: FontWeight.w600,
