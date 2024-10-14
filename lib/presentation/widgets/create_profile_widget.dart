@@ -95,7 +95,7 @@ class EditCreateProfile extends StatelessWidget {
           text: text,
           fontfamily: 'Montserrat',
           color: MyColors.black,
-          size: 20.sp,
+          size: 19.sp,
           fontweight: FontWeight.w600,
         ),
         SizedBox(

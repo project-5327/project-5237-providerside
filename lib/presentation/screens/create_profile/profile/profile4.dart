@@ -265,17 +265,24 @@ class _Profile4State extends State<Profile4> {
                               profileController.nextPage();
                               Get.to(() => const Profile5());
                             } else {
-                              Get.snackbar(
-                                'Error',
-                                'Please select at least one language to proceed.',
-                                snackPosition: SnackPosition.BOTTOM,
-                                backgroundColor: Colors.red,
-                                colorText: Colors.white,
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    'Please select at least one langauge".',
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w500,
+                                      color: MyColors.white,
+                                    ),
+                                  ),
+                                  backgroundColor: Colors.red,
+                                ),
                               );
                             }
                           }),
                     ],
                   ),
+                  SizedBox(height: 550.h),
                 ],
               ),
             ),

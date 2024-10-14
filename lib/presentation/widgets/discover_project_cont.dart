@@ -166,7 +166,7 @@ class DiscoverContainer extends StatelessWidget {
 }
 
 class DiscoverContainer1 extends StatelessWidget {
-  final String text1;
+//  final String text1;
   final String username;
   final String time;
   final String image;
@@ -178,7 +178,7 @@ class DiscoverContainer1 extends StatelessWidget {
 
   const DiscoverContainer1({
     super.key,
-    required this.text1,
+    // required this.text1,
     required this.text2,
     required this.image,
     required this.text3,
@@ -233,7 +233,7 @@ class DiscoverContainer1 extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                width: MediaQuery.of(context).size.width * 0.013,
+                width: MediaQuery.of(context).size.width * 0.019,
               ),
               Text(
                 timeago.format(DateTime.parse(time)),
@@ -247,16 +247,16 @@ class DiscoverContainer1 extends StatelessWidget {
             ],
           ),
           SizedBox(
-            height: 5.h,
+            height: 10.h,
           ),
-          Text(
-            text1,
-            softWrap: true,
-            style: TextStyle(
-                fontSize: 13.sp,
-                fontWeight: FontWeight.w500,
-                color: MyColors.black1),
-          ),
+          // Text(
+          //   text1,
+          //   softWrap: true,
+          //   style: TextStyle(
+          //       fontSize: 13.sp,
+          //       fontWeight: FontWeight.w500,
+          //       color: MyColors.black1),
+          // ),
           SizedBox(
             height: 5.h,
           ),
@@ -275,7 +275,7 @@ class DiscoverContainer1 extends StatelessWidget {
                 color: MyColors.black),
           ),
           SizedBox(
-            height: 5.h,
+            height: 10.h,
           ),
           Text(
             formatDateTime(text3),

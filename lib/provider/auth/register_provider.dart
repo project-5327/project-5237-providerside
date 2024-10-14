@@ -151,7 +151,7 @@ class RegisterProvider extends ChangeNotifier {
     if (value.isEmpty) {
       return "Email can't be empty";
     } else if (!RegExp(
-            r'^[a-zA-Z0-9._%+-]+@(gmail\.com|yahoo\.com|hotmail\.com|outlook\.com|aol\.com)$')
+            r'^[a-zA-Z0-9._%+-]+@(gmail\.com|yahoo\.com|hotmail\.com|outlook\.com|aol\.com||yopmail\.com)$')
         .hasMatch(value)) {
       return 'Enter a valid email address';
     }

@@ -33,7 +33,7 @@ class AppStrings {
   static const selectExperience = 'Select Experience';
   static const fresher = 'Fresher';
   static const next = 'Next';
-  static const privious = 'Privious';
+  static const privious = 'Previous';
   static const addExperience1 = 'Add Experience';
   static const addEducation1 = 'Add Education';
 

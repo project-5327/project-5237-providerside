@@ -103,6 +103,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                         Center(
                           child: CustomTextFormField(
+                            // keyboardType: TextInputType.name,
                             readOnly: false,
                             validator: (value) =>
                                 registerProvider.validateUserName(value ?? ''),

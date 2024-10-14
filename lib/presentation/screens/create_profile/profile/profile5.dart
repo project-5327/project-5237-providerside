@@ -150,7 +150,13 @@ class _Profile5State extends State<Profile5> {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
                                     content: Text(
-                                        'Please select at least one language'),
+                                      'Please select at least one skill".',
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w500,
+                                        color: MyColors.white,
+                                      ),
+                                    ),
                                     backgroundColor: Colors.red,
                                   ),
                                 );
@@ -166,7 +172,7 @@ class _Profile5State extends State<Profile5> {
                             }),
                       ],
                     ),
-                    SizedBox(height: 42.h),
+                    SizedBox(height: 70.h),
                   ],
                 ),
               ),

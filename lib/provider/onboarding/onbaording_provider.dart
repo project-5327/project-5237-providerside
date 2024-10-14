@@ -389,6 +389,10 @@ class OnbaordingProvider extends ChangeNotifier {
       return 'Rate cannot be negative';
     }
 
+    if (rate > 1000000) {
+      return 'Rate cannot be more than 1000000';
+    }
+
     return null;
   }
 

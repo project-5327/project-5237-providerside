@@ -30,6 +30,11 @@ class HomeProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void removeProposal(String proposalId) {
+    _filteredProposals?.removeWhere((proposal) => proposal.sId == proposalId);
+    notifyListeners();
+  }
+
   void _applyFilters() {
     if (_proposalDataDoc != null) {
       _filteredProposals = _proposalDataDoc!.projects?.where((project) {
@@ -122,7 +127,7 @@ class HomeProvider extends ChangeNotifier {
         if (response.data['message'] != null) {
           debugPrint("Message======> ${response.data['message']}");
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(response.data['message'])),
+            SnackBar(content: Text("Proposal sent successfully")),
           );
         } else {
           debugPrint("Message not found in response");

@@ -139,10 +139,12 @@ class ProposalProvider with ChangeNotifier {
       );
 
       if (response.statusCode == 200) {
+        debugPrint("======== Proposal ${status} successfully ============");
+
         print('Response data: ${json.encode(response.data)}');
 
         ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text(response.data['message'])));
+            .showSnackBar(SnackBar(content: Text('Proposal ${status}')));
       } else {
         print('Error: ${response.statusMessage}');
       }

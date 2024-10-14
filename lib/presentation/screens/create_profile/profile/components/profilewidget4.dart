@@ -39,143 +39,145 @@ class _Profilewidget4State extends State<Profilewidget4> {
   Widget build(BuildContext context) {
     return Consumer<OnbaordingProvider>(
         builder: (context, onboardingProvider, child) {
-      return Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: 25.h),
-                TextWidget(
-                  align: TextAlign.start,
-                  text: AppStrings.addLanguages,
-                  color: MyColors.black,
-                  size: 20.sp,
-                  fontweight: FontWeight.w600,
-                ),
-                SizedBox(
-                  height: 15.h,
-                ),
-                TextWidget(
-                  align: TextAlign.start,
-                  text: AppStrings.createProfileLorem1,
-                  color: MyColors.grey,
-                  size: 10.sp,
-                  fontweight: FontWeight.w500,
-                ),
-                SizedBox(
-                  height: 25.h,
-                ),
-                TextWidget(
-                  align: TextAlign.start,
-                  text: "Languages you know",
-                  color: const Color(0xff222222),
-                  size: 13.sp,
-                  fontweight: FontWeight.w600,
-                ),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width / 1,
-                  height: 100,
-                  child: DropDownMultiSelect(
-                    decoration: InputDecoration(
-                      fillColor: Theme.of(context).colorScheme.onPrimary,
-                      focusColor: Theme.of(context).colorScheme.onPrimary,
-                      enabledBorder: OutlineInputBorder(
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(8)),
-                          borderSide: BorderSide(
-                              color: MyColors.lightGrey, width: 1.5)),
-                      focusedBorder: OutlineInputBorder(
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(8.0)),
-                          borderSide: BorderSide(
-                            color: MyColors.blue,
-                            width: 1.5,
-                          )),
-                    ),
-                    options: _languages,
-                    selectedValues: _selectedLanguages,
-                    onChanged: (List<String> value) {},
-                    whenEmpty: 'Select languages',
+      return SingleChildScrollView(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: 25.h),
+                  TextWidget(
+                    align: TextAlign.start,
+                    text: AppStrings.addLanguages,
+                    color: MyColors.black,
+                    size: 20.sp,
+                    fontweight: FontWeight.w600,
                   ),
-                ),
-                SizedBox(height: 160.h),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    CustomizeButton(
-                      borderColor: MyColors.btnColor,
-                      radius: 100.r,
-                      text: AppStrings.privious,
-                      height: 40.h,
-                      width: 150.w,
-                      color: MyColors.white,
-                      textColor: MyColors.btnColor,
-                      onTap: () {
-                        // if (formKey.currentState!.validate()) {
-                        profileController.previousPage();
-                        Get.to(() => const Profile3());
-                        // }
-                      },
+                  SizedBox(
+                    height: 15.h,
+                  ),
+                  TextWidget(
+                    align: TextAlign.start,
+                    text: AppStrings.createProfileLorem1,
+                    color: MyColors.grey,
+                    size: 10.sp,
+                    fontweight: FontWeight.w500,
+                  ),
+                  SizedBox(
+                    height: 25.h,
+                  ),
+                  TextWidget(
+                    align: TextAlign.start,
+                    text: "Languages you know",
+                    color: const Color(0xff222222),
+                    size: 13.sp,
+                    fontweight: FontWeight.w600,
+                  ),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width / 1,
+                    height: 100,
+                    child: DropDownMultiSelect(
+                      decoration: InputDecoration(
+                        fillColor: Theme.of(context).colorScheme.onPrimary,
+                        focusColor: Theme.of(context).colorScheme.onPrimary,
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(8)),
+                            borderSide: BorderSide(
+                                color: MyColors.lightGrey, width: 1.5)),
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(8.0)),
+                            borderSide: BorderSide(
+                              color: MyColors.blue,
+                              width: 1.5,
+                            )),
+                      ),
+                      options: _languages,
+                      selectedValues: _selectedLanguages,
+                      onChanged: (List<String> value) {},
+                      whenEmpty: 'Select languages',
                     ),
-                    SizedBox(
-                      width: 5.w,
-                    ),
-                    CustomizeButton(
+                  ),
+                  SizedBox(height: 160.h),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      CustomizeButton(
                         borderColor: MyColors.btnColor,
                         radius: 100.r,
-                        text: AppStrings.next,
+                        text: AppStrings.privious,
                         height: 40.h,
                         width: 150.w,
-                        color: MyColors.btnColor,
-                        textColor: MyColors.white,
+                        color: MyColors.white,
+                        textColor: MyColors.btnColor,
                         onTap: () {
-                          if (_selectedLanguages.isEmpty ||
-                              _selectedLanguages == []) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content:
-                                    Text('Please select at least one language'),
-                                backgroundColor: Colors.red,
-                              ),
-                            );
-                          } else {
-                            debugPrint(
-                                "Selected languages: ${_selectedLanguages.length}");
+                          // if (formKey.currentState!.validate()) {
+                          profileController.previousPage();
+                          Get.to(() => const Profile3());
+                          // }
+                        },
+                      ),
+                      SizedBox(
+                        width: 5.w,
+                      ),
+                      CustomizeButton(
+                          borderColor: MyColors.btnColor,
+                          radius: 100.r,
+                          text: AppStrings.next,
+                          height: 40.h,
+                          width: 150.w,
+                          color: MyColors.btnColor,
+                          textColor: MyColors.white,
+                          onTap: () {
+                            if (_selectedLanguages.isEmpty ||
+                                _selectedLanguages == []) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                      'Please select at least one language'),
+                                  backgroundColor: Colors.red,
+                                ),
+                              );
+                            } else {
+                              debugPrint(
+                                  "Selected languages: ${_selectedLanguages.length}");
 
-                            onboardingProvider.setLanguages =
-                                _selectedLanguages;
-                            onboardingProvider.addYourLangauges(
-                              onboardingProvider.languages,
-                              onboardingProvider.proficiancyController.text,
-                            );
+                              onboardingProvider.setLanguages =
+                                  _selectedLanguages;
+                              onboardingProvider.addYourLangauges(
+                                onboardingProvider.languages,
+                                onboardingProvider.proficiancyController.text,
+                              );
 
-                            profileController.nextPage();
-                            Get.to(() => const Profile5());
+                              profileController.nextPage();
+                              Get.to(() => const Profile5());
+                            }
                           }
-                        }
 
-                        // onTap: () {
-                        //   debugPrint(
-                        //       "Selected languages: ${_selectedLanguages.length}");
-                        //   // if (formKey.currentState!.validate()) {
-                        //   onboardingProvider.setLanguages = _selectedLanguages;
-                        //   onboardingProvider.addYourLangauges(
-                        //       onboardingProvider.languages,
-                        //       onboardingProvider.proficiancyController.text);
+                          // onTap: () {
+                          //   debugPrint(
+                          //       "Selected languages: ${_selectedLanguages.length}");
+                          //   // if (formKey.currentState!.validate()) {
+                          //   onboardingProvider.setLanguages = _selectedLanguages;
+                          //   onboardingProvider.addYourLangauges(
+                          //       onboardingProvider.languages,
+                          //       onboardingProvider.proficiancyController.text);
 
-                        //   profileController.nextPage();
-                        //   Get.to(() => const Profile5());
-                        // },
-                        ),
-                  ],
-                ),
-                SizedBox(height: 42.h),
-              ],
+                          //   profileController.nextPage();
+                          //   Get.to(() => const Profile5());
+                          // },
+                          ),
+                    ],
+                  ),
+                  SizedBox(height: 70.h),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       );
     });
   }

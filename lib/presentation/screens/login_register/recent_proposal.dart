@@ -149,8 +149,22 @@ class _RecentProposalState extends State<RecentProposal> {
                                         return Column(
                                           children: [
                                             InkWell(
-                                              onTap: () {
-                                                Navigator.push(
+                                              onTap: () async {
+                                                //     Navigator.push(
+                                                //       context,
+                                                //       MaterialPageRoute(
+                                                //         builder: (context) =>
+                                                //             ProposalDetailScreen(
+                                                //           isFromHomeScreen: true,
+                                                //           proposalListData:
+                                                //               project ??
+                                                //                   ProposalListData(),
+                                                //         ),
+                                                //       ),
+                                                //     );
+                                                //   },
+                                                final result =
+                                                    await Navigator.push(
                                                   context,
                                                   MaterialPageRoute(
                                                     builder: (context) =>
@@ -162,6 +176,13 @@ class _RecentProposalState extends State<RecentProposal> {
                                                     ),
                                                   ),
                                                 );
+
+                                                // If the proposal was accepted or rejected, remove it locally
+                                                if (result == 'accepted' ||
+                                                    result == 'rejected') {
+                                                  homeProvider.removeProposal(
+                                                      project?.sId ?? "");
+                                                }
                                               },
                                               child: DiscoverContainer(
                                                 timerange:

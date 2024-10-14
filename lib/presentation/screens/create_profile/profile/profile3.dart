@@ -105,7 +105,7 @@ class _Profile3State extends State<Profile3> {
                           width: 150.w,
                           color: _isNextButtonEnabled
                               ? MyColors.btnColor
-                              : MyColors.btnDisable,
+                              : MyColors.btnColor.withOpacity(0.5),
                           textColor: MyColors.white,
                           onTap: _isNextButtonEnabled
                               ? () {

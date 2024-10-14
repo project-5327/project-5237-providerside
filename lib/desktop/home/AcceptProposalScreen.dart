@@ -5,8 +5,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:project_5237_provider/data/models/proposal_data_response.dart';
+import 'package:project_5237_provider/desktop/home/accepted_message.dart';
 import 'package:project_5237_provider/presentation/constants/responsive_view.dart';
 import 'package:project_5237_provider/provider/date_time_provider.dart';
+import 'package:project_5237_provider/provider/home/home_provider.dart';
 import 'package:provider/provider.dart';
 import '../../presentation/constants/color.dart';
 import '../../presentation/constants/strings.dart';
@@ -66,6 +68,7 @@ class _AcceptProposalScreenState extends State<AcceptProposalScreen> {
       child: Consumer<ProposalProvider>(
           builder: (context, proposalProvider, child) {
         final dateTimeProvider = Provider.of<DateTimeProvider>(context);
+        final homeProvider = Provider.of<HomeProvider>(context);
 
         return Scaffold(
           body: SingleChildScrollView(
@@ -281,14 +284,20 @@ class _AcceptProposalScreenState extends State<AcceptProposalScreen> {
                           width: 155.w,
                           color: MyColors.btnColor,
                           textColor: MyColors.white,
-                          // onTap: () {
-                          //   _showDialogeBox(context);
-                          // }
                           onTap: () async {
                             await proposalProvider.updateProposalN(
-                                context: context, status: "Accepted");
+                              context: context,
+                              status: "Accepted",
+                            );
 
-                            _showDialogeBox(context);
+                            Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => AcceptedMessage()),
+                              (Route<dynamic> route) => false,
+                            );
+                            homeProvider.removeProposal(
+                                widget.proposalListData.sId ?? "");
                           },
                         ),
                       ),

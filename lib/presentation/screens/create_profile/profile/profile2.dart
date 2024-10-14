@@ -61,7 +61,7 @@ class _Profile2State extends State<Profile2> {
           child: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
+                padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -146,7 +146,7 @@ class _Profile2State extends State<Profile2> {
                           width: 150.w,
                           color: _isNextButtonEnabled
                               ? MyColors.btnColor
-                              : MyColors.btnDisable,
+                              : MyColors.btnColor.withOpacity(0.5),
                           textColor: MyColors.white,
                           onTap: _isNextButtonEnabled
                               ? () {

@@ -135,11 +135,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                         tags: project.skillsRequired ?? [],
                                         tagsLength:
                                             project.skillsRequired!.length,
-                                        text1: project.description ??
-                                            "Description",
+                                        // text1: project.description ??
+                                        //     "Description",
                                         text2:
                                             "\$${project.budget?.min}-\$${project.budget?.max}",
-                                        image:
+                                        image: project.attachment ??
                                             "https://pub-261021c7b68740ffba855a7e8a6f3c1e.r2.dev/undefined/vasily-koloda-8CqDvPuo_kI-unsplash.jpg",
                                         text3: project.deadline ?? "deadline",
                                         username: '${project.title}',

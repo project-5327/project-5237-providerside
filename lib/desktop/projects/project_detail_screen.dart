@@ -16,6 +16,7 @@ import 'package:project_5237_provider/presentation/screens/my_contracts/map_scre
 import 'package:project_5237_provider/presentation/screens/my_contracts/send_screen.dart';
 import 'package:project_5237_provider/presentation/widgets/customize_button.dart';
 import 'package:project_5237_provider/presentation/widgets/discover_project_cont.dart';
+import 'package:project_5237_provider/provider/home/home_provider.dart';
 import 'package:project_5237_provider/provider/home/proposal_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -30,8 +31,9 @@ class ProposalDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final prosalProvider = Provider.of<ProposalProvider>(context);
-
+    final proposalProvider =
+        Provider.of<ProposalProvider>(context, listen: false);
+    final homeProvider = Provider.of<HomeProvider>(context, listen: false);
     DateTime createdAt = DateTime.parse(proposalListData.createdAt ?? "");
     final responsive = ResponsiveCheck(context);
     return responsive.isMobile || responsive.isTablet
@@ -281,99 +283,100 @@ class ProposalDetailScreen extends StatelessWidget {
                             color: MyColors.btnColor,
                             textColor: MyColors.white,
                             borderColor: MyColors.btnColor,
-                            onTap: () async {
+                            onTap: () {
+                              // Show the confirmation dialog
                               showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return AlertDialog(
-                                        title: Center(
-                                          child: TextWidget(
-                                            text: 'Are you Sure?',
-                                            color: MyColors.btnColor,
-                                            size: 20.sp,
-                                            fontweight: FontWeight.w700,
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    title: Center(
+                                      child: TextWidget(
+                                        text: 'Are you Sure?',
+                                        color: MyColors.btnColor,
+                                        size: 20.sp,
+                                        fontweight: FontWeight.w700,
+                                      ),
+                                    ),
+                                    content: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 20.0),
+                                      child: TextWidget(
+                                        text:
+                                            "Do you want to reject this proposal?",
+                                        color: MyColors.black,
+                                        size: 12.sp,
+                                        fontweight: FontWeight.w500,
+                                      ),
+                                    ),
+                                    actions: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          TextButton(
+                                            style: TextButton.styleFrom(
+                                                backgroundColor:
+                                                    MyColors.btnColor,
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          100),
+                                                  side: BorderSide(
+                                                      color: MyColors.btnColor),
+                                                )),
+                                            onPressed: () async {
+                                              await proposalProvider
+                                                  .updateProposalN(
+                                                context: context,
+                                                status: 'Rejected',
+                                              );
+
+                                              homeProvider.removeProposal(
+                                                  proposalListData.sId ?? "");
+
+                                              Get.back();
+                                            },
+                                            child: TextWidget(
+                                              text: "Yes",
+                                              color: MyColors.white,
+                                              size: 12.sp,
+                                              fontweight: FontWeight.w500,
+                                            ),
                                           ),
-                                        ),
-                                        content: Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 20.0),
-                                          child: TextWidget(
-                                            text:
-                                                "Do you want to reject this proposal?",
-                                            color: MyColors.black,
-                                            size: 12.sp,
-                                            fontweight: FontWeight.w500,
+                                          SizedBox(width: 10.w),
+                                          TextButton(
+                                            style: TextButton.styleFrom(
+                                                backgroundColor: MyColors.white,
+                                                shape: RoundedRectangleBorder(
+                                                  side: BorderSide(
+                                                      color: MyColors.btnColor),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          100),
+                                                )),
+                                            onPressed: () {
+                                              // Close the dialog without doing anything
+                                              Get.back();
+                                            },
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(4.0),
+                                              child: TextWidget(
+                                                text: "No",
+                                                color: MyColors.black,
+                                                size: 12.sp,
+                                                fontweight: FontWeight.w500,
+                                              ),
+                                            ),
                                           ),
-                                        ),
-                                        actions: [
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              TextButton(
-                                                style: TextButton.styleFrom(
-                                                    backgroundColor:
-                                                        MyColors.btnColor,
-                                                    shape:
-                                                        RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              100),
-                                                      side: BorderSide(
-                                                          color: MyColors
-                                                              .btnColor),
-                                                    )),
-                                                onPressed: () async {
-                                                  await prosalProvider
-                                                      .updateProposalN(
-                                                    context: context,
-                                                    status: 'Rejected',
-                                                  );
-                                                  Get.back();
-                                                },
-                                                child: TextWidget(
-                                                  text: "Yes",
-                                                  color: MyColors.white,
-                                                  size: 12.sp,
-                                                  fontweight: FontWeight.w500,
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: 10.w,
-                                              ),
-                                              TextButton(
-                                                style: TextButton.styleFrom(
-                                                    backgroundColor:
-                                                        MyColors.white,
-                                                    shape:
-                                                        RoundedRectangleBorder(
-                                                      side: BorderSide(
-                                                          color: MyColors
-                                                              .btnColor),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              100),
-                                                    )),
-                                                onPressed: () {
-                                                  Get.back();
-                                                },
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(4.0),
-                                                  child: TextWidget(
-                                                    text: "No",
-                                                    color: MyColors.black,
-                                                    size: 12.sp,
-                                                    fontweight: FontWeight.w500,
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          )
-                                        ]);
-                                  });
+                                        ],
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
                             },
                           ),
                         ],

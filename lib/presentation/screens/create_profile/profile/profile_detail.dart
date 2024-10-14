@@ -54,7 +54,7 @@ class ProfileDetail extends StatelessWidget {
                 feildText: AppStrings.titletext,
                 labelText: AppStrings.title,
                 color: MyColors.lightGrey,
-                title: 'Tittle',
+                title: 'Title',
               ),
               SizedBox(height: 158.h),
               Center(

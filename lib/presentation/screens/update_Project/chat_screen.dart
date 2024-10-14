@@ -225,7 +225,16 @@ class _ChatScreenState extends State<ChatScreen> {
                     ),
                     child: IconButton(
                       onPressed: () {
-                        _sendMessage();
+                        if (messageController.text.isNotEmpty) {
+                          _sendMessage();
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Please enter a message'),
+                              backgroundColor: Colors.red,
+                            ),
+                          );
+                        }
                       },
                       icon: Icon(
                         Icons.arrow_forward_ios,

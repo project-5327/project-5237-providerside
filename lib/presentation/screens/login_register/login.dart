@@ -103,6 +103,7 @@ class LoginScreen extends StatelessWidget {
                         SizedBox(height: 63.5.h),
                         Center(
                           child: CustomTextFormField(
+                            keyboardType: TextInputType.emailAddress,
                             validator: (value) =>
                                 loginProvider.validateEmail(value ?? ""),
                             controller: loginProvider.emailController,
@@ -118,6 +119,7 @@ class LoginScreen extends StatelessWidget {
                         SizedBox(height: 18.h),
                         Center(
                           child: CustomTextFormField(
+                            keyboardType: TextInputType.visiblePassword,
                             obscureText: loginProvider.obscureText,
                             validator: (value) =>
                                 loginProvider.validatePassword(value ?? ""),

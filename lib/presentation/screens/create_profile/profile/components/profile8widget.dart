@@ -104,11 +104,12 @@ class _Profile8widgetState extends State<Profile8widget> {
                   ),
                   SizedBox(height: 19.h),
                   CustomTextFormField(
+                    keyboardType: TextInputType.name,
                     errorMessage: 3,
                     controller: onboardingProvider.fnameController,
                     validator: (value) =>
                         onboardingProvider.validatefullname(value ?? ''),
-                    title: AppStrings.firstName,
+                    title: "Full name",
                     text: AppStrings.enterHere,
                   ),
                   // SizedBox(height: 13.h),
@@ -121,6 +122,7 @@ class _Profile8widgetState extends State<Profile8widget> {
                   // ),
                   SizedBox(height: 13.h),
                   CustomTextFormField(
+                    keyboardType: TextInputType.streetAddress,
                     errorMessage: 3,
                     controller: onboardingProvider.addressController,
                     validator: (value) =>
@@ -134,6 +136,7 @@ class _Profile8widgetState extends State<Profile8widget> {
                     children: [
                       Flexible(
                         child: CustomTextFormField(
+                          keyboardType: TextInputType.number,
                           errorMessage: 3,
                           controller: onboardingProvider.pincodeController,
                           validator: (value) =>
@@ -146,6 +149,7 @@ class _Profile8widgetState extends State<Profile8widget> {
                       SizedBox(width: 15.w),
                       Flexible(
                         child: CustomTextFormField(
+                          keyboardType: TextInputType.phone,
                           controller: onboardingProvider.phoneNumberController,
                           validator: (value) =>
                               onboardingProvider.validatePhone(value ?? ''),
