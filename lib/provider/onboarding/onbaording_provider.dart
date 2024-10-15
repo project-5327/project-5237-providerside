@@ -388,6 +388,10 @@ class OnbaordingProvider extends ChangeNotifier {
     if (rate < 0) {
       return 'Rate cannot be negative';
     }
+    final regex = RegExp(r'^\d+(\.\d{1,2})?$');
+    if (!regex.hasMatch(value)) {
+      return 'Please enter a valid number with up to 2 decimal places';
+    }
 
     if (rate > 1000000) {
       return 'Rate cannot be more than 1000000';

@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:multiselect/multiselect.dart';
+import 'package:project_5237_provider/data/models/freelancer_model.dart';
 import 'package:project_5237_provider/presentation/constants/color.dart';
 import 'package:project_5237_provider/presentation/constants/strings.dart';
 import 'package:project_5237_provider/presentation/screens/create_profile/profile/components/personal-project.dart';
@@ -22,7 +23,8 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 class EditProject extends StatefulWidget {
-  const EditProject({super.key});
+  final PersonalProjects? projectDetails;
+  const EditProject({super.key, required this.projectDetails});
 
   @override
   State<EditProject> createState() => _EditProjectState();
@@ -93,7 +95,8 @@ class _EditProjectState extends State<EditProject> {
                     Center(
                       child: CustomTextFormField(
                         errorMessage: 2,
-                        controller: nameController,
+                        controller: nameController
+                          ..text = widget.projectDetails?.projectName ?? "",
                         text: AppStrings.enterprojectTitle,
                         title: AppStrings.projectTitle,
                         style: TextStyle(
@@ -114,7 +117,8 @@ class _EditProjectState extends State<EditProject> {
                     Center(
                       child: TextFormField(
                         maxLines: 3,
-                        controller: descriptionController,
+                        controller: descriptionController
+                          ..text = widget.projectDetails?.description ?? "",
                         decoration: InputDecoration(
                           errorMaxLines: 2,
                           hintText: AppStrings.desc,
@@ -167,7 +171,9 @@ class _EditProjectState extends State<EditProject> {
                                     fontWeight: FontWeight.w600,
                                     color: MyColors.black),
                                 title: AppStrings.startDate,
-                                controller: startController,
+                                controller: startController
+                                  ..text =
+                                      widget.projectDetails?.startDate ?? "",
                               ),
                             ),
                           ),
@@ -212,7 +218,8 @@ class _EditProjectState extends State<EditProject> {
                                     fontWeight: FontWeight.w600,
                                     color: MyColors.black),
                                 title: AppStrings.endDate,
-                                controller: endController,
+                                controller: endController
+                                  ..text = widget.projectDetails?.endDate ?? "",
                               ),
                             ),
                           ),
@@ -237,7 +244,11 @@ class _EditProjectState extends State<EditProject> {
                             _selectedSkills = value;
                           });
                         },
-                        whenEmpty: 'Select your technologies',
+                        whenEmpty: widget
+                                    .projectDetails?.technologies?.isNotEmpty ==
+                                true
+                            ? widget.projectDetails!.technologies?.join(', ')
+                            : "Select your technology",
                         decoration: InputDecoration(
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8),

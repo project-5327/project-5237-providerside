@@ -26,6 +26,7 @@ class CustomTextFormField extends StatelessWidget {
   final int? maxlines;
   final bool? readOnly;
   final FocusNode? focusNode;
+
   final String? Function(String?)? validator;
   const CustomTextFormField(
       {super.key,

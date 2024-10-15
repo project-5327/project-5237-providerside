@@ -60,7 +60,7 @@ class ProposalData {
 class ProposalListData {
   Budget? budget;
   String? sId;
-  String? projectId; // Add projectId here
+  String? projectId;
   ClientId? clientId;
   String? title;
   String? description;

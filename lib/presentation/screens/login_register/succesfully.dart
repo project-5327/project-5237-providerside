@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -21,6 +22,9 @@ class _SuccesfullyScreenState extends State<SuccesfullyScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+        ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 32),
           child: Column(
@@ -33,7 +37,7 @@ class _SuccesfullyScreenState extends State<SuccesfullyScreen> {
                 height: 18.h,
               ),
               Text(
-                'Projects Details',
+                'Proposal Sent!!!',
                 style: TextStyle(
                     color: MyColors.btnColor,
                     fontSize: 16.sp,
@@ -63,7 +67,11 @@ class _SuccesfullyScreenState extends State<SuccesfullyScreen> {
                     color: MyColors.btnColor,
                     textColor: MyColors.white,
                     onTap: () {
-                      Get.to(() => const MycontractScreen());
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const MycontractScreen()));
+                      //Get.to(() => ChatScreen());
                     }
                     //)
 

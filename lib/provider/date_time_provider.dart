@@ -30,7 +30,6 @@ class DateTimeProvider with ChangeNotifier {
           pickedTime.minute,
         );
 
-        // Format the combined date and time
         _selectedDateTime =
             DateFormat('yyyy-MM-dd hh:mm a').format(fullDateTime);
         notifyListeners(); // Notify listeners to rebuild the UI

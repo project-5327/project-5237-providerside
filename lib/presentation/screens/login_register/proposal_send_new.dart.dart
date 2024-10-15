@@ -64,13 +64,14 @@ class _ProposalSendScreenState extends State<ProposalSendScreen> {
       return SafeArea(
         child: Scaffold(
           appBar: AppBar(
-            leading: IconButton(
-              onPressed: () => Get.back(),
-              icon: Icon(
-                Icons.arrow_back_ios,
-                color: MyColors.black,
-              ),
-            ),
+            automaticallyImplyLeading: false,
+            // leading: IconButton(
+            //   onPressed: () => Get.back(),
+            //   icon: Icon(
+            //     Icons.arrow_back_ios,
+            //     color: MyColors.black,
+            //   ),
+            // ),
             title: Text(
               'Send Proposal',
               style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600),
@@ -135,6 +136,10 @@ class _ProposalSendScreenState extends State<ProposalSendScreen> {
                           final num? minRate = num.tryParse(value);
                           if (minRate == null) {
                             return 'Please enter a valid number';
+                          }
+                          final regex = RegExp(r'^\d+(\.\d{1,2})?$');
+                          if (!regex.hasMatch(value)) {
+                            return 'Please enter a valid number with up to 2 decimal places';
                           }
                           return null;
                         },

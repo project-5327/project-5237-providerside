@@ -342,7 +342,9 @@ class _ProjectListViewState extends State<ProjectListView> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => EditProject()));
+                                      builder: (context) => EditProject(
+                                            projectDetails: project,
+                                          )));
                             },
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -357,7 +359,7 @@ class _ProjectListViewState extends State<ProjectListView> {
                                       size: 17.sp,
                                       fontweight: FontWeight.w500,
                                     ),
-                                    SizedBox(width: 100.w),
+                                    SizedBox(width: 140.w),
                                     TextWidget(
                                       text: timeago.format(
                                         DateTime.tryParse(

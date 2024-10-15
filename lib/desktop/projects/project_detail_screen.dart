@@ -201,7 +201,7 @@ class ProposalDetailScreen extends StatelessWidget {
                                         SvgPicture.asset(Assets.location),
                                         SizedBox(width: 4.w),
                                         Text(
-                                          "Location",
+                                          "123 stain" ?? "Location",
                                           style: TextStyle(
                                               fontSize: 12.sp,
                                               fontWeight: FontWeight.w500,
