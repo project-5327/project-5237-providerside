@@ -108,7 +108,7 @@ class CreateYourProfile extends StatelessWidget {
                           }),
                     ),
                     SizedBox(
-                      height: 42.h,
+                      height: 150.h,
                     ),
                   ],
                 ),

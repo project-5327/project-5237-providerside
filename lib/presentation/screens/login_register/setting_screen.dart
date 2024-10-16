@@ -44,7 +44,8 @@ class SettingsScreen extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const NotificationScreen()));
+                                  builder: (context) =>
+                                      const NotificationScreen()));
                         },
                       ),
                       SettingWidget(
@@ -59,7 +60,8 @@ class SettingsScreen extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const MilestoneScreen()));
+                                  builder: (context) =>
+                                      const MilestoneScreen()));
                         },
                       ),
                       SettingWidget(
@@ -68,7 +70,8 @@ class SettingsScreen extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const MycontractScreen()));
+                                  builder: (context) =>
+                                      const MycontractScreen()));
                         },
                       ),
                       SettingWidget(
@@ -120,8 +123,8 @@ class SettingsScreen extends StatelessWidget {
                     style: TextButton.styleFrom(
                       foregroundColor: Colors.white,
                       backgroundColor: MyColors.btnColor,
-                      padding:
-                          const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16.0, vertical: 8.0),
                     ),
                     onPressed: () {
                       BaseClient.logout()
@@ -131,8 +134,8 @@ class SettingsScreen extends StatelessWidget {
                                     builder: (context) => LoginScreen()),
                                 (Route<dynamic> route) => false,
                               ));
-                      ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text("User log out succesfully")));
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                          content: Text("User log out succesfully")));
                     },
                     child: Text(
                       'Yes',
@@ -148,8 +151,8 @@ class SettingsScreen extends StatelessWidget {
                     style: TextButton.styleFrom(
                       foregroundColor: Colors.white,
                       backgroundColor: MyColors.btnColor,
-                      padding:
-                          const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16.0, vertical: 8.0),
                     ),
                     onPressed: () {
                       Navigator.of(context).pop();
@@ -188,6 +191,7 @@ class SettingWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               TextWidget(
+                fontfamily: "Inter",
                 text: text,
                 color: MyColors.black,
                 size: 14.sp,

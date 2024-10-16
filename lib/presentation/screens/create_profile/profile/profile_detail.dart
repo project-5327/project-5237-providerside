@@ -75,7 +75,7 @@ class ProfileDetail extends StatelessWidget {
                           //   }
                         }
                       })),
-              SizedBox(height: 42.h),
+              SizedBox(height: 150.h),
             ],
           ),
         ),

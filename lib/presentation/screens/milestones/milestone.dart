@@ -45,7 +45,7 @@ class _MilestoneScreenState extends State<MilestoneScreen>
               appBar: AppBar(
                 automaticallyImplyLeading: false,
                 title: Text(
-                  AppStrings.milestonePayment,
+                  "Milestone",
                   style: TextStyle(
                       fontSize: 14.sp,
                       fontWeight: FontWeight.w700,
@@ -77,7 +77,7 @@ class _MilestoneScreenState extends State<MilestoneScreen>
                           scrollDirection: Axis.horizontal,
                           child: Tab(
                             child: TextWidget(
-                              text: "Active Milestone(2)",
+                              text: "Active(02)",
                               color: MyColors.black,
                               size: 12.sp,
                               fontweight: FontWeight.w600,
@@ -88,7 +88,7 @@ class _MilestoneScreenState extends State<MilestoneScreen>
                           scrollDirection: Axis.horizontal,
                           child: Tab(
                             child: TextWidget(
-                              text: "Awaiting Milestone(7)",
+                              text: "Pending(07)",
                               color: MyColors.black,
                               size: 12.sp,
                               fontweight: FontWeight.w600,
@@ -97,7 +97,7 @@ class _MilestoneScreenState extends State<MilestoneScreen>
                         ),
                         Tab(
                           child: TextWidget(
-                            text: "Payments(7)",
+                            text: "Completed(07)",
                             color: MyColors.black,
                             size: 12.sp,
                             fontweight: FontWeight.w600,

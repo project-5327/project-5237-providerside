@@ -107,6 +107,11 @@ class _AddYourPersonalProjectState extends State<AddYourPersonalProject> {
                             if (value == null || value.isEmpty) {
                               return 'Project Title cant be empty';
                             }
+                            final RegExp regex = RegExp(r'^[a-zA-Z0-9 ]+$');
+
+                            if (!regex.hasMatch(value)) {
+                              return "Please enter only letters and numbers";
+                            }
                             // if (value.length < 10) {
                             //   return 'Project description should be at least 10 characters long';
                             // }
@@ -325,7 +330,7 @@ class _AddYourPersonalProjectState extends State<AddYourPersonalProject> {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                       content: Text(
-                                          'Please select at least one language'),
+                                          'Please select at least one skill'),
                                       backgroundColor: Colors.red,
                                     ),
                                   );
@@ -350,7 +355,7 @@ class _AddYourPersonalProjectState extends State<AddYourPersonalProject> {
                         ],
                       ),
                       SizedBox(
-                        height: 20.h,
+                        height: 200.h,
                       ),
                     ],
                   ),

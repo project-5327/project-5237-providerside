@@ -62,8 +62,9 @@ class DiscoverContainer extends StatelessWidget {
               ),
               Container(
                 //  margin: EdgeInsets.only(right: 8.w),
-                width: 180.w,
+                width: 165.w,
                 child: Text(
+                  softWrap: true,
                   username,
                   style: GoogleFonts.inter(
                     textStyle: TextStyle(
@@ -74,10 +75,11 @@ class DiscoverContainer extends StatelessWidget {
                   ),
                 ),
               ),
-              // SizedBox(
-              //   width: MediaQuery.of(context).size.width * 0.0001,
-              // ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.0008,
+              ),
               Text(
+                softWrap: true,
                 time,
                 style: GoogleFonts.inter(
                   textStyle: TextStyle(
@@ -220,7 +222,7 @@ class DiscoverContainer1 extends StatelessWidget {
               ),
               Container(
                 margin: EdgeInsets.only(right: 8.w),
-                width: 200.w,
+                width: 160.w,
                 child: Text(
                   username,
                   style: GoogleFonts.inter(
@@ -233,9 +235,10 @@ class DiscoverContainer1 extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                width: MediaQuery.of(context).size.width * 0.019,
+                width: MediaQuery.of(context).size.width * 0.015,
               ),
               Text(
+                softWrap: true,
                 timeago.format(DateTime.parse(time)),
                 style: GoogleFonts.inter(
                   textStyle: TextStyle(

@@ -187,7 +187,7 @@ class _Profile2State extends State<Profile2> {
                         )
                       ],
                     ),
-                    SizedBox(height: 42.h),
+                    SizedBox(height: 150.h),
                   ],
                 ),
               ),

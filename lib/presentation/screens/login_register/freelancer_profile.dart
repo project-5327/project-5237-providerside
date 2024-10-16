@@ -46,16 +46,7 @@ class _FreelancerProfileState extends State<FreelancerProfile> {
       return SafeArea(
           child: Scaffold(
         appBar: AppBar(
-          leading: IconButton(
-            onPressed: () {
-              Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) => MainScreen()));
-            },
-            icon: Icon(
-              Icons.arrow_back_ios,
-              color: MyColors.black,
-            ),
-          ),
+          automaticallyImplyLeading: false,
           title: Text(
             AppStrings.myProfile,
             style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600),

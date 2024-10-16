@@ -114,7 +114,7 @@ class _Profile5State extends State<Profile5> {
                         fontweight: FontWeight.w500,
                       ),
                     ),
-                    SizedBox(height: 150.h),
+                    SizedBox(height: 130.h),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
@@ -172,7 +172,7 @@ class _Profile5State extends State<Profile5> {
                             }),
                       ],
                     ),
-                    SizedBox(height: 70.h),
+                    SizedBox(height: 150.h),
                   ],
                 ),
               ),

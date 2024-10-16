@@ -49,8 +49,7 @@ class _EditprofileState extends State<Editprofile>
       child: Scaffold(
         appBar: AppBar(
           leading: IconButton(
-            onPressed: () => Navigator.push(
-                context, MaterialPageRoute(builder: (context) => MainScreen())),
+            onPressed: () => Navigator.pop(context),
             icon: Icon(
               Icons.arrow_back_ios,
               color: MyColors.black,

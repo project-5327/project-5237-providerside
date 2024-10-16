@@ -172,7 +172,7 @@ class _Profilewidget4State extends State<Profilewidget4> {
                           ),
                     ],
                   ),
-                  SizedBox(height: 70.h),
+                  SizedBox(height: 150.h),
                 ],
               ),
             ),

@@ -97,7 +97,7 @@ class Profile7 extends StatelessWidget {
                                 errorMaxLines: 2,
                                 prefixIcon: Padding(
                                   padding: const EdgeInsets.only(
-                                      left: 10, top: 8, bottom: 8),
+                                      left: 10, top: 11, bottom: 8),
                                   child: Text(
                                     textAlign: TextAlign.left,
                                     '\$',
@@ -179,7 +179,7 @@ class Profile7 extends StatelessWidget {
                         ],
                       ),
                       SizedBox(
-                        height: 42.h,
+                        height: 150.h,
                       ),
                     ]),
               ),

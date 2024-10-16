@@ -363,21 +363,35 @@ class OnbaordingProvider extends ChangeNotifier {
 
   String? validateTitle(String value) {
     if (value.isEmpty) {
-      return "This field can't be empty";
+      return "Title can't be empty";
     }
-    return null;
+
+    final RegExp regex = RegExp(r'^[a-zA-Z]+$');
+
+    if (!regex.hasMatch(value)) {
+      return 'Please enter only letters';
+    }
+
+    return null; // Return null if validation passes
   }
 
   String? validateCompany(String value) {
     if (value.isEmpty) {
-      return "This field can't be empty";
+      return "Company can't be empty";
     }
-    return null;
+
+    final RegExp regex = RegExp(r'^[a-zA-Z0-9 ]+$');
+
+    if (!regex.hasMatch(value)) {
+      return "Please enter only letters and numbers";
+    }
+
+    return null; // Return null if validation passes
   }
 
   String? validateHourlyRate(String value) {
     if (value.isEmpty) {
-      return "This field can't be empty";
+      return "Hourly rate can't be empty";
     }
 
     final num? rate = num.tryParse(value);
@@ -402,42 +416,66 @@ class OnbaordingProvider extends ChangeNotifier {
 
   String? validateLocatioon1(String value) {
     if (value.isEmpty) {
-      return "This field can't be empty";
+      return "Location can't be empty";
     }
     return null;
   }
 
   String? validateFeildOfStudy(String value) {
     if (value.isEmpty) {
-      return "This field can't be empty";
+      return "Study field can't be empty";
+    }
+    final RegExp regex = RegExp(r'^[a-zA-Z]+$');
+
+    if (!regex.hasMatch(value)) {
+      return 'Please enter only letters';
     }
     return null;
   }
 
   String? validateZipcode(String value) {
     if (value.isEmpty) {
-      return "This field can't be empty";
+      return "Zipcode can't be empty";
+    }
+    if (value.length != 6) {
+      // Assuming 6-digit pincode (adjust as per requirement)
+      return "Zipcode must be 6 digits long";
+    }
+
+    final RegExp regex = RegExp(r'^[0-9]+$');
+    if (!regex.hasMatch(value)) {
+      return "Pincode can only contain digits";
     }
     return null;
   }
 
   String? validateInstituteName(String value) {
     if (value.isEmpty) {
-      return "This field can't be empty";
+      return "Institute Name can't be empty";
+    }
+    final RegExp regex = RegExp(r'^[a-zA-Z]+$');
+
+    if (!regex.hasMatch(value)) {
+      return 'Please enter only letters';
     }
     return null;
   }
 
   String? validateDegreeOrCertifcate(String value) {
     if (value.isEmpty) {
-      return "This field can't be empty";
+      return "Degree can't be empty";
+    }
+    final RegExp regex = RegExp(r'^[a-zA-Z]+$');
+
+    if (!regex.hasMatch(value)) {
+      return 'Please enter only letters';
     }
     return null;
   }
 
   String? validateStartDate(String value, String endDate) {
     if (value.isEmpty) {
-      return "This field can't be empty";
+      return "Start Date can't be empty";
     }
 
     DateFormat format = DateFormat('MMMM yyyy');
@@ -454,7 +492,7 @@ class OnbaordingProvider extends ChangeNotifier {
 
   String? validateEndDate(String value, String startDate) {
     if (value.isEmpty) {
-      return "This field can't be empty";
+      return "End Date can't be empty";
     }
 
     DateFormat format = DateFormat('MMMM yyyy');
@@ -477,35 +515,51 @@ class OnbaordingProvider extends ChangeNotifier {
 
   String? validateLocation(String value) {
     if (value.isEmpty) {
-      return "This field can't be empty";
+      return "Location can't be empty";
     }
     return null;
   }
 
   String? validateEmployementType(String value) {
     if (value.isEmpty) {
-      return "This field can't be empty";
+      return "EmployementType can't be empty";
+    }
+    final RegExp regex = RegExp(r'^[a-zA-Z]+$');
+
+    if (!regex.hasMatch(value)) {
+      return 'Please enter only  characters';
     }
     return null;
   }
 
   String? validateDescription(String value) {
     if (value.isEmpty) {
-      return "This field can't be empty";
+      return "Description can't be empty";
+    }
+    if (value.length < 10) {
+      return 'Project description should be at least 10 characters long';
+    }
+    if (value.length > 500) {
+      return 'Project description should not exceed 500 characters';
     }
     return null;
   }
 
   String? validateRole(String value) {
     if (value.isEmpty) {
-      return "This field can't be empty";
+      return "Role can't be empty";
+    }
+    final RegExp regex = RegExp(r'^[a-zA-Z ]+$');
+
+    if (!regex.hasMatch(value)) {
+      return "Please enter only letters ";
     }
     return null;
   }
 
   String? validateAddress(String value) {
     if (value.isEmpty) {
-      return "This field can't be empty";
+      return "Address can't be empty";
     }
     return null;
   }
@@ -539,7 +593,11 @@ class OnbaordingProvider extends ChangeNotifier {
       return "Full Name can't contain special characters";
     }
     if (value.length < 3) {
-      return "Full Name must be at least 3 characters long";
+      return "Name must be at least 3 characters long";
+    }
+
+    if (value.length > 40) {
+      return "Name can't be more than 40 characters long";
     }
     return null;
   }
@@ -564,7 +622,16 @@ class OnbaordingProvider extends ChangeNotifier {
 
   String? validatePhone(String value) {
     if (value.isEmpty) {
-      return "This field can't be empty";
+      return "Phone no can't be empty";
+    }
+    if (value.length != 10) {
+      // Assuming 10-digit phone number
+      return "Phone number must be 10 digits long";
+    }
+
+    final RegExp regex = RegExp(r'^[0-9]+$');
+    if (!regex.hasMatch(value)) {
+      return "Phone number can only contain digits";
     }
     return null;
   }

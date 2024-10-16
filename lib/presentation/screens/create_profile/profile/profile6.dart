@@ -117,48 +117,51 @@ class Profile6 extends StatelessWidget {
                       SizedBox(
                         height: 57.h,
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          CustomizeButton(
-                            borderColor: MyColors.btnColor,
-                            radius: 100.r,
-                            text: AppStrings.privious,
-                            height: 40.h,
-                            width: 150.w,
-                            color: MyColors.white,
-                            textColor: MyColors.btnColor,
-                            onTap: () {
-                              /*print('====> decription : ${onboardingProvider.descriptionController}');*/
+                      Padding(
+                        padding: EdgeInsets.only(bottom: 20),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            CustomizeButton(
+                              borderColor: MyColors.btnColor,
+                              radius: 100.r,
+                              text: AppStrings.privious,
+                              height: 40.h,
+                              width: 150.w,
+                              color: MyColors.white,
+                              textColor: MyColors.btnColor,
+                              onTap: () {
+                                /*print('====> decription : ${onboardingProvider.descriptionController}');*/
 
-                              profileController.previousPage();
-                              Get.to(() => const Profile5());
-                            },
-                          ),
-                          SizedBox(
-                            width: 5.w,
-                          ),
-                          CustomizeButton(
-                            borderColor: MyColors.btnColor,
-                            radius: 100.r,
-                            text: AppStrings.next,
-                            height: 40.h,
-                            width: 150.w,
-                            color: MyColors.btnColor,
-                            textColor: MyColors.white,
-                            onTap: () {
-                              debugPrint(
-                                  '====> decription : ${onboardingProvider.profileDescriptionController}');
-                              if (_profile5Key.currentState!.validate()) {
-                                profileController.nextPage();
-                                Get.to(() => Profile7());
-                              }
-                            },
-                          ),
-                        ],
+                                profileController.previousPage();
+                                Get.to(() => const Profile5());
+                              },
+                            ),
+                            SizedBox(
+                              width: 5.w,
+                            ),
+                            CustomizeButton(
+                              borderColor: MyColors.btnColor,
+                              radius: 100.r,
+                              text: AppStrings.next,
+                              height: 40.h,
+                              width: 150.w,
+                              color: MyColors.btnColor,
+                              textColor: MyColors.white,
+                              onTap: () {
+                                debugPrint(
+                                    '====> decription : ${onboardingProvider.profileDescriptionController}');
+                                if (_profile5Key.currentState!.validate()) {
+                                  profileController.nextPage();
+                                  Get.to(() => Profile7());
+                                }
+                              },
+                            ),
+                          ],
+                        ),
                       ),
                       SizedBox(
-                        height: 42.h,
+                        height: 150.h,
                       ),
                     ],
                   ),
